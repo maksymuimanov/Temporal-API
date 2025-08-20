@@ -1,0 +1,52 @@
+package com.temporal.api.core.util.other;
+
+import com.temporal.api.core.engine.io.IOLayer;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.stream.Stream;
+
+public final class ResourceUtils {
+    private ResourceUtils() {
+    }
+
+    public static <T> ResourceKey<T> createKey(ResourceKey<? extends Registry<T>> registry, String id) {
+        return ResourceKey.create(registry, parse(id));
+    }
+
+    public static ResourceLocation parse(String id) {
+        if (id.contains(":")) {
+            String[] split = id.split(":");
+            return ResourceLocation.fromNamespaceAndPath(split[0], split[1]);
+        } else {
+            return createLocation(id);
+        }
+    }
+
+    public static ResourceLocation createLocation(ResourceKey<?> resourceKey) {
+        String namespace = resourceKey.location().getNamespace();
+        return ResourceLocation.fromNamespaceAndPath(namespace, getResourceId(resourceKey));
+    }
+
+    public static ResourceLocation createLocation(String id) {
+        return ResourceLocation.fromNamespaceAndPath(IOLayer.NEO_MOD.getModId(), id);
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T> @NotNull Stream<ResourceKey<T>> getResourceKeyStream(Class<?> resourceClassHolder) {
+        return IOUtils.getFieldStream(resourceClassHolder, o -> o instanceof ResourceKey, o -> (ResourceKey<T>) o);
+    }
+
+    public static String getResourceId(ResourceKey<?> resourceKey) {
+        if (resourceKey == null) throw new RuntimeException("ResourceKey is null");
+        return resourceKey.location().toString();
+    }
+
+    public static String getResourceId(TagKey<?> tagKey) {
+        if (tagKey == null) throw new RuntimeException("ResourceKey is null");
+        return tagKey.location().toString();
+    }
+}

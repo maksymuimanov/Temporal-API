@@ -1,0 +1,42 @@
+package com.temporal.api.core.registry.factory.common;
+
+import com.temporal.api.client.dto.Size;
+import com.temporal.api.core.engine.io.context.InjectionPool;
+import com.temporal.api.core.util.other.ResourceUtils;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
+
+public class EntityTypeFactory extends AbstractObjectFactory<EntityType<?>> {
+    private final DeferredRegister<EntityType<?>> entityTypes;
+
+    public EntityTypeFactory() {
+        this(InjectionPool.getFromInstance("$EntityTypes"));
+    }
+
+    public EntityTypeFactory(DeferredRegister<EntityType<?>> entityTypes) {
+        this.entityTypes = entityTypes;
+    }
+
+    public <T extends Entity> DeferredHolder<EntityType<?>, EntityType<T>> create(String name, EntityType.EntityFactory<T> entityFactory, Size size, MobCategory category) {
+        return this.create(name, EntityType.Builder.of(entityFactory, category)
+                .sized(size.width(), size.height()));
+    }
+
+    public <T extends Entity> DeferredHolder<EntityType<?>, EntityType<T>> create(String name, EntityType.Builder<T> builder) {
+        return this.create(name, builder, ResourceUtils.createKey(Registries.ENTITY_TYPE, name));
+    }
+
+    public <T extends Entity> DeferredHolder<EntityType<?>, EntityType<T>> create(String name, EntityType.Builder<T> builder, ResourceKey<EntityType<?>> entityType) {
+        return this.create(name, () -> builder.build(entityType.registry().toString()));
+    }
+
+    @Override
+    public DeferredRegister<EntityType<?>> getRegistry() {
+        return entityTypes;
+    }
+}

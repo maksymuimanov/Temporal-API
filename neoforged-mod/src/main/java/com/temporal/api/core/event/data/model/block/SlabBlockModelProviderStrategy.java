@@ -1,0 +1,13 @@
+package com.temporal.api.core.event.data.model.block;
+
+import net.minecraft.core.Holder;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SlabBlock;
+
+public class SlabBlockModelProviderStrategy implements BlockModelProviderStrategy {
+    @Override
+    public void registerBlockModel(Holder<? extends Block> blockRegistry, ApiBlockModelProvider provider, String... additionalData) {
+        provider.familyMember((SlabBlock) blockRegistry.value(), additionalData[0],
+                (block, parentTexture) -> provider.slabBlock(block, parentTexture, parentTexture));
+    }
+}
