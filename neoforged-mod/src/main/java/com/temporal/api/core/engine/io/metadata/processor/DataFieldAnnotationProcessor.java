@@ -5,7 +5,10 @@ import com.temporal.api.core.engine.io.metadata.executor.AnnotationExecutor;
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.field.data.biome.*;
 import com.temporal.api.core.engine.io.metadata.strategy.field.data.language.*;
-import com.temporal.api.core.engine.io.metadata.strategy.field.data.model.*;
+import com.temporal.api.core.engine.io.metadata.strategy.field.data.model.BlockModelStrategy;
+import com.temporal.api.core.engine.io.metadata.strategy.field.data.model.ItemModelStrategy;
+import com.temporal.api.core.engine.io.metadata.strategy.field.data.model.PaintingStrategy;
+import com.temporal.api.core.engine.io.metadata.strategy.field.data.model.ParticleSpriteSetStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.field.data.music.JukeboxSongDescriptionStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.field.data.other.*;
 import com.temporal.api.core.engine.io.metadata.strategy.field.data.properties.*;
@@ -20,11 +23,8 @@ import java.util.Map;
 public class DataFieldAnnotationProcessor implements AnnotationProcessor<FieldAnnotationStrategy> {
     private final Map<Class<? extends Annotation>, FieldAnnotationStrategy> strategies = IOUtils.createAnnotationStrategyMap(List.of(
             new BlockModelStrategy(),
-            new CustomBlockModelStrategy(),
             new ItemModelStrategy(),
-            new CustomItemModelStrategy(),
             new BlockLootTableStrategy(),
-            new CustomBlockLootTableStrategy(),
             new RecipeStrategy(),
             new BlockTagComponentStrategy(),
             new ItemTagComponentStrategy(),

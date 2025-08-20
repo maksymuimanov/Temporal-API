@@ -1,8 +1,10 @@
 package com.temporal.api.core.engine.io.metadata.strategy.field.data.other;
 
+import com.temporal.api.core.collection.SimplePair;
 import com.temporal.api.core.engine.io.metadata.annotation.data.other.BlockLootTable;
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.event.data.loot.BlockLootTableProvider;
+import com.temporal.api.core.event.data.loot.LootProviderStrategy;
 import net.minecraft.core.Holder;
 import net.minecraft.world.level.block.Block;
 
@@ -16,6 +18,13 @@ public class BlockLootTableStrategy implements FieldAnnotationStrategy {
         Holder<? extends Block> registryObject = (Holder<? extends Block>) field.get(object);
         BlockLootTable blockLootTable = field.getDeclaredAnnotation(BlockLootTable.class);
         String[] additionalData = blockLootTable.additionalData();
+        if (!LootProviderStrategy.class.equals(blockLootTable.custom())) {
+            LootProviderStrategy providerStrategy = blockLootTable.custom()
+                    .getDeclaredConstructor()
+                    .newInstance();
+            BlockLootTableProvider.CUSTOM_LOOT.put(new SimplePair<>(registryObject, additionalData), providerStrategy);
+            return;
+        }
         switch (blockLootTable.value()) {
             case SELF -> BlockLootTableProvider.SELF.put(registryObject, additionalData);
             case SILK_TOUCH -> BlockLootTableProvider.SILK_TOUCH.put(registryObject, additionalData);

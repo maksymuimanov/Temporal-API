@@ -19,9 +19,9 @@ import java.util.function.Function;
 
 public class ApiBlockModelProvider extends BlockStateProvider {
     private static final BlockModelProviderStrategyConsumer CONSUMER = new BlockModelProviderStrategyConsumerImpl();
-    public static final String MINECRAFT_ITEM_GENERATED = "minecraft:item/generated";
-    public static final String LAYER_0 = "layer0";
     public static final String MINECRAFT_CUTOUT = "minecraft:cutout";
+    public static final String BLOCK_PREFIX = "block";
+    public static final String BLOCK_PREFIX_PATH = BLOCK_PREFIX + "/";
 
     public ApiBlockModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
         super(output, IOLayer.NEO_MOD.getModId(), existingFileHelper);
@@ -47,11 +47,11 @@ public class ApiBlockModelProvider extends BlockStateProvider {
     public <T extends ApiCropBlock> ConfiguredModel[] states(BlockState state, CropBlock block, String modelName, String textureName) {
         ConfiguredModel[] models = new ConfiguredModel[1];
         Integer age = state.getValue(((T) block).getAgeProperty());
-        models[0] = new ConfiguredModel(models().crop(modelName + age, ResourceUtils.parse("block/" + textureName + age)).renderType(MINECRAFT_CUTOUT));
+        models[0] = new ConfiguredModel(models().crop(modelName + age, ResourceUtils.parse(BLOCK_PREFIX_PATH + textureName + age)).renderType(MINECRAFT_CUTOUT));
         return models;
     }
 
     public String getBlockPath(Block block) {
-        return RegistryUtils.getIdFromRegistry(BuiltInRegistries.BLOCK, block, "block");
+        return RegistryUtils.getIdFromRegistry(BuiltInRegistries.BLOCK, block, BLOCK_PREFIX);
     }
 }

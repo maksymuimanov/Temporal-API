@@ -18,7 +18,20 @@ public class ItemModelProviderStrategyConsumerImpl implements ItemModelProviderS
         CROSSBOW_ITEMS.forEach(registerItemModel(provider, CrossbowModelProviderStrategy::new));
         TRIMMED_ARMOR_ITEMS.forEach(registerItemModel(provider, TrimmedItemModelProviderStrategy::new));
         POTION_ITEMS.forEach(registerItemModel(provider, PotionItemModelProviderStrategy::new));
-        BLOCK_ITEMS.forEach(registerItemModel(provider, BlockItemModelProviderStrategy::new));
+        CUBED_BLOCK_ITEMS.forEach(registerItemModel(provider, CubedBlockItemModelProviderStrategy::new));
+        BLOCK_FLAT_BLOCK_ITEMS.forEach(registerItemModel(provider, BlockFlatBlockItemModelProviderStrategy::new));
+        LOG_BLOCK_ITEMS.forEach(registerItemModel(provider, LogBlockItemModelProviderStrategy::new));
+        WOOD_BLOCK_ITEMS.forEach(registerItemModel(provider, WoodBlockItemModelProviderStrategy::new));
+        BUTTON_BLOCK_ITEMS.forEach(registerItemModel(provider, ButtonBlockItemModelProviderStrategy::new));
+        FENCE_BLOCK_ITEMS.forEach(registerItemModel(provider, FenceBlockItemModelProviderStrategy::new));
+        FENCE_GATE_BLOCK_ITEMS.forEach(registerItemModel(provider, FenceGateBlockItemModelProviderStrategy::new));
+        PRESSURE_PLATE_BLOCK_ITEMS.forEach(registerItemModel(provider, PressurePlateBlockItemModelProviderStrategy::new));
+        SLAB_BLOCK_ITEMS.forEach(registerItemModel(provider, SlabBlockItemModelProviderStrategy::new));
+        STAIRS_BLOCK_ITEMS.forEach(registerItemModel(provider, StairsBlockItemModelProviderStrategy::new));
+        TRAPDOOR_BLOCK_ITEMS.forEach(registerItemModel(provider, TrapdoorBlockItemModelProviderStrategy::new));
+        WALL_BLOCK_ITEMS.forEach(registerItemModel(provider, WallBlockItemModelProviderStrategy::new));
+        BARREL_BLOCK_ITEMS.forEach(registerItemModel(provider, BarrelBlockItemModelProviderStrategy::new));
+        CARPET_BLOCK_ITEMS.forEach(registerItemModel(provider, CarpetBlockItemModelProviderStrategy::new));
         CUSTOM_MODELS.forEach((key, value) -> value.registerItemModel(key.getLeft(), provider, key.getRight()));
     }
 

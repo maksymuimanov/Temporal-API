@@ -1,8 +1,10 @@
 package com.temporal.api.core.engine.io.metadata.strategy.field.data.model;
 
+import com.temporal.api.core.collection.SimplePair;
 import com.temporal.api.core.engine.io.metadata.annotation.data.model.BlockModel;
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.event.data.model.block.BlockModelDescriptionContainer;
+import com.temporal.api.core.event.data.model.block.BlockModelProviderStrategy;
 import net.minecraft.core.Holder;
 import net.minecraft.world.level.block.Block;
 
@@ -16,6 +18,13 @@ public class BlockModelStrategy implements FieldAnnotationStrategy {
         Holder<? extends Block> registryObject = (Holder<? extends Block>) field.get(object);
         BlockModel blockModel = field.getDeclaredAnnotation(BlockModel.class);
         String[] additionalData = blockModel.additionalData();
+        if (!BlockModelProviderStrategy.class.equals(blockModel.custom())) {
+            BlockModelProviderStrategy providerStrategy = blockModel.custom()
+                    .getDeclaredConstructor()
+                    .newInstance();
+            BlockModelDescriptionContainer.CUSTOM_MODELS.put(new SimplePair<>(registryObject, additionalData), providerStrategy);
+            return;
+        }
         switch (blockModel.value()) {
             case CUBED -> BlockModelDescriptionContainer.CUBED_BLOCKS.put(registryObject, additionalData);
             case CUTOUT_CUBED -> BlockModelDescriptionContainer.CUTOUT_CUBED_BLOCKS.put(registryObject, additionalData);

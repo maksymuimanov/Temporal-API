@@ -7,7 +7,18 @@ public enum ItemModelType {
     CROSSBOW,
     TRIMMED_ARMOR,
     POTION,
-    BLOCK,
+    CUBED,
+    BLOCK_FLAT,
+    LOG,
+    WOOD,
+    BUTTON,
+    FENCE,
+    FENCE_GATE,
+    PRESSURE_PLATE,
     SLAB,
-    STAIRS
+    STAIRS,
+    TRAPDOOR,
+    WALL,
+    BARREL,
+    CARPET
 }

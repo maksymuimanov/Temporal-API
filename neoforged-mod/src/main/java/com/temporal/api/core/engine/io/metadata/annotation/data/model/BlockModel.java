@@ -1,6 +1,7 @@
 package com.temporal.api.core.engine.io.metadata.annotation.data.model;
 
 import com.temporal.api.core.engine.io.metadata.constant.BlockModelType;
+import com.temporal.api.core.event.data.model.block.BlockModelProviderStrategy;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -13,4 +14,6 @@ public @interface BlockModel {
     BlockModelType value() default BlockModelType.CUBED;
 
     String[] additionalData() default {};
+
+    Class<? extends BlockModelProviderStrategy> custom() default BlockModelProviderStrategy.class;
 }

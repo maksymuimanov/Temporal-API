@@ -1,0 +1,8 @@
+{
+  "example_sound": {
+    "sounds": [
+      "example:example_sound"
+    ],
+    "subtitle": "sound.example.example_sound"
+  }
+}

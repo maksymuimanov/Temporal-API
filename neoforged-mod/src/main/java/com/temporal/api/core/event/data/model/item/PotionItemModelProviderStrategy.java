@@ -10,7 +10,7 @@ public class PotionItemModelProviderStrategy implements ItemModelProviderStrateg
         Item item = itemRegistry.value();
         String itemPath = provider.getItemPath(item);
         provider.withExistingParent(itemPath, "item/potion")
-                .texture("layer0", provider.mcLoc("item/potion_overlay"))
-                .texture("layer1", ResourceUtils.parse(itemPath));
+                .texture(ApiItemModelProvider.LAYER_0, provider.mcLoc("item/potion_overlay"))
+                .texture(ApiItemModelProvider.LAYER_1, ResourceUtils.parse(itemPath));
     }
 }
