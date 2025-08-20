@@ -3,8 +3,8 @@ package com.temporal.api.core.event.data.biome.configuration;
 import com.temporal.api.ApiMod;
 import com.temporal.api.core.event.data.biome.GenerationProcess;
 import com.temporal.api.core.event.data.biome.dto.Tree;
-import com.temporal.api.core.util.biome.ConfiguredFeatureUtils;
-import com.temporal.api.core.util.other.RegistryUtils;
+import com.temporal.api.core.util.RegistryUtils;
+import com.temporal.api.core.util.WorldGenerationUtils;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.valueproviders.ConstantInt;
@@ -40,7 +40,7 @@ public class TreeConfiguredFeaturesGenerationProcess implements GenerationProces
                     featureSize
             ).dirt(BlockStateProvider.simple(RegistryUtils.getBlockById(configuration.rootBlock())));
             builder = configuration.ignoreVines() ? builder.ignoreVines() : builder;
-            ConfiguredFeatureUtils.register(context, configuredFeatureKey, Feature.TREE, builder.build());
+            WorldGenerationUtils.registerFeature(context, configuredFeatureKey, Feature.TREE, builder.build());
         } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
             ApiMod.LOGGER.error("Error while instantiating trunk placer or foliage placer", e);
             throw new RuntimeException(e);

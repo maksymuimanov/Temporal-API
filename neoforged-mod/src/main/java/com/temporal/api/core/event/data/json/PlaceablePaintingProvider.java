@@ -1,7 +1,7 @@
 package com.temporal.api.core.event.data.json;
 
 import com.temporal.api.core.collection.TemporalQueue;
-import com.temporal.api.core.util.other.IOUtils;
+import com.temporal.api.core.util.IOUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.decoration.PaintingVariant;
 

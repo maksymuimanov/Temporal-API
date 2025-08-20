@@ -1,6 +1,6 @@
 package com.temporal.api.core.event.data.model.block;
 
-import com.temporal.api.core.util.other.RegistryUtils;
+import com.temporal.api.core.util.RegistryUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.world.level.block.Block;
 

@@ -4,7 +4,7 @@ import com.temporal.api.core.collection.Pair;
 import com.temporal.api.core.collection.SimplePair;
 import com.temporal.api.core.collection.TemporalMap;
 import com.temporal.api.core.collection.TemporalQueue;
-import com.temporal.api.core.util.other.IOUtils;
+import com.temporal.api.core.util.IOUtils;
 import net.minecraft.resources.ResourceLocation;
 
 import java.nio.file.Path;

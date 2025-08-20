@@ -2,7 +2,7 @@ package com.temporal.api.core.event.data.wolf;
 
 import com.temporal.api.core.collection.TemporalQueue;
 import com.temporal.api.core.event.data.preparer.tag.biome.BiomeTagDynamicPreparer;
-import com.temporal.api.core.util.other.ResourceUtils;
+import com.temporal.api.core.util.ResourceUtils;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;

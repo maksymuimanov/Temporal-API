@@ -5,7 +5,7 @@ import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationSt
 import com.temporal.api.core.event.data.biome.GenerationFeaturesDescriptionContainer;
 import com.temporal.api.core.event.data.biome.dto.Grass;
 import com.temporal.api.core.event.data.preparer.tag.biome.BiomeTagDynamicPreparer;
-import com.temporal.api.core.util.other.ResourceUtils;
+import com.temporal.api.core.util.ResourceUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 

@@ -3,7 +3,7 @@ package net.temporal.example.tag;
 import com.temporal.api.core.engine.io.metadata.annotation.data.tag.TagContainer;
 import com.temporal.api.core.engine.io.metadata.annotation.injection.Injected;
 import com.temporal.api.core.engine.io.metadata.constant.TagContainerType;
-import com.temporal.api.core.util.other.TagUtils;
+import com.temporal.api.core.util.TagUtils;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 

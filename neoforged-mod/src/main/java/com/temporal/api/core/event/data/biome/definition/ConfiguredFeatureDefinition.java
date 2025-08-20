@@ -1,6 +1,6 @@
 package com.temporal.api.core.event.data.biome.definition;
 
-import com.temporal.api.core.util.biome.ConfiguredFeatureUtils;
+import com.temporal.api.core.util.WorldGenerationUtils;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -10,7 +10,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfigur
 public interface ConfiguredFeatureDefinition<C extends FeatureConfiguration> extends GenerationDefinition<ConfiguredFeature<?, ?>> {
     @Override
     default void generate(BootstrapContext<ConfiguredFeature<?, ?>> context, ResourceKey<ConfiguredFeature<?, ?>> configuredFeatureKey) {
-        ConfiguredFeatureUtils.register(context, configuredFeatureKey, getFeature(), getFeatureConfiguration());
+        WorldGenerationUtils.registerFeature(context, configuredFeatureKey, getFeature(), getFeatureConfiguration());
     }
 
     Feature<C> getFeature();

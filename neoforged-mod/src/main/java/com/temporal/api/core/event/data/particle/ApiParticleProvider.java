@@ -1,7 +1,7 @@
 package com.temporal.api.core.event.data.particle;
 
 import com.temporal.api.core.collection.TemporalMap;
-import com.temporal.api.core.util.other.ResourceUtils;
+import com.temporal.api.core.util.ResourceUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.data.PackOutput;

@@ -1,8 +1,8 @@
 package com.temporal.api.core.event.data.biome.definition;
 
 import com.temporal.api.core.event.data.biome.placement.PlacedFeaturesContainer;
-import com.temporal.api.core.util.biome.PlacedFeatureUtils;
-import com.temporal.api.core.util.other.ResourceUtils;
+import com.temporal.api.core.util.ResourceUtils;
+import com.temporal.api.core.util.WorldGenerationUtils;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
@@ -16,12 +16,12 @@ import java.util.List;
 public interface PlacedFeatureDefinition extends GenerationDefinition<PlacedFeature> {
     @Override
     default void generate(BootstrapContext<PlacedFeature> context, ResourceKey<ConfiguredFeature<?, ?>> configuredFeatureKey) {
-        String registryName = ResourceUtils.getResourceId(configuredFeatureKey);
-        String placedFeatureRegistryName = getName(registryName);
-        ResourceKey<PlacedFeature> placedFeatureResourceKey = PlacedFeatureUtils.createKey(placedFeatureRegistryName);
-        PlacedFeaturesContainer.PLACED_FEATURES.put(registryName, placedFeatureResourceKey);
+        String id = ResourceUtils.getResourceId(configuredFeatureKey);
+        String placedFeatureRegistryName = this.getName(id);
+        ResourceKey<PlacedFeature> placedFeature = ResourceUtils.createKey(Registries.PLACED_FEATURE, placedFeatureRegistryName);
+        PlacedFeaturesContainer.PLACED_FEATURES.put(id, placedFeature);
         HolderGetter<ConfiguredFeature<?, ?>> featureHolderGetter = context.lookup(Registries.CONFIGURED_FEATURE);
-        PlacedFeatureUtils.register(context, placedFeatureResourceKey, featureHolderGetter.getOrThrow(configuredFeatureKey), getPlacementModifiers());
+        WorldGenerationUtils.registerFeature(context, placedFeature, featureHolderGetter.getOrThrow(configuredFeatureKey), getPlacementModifiers());
     }
 
     default String getName(String registryName) {

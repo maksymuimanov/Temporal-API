@@ -1,7 +1,7 @@
 package com.temporal.api.core.registry.factory.common;
 
 import com.temporal.api.core.engine.io.context.InjectionPool;
-import com.temporal.api.core.util.other.ResourceUtils;
+import com.temporal.api.core.util.ResourceUtils;
 import net.minecraft.sounds.SoundEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;

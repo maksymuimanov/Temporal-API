@@ -2,7 +2,7 @@ package com.temporal.api.core.event.data.advancement;
 
 import com.temporal.api.core.collection.TemporalMap;
 import com.temporal.api.core.collection.TemporalQueue;
-import com.temporal.api.core.util.other.ResourceUtils;
+import com.temporal.api.core.util.ResourceUtils;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementRewards;

@@ -2,7 +2,7 @@ package com.temporal.api.core.event.data.recipe.strategy;
 
 import com.temporal.api.core.event.data.recipe.ApiRecipeProvider;
 import com.temporal.api.core.event.data.recipe.holder.SmithingTransformRecipeHolder;
-import com.temporal.api.core.util.other.RegistryUtils;
+import com.temporal.api.core.util.RegistryUtils;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.SmithingTransformRecipeBuilder;

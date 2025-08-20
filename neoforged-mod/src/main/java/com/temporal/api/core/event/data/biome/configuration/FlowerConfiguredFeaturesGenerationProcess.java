@@ -2,8 +2,8 @@ package com.temporal.api.core.event.data.biome.configuration;
 
 import com.temporal.api.core.event.data.biome.GenerationProcess;
 import com.temporal.api.core.event.data.biome.dto.Flower;
-import com.temporal.api.core.util.biome.ConfiguredFeatureUtils;
-import com.temporal.api.core.util.other.RegistryUtils;
+import com.temporal.api.core.util.RegistryUtils;
+import com.temporal.api.core.util.WorldGenerationUtils;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
@@ -21,7 +21,7 @@ public class FlowerConfiguredFeaturesGenerationProcess implements GenerationProc
     @Override
     public void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context, ResourceKey<ConfiguredFeature<?, ?>> configuredFeatureKey, Flower description) {
         Flower.Configuration configuration = description.configuration();
-        ConfiguredFeatureUtils.register(context, configuredFeatureKey, Feature.FLOWER,
+        WorldGenerationUtils.registerFeature(context, configuredFeatureKey, Feature.FLOWER,
                 new RandomPatchConfiguration(configuration.tries(), configuration.xzSpread(), configuration.ySpread(),
                         PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK,
                                 new SimpleBlockConfiguration(

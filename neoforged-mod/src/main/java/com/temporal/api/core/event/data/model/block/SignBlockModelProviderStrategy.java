@@ -1,7 +1,7 @@
 package com.temporal.api.core.event.data.model.block;
 
-import com.temporal.api.core.util.other.RegistryUtils;
-import com.temporal.api.core.util.other.ResourceUtils;
+import com.temporal.api.core.util.RegistryUtils;
+import com.temporal.api.core.util.ResourceUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.StandingSignBlock;

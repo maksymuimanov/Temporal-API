@@ -1,4 +1,4 @@
-package com.temporal.api.core.util.other;
+package com.temporal.api.core.util;
 
 import com.temporal.api.core.engine.io.IOLayer;
 import net.minecraft.core.Registry;
@@ -7,10 +7,20 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.function.Function;
 import java.util.stream.Stream;
 
 public final class ResourceUtils {
     private ResourceUtils() {
+    }
+
+    public static String mapId(String id, Function<String, String> pathMapper) {
+        return mapId(id, (namespace) -> namespace, pathMapper);
+    }
+
+    public static String mapId(String id, Function<String, String> namespaceMapper, Function<String, String> pathMapper) {
+        String[] resource = id.split(":");
+        return namespaceMapper.apply(resource[0]) + ":" + pathMapper.apply(resource[1]);
     }
 
     public static <T> ResourceKey<T> createKey(ResourceKey<? extends Registry<T>> registry, String id) {

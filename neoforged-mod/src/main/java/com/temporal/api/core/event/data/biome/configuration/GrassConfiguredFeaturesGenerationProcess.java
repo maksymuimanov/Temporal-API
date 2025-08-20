@@ -2,8 +2,8 @@ package com.temporal.api.core.event.data.biome.configuration;
 
 import com.temporal.api.core.event.data.biome.GenerationProcess;
 import com.temporal.api.core.event.data.biome.dto.Grass;
-import com.temporal.api.core.util.biome.ConfiguredFeatureUtils;
-import com.temporal.api.core.util.other.RegistryUtils;
+import com.temporal.api.core.util.RegistryUtils;
+import com.temporal.api.core.util.WorldGenerationUtils;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
@@ -17,7 +17,7 @@ public class GrassConfiguredFeaturesGenerationProcess implements GenerationProce
     @Override
     public void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context, ResourceKey<ConfiguredFeature<?, ?>> configuredFeatureKey, Grass description) {
         Grass.Configuration configuration = description.configuration();
-        ConfiguredFeatureUtils.register(context, configuredFeatureKey, Feature.RANDOM_PATCH,
+        WorldGenerationUtils.registerFeature(context, configuredFeatureKey, Feature.RANDOM_PATCH,
                 FeatureUtils.simpleRandomPatchConfiguration(
                         configuration.tries(), PlacementUtils.onlyWhenEmpty(
                                 Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(

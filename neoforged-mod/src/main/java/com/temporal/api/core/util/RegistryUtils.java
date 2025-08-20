@@ -1,4 +1,4 @@
-package com.temporal.api.core.util.other;
+package com.temporal.api.core.util;
 
 import com.temporal.api.core.engine.io.IOLayer;
 import net.minecraft.core.Registry;
@@ -11,7 +11,6 @@ import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.Objects;
-import java.util.function.Function;
 import java.util.function.Predicate;
 
 public final class RegistryUtils {
@@ -28,15 +27,6 @@ public final class RegistryUtils {
 
     public static <T> DeferredRegister<T> createRegistry(ResourceKey<Registry<T>> registry) {
         return DeferredRegister.create(registry, IOLayer.NEO_MOD.getModId());
-    }
-
-    public static String mapId(String id, Function<String, String> pathMapper) {
-        return mapId(id, (namespace) -> namespace, pathMapper);
-    }
-
-    public static String mapId(String id, Function<String, String> namespaceMapper, Function<String, String> pathMapper) {
-        String[] resource = id.split(":");
-        return namespaceMapper.apply(resource[0]) + ":" + pathMapper.apply(resource[1]);
     }
 
     public static SoundEvent getSoundEventById(String id) {

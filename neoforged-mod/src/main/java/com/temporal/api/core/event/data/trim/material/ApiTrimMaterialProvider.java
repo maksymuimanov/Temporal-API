@@ -2,8 +2,8 @@ package com.temporal.api.core.event.data.trim.material;
 
 import com.temporal.api.core.collection.TemporalMap;
 import com.temporal.api.core.event.data.json.AtlasTrimProvider;
-import com.temporal.api.core.util.other.RegistryUtils;
-import com.temporal.api.core.util.other.ResourceUtils;
+import com.temporal.api.core.util.RegistryUtils;
+import com.temporal.api.core.util.ResourceUtils;
 import net.minecraft.Util;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.network.chat.Component;

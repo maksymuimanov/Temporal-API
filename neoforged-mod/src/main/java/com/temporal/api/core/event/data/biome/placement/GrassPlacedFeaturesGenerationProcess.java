@@ -2,7 +2,8 @@ package com.temporal.api.core.event.data.biome.placement;
 
 import com.temporal.api.core.event.data.biome.GenerationProcess;
 import com.temporal.api.core.event.data.biome.dto.Grass;
-import com.temporal.api.core.util.biome.PlacedFeatureUtils;
+import com.temporal.api.core.util.ResourceUtils;
+import com.temporal.api.core.util.WorldGenerationUtils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
@@ -20,10 +21,10 @@ public class GrassPlacedFeaturesGenerationProcess implements GenerationProcess<P
         String registryName = description.id();
         var configuredFeatureReference = lookup.getOrThrow(configuredFeatureKey);
         String placedFeatureRegistryName = registryName + "_placed";
-        ResourceKey<PlacedFeature> placedFeatureResourceKey = PlacedFeatureUtils.createKey(placedFeatureRegistryName);
+        ResourceKey<PlacedFeature> placedFeatureResourceKey = ResourceUtils.createKey(Registries.PLACED_FEATURE, placedFeatureRegistryName);
         PlacedFeaturesContainer.PLACED_FEATURES.put(registryName, placedFeatureResourceKey);
         Grass.Placement placement = description.placement();
         List<PlacementModifier> placementModifiers = VegetationPlacements.worldSurfaceSquaredWithCount(placement.count());
-        PlacedFeatureUtils.register(context, placedFeatureResourceKey, configuredFeatureReference, placementModifiers);
+        WorldGenerationUtils.registerFeature(context, placedFeatureResourceKey, configuredFeatureReference, placementModifiers);
     }
 }

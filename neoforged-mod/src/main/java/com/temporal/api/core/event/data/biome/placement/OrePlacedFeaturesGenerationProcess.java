@@ -2,8 +2,8 @@ package com.temporal.api.core.event.data.biome.placement;
 
 import com.temporal.api.core.event.data.biome.GenerationProcess;
 import com.temporal.api.core.event.data.biome.dto.Ore;
-import com.temporal.api.core.util.biome.OrePlacements;
-import com.temporal.api.core.util.biome.PlacedFeatureUtils;
+import com.temporal.api.core.util.ResourceUtils;
+import com.temporal.api.core.util.WorldGenerationUtils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
@@ -22,7 +22,7 @@ public class OrePlacedFeaturesGenerationProcess implements GenerationProcess<Pla
         String registryName = description.id();
         var configuredFeatureReference = lookup.getOrThrow(configuredFeatureKey);
         String placedFeatureRegistryName = registryName + "_placed";
-        ResourceKey<PlacedFeature> placedFeatureResourceKey = PlacedFeatureUtils.createKey(placedFeatureRegistryName);
+        ResourceKey<PlacedFeature> placedFeatureResourceKey = ResourceUtils.createKey(Registries.PLACED_FEATURE, placedFeatureRegistryName);
         PlacedFeaturesContainer.PLACED_FEATURES.put(registryName, placedFeatureResourceKey);
         Ore.Placement placement = description.placement();
         VerticalAnchor anchorFrom = VerticalAnchor.absolute(placement.from());
@@ -32,9 +32,9 @@ public class OrePlacedFeaturesGenerationProcess implements GenerationProcess<Pla
             case TRIANGLE -> HeightRangePlacement.triangle(anchorFrom, anchorTo);
         };
         List<PlacementModifier> placementModifiers = switch (placement.rarity()) {
-            case RARE -> OrePlacements.rareOrePlacement(placement.count(), heightRangePlacement);
-            case COMMON -> OrePlacements.commonOrePlacement(placement.count(), heightRangePlacement);
+            case RARE -> WorldGenerationUtils.rareOrePlacement(placement.count(), heightRangePlacement);
+            case COMMON -> WorldGenerationUtils.commonOrePlacement(placement.count(), heightRangePlacement);
         };
-        PlacedFeatureUtils.register(context, placedFeatureResourceKey, configuredFeatureReference, placementModifiers);
+        WorldGenerationUtils.registerFeature(context, placedFeatureResourceKey, configuredFeatureReference, placementModifiers);
     }
 }

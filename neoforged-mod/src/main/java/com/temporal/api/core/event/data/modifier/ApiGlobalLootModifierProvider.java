@@ -3,7 +3,7 @@ package com.temporal.api.core.event.data.modifier;
 import com.temporal.api.common.loot.AddItemModifier;
 import com.temporal.api.core.collection.TemporalQueue;
 import com.temporal.api.core.engine.io.IOLayer;
-import com.temporal.api.core.util.other.ResourceUtils;
+import com.temporal.api.core.util.ResourceUtils;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;

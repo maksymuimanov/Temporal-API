@@ -7,7 +7,7 @@ import com.temporal.api.core.engine.io.metadata.strategy.field.event.fml.SetupCr
 import com.temporal.api.core.engine.io.metadata.strategy.field.event.fml.SetupShieldClientStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.field.event.fml.SetupWoodTypeClientStrategy;
 import com.temporal.api.core.event.client.*;
-import com.temporal.api.core.util.other.IOUtils;
+import com.temporal.api.core.util.IOUtils;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.registries.DeferredItem;

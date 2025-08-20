@@ -9,7 +9,7 @@ import com.temporal.api.core.engine.io.metadata.strategy.type.data.defined.Defin
 import com.temporal.api.core.engine.io.metadata.strategy.type.data.defined.DefinedRecipeStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.type.data.other.CustomAdvancementStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.type.data.tag.TagContainerStrategy;
-import com.temporal.api.core.util.other.IOUtils;
+import com.temporal.api.core.util.IOUtils;
 
 import java.lang.annotation.Annotation;
 import java.util.List;

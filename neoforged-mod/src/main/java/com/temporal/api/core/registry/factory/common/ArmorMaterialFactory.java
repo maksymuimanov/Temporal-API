@@ -1,7 +1,7 @@
 package com.temporal.api.core.registry.factory.common;
 
 import com.temporal.api.core.engine.io.context.InjectionPool;
-import com.temporal.api.core.util.other.ResourceUtils;
+import com.temporal.api.core.util.ResourceUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;

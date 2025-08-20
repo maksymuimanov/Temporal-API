@@ -5,7 +5,7 @@ import com.temporal.api.core.engine.io.IOLayer;
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.field.event.render.RegisterHangingSignRendererStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.field.event.render.RegisterSignRendererStrategy;
-import com.temporal.api.core.util.other.IOUtils;
+import com.temporal.api.core.util.IOUtils;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 
 import java.lang.annotation.Annotation;

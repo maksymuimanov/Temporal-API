@@ -1,4 +1,4 @@
-package com.temporal.api.core.util.other;
+package com.temporal.api.core.util;
 
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;

@@ -1,8 +1,8 @@
 package com.temporal.api.core.event.data.model.item;
 
 import com.temporal.api.core.event.data.model.block.ApiBlockModelProvider;
-import com.temporal.api.core.util.other.RegistryUtils;
-import com.temporal.api.core.util.other.ResourceUtils;
+import com.temporal.api.core.util.RegistryUtils;
+import com.temporal.api.core.util.ResourceUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;

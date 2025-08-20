@@ -14,7 +14,7 @@ import com.temporal.api.core.engine.io.metadata.strategy.field.data.other.*;
 import com.temporal.api.core.engine.io.metadata.strategy.field.data.properties.*;
 import com.temporal.api.core.engine.io.metadata.strategy.field.data.tag.BlockTagComponentStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.field.data.tag.ItemTagComponentStrategy;
-import com.temporal.api.core.util.other.IOUtils;
+import com.temporal.api.core.util.IOUtils;
 
 import java.lang.annotation.Annotation;
 import java.util.List;

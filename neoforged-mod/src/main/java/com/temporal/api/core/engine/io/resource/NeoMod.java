@@ -2,7 +2,7 @@ package com.temporal.api.core.engine.io.resource;
 
 import com.google.common.base.MoreObjects;
 import com.temporal.api.core.engine.io.metadata.annotation.injection.Injected;
-import com.temporal.api.core.util.other.IOUtils;
+import com.temporal.api.core.util.IOUtils;
 import net.neoforged.fml.common.Mod;
 
 import java.util.Set;

@@ -2,7 +2,7 @@ package com.temporal.api.core.event.data.trim.pattern;
 
 import com.temporal.api.core.collection.TemporalMap;
 import com.temporal.api.core.event.data.json.AtlasTrimProvider;
-import com.temporal.api.core.util.other.RegistryUtils;
+import com.temporal.api.core.util.RegistryUtils;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.data.worldgen.BootstrapContext;

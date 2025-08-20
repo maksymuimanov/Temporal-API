@@ -1,4 +1,4 @@
-package com.temporal.api.core.util.other;
+package com.temporal.api.core.util;
 
 import com.temporal.api.core.engine.io.metadata.strategy.AnnotationStrategy;
 import com.temporal.api.core.exception.ModInfoNotFoundException;

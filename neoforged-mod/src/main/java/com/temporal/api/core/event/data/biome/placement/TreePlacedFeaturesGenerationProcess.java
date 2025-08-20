@@ -2,8 +2,9 @@ package com.temporal.api.core.event.data.biome.placement;
 
 import com.temporal.api.core.event.data.biome.GenerationProcess;
 import com.temporal.api.core.event.data.biome.dto.Tree;
-import com.temporal.api.core.util.biome.PlacedFeatureUtils;
-import com.temporal.api.core.util.other.RegistryUtils;
+import com.temporal.api.core.util.RegistryUtils;
+import com.temporal.api.core.util.ResourceUtils;
+import com.temporal.api.core.util.WorldGenerationUtils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
@@ -22,13 +23,13 @@ public class TreePlacedFeaturesGenerationProcess implements GenerationProcess<Pl
         String registryName = description.id();
         var configuredFeatureReference = lookup.getOrThrow(configuredFeatureKey);
         String placedFeatureRegistryName = registryName + "_placed";
-        ResourceKey<PlacedFeature> placedFeatureResourceKey = PlacedFeatureUtils.createKey(placedFeatureRegistryName);
+        ResourceKey<PlacedFeature> placedFeatureResourceKey = ResourceUtils.createKey(Registries.PLACED_FEATURE, placedFeatureRegistryName);
         PlacedFeaturesContainer.PLACED_FEATURES.put(registryName, placedFeatureResourceKey);
         Tree.Placement placement = description.placement();
         List<PlacementModifier> placementModifiers = VegetationPlacements.treePlacement(
                 PlacementUtils.countExtra(placement.baseValue(), placement.chance(), placement.addedAmount()),
                 RegistryUtils.getBlockById(placement.saplingBlock())
         );
-        PlacedFeatureUtils.register(context, placedFeatureResourceKey, configuredFeatureReference, placementModifiers);
+        WorldGenerationUtils.registerFeature(context, placedFeatureResourceKey, configuredFeatureReference, placementModifiers);
     }
 }

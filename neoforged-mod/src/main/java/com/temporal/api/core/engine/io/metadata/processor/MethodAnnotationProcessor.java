@@ -4,7 +4,7 @@ import com.temporal.api.core.engine.io.IOLayer;
 import com.temporal.api.core.engine.io.metadata.executor.AnnotationExecutor;
 import com.temporal.api.core.engine.io.metadata.strategy.method.ExecutionStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.method.MethodAnnotationStrategy;
-import com.temporal.api.core.util.other.IOUtils;
+import com.temporal.api.core.util.IOUtils;
 
 import java.lang.annotation.Annotation;
 import java.util.List;

@@ -4,7 +4,7 @@ import com.temporal.api.core.collection.TemporalMap;
 import com.temporal.api.core.engine.io.IOLayer;
 import com.temporal.api.core.engine.io.metadata.strategy.type.ClassAnnotationStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.type.event.render.RegisterLayerDefinitionStrategy;
-import com.temporal.api.core.util.other.IOUtils;
+import com.temporal.api.core.util.IOUtils;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;

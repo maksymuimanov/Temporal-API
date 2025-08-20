@@ -1,6 +1,6 @@
 package com.temporal.api.core.engine.io.context;
 
-import com.temporal.api.core.util.other.RegistryUtils;
+import com.temporal.api.core.util.RegistryUtils;
 import net.minecraft.core.registries.Registries;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 

@@ -2,7 +2,7 @@ package com.temporal.api.core.registry.factory.extension.item;
 
 import com.temporal.api.core.engine.io.context.InjectionPool;
 import com.temporal.api.core.registry.factory.common.ItemFactory;
-import com.temporal.api.core.util.other.ResourceUtils;
+import com.temporal.api.core.util.ResourceUtils;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SmithingTemplateItem;
 import net.neoforged.neoforge.registries.DeferredItem;

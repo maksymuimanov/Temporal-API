@@ -1,7 +1,7 @@
 package com.temporal.api.core.event.data.preparer.tag.biome;
 
 import com.temporal.api.core.event.data.preparer.DynamicPreparer;
-import com.temporal.api.core.util.other.TagUtils;
+import com.temporal.api.core.util.TagUtils;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
