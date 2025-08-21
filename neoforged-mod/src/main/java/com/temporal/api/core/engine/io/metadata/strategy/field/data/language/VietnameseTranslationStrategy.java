@@ -1,6 +1,6 @@
 package com.temporal.api.core.engine.io.metadata.strategy.field.data.language;
 
-import com.temporal.api.core.engine.io.metadata.annotation.data.language.VietnameseTranslation;
+import com.temporal.api.core.engine.io.metadata.annotation.data.language.TranslateVietnamese;
 import com.temporal.api.core.event.data.language.provider.VietnameseProvider;
 
 import java.lang.annotation.Annotation;
@@ -15,12 +15,12 @@ public class VietnameseTranslationStrategy extends TranslationStrategy {
     public void execute(Field field, Object object) throws Exception {
         field.setAccessible(true);
         Object o = field.get(object);
-        VietnameseTranslation translation = field.getDeclaredAnnotation(VietnameseTranslation.class);
+        TranslateVietnamese translation = field.getDeclaredAnnotation(TranslateVietnamese.class);
         this.putDynamicTranslation(translation.id(), translation.value(), o);
     }
 
     @Override
     public Class<? extends Annotation> getAnnotationClass() {
-        return VietnameseTranslation.class;
+        return TranslateVietnamese.class;
     }
 }

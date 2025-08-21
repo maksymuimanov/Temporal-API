@@ -1,6 +1,6 @@
 package com.temporal.api.core.engine.io.metadata.strategy.field.data.language;
 
-import com.temporal.api.core.engine.io.metadata.annotation.data.language.HindiTranslation;
+import com.temporal.api.core.engine.io.metadata.annotation.data.language.TranslateHindi;
 import com.temporal.api.core.event.data.language.provider.HindiProvider;
 
 import java.lang.annotation.Annotation;
@@ -15,12 +15,12 @@ public class HindiTranslationStrategy extends TranslationStrategy {
     public void execute(Field field, Object object) throws Exception {
         field.setAccessible(true);
         Object o = field.get(object);
-        HindiTranslation translation = field.getDeclaredAnnotation(HindiTranslation.class);
+        TranslateHindi translation = field.getDeclaredAnnotation(TranslateHindi.class);
         this.putDynamicTranslation(translation.id(), translation.value(), o);
     }
 
     @Override
     public Class<? extends Annotation> getAnnotationClass() {
-        return HindiTranslation.class;
+        return TranslateHindi.class;
     }
 }

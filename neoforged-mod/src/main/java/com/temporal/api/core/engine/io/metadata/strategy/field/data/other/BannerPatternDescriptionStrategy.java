@@ -1,6 +1,6 @@
 package com.temporal.api.core.engine.io.metadata.strategy.field.data.other;
 
-import com.temporal.api.core.engine.io.metadata.annotation.data.other.BannerPatternDescription;
+import com.temporal.api.core.engine.io.metadata.annotation.data.GenerateBannerPattern;
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.event.data.banner.ApiBannerPatternProvider;
 import com.temporal.api.core.event.data.banner.BannerPatternDescriptionHolder;
@@ -20,6 +20,6 @@ public class BannerPatternDescriptionStrategy implements FieldAnnotationStrategy
 
     @Override
     public Class<? extends Annotation> getAnnotationClass() {
-        return BannerPatternDescription.class;
+        return GenerateBannerPattern.class;
     }
 }

@@ -1,7 +1,7 @@
 package com.temporal.api.core.engine.io.metadata.strategy.field.data.model;
 
 import com.temporal.api.core.collection.SimplePair;
-import com.temporal.api.core.engine.io.metadata.annotation.data.model.BlockModel;
+import com.temporal.api.core.engine.io.metadata.annotation.data.model.GenerateBlockModel;
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.event.data.model.block.BlockModelDescriptionContainer;
 import com.temporal.api.core.event.data.model.block.BlockModelProviderStrategy;
@@ -16,16 +16,16 @@ public class BlockModelStrategy implements FieldAnnotationStrategy {
     public void execute(Field field, Object object) throws Exception {
         field.setAccessible(true);
         Holder<? extends Block> registryObject = (Holder<? extends Block>) field.get(object);
-        BlockModel blockModel = field.getDeclaredAnnotation(BlockModel.class);
-        String[] additionalData = blockModel.additionalData();
-        if (!BlockModelProviderStrategy.class.equals(blockModel.custom())) {
-            BlockModelProviderStrategy providerStrategy = blockModel.custom()
+        GenerateBlockModel annotation = field.getDeclaredAnnotation(GenerateBlockModel.class);
+        String[] additionalData = annotation.additionalData();
+        if (!BlockModelProviderStrategy.class.equals(annotation.custom())) {
+            BlockModelProviderStrategy providerStrategy = annotation.custom()
                     .getDeclaredConstructor()
                     .newInstance();
             BlockModelDescriptionContainer.CUSTOM_MODELS.put(new SimplePair<>(registryObject, additionalData), providerStrategy);
             return;
         }
-        switch (blockModel.value()) {
+        switch (annotation.value()) {
             case CUBED -> BlockModelDescriptionContainer.CUBED_BLOCKS.put(registryObject, additionalData);
             case CUTOUT_CUBED -> BlockModelDescriptionContainer.CUTOUT_CUBED_BLOCKS.put(registryObject, additionalData);
             case CROSS -> BlockModelDescriptionContainer.CROSS_BLOCKS.put(registryObject, additionalData);
@@ -53,6 +53,6 @@ public class BlockModelStrategy implements FieldAnnotationStrategy {
 
     @Override
     public Class<? extends Annotation> getAnnotationClass() {
-        return BlockModel.class;
+        return GenerateBlockModel.class;
     }
 }

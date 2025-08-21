@@ -1,7 +1,7 @@
 package com.temporal.api.core.engine.io.metadata.strategy.field.data.model;
 
 import com.temporal.api.core.collection.SimplePair;
-import com.temporal.api.core.engine.io.metadata.annotation.data.model.ItemModel;
+import com.temporal.api.core.engine.io.metadata.annotation.data.model.GenerateItemModel;
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.event.data.model.item.ItemModelDescriptionContainer;
 import com.temporal.api.core.event.data.model.item.ItemModelProviderStrategy;
@@ -24,16 +24,16 @@ public class ItemModelStrategy implements FieldAnnotationStrategy {
         } else {
             registryObject = (Holder<? extends Item>) field.get(object);
         }
-        ItemModel itemModel = field.getDeclaredAnnotation(ItemModel.class);
-        String[] additionalData = itemModel.additionalData();
-        if (!ItemModelProviderStrategy.class.equals(itemModel.custom())) {
-            ItemModelProviderStrategy providerStrategy = itemModel.custom()
+        GenerateItemModel annotation = field.getDeclaredAnnotation(GenerateItemModel.class);
+        String[] additionalData = annotation.additionalData();
+        if (!ItemModelProviderStrategy.class.equals(annotation.custom())) {
+            ItemModelProviderStrategy providerStrategy = annotation.custom()
                     .getDeclaredConstructor()
                     .newInstance();
             ItemModelDescriptionContainer.CUSTOM_MODELS.put(new SimplePair<>(registryObject, additionalData), providerStrategy);
             return;
         }
-        switch (itemModel.value()) {
+        switch (annotation.value()) {
             case BASIC -> ItemModelDescriptionContainer.BASIC_ITEMS.put(registryObject, additionalData);
             case HANDHELD -> ItemModelDescriptionContainer.HANDHELD_ITEMS.put(registryObject, additionalData);
             case BOW -> ItemModelDescriptionContainer.BOW_ITEMS.put(registryObject, additionalData);
@@ -59,6 +59,6 @@ public class ItemModelStrategy implements FieldAnnotationStrategy {
 
     @Override
     public Class<? extends Annotation> getAnnotationClass() {
-        return ItemModel.class;
+        return GenerateItemModel.class;
     }
 }

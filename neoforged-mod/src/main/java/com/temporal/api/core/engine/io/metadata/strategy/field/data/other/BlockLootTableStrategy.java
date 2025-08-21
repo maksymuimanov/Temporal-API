@@ -1,7 +1,7 @@
 package com.temporal.api.core.engine.io.metadata.strategy.field.data.other;
 
 import com.temporal.api.core.collection.SimplePair;
-import com.temporal.api.core.engine.io.metadata.annotation.data.other.BlockLootTable;
+import com.temporal.api.core.engine.io.metadata.annotation.data.GenerateBlockLootTable;
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.event.data.loot.BlockLootTableProvider;
 import com.temporal.api.core.event.data.loot.LootProviderStrategy;
@@ -16,16 +16,16 @@ public class BlockLootTableStrategy implements FieldAnnotationStrategy {
     public void execute(Field field, Object object) throws Exception {
         field.setAccessible(true);
         Holder<? extends Block> registryObject = (Holder<? extends Block>) field.get(object);
-        BlockLootTable blockLootTable = field.getDeclaredAnnotation(BlockLootTable.class);
-        String[] additionalData = blockLootTable.additionalData();
-        if (!LootProviderStrategy.class.equals(blockLootTable.custom())) {
-            LootProviderStrategy providerStrategy = blockLootTable.custom()
+        GenerateBlockLootTable annotation = field.getDeclaredAnnotation(GenerateBlockLootTable.class);
+        String[] additionalData = annotation.additionalData();
+        if (!LootProviderStrategy.class.equals(annotation.custom())) {
+            LootProviderStrategy providerStrategy = annotation.custom()
                     .getDeclaredConstructor()
                     .newInstance();
             BlockLootTableProvider.CUSTOM_LOOT.put(new SimplePair<>(registryObject, additionalData), providerStrategy);
             return;
         }
-        switch (blockLootTable.value()) {
+        switch (annotation.value()) {
             case SELF -> BlockLootTableProvider.SELF.put(registryObject, additionalData);
             case SILK_TOUCH -> BlockLootTableProvider.SILK_TOUCH.put(registryObject, additionalData);
             case POTTED_CONTENT -> BlockLootTableProvider.POTTED_CONTENTS.put(registryObject, additionalData);
@@ -46,6 +46,6 @@ public class BlockLootTableStrategy implements FieldAnnotationStrategy {
 
     @Override
     public Class<? extends Annotation> getAnnotationClass() {
-        return BlockLootTable.class;
+        return GenerateBlockLootTable.class;
     }
 }

@@ -1,6 +1,6 @@
 package com.temporal.api.core.engine.io.metadata.strategy.field.data.other;
 
-import com.temporal.api.core.engine.io.metadata.annotation.data.other.SoundDescription;
+import com.temporal.api.core.engine.io.metadata.annotation.data.GenerateSound;
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.event.data.sound.ApiSoundProvider;
 import com.temporal.api.core.event.data.sound.SoundGenerationDescription;
@@ -17,7 +17,7 @@ public class SoundDescriptionStrategy implements FieldAnnotationStrategy {
     @Override
     public void execute(Field field, Object object) throws Exception {
         field.setAccessible(true);
-        SoundDescription annotation = field.getDeclaredAnnotation(SoundDescription.class);
+        GenerateSound annotation = field.getDeclaredAnnotation(GenerateSound.class);
         Holder<SoundEvent> soundEvent = (Holder<SoundEvent>) field.get(object);
         SoundGenerationDescription description = new SoundGenerationDescription(soundEvent, annotation.replace());
         List<SoundHolder> soundHolders = Arrays.stream(annotation.value())
@@ -31,6 +31,6 @@ public class SoundDescriptionStrategy implements FieldAnnotationStrategy {
 
     @Override
     public Class<? extends Annotation> getAnnotationClass() {
-        return SoundDescription.class;
+        return GenerateSound.class;
     }
 }

@@ -9,18 +9,16 @@ import net.neoforged.fml.ModList;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
-public class DependencyStrategy implements FieldAnnotationStrategy {
+public class DependencyStrategy implements FieldAnnotationStrategy<Dependency> {
     @Override
-    public void execute(Field field, Object object) throws Exception {
-        field.setAccessible(true);
-        Dependency dependency = field.getDeclaredAnnotation(Dependency.class);
-        field.setBoolean(object, ModList.get().isLoaded(dependency.value()));
+    public void execute(Field field, Object object, Dependency annotation) throws Exception {
+        field.setBoolean(object, ModList.get().isLoaded(annotation.value()));
         ObjectPool objectPool = InjectionPool.getInstance();
         objectPool.putObject(object);
     }
 
     @Override
-    public Class<? extends Annotation> getAnnotationClass() {
+    public Class<? extends Dependency> getAnnotationClass() {
         return Dependency.class;
     }
 }

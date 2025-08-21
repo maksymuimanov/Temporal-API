@@ -3,8 +3,8 @@ package com.temporal.api.core.engine.event.handler;
 import com.temporal.api.core.collection.TemporalQueue;
 import com.temporal.api.core.engine.io.IOLayer;
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
-import com.temporal.api.core.engine.io.metadata.strategy.field.event.render.RegisterHangingSignRendererStrategy;
-import com.temporal.api.core.engine.io.metadata.strategy.field.event.render.RegisterSignRendererStrategy;
+import com.temporal.api.core.engine.io.metadata.strategy.field.event.RegisterHangingSignRendererStrategy;
+import com.temporal.api.core.engine.io.metadata.strategy.field.event.RegisterSignRendererStrategy;
 import com.temporal.api.core.util.IOUtils;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 

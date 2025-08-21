@@ -2,7 +2,7 @@ package com.temporal.api.core.engine.io.metadata.processor;
 
 import com.temporal.api.core.engine.io.IOLayer;
 import com.temporal.api.core.engine.io.metadata.executor.AnnotationExecutor;
-import com.temporal.api.core.engine.io.metadata.strategy.method.ExecutionStrategy;
+import com.temporal.api.core.engine.io.metadata.strategy.method.ExecuteStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.method.MethodAnnotationStrategy;
 import com.temporal.api.core.util.IOUtils;
 
@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class MethodAnnotationProcessor implements AnnotationProcessor<MethodAnnotationStrategy> {
     private final Map<Class<? extends Annotation>, MethodAnnotationStrategy> strategies = IOUtils.createAnnotationStrategyMap(List.of(
-            new ExecutionStrategy()
+            new ExecuteStrategy()
     ));
 
     @Override

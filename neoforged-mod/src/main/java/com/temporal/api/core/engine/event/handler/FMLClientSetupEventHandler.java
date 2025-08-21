@@ -2,10 +2,10 @@ package com.temporal.api.core.engine.event.handler;
 
 import com.temporal.api.core.engine.io.IOLayer;
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
-import com.temporal.api.core.engine.io.metadata.strategy.field.event.fml.SetupBowClientStrategy;
-import com.temporal.api.core.engine.io.metadata.strategy.field.event.fml.SetupCrossbowClientStrategy;
-import com.temporal.api.core.engine.io.metadata.strategy.field.event.fml.SetupShieldClientStrategy;
-import com.temporal.api.core.engine.io.metadata.strategy.field.event.fml.SetupWoodTypeClientStrategy;
+import com.temporal.api.core.engine.io.metadata.strategy.field.event.SetupBowClientStrategy;
+import com.temporal.api.core.engine.io.metadata.strategy.field.event.SetupCrossbowClientStrategy;
+import com.temporal.api.core.engine.io.metadata.strategy.field.event.SetupShieldClientStrategy;
+import com.temporal.api.core.engine.io.metadata.strategy.field.event.SetupWoodTypeClientStrategy;
 import com.temporal.api.core.event.client.*;
 import com.temporal.api.core.util.IOUtils;
 import net.minecraft.world.level.block.state.properties.WoodType;

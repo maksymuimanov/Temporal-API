@@ -1,6 +1,6 @@
 package com.temporal.api.core.engine.io.metadata.strategy.field.data.language;
 
-import com.temporal.api.core.engine.io.metadata.annotation.data.language.UkrainianTranslation;
+import com.temporal.api.core.engine.io.metadata.annotation.data.language.TranslateUkrainian;
 import com.temporal.api.core.event.data.language.provider.UkrainianProvider;
 
 import java.lang.annotation.Annotation;
@@ -15,12 +15,12 @@ public class UkrainianTranslationStrategy extends TranslationStrategy {
     public void execute(Field field, Object object) throws Exception {
         field.setAccessible(true);
         Object o = field.get(object);
-        UkrainianTranslation translation = field.getDeclaredAnnotation(UkrainianTranslation.class);
+        TranslateUkrainian translation = field.getDeclaredAnnotation(TranslateUkrainian.class);
         this.putDynamicTranslation(translation.id(), translation.value(), o);
     }
 
     @Override
     public Class<? extends Annotation> getAnnotationClass() {
-        return UkrainianTranslation.class;
+        return TranslateUkrainian.class;
     }
 }

@@ -2,8 +2,10 @@ package com.temporal.api.core.engine.io.metadata.strategy;
 
 import java.lang.annotation.Annotation;
 
-public interface AnnotationStrategy<T> {
+public interface AnnotationStrategy<T, A extends Annotation> {
     void execute(T t, Object object) throws Exception;
 
-    Class<? extends Annotation> getAnnotationClass();
+    void execute(T t, Object object, A annotation) throws Exception;
+
+    Class<? extends A> getAnnotationClass();
 }

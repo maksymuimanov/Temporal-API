@@ -1,6 +1,6 @@
 package com.temporal.api.core.engine.io.metadata.strategy.field.data.other;
 
-import com.temporal.api.core.engine.io.metadata.annotation.data.other.TrimMaterialDescription;
+import com.temporal.api.core.engine.io.metadata.annotation.data.GenerateTrimMaterial;
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.event.data.trim.material.ApiTrimMaterialProvider;
 import com.temporal.api.core.event.data.trim.material.TrimMaterialDescriptionHolder;
@@ -14,7 +14,7 @@ public class TrimMaterialDescriptionStrategy implements FieldAnnotationStrategy 
     @Override
     public void execute(Field field, Object object) throws Exception {
         field.setAccessible(true);
-        TrimMaterialDescription annotation = field.getDeclaredAnnotation(TrimMaterialDescription.class);
+        GenerateTrimMaterial annotation = field.getDeclaredAnnotation(GenerateTrimMaterial.class);
         ResourceKey<TrimMaterial> trimMaterial = (ResourceKey<TrimMaterial>) field.get(object);
         TrimMaterialDescriptionHolder descriptionHolder = new TrimMaterialDescriptionHolder(annotation.itemId(), annotation.color(), annotation.itemModelIndex());
         ApiTrimMaterialProvider.TRIM_MATERIALS.put(trimMaterial, descriptionHolder);
@@ -22,6 +22,6 @@ public class TrimMaterialDescriptionStrategy implements FieldAnnotationStrategy 
 
     @Override
     public Class<? extends Annotation> getAnnotationClass() {
-        return TrimMaterialDescription.class;
+        return GenerateTrimMaterial.class;
     }
 }

@@ -8,7 +8,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface Injected {
-    boolean value() default true;
-    boolean isInjection() default true;
+    boolean value() default false;
     String mandatoryMod() default "";
 }

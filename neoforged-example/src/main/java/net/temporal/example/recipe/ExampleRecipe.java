@@ -1,6 +1,6 @@
 package net.temporal.example.recipe;
 
-import com.temporal.api.core.engine.io.metadata.annotation.data.defined.DefinedRecipe;
+import com.temporal.api.core.engine.io.metadata.annotation.data.RegisterRecipe;
 import com.temporal.api.core.engine.io.metadata.annotation.injection.Injected;
 import com.temporal.api.core.event.data.recipe.holder.ShapelessRecipeHolder;
 import net.minecraft.data.recipes.RecipeCategory;
@@ -10,7 +10,7 @@ import net.temporal.example.registry.ExampleItems;
 
 import java.util.Map;
 
-@DefinedRecipe
+@RegisterRecipe
 @Injected(false)
 public class ExampleRecipe implements ShapelessRecipeHolder {
     @Override
