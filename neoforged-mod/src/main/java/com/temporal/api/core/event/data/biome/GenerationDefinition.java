@@ -4,6 +4,10 @@ import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 
-public interface GenerationProcess<T, D> {
-    void bootstrap(BootstrapContext<T> context, ResourceKey<ConfiguredFeature<?, ?>> configuredFeatureKey, D description);
+import java.util.Map;
+
+public interface GenerationDefinition<T, D> {
+    void generate(BootstrapContext<T> context);
+
+    Map<ResourceKey<ConfiguredFeature<?, ?>>, D> getDataSource();
 }

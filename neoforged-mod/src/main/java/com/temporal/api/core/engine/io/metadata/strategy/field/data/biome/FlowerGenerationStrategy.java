@@ -2,7 +2,7 @@ package com.temporal.api.core.engine.io.metadata.strategy.field.data.biome;
 
 import com.temporal.api.core.engine.io.metadata.annotation.data.biome.FlowerGeneration;
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
-import com.temporal.api.core.event.data.biome.GenerationFeaturesDescriptionContainer;
+import com.temporal.api.core.event.data.biome.GenerationDescriptionContainer;
 import com.temporal.api.core.event.data.biome.dto.Flower;
 import com.temporal.api.core.event.data.preparer.tag.biome.BiomeTagDynamicPreparer;
 import com.temporal.api.core.util.ResourceUtils;
@@ -24,7 +24,7 @@ public class FlowerGenerationStrategy implements FieldAnnotationStrategy {
         var placement = new Flower.Placement(flowerGeneration.chance(), flowerGeneration.noiseLevel(), flowerGeneration.belowNoise(), flowerGeneration.aboveNoise());
         var biomeModifier = new Flower.BiomeModifier(flowerGeneration.biomeTag());
         Flower flower = new Flower(ResourceUtils.getResourceId(configuredFeatureKey), configuration, placement, biomeModifier);
-        GenerationFeaturesDescriptionContainer.FLOWERS.put(configuredFeatureKey, flower);
+        GenerationDescriptionContainer.FLOWERS.put(configuredFeatureKey, flower);
     }
 
     @Override

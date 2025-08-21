@@ -1,4 +1,4 @@
-package com.temporal.api.core.event.data.biome.modifier;
+package com.temporal.api.core.event.data.biome;
 
 import net.minecraft.resources.ResourceKey;
 import net.neoforged.neoforge.common.world.BiomeModifier;

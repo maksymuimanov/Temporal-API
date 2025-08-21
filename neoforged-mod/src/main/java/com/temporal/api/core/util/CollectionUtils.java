@@ -3,15 +3,22 @@ package com.temporal.api.core.util;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collector;
 
 public final class CollectionUtils {
     private CollectionUtils() {
+    }
+
+    public static <K, V, VR> Map<K, VR> createMap(Map<K, V> source, Function<V, VR> valueMapper) {
+        return createMap(source, key -> key, valueMapper);
+    }
+
+    public static <K, V, KR, VR> Map<KR, VR> createMap(Map<K, V> source, Function<K, KR> keyMapper, Function<V, VR> valueMapper) {
+        HashMap<KR, VR> map = new HashMap<>();
+        source.forEach((key, value) -> map.put(keyMapper.apply(key), valueMapper.apply(value)));
+        return map;
     }
 
     public static Object[] mergeArrays(Object[]... arrays) {

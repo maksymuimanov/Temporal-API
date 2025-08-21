@@ -1,4 +1,4 @@
-package com.temporal.api.core.event.data.biome.placement;
+package com.temporal.api.core.event.data.biome;
 
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;

@@ -1,11 +1,10 @@
 package com.temporal.api.core.event.data.biome.configuration;
 
 import com.temporal.api.ApiMod;
-import com.temporal.api.core.event.data.biome.GenerationProcess;
+import com.temporal.api.core.event.data.biome.GenerationDescriptionContainer;
 import com.temporal.api.core.event.data.biome.dto.Tree;
+import com.temporal.api.core.util.CollectionUtils;
 import com.temporal.api.core.util.RegistryUtils;
-import com.temporal.api.core.util.WorldGenerationUtils;
-import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.IntProvider;
@@ -22,29 +21,39 @@ import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Map;
 import java.util.OptionalInt;
 
-public class TreeConfiguredFeaturesGenerationProcess implements GenerationProcess<ConfiguredFeature<?, ?>, Tree> {
+public class TreeConfiguredFeatureDefinition implements ConfiguredFeatureDefinition<Tree.Configuration, TreeConfiguration> {
     @Override
-    public void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context, ResourceKey<ConfiguredFeature<?, ?>> configuredFeatureKey, Tree description) {
-        Tree.Configuration configuration = description.configuration();
+    public Feature<TreeConfiguration> getFeature(ResourceKey<ConfiguredFeature<?, ?>> configuredFeatureKey, Tree.Configuration data) {
+        return Feature.TREE;
+    }
+
+    @Override
+    public TreeConfiguration getFeatureConfiguration(ResourceKey<ConfiguredFeature<?, ?>> configuredFeatureKey, Tree.Configuration data) {
         try {
-            TrunkPlacer trunkPlacer = getTrunkPlacer(configuration);
-            FoliagePlacer foliagePlacer = getFoliagePlacer(configuration);
-            FeatureSize featureSize = getFeatureSize(configuration);
+            TrunkPlacer trunkPlacer = getTrunkPlacer(data);
+            FoliagePlacer foliagePlacer = getFoliagePlacer(data);
+            FeatureSize featureSize = getFeatureSize(data);
             TreeConfiguration.TreeConfigurationBuilder builder = new TreeConfiguration.TreeConfigurationBuilder(
-                    BlockStateProvider.simple(RegistryUtils.getBlockById(configuration.logBlock())),
+                    BlockStateProvider.simple(RegistryUtils.getBlockById(data.logBlock())),
                     trunkPlacer,
-                    BlockStateProvider.simple(RegistryUtils.getBlockById(configuration.leavesBlock())),
+                    BlockStateProvider.simple(RegistryUtils.getBlockById(data.leavesBlock())),
                     foliagePlacer,
                     featureSize
-            ).dirt(BlockStateProvider.simple(RegistryUtils.getBlockById(configuration.rootBlock())));
-            builder = configuration.ignoreVines() ? builder.ignoreVines() : builder;
-            WorldGenerationUtils.registerFeature(context, configuredFeatureKey, Feature.TREE, builder.build());
+            ).dirt(BlockStateProvider.simple(RegistryUtils.getBlockById(data.rootBlock())));
+            builder = data.ignoreVines() ? builder.ignoreVines() : builder;
+            return builder.build();
         } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
             ApiMod.LOGGER.error("Error while instantiating trunk placer or foliage placer", e);
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public Map<ResourceKey<ConfiguredFeature<?, ?>>, Tree.Configuration> getDataSource() {
+        return CollectionUtils.createMap(GenerationDescriptionContainer.TREES, Tree::configuration);
     }
 
     private @NotNull TrunkPlacer getTrunkPlacer(Tree.Configuration configuration) throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {

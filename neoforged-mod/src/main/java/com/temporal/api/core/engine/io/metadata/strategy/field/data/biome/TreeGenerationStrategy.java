@@ -2,7 +2,7 @@ package com.temporal.api.core.engine.io.metadata.strategy.field.data.biome;
 
 import com.temporal.api.core.engine.io.metadata.annotation.data.biome.TreeGeneration;
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
-import com.temporal.api.core.event.data.biome.GenerationFeaturesDescriptionContainer;
+import com.temporal.api.core.event.data.biome.GenerationDescriptionContainer;
 import com.temporal.api.core.event.data.biome.dto.Tree;
 import com.temporal.api.core.event.data.preparer.tag.biome.BiomeTagDynamicPreparer;
 import com.temporal.api.core.util.ResourceUtils;
@@ -32,7 +32,7 @@ public class TreeGenerationStrategy implements FieldAnnotationStrategy {
         var placement = new Tree.Placement(treeGeneration.saplingBlockId(), treeGeneration.baseValue(), treeGeneration.chance(), treeGeneration.addedAmount());
         var biomeModifier = new Tree.BiomeModifier(treeGeneration.biomeTag());
         Tree tree = new Tree(ResourceUtils.getResourceId(configuredFeatureKey), configuration, placement, biomeModifier);
-        GenerationFeaturesDescriptionContainer.TREES.put(configuredFeatureKey, tree);
+        GenerationDescriptionContainer.TREES.put(configuredFeatureKey, tree);
     }
 
     @Override

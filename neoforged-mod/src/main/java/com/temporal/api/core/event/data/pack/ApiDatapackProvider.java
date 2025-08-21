@@ -2,7 +2,7 @@ package com.temporal.api.core.event.data.pack;
 
 import com.temporal.api.core.engine.io.IOLayer;
 import com.temporal.api.core.event.data.banner.ApiBannerPatternProvider;
-import com.temporal.api.core.event.data.biome.CompoundGenerationProcessFacade;
+import com.temporal.api.core.event.data.biome.CompoundGenerationDefinitionFacade;
 import com.temporal.api.core.event.data.damage.ApiDamageTypeProvider;
 import com.temporal.api.core.event.data.enchantment.ApiEnchantmentProvider;
 import com.temporal.api.core.event.data.music.jukebox.ApiJukeboxSongProvider;
@@ -30,9 +30,9 @@ public class ApiDatapackProvider extends DatapackBuiltinEntriesProvider {
             .add(Registries.BANNER_PATTERN, ApiBannerPatternProvider::bootstrap)
             .add(Registries.ENCHANTMENT, ApiEnchantmentProvider::bootstrap)
             .add(Registries.JUKEBOX_SONG, ApiJukeboxSongProvider::bootstrap)
-            .add(Registries.CONFIGURED_FEATURE, CompoundGenerationProcessFacade::executeConfiguredFeatures)
-            .add(Registries.PLACED_FEATURE, CompoundGenerationProcessFacade::executePlacedFeatures)
-            .add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, CompoundGenerationProcessFacade::executeBiomeModifiers);
+            .add(Registries.CONFIGURED_FEATURE, CompoundGenerationDefinitionFacade::executeConfiguredFeatures)
+            .add(Registries.PLACED_FEATURE, CompoundGenerationDefinitionFacade::executePlacedFeatures)
+            .add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, CompoundGenerationDefinitionFacade::executeBiomeModifiers);
 
     public ApiDatapackProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries, BUILDER, Set.of(IOLayer.NEO_MOD.getModId()));

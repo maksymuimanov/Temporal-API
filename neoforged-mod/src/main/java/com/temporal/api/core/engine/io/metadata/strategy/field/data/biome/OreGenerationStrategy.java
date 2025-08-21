@@ -2,7 +2,7 @@ package com.temporal.api.core.engine.io.metadata.strategy.field.data.biome;
 
 import com.temporal.api.core.engine.io.metadata.annotation.data.biome.OreGeneration;
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
-import com.temporal.api.core.event.data.biome.GenerationFeaturesDescriptionContainer;
+import com.temporal.api.core.event.data.biome.GenerationDescriptionContainer;
 import com.temporal.api.core.event.data.biome.dto.Ore;
 import com.temporal.api.core.event.data.preparer.tag.biome.BiomeTagDynamicPreparer;
 import com.temporal.api.core.util.ResourceUtils;
@@ -24,7 +24,7 @@ public class OreGenerationStrategy implements FieldAnnotationStrategy {
         var placement = new Ore.Placement(oreGeneration.rarity(), oreGeneration.count(), oreGeneration.shape(), oreGeneration.from(), oreGeneration.to());
         var biomeModifier = new Ore.BiomeModifier(oreGeneration.biomeTag());
         Ore ore = new Ore(ResourceUtils.getResourceId(configuredFeatureKey), configuration, placement, biomeModifier);
-        GenerationFeaturesDescriptionContainer.ORES.put(configuredFeatureKey, ore);
+        GenerationDescriptionContainer.ORES.put(configuredFeatureKey, ore);
     }
 
     @Override
