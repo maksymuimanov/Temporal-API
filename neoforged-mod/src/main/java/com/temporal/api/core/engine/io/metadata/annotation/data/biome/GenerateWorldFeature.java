@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface WorldFeatureGeneration {
+public @interface GenerateWorldFeature {
     Class<? extends ConfiguredFeatureDefinition<?, ?>> configuration();
 
     Class<? extends PlacedFeatureDefinition<?>> placement();

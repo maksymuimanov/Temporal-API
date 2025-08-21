@@ -1,6 +1,6 @@
 package com.temporal.api.core.engine.io.metadata.strategy.field.data.biome;
 
-import com.temporal.api.core.engine.io.metadata.annotation.data.biome.OreGeneration;
+import com.temporal.api.core.engine.io.metadata.annotation.data.biome.GenerateOre;
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.event.data.biome.GenerationDescriptionContainer;
 import com.temporal.api.core.event.data.biome.dto.Ore;
@@ -12,23 +12,26 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
-public class OreGenerationStrategy implements FieldAnnotationStrategy {
+public class GenerateOreStrategy implements FieldAnnotationStrategy {
     @Override
     public void execute(Field field, Object object) throws Exception {
         field.setAccessible(true);
         ResourceKey<ConfiguredFeature<?, ?>> configuredFeatureKey = (ResourceKey<ConfiguredFeature<?, ?>>) field.get(object);
-        OreGeneration oreGeneration = field.getDeclaredAnnotation(OreGeneration.class);
-        Class<?> tagContainer = oreGeneration.biomeTagContainer();
+        GenerateOre annotation = field.getDeclaredAnnotation(GenerateOre.class);
+        var annotationConfiguration = annotation.configuration();
+        var annotationPlacement = annotation.placement();
+        var annotationBiomeModifier = annotation.biomeModifier();
+        Class<?> tagContainer = annotationBiomeModifier.biomeTagContainer();
         if (!tagContainer.equals(Object.class)) BiomeTagDynamicPreparer.TAG_CONTAINERS.add(tagContainer);
-        var configuration = new Ore.Configuration(oreGeneration.blockId(), oreGeneration.replaceableBlocks(), oreGeneration.size());
-        var placement = new Ore.Placement(oreGeneration.rarity(), oreGeneration.count(), oreGeneration.shape(), oreGeneration.from(), oreGeneration.to());
-        var biomeModifier = new Ore.BiomeModifier(oreGeneration.biomeTag());
+        var configuration = new Ore.Configuration(annotationConfiguration.blockId(), annotationConfiguration.replaceableBlocks(), annotationConfiguration.size());
+        var placement = new Ore.Placement(annotationPlacement.rarity(), annotationPlacement.count(), annotationPlacement.shape(), annotationPlacement.from(), annotationPlacement.to());
+        var biomeModifier = new Ore.BiomeModifier(annotationBiomeModifier.biomeTag());
         Ore ore = new Ore(ResourceUtils.getResourceId(configuredFeatureKey), configuration, placement, biomeModifier);
         GenerationDescriptionContainer.ORES.put(configuredFeatureKey, ore);
     }
 
     @Override
     public Class<? extends Annotation> getAnnotationClass() {
-        return OreGeneration.class;
+        return GenerateOre.class;
     }
 }

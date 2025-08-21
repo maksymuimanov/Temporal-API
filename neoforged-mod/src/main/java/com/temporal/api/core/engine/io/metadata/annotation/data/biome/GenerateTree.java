@@ -13,20 +13,34 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface TreeGeneration {
-    String saplingBlockId();
-    String logBlockId();
-    String leavesBlockId();
-    String rootBlockId() default "minecraft:grass_block";
-    Trunk trunk();
-    Foliage foliage();
-    FeatureSize featureSize();
-    boolean ignoreVines() default true;
-    int baseValue();
-    int chance();
-    int addedAmount();
-    String biomeTag() default "minecraft:is_overworld";
-    Class<?> biomeTagContainer() default Object.class;
+public @interface GenerateTree {
+    Configuration configuration();
+
+    Placement placement();
+
+    BiomeModifier biomeModifier() default @BiomeModifier;
+
+    @interface Configuration {
+        String logBlockId();
+        String leavesBlockId();
+        String rootBlockId() default "minecraft:grass_block";
+        Trunk trunk();
+        Foliage foliage();
+        FeatureSize featureSize();
+        boolean ignoreVines() default true;
+    }
+
+    @interface Placement {
+        String saplingBlockId();
+        int baseValue();
+        int chance();
+        int addedAmount();
+    }
+
+    @interface BiomeModifier {
+        String biomeTag() default "minecraft:is_overworld";
+        Class<?> biomeTagContainer() default Object.class;
+    }
 
     @interface Trunk {
         Class<? extends TrunkPlacer> trunkPlacerClass() default ForkingTrunkPlacer.class;

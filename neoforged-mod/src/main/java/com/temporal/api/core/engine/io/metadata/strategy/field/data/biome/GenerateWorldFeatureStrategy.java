@@ -1,6 +1,6 @@
 package com.temporal.api.core.engine.io.metadata.strategy.field.data.biome;
 
-import com.temporal.api.core.engine.io.metadata.annotation.data.biome.WorldFeatureGeneration;
+import com.temporal.api.core.engine.io.metadata.annotation.data.biome.GenerateWorldFeature;
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.event.data.biome.GenerationDescriptionContainer;
 import com.temporal.api.core.event.data.biome.configuration.ConfiguredFeatureDefinition;
@@ -10,18 +10,18 @@ import com.temporal.api.core.event.data.biome.placement.PlacedFeatureDefinition;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
-public class WorldFeatureGenerationStrategy implements FieldAnnotationStrategy {
+public class GenerateWorldFeatureStrategy implements FieldAnnotationStrategy {
     @Override
     public void execute(Field field, Object object) throws Exception {
         field.setAccessible(true);
-        WorldFeatureGeneration worldFeatureGeneration = field.getDeclaredAnnotation(WorldFeatureGeneration.class);
-        ConfiguredFeatureDefinition<?, ?> configuredFeatureDefinition = worldFeatureGeneration.configuration()
+        GenerateWorldFeature annotation = field.getDeclaredAnnotation(GenerateWorldFeature.class);
+        ConfiguredFeatureDefinition<?, ?> configuredFeatureDefinition = annotation.configuration()
                 .getDeclaredConstructor()
                 .newInstance();
-        PlacedFeatureDefinition<?> placedFeatureDefinition = worldFeatureGeneration.placement()
+        PlacedFeatureDefinition<?> placedFeatureDefinition = annotation.placement()
                 .getDeclaredConstructor()
                 .newInstance();
-        BiomeModifierDefinition<?> biomeModifierDefinition = worldFeatureGeneration.biomeModifier()
+        BiomeModifierDefinition<?> biomeModifierDefinition = annotation.biomeModifier()
                 .getDeclaredConstructor()
                 .newInstance();
         GenerationDescriptionContainer.CUSTOM_CONFIGURED_FEATURES.add(configuredFeatureDefinition);
@@ -31,6 +31,6 @@ public class WorldFeatureGenerationStrategy implements FieldAnnotationStrategy {
 
     @Override
     public Class<? extends Annotation> getAnnotationClass() {
-        return WorldFeatureGeneration.class;
+        return GenerateWorldFeature.class;
     }
 }
