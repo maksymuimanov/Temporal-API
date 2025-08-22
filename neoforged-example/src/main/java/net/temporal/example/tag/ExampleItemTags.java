@@ -8,7 +8,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 
 @RegisterTagContainer(TagContainerType.ITEM)
-@Injected(false)
+@Injected
 public final class ExampleItemTags {
     public static final TagKey<Item> REPAIRS_EXAMPLE_ARMOR = TagUtils.createItemTag("repairs_example_armor");
 }

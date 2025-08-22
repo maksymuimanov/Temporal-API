@@ -1,11 +1,11 @@
 package net.temporal.example.registry;
 
 import com.temporal.api.core.engine.io.context.InjectionPool;
+import com.temporal.api.core.engine.io.metadata.annotation.data.AddItemTag;
 import com.temporal.api.core.engine.io.metadata.annotation.data.language.TranslateEnglish;
 import com.temporal.api.core.engine.io.metadata.annotation.data.model.GenerateItemModel;
 import com.temporal.api.core.engine.io.metadata.annotation.data.properties.Compostable;
 import com.temporal.api.core.engine.io.metadata.annotation.data.properties.FurnaceFuel;
-import com.temporal.api.core.engine.io.metadata.annotation.data.AddItemTag;
 import com.temporal.api.core.engine.io.metadata.annotation.event.SetupBow;
 import com.temporal.api.core.engine.io.metadata.annotation.event.SetupCrossbow;
 import com.temporal.api.core.engine.io.metadata.annotation.injection.Injected;
@@ -15,7 +15,7 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Tiers;
 import net.neoforged.neoforge.registries.DeferredItem;
 
-@Injected(false)
+@Injected
 public final class ExampleItems {
     @RegisterFactory
     private static final ExampleItemFactory ITEM_FACTORY = InjectionPool.getFromInstance(ExampleItemFactory.class);

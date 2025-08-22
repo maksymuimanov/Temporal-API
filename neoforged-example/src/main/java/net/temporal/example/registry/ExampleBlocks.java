@@ -1,11 +1,11 @@
 package net.temporal.example.registry;
 
 import com.temporal.api.core.engine.io.context.InjectionPool;
+import com.temporal.api.core.engine.io.metadata.annotation.data.AddBlockTag;
+import com.temporal.api.core.engine.io.metadata.annotation.data.GenerateBlockLootTable;
 import com.temporal.api.core.engine.io.metadata.annotation.data.language.TranslateEnglish;
 import com.temporal.api.core.engine.io.metadata.annotation.data.model.GenerateBlockModel;
 import com.temporal.api.core.engine.io.metadata.annotation.data.model.GenerateItemModel;
-import com.temporal.api.core.engine.io.metadata.annotation.data.GenerateBlockLootTable;
-import com.temporal.api.core.engine.io.metadata.annotation.data.AddBlockTag;
 import com.temporal.api.core.engine.io.metadata.annotation.injection.Injected;
 import com.temporal.api.core.engine.io.metadata.annotation.injection.RegisterFactory;
 import com.temporal.api.core.engine.io.metadata.constant.BlockLootTableType;
@@ -21,7 +21,7 @@ import net.minecraft.world.level.block.state.properties.WoodType;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.temporal.example.worldgen.ExampleConfiguredFeatures;
 
-@Injected(false)
+@Injected
 public final class ExampleBlocks {
     @RegisterFactory
     private static final ExampleBlockFactory BLOCK_FACTORY = InjectionPool.getFromInstance(ExampleBlockFactory.class);

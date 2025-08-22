@@ -11,7 +11,7 @@ import net.temporal.example.registry.ExampleItems;
 import java.util.Map;
 
 @RegisterRecipe
-@Injected(false)
+@Injected
 public class ExampleRecipe implements ShapelessRecipeHolder {
     @Override
     public Map<ItemLike, Integer> getItemAndCountMap() {

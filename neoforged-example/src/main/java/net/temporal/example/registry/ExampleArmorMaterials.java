@@ -12,7 +12,7 @@ import net.temporal.example.tag.ExampleItemTags;
 
 import java.util.EnumMap;
 
-@Injected(false)
+@Injected
 public final class ExampleArmorMaterials {
     @RegisterFactory
     private static final ArmorMaterialFactory ARMOR_MATERIAL_FACTORY = InjectionPool.getFromInstance(ArmorMaterialFactory.class);

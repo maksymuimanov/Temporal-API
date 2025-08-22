@@ -11,7 +11,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 
-@Injected(false)
+@Injected
 public final class ExampleConfiguredFeatures {
     @GenerateOre(
             configuration = @GenerateOre.Configuration(

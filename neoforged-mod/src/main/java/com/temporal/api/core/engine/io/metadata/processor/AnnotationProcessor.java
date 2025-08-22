@@ -9,7 +9,7 @@ import java.lang.annotation.Annotation;
 import java.util.Map;
 import java.util.Set;
 
-public interface AnnotationProcessor<S extends AnnotationStrategy<?>> {
+public interface AnnotationProcessor<S extends AnnotationStrategy<?, ?>> {
     default void process(Set<Class<?>> classes, AnnotationStrategyConsumer consumer) {
         try {
             consumer.execute(getExecutor(), getStrategies(), classes);

@@ -5,6 +5,6 @@ import com.temporal.api.core.registry.factory.common.BlockEntityTypeFactory;
 import com.temporal.api.core.registry.factory.extension.entity.HangingSignSubFactory;
 import com.temporal.api.core.registry.factory.extension.entity.SignSubFactory;
 
-@Injected
+@Injected(true)
 public final class ExampleBlockEntityTypeFactory extends BlockEntityTypeFactory implements SignSubFactory, HangingSignSubFactory {
 }

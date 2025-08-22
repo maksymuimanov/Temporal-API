@@ -7,7 +7,7 @@ import java.lang.annotation.Annotation;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public interface AnnotationExecutor<S extends AnnotationStrategy<?>> {
+public interface AnnotationExecutor<S extends AnnotationStrategy<?, ?>> {
     default void tryExecute(Map<Class<? extends Annotation>, S> strategies, Class<?> clazz) {
         try {
             execute(strategies, clazz);

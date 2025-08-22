@@ -14,7 +14,7 @@ import java.util.concurrent.Executors;
 
 public class AsyncStrategyConsumer implements AnnotationStrategyConsumer {
     @Override
-    public <T extends AnnotationStrategy<?>> void execute(AnnotationExecutor<T> executor, Map<Class<? extends Annotation>, T> strategies, Set<Class<?>> source) {
+    public <T extends AnnotationStrategy<?, ?>> void execute(AnnotationExecutor<T> executor, Map<Class<? extends Annotation>, T> strategies, Set<Class<?>> source) {
         ExecutorService pool = Executors.newWorkStealingPool();
         try {
             List<CompletableFuture<Void>> futures = new ArrayList<>();

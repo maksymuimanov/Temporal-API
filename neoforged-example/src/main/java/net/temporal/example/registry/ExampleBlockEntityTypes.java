@@ -2,7 +2,7 @@ package net.temporal.example.registry;
 
 import com.temporal.api.core.engine.io.metadata.annotation.injection.Injected;
 
-@Injected(false)
+@Injected
 public final class ExampleBlockEntityTypes {
 //    @Registry
 //    private static final ExampleBlockEntityTypeFactory BLOCK_ENTITY_TYPE_FACTORY = InjectionPool.getFromInstance(ExampleBlockEntityTypeFactory.class);

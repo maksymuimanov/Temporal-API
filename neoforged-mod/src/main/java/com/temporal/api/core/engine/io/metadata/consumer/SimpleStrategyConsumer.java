@@ -9,7 +9,7 @@ import java.util.Set;
 
 public class SimpleStrategyConsumer implements AnnotationStrategyConsumer {
     @Override
-    public <T extends AnnotationStrategy<?>> void execute(AnnotationExecutor<T> executor, Map<Class<? extends Annotation>, T> strategies, Set<Class<?>> source) {
+    public <T extends AnnotationStrategy<?, ?>> void execute(AnnotationExecutor<T> executor, Map<Class<? extends Annotation>, T> strategies, Set<Class<?>> source) {
         source.forEach(clazz -> {
             executor.tryExecute(strategies, clazz);
         });
