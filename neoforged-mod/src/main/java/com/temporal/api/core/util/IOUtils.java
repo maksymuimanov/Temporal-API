@@ -74,7 +74,7 @@ public final class IOUtils {
         resourceInserter.insert(formatted, path);
     }
 
-    public static <T, S extends AnnotationStrategy<T>> Map<Class<? extends Annotation>, S> createAnnotationStrategyMap(Collection<S> strategies) {
+    public static <T, S extends AnnotationStrategy<T, ? extends Annotation>> Map<Class<? extends Annotation>, S> createAnnotationStrategyMap(Collection<S> strategies) {
         return strategies.stream()
                 .distinct()
                 .collect(Collectors.toMap(AnnotationStrategy::getAnnotationClass, strategy -> strategy));

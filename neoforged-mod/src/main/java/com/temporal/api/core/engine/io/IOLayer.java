@@ -21,11 +21,11 @@ public class IOLayer implements EngineLayer {
     public static volatile NeoMod NEO_MOD;
     public static final AnnotationStrategyConsumer SIMPLE_STRATEGY_CONSUMER = new SimpleStrategyConsumer();
     public static final AnnotationStrategyConsumer ASYNC_STRATEGY_CONSUMER = new AsyncStrategyConsumer();
-    public static final AnnotationExecutor<ClassAnnotationStrategy> CLASS_EXECUTOR = new ClassExecutor();
-    public static final AnnotationExecutor<FieldAnnotationStrategy> FIELD_EXECUTOR = new FieldExecutor();
-    public static final AnnotationExecutor<MethodAnnotationStrategy> METHOD_EXECUTOR = new MethodExecutor();
-    public static final AnnotationExecutor<FieldAnnotationStrategy> STATIC_FIELD_EXECUTOR = new StaticFieldExecutor();
-    public static final AnnotationExecutor<MethodAnnotationStrategy> STATIC_METHOD_EXECUTOR = new StaticMethodExecutor();
+    public static final AnnotationExecutor<ClassAnnotationStrategy<?>> CLASS_EXECUTOR = new ClassExecutor();
+    public static final AnnotationExecutor<FieldAnnotationStrategy<?>> FIELD_EXECUTOR = new FieldExecutor();
+    public static final AnnotationExecutor<MethodAnnotationStrategy<?>> METHOD_EXECUTOR = new MethodExecutor();
+    public static final AnnotationExecutor<FieldAnnotationStrategy<?>> STATIC_FIELD_EXECUTOR = new StaticFieldExecutor();
+    public static final AnnotationExecutor<MethodAnnotationStrategy<?>> STATIC_METHOD_EXECUTOR = new StaticMethodExecutor();
     private Class<?> modClass;
     private List<ObjectPoolInitializer> objectPoolInitializers;
     private List<?> externalSource;

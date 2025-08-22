@@ -10,18 +10,18 @@ import java.lang.annotation.Annotation;
 import java.util.List;
 import java.util.Map;
 
-public class MethodAnnotationProcessor implements AnnotationProcessor<MethodAnnotationStrategy> {
-    private final Map<Class<? extends Annotation>, MethodAnnotationStrategy> strategies = IOUtils.createAnnotationStrategyMap(List.of(
+public class MethodAnnotationProcessor implements AnnotationProcessor<MethodAnnotationStrategy<?>> {
+    private final Map<Class<? extends Annotation>, MethodAnnotationStrategy<?>> strategies = IOUtils.createAnnotationStrategyMap(List.of(
             new ExecuteStrategy()
     ));
 
     @Override
-    public AnnotationExecutor<MethodAnnotationStrategy> getExecutor() {
+    public AnnotationExecutor<MethodAnnotationStrategy<?>> getExecutor() {
         return IOLayer.METHOD_EXECUTOR;
     }
 
     @Override
-    public Map<Class<? extends Annotation>, MethodAnnotationStrategy> getStrategies() {
+    public Map<Class<? extends Annotation>, MethodAnnotationStrategy<?>> getStrategies() {
         return strategies;
     }
 }

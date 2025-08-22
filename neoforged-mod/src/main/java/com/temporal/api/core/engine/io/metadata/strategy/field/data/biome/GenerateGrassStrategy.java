@@ -6,23 +6,20 @@ import com.temporal.api.core.event.data.biome.GenerationDescriptionContainer;
 import com.temporal.api.core.event.data.biome.dto.Grass;
 import com.temporal.api.core.event.data.preparer.tag.biome.BiomeTagDynamicPreparer;
 import com.temporal.api.core.util.ResourceUtils;
+import com.temporal.api.core.util.TagUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
-public class GenerateGrassStrategy implements FieldAnnotationStrategy {
+public class GenerateGrassStrategy implements FieldAnnotationStrategy<GenerateGrass> {
     @Override
-    public void execute(Field field, Object object) throws Exception {
-        field.setAccessible(true);
+    public void execute(Field field, Object object, GenerateGrass annotation) throws Exception {
         ResourceKey<ConfiguredFeature<?, ?>> configuredFeatureKey = (ResourceKey<ConfiguredFeature<?, ?>>) field.get(object);
-        GenerateGrass annotation = field.getDeclaredAnnotation(GenerateGrass.class);
         var annotationConfiguration = annotation.configuration();
         var annotationPlacement = annotation.placement();
         var annotationBiomeModifier = annotation.biomeModifier();
-        Class<?> tagContainer = annotationBiomeModifier.biomeTagContainer();
-        if (!tagContainer.equals(Object.class)) BiomeTagDynamicPreparer.TAG_CONTAINERS.add(tagContainer);
+        TagUtils.putTagContainer(BiomeTagDynamicPreparer.TAG_CONTAINERS, annotationBiomeModifier.biomeTagContainer());
         var configuration = new Grass.Configuration(annotationConfiguration.blockId(), annotationConfiguration.tries());
         var placement = new Grass.Placement(annotationPlacement.count());
         var biomeModifier = new Grass.BiomeModifier(annotationBiomeModifier.biomeTag());
@@ -31,7 +28,7 @@ public class GenerateGrassStrategy implements FieldAnnotationStrategy {
     }
 
     @Override
-    public Class<? extends Annotation> getAnnotationClass() {
+    public Class<? extends GenerateGrass> getAnnotationClass() {
         return GenerateGrass.class;
     }
 }

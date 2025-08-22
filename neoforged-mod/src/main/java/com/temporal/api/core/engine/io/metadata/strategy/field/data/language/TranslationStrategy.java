@@ -11,15 +11,30 @@ import net.minecraft.resources.ResourceKey;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.Objects;
 
 @SuppressWarnings("unchecked")
-public abstract class TranslationStrategy implements FieldAnnotationStrategy {
+public abstract class TranslationStrategy<A extends Annotation> implements FieldAnnotationStrategy<A> {
+    public static final String TRANSLATION_ID_METHOD = "id";
     private final Class<?> translationProvider;
 
     protected TranslationStrategy(Class<?> translationProvider) {
         this.translationProvider = translationProvider;
+    }
+
+    @Override
+    public void execute(Field field, Object object, A annotation) throws Exception {
+        Object o = field.get(object);
+        Class<? extends A> annotationClass = this.getAnnotationClass();
+        Method idMethod = annotationClass.getDeclaredMethod(TRANSLATION_ID_METHOD);
+        String id = (String) idMethod.invoke(annotation);
+        Method valueMethod = annotationClass.getDeclaredMethod("value");
+        String value = (String) valueMethod.invoke(annotation);
+        this.putDynamicTranslation(id, value, o);
     }
 
     protected void putDynamicTranslation(String possibleKey, String value, Object o) throws Exception {

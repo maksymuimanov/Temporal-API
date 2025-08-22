@@ -8,26 +8,23 @@ import net.minecraft.core.Holder;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
-public class CompostableStrategy implements FieldAnnotationStrategy {
+public class CompostableStrategy implements FieldAnnotationStrategy<Compostable> {
     @Override
-    public void execute(Field field, Object object) throws Exception {
-        field.setAccessible(true);
-        Compostable compostable = field.getAnnotation(Compostable.class);
+    public void execute(Field field, Object object, Compostable annotation) throws Exception {
         CompostableDto compostableDto;
         Object o = field.get(object);
         compostableDto = switch (o) {
-            case DeferredItem<?> item -> new CompostableDto(item, compostable.chance(), compostable.replace());
-            case DeferredBlock<?> block -> new CompostableDto(Holder.direct(block.asItem()), compostable.chance(), compostable.replace());
+            case DeferredItem<?> item -> new CompostableDto(item, annotation.chance(), annotation.replace());
+            case DeferredBlock<?> block -> new CompostableDto(Holder.direct(block.asItem()), annotation.chance(), annotation.replace());
             case null, default -> throw new RuntimeException();
         };
         ApiDataMapProvider.COMPOSTABLES.add(compostableDto);
     }
 
     @Override
-    public Class<? extends Annotation> getAnnotationClass() {
+    public Class<? extends Compostable> getAnnotationClass() {
         return Compostable.class;
     }
 }

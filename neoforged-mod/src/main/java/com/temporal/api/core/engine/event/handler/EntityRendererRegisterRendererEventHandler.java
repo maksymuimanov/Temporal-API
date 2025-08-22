@@ -16,7 +16,7 @@ import java.util.function.Consumer;
 
 public class EntityRendererRegisterRendererEventHandler implements EventHandler {
     public static final Queue<Consumer<EntityRenderersEvent.RegisterRenderers>> RENDERING_REGISTRIES = new TemporalQueue<>();
-    private final Map<Class<? extends Annotation>, FieldAnnotationStrategy> strategies = IOUtils.createAnnotationStrategyMap(List.of(
+    private final Map<Class<? extends Annotation>, FieldAnnotationStrategy<?>> strategies = IOUtils.createAnnotationStrategyMap(List.of(
             new RegisterSignRendererStrategy(),
             new RegisterHangingSignRendererStrategy()
     ));

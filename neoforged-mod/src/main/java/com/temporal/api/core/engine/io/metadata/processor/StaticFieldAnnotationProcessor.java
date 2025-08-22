@@ -10,18 +10,18 @@ import java.lang.annotation.Annotation;
 import java.util.List;
 import java.util.Map;
 
-public class StaticFieldAnnotationProcessor implements AnnotationProcessor<FieldAnnotationStrategy> {
-    private final Map<Class<? extends Annotation>, FieldAnnotationStrategy> strategies = IOUtils.createAnnotationStrategyMap(List.of(
+public class StaticFieldAnnotationProcessor implements AnnotationProcessor<FieldAnnotationStrategy<?>> {
+    private final Map<Class<? extends Annotation>, FieldAnnotationStrategy<?>> strategies = IOUtils.createAnnotationStrategyMap(List.of(
             new RegisterFactoryFieldStrategy()
     ));
 
     @Override
-    public AnnotationExecutor<FieldAnnotationStrategy> getExecutor() {
+    public AnnotationExecutor<FieldAnnotationStrategy<?>> getExecutor() {
         return IOLayer.STATIC_FIELD_EXECUTOR;
     }
 
     @Override
-    public Map<Class<? extends Annotation>, FieldAnnotationStrategy> getStrategies() {
+    public Map<Class<? extends Annotation>, FieldAnnotationStrategy<?>> getStrategies() {
         return strategies;
     }
 }

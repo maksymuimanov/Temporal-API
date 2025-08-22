@@ -8,26 +8,23 @@ import net.minecraft.core.Holder;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
-public class FurnaceFuelStrategy implements FieldAnnotationStrategy {
+public class FurnaceFuelStrategy implements FieldAnnotationStrategy<FurnaceFuel> {
     @Override
-    public void execute(Field field, Object object) throws Exception {
-        field.setAccessible(true);
-        FurnaceFuel fuel = field.getAnnotation(FurnaceFuel.class);
+    public void execute(Field field, Object object, FurnaceFuel annotation) throws Exception {
         FurnaceFuelDto fuelDto;
         Object o = field.get(object);
         fuelDto = switch (o) {
-            case DeferredItem<?> item -> new FurnaceFuelDto(item, fuel.burnTime(), fuel.replace());
-            case DeferredBlock<?> block -> new FurnaceFuelDto(Holder.direct(block.asItem()), fuel.burnTime(), fuel.replace());
+            case DeferredItem<?> item -> new FurnaceFuelDto(item, annotation.burnTime(), annotation.replace());
+            case DeferredBlock<?> block -> new FurnaceFuelDto(Holder.direct(block.asItem()), annotation.burnTime(), annotation.replace());
             case null, default -> throw new RuntimeException();
         };
         ApiDataMapProvider.FURNACE_FUELS.add(fuelDto);
     }
 
     @Override
-    public Class<? extends Annotation> getAnnotationClass() {
+    public Class<? extends FurnaceFuel> getAnnotationClass() {
         return FurnaceFuel.class;
     }
 }

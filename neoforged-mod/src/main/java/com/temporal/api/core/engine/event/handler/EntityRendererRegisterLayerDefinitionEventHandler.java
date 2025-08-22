@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class EntityRendererRegisterLayerDefinitionEventHandler implements EventHandler {
     public static final Map<ModelLayerLocation, LayerDefinition> LAYERS = new TemporalMap<>();
-    private final Map<Class<? extends Annotation>, ClassAnnotationStrategy> strategies = IOUtils.createAnnotationStrategyMap(List.of(
+    private final Map<Class<? extends Annotation>, ClassAnnotationStrategy<?>> strategies = IOUtils.createAnnotationStrategyMap(List.of(
             new RegisterLayerDefinitionStrategy()
     ));
 

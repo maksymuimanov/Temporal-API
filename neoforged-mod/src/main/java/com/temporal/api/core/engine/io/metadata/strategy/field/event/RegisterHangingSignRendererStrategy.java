@@ -8,19 +8,17 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.HangingSignBlockEntity;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
-public class RegisterHangingSignRendererStrategy implements FieldAnnotationStrategy {
+public class RegisterHangingSignRendererStrategy implements FieldAnnotationStrategy<RegisterHangingSignRenderer> {
     @Override
-    public void execute(Field field, Object object) throws Exception {
-        field.setAccessible(true);
+    public void execute(Field field, Object object, RegisterHangingSignRenderer annotation) throws Exception {
         var hangingSignBlockEntity = (DeferredHolder<BlockEntityType<?>, BlockEntityType<HangingSignBlockEntity>>) field.get(object);
         EntityRendererRegisterRendererEventHandler.RENDERING_REGISTRIES.add(event -> event.registerBlockEntityRenderer(hangingSignBlockEntity.value(), HangingSignRenderer::new));
     }
 
     @Override
-    public Class<? extends Annotation> getAnnotationClass() {
+    public Class<? extends RegisterHangingSignRenderer> getAnnotationClass() {
         return RegisterHangingSignRenderer.class;
     }
 }

@@ -6,23 +6,20 @@ import com.temporal.api.core.event.data.biome.GenerationDescriptionContainer;
 import com.temporal.api.core.event.data.biome.dto.Ore;
 import com.temporal.api.core.event.data.preparer.tag.biome.BiomeTagDynamicPreparer;
 import com.temporal.api.core.util.ResourceUtils;
+import com.temporal.api.core.util.TagUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
-public class GenerateOreStrategy implements FieldAnnotationStrategy {
+public class GenerateOreStrategy implements FieldAnnotationStrategy<GenerateOre> {
     @Override
-    public void execute(Field field, Object object) throws Exception {
-        field.setAccessible(true);
+    public void execute(Field field, Object object, GenerateOre annotation) throws Exception {
         ResourceKey<ConfiguredFeature<?, ?>> configuredFeatureKey = (ResourceKey<ConfiguredFeature<?, ?>>) field.get(object);
-        GenerateOre annotation = field.getDeclaredAnnotation(GenerateOre.class);
         var annotationConfiguration = annotation.configuration();
         var annotationPlacement = annotation.placement();
         var annotationBiomeModifier = annotation.biomeModifier();
-        Class<?> tagContainer = annotationBiomeModifier.biomeTagContainer();
-        if (!tagContainer.equals(Object.class)) BiomeTagDynamicPreparer.TAG_CONTAINERS.add(tagContainer);
+        TagUtils.putTagContainer(BiomeTagDynamicPreparer.TAG_CONTAINERS, annotationBiomeModifier.biomeTagContainer());
         var configuration = new Ore.Configuration(annotationConfiguration.blockId(), annotationConfiguration.replaceableBlocks(), annotationConfiguration.size());
         var placement = new Ore.Placement(annotationPlacement.rarity(), annotationPlacement.count(), annotationPlacement.shape(), annotationPlacement.from(), annotationPlacement.to());
         var biomeModifier = new Ore.BiomeModifier(annotationBiomeModifier.biomeTag());
@@ -31,7 +28,7 @@ public class GenerateOreStrategy implements FieldAnnotationStrategy {
     }
 
     @Override
-    public Class<? extends Annotation> getAnnotationClass() {
+    public Class<? extends GenerateOre> getAnnotationClass() {
         return GenerateOre.class;
     }
 }

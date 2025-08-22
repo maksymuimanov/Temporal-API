@@ -19,6 +19,7 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Stream;
 
 public final class TagUtils {
@@ -56,6 +57,12 @@ public final class TagUtils {
 
     public static <T> TagKey<T> createTag(ResourceKey<? extends Registry<T>> registry, String name) {
         return TagKey.create(registry, ResourceUtils.parse(name));
+    }
+
+    public static void putTagContainer(Set<Class<?>> tagContainers, Class<?> tagContainer) {
+        if (!tagContainer.equals(Object.class)) {
+            tagContainers.add(tagContainer);
+        }
     }
 
     public static <T> void putTagKey(TagKey<T> tag, Map<String, TagKey<T>> data) {

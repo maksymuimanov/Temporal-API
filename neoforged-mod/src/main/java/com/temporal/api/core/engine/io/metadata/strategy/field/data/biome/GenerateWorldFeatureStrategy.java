@@ -7,14 +7,11 @@ import com.temporal.api.core.event.data.biome.configuration.ConfiguredFeatureDef
 import com.temporal.api.core.event.data.biome.modifier.BiomeModifierDefinition;
 import com.temporal.api.core.event.data.biome.placement.PlacedFeatureDefinition;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
-public class GenerateWorldFeatureStrategy implements FieldAnnotationStrategy {
+public class GenerateWorldFeatureStrategy implements FieldAnnotationStrategy<GenerateWorldFeature> {
     @Override
-    public void execute(Field field, Object object) throws Exception {
-        field.setAccessible(true);
-        GenerateWorldFeature annotation = field.getDeclaredAnnotation(GenerateWorldFeature.class);
+    public void execute(Field field, Object object, GenerateWorldFeature annotation) throws Exception {
         ConfiguredFeatureDefinition<?, ?> configuredFeatureDefinition = annotation.configuration()
                 .getDeclaredConstructor()
                 .newInstance();
@@ -30,7 +27,7 @@ public class GenerateWorldFeatureStrategy implements FieldAnnotationStrategy {
     }
 
     @Override
-    public Class<? extends Annotation> getAnnotationClass() {
+    public Class<? extends GenerateWorldFeature> getAnnotationClass() {
         return GenerateWorldFeature.class;
     }
 }

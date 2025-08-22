@@ -11,19 +11,19 @@ import java.lang.annotation.Annotation;
 import java.util.List;
 import java.util.Map;
 
-public class ClassAnnotationProcessor implements AnnotationProcessor<ClassAnnotationStrategy> {
-    private final Map<Class<? extends Annotation>, ClassAnnotationStrategy> strategies = IOUtils.createAnnotationStrategyMap(List.of(
+public class ClassAnnotationProcessor implements AnnotationProcessor<ClassAnnotationStrategy<?>> {
+    private final Map<Class<? extends Annotation>, ClassAnnotationStrategy<?>> strategies = IOUtils.createAnnotationStrategyMap(List.of(
             new InjectedStrategy(),
             new RegisterFactoryClassStrategy()
     ));
 
     @Override
-    public AnnotationExecutor<ClassAnnotationStrategy> getExecutor() {
+    public AnnotationExecutor<ClassAnnotationStrategy<?>> getExecutor() {
         return IOLayer.CLASS_EXECUTOR;
     }
 
     @Override
-    public Map<Class<? extends Annotation>, ClassAnnotationStrategy> getStrategies() {
+    public Map<Class<? extends Annotation>, ClassAnnotationStrategy<?>> getStrategies() {
         return strategies;
     }
 }

@@ -2,10 +2,10 @@ package com.temporal.api.core.engine.event.handler;
 
 import com.temporal.api.core.engine.io.IOLayer;
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
-import com.temporal.api.core.engine.io.metadata.strategy.field.event.SetupBowClientStrategy;
-import com.temporal.api.core.engine.io.metadata.strategy.field.event.SetupCrossbowClientStrategy;
-import com.temporal.api.core.engine.io.metadata.strategy.field.event.SetupShieldClientStrategy;
-import com.temporal.api.core.engine.io.metadata.strategy.field.event.SetupWoodTypeClientStrategy;
+import com.temporal.api.core.engine.io.metadata.strategy.field.event.SetupBowStrategy;
+import com.temporal.api.core.engine.io.metadata.strategy.field.event.SetupCrossbowStrategy;
+import com.temporal.api.core.engine.io.metadata.strategy.field.event.SetupShieldStrategy;
+import com.temporal.api.core.engine.io.metadata.strategy.field.event.SetupWoodTypeStrategy;
 import com.temporal.api.core.event.client.*;
 import com.temporal.api.core.util.IOUtils;
 import net.minecraft.world.level.block.state.properties.WoodType;
@@ -26,11 +26,11 @@ public class FMLClientSetupEventHandler implements EventHandler {
     private static final ClientSetupStrategy<DeferredItem<?>> CROSSBOW_STRATEGY = new CrossbowClientSetupStrategy();
     private static final ClientSetupStrategy<DeferredItem<?>> SHIELD_STRATEGY = new ShieldClientSetupStrategy();
     private static final ClientSetupStrategy<WoodType> WOOD_TYPE_STRATEGY = new WoodTypeClientSetupStrategy();
-    private final Map<Class<? extends Annotation>, FieldAnnotationStrategy> strategies = IOUtils.createAnnotationStrategyMap(List.of(
-            new SetupBowClientStrategy(),
-            new SetupCrossbowClientStrategy(),
-            new SetupShieldClientStrategy(),
-            new SetupWoodTypeClientStrategy()
+    private final Map<Class<? extends Annotation>, FieldAnnotationStrategy<?>> strategies = IOUtils.createAnnotationStrategyMap(List.of(
+            new SetupBowStrategy(),
+            new SetupCrossbowStrategy(),
+            new SetupShieldStrategy(),
+            new SetupWoodTypeStrategy()
     ));
 
     @Override
