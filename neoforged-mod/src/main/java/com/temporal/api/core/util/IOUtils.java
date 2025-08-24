@@ -1,7 +1,6 @@
 package com.temporal.api.core.util;
 
 import com.temporal.api.core.engine.io.metadata.annotation.injection.Injected;
-import com.temporal.api.core.engine.io.metadata.annotation.injection.RegisterFactory;
 import com.temporal.api.core.engine.io.metadata.strategy.AnnotationStrategy;
 import com.temporal.api.core.exception.ModInfoNotFoundException;
 import com.temporal.api.core.json.formatter.JsonFormatter;
@@ -10,6 +9,7 @@ import com.temporal.api.core.json.inserter.JsonInserter;
 import com.temporal.api.core.json.inserter.ResourceInserter;
 import com.temporal.api.core.registry.factory.common.BlockFactory;
 import com.temporal.api.core.registry.factory.common.ItemFactory;
+import com.temporal.api.core.registry.factory.common.ObjectFactory;
 import com.temporal.api.core.registry.factory.common.SoundEventFactory;
 import net.minecraft.core.Holder;
 import net.minecraft.world.item.Item;
@@ -60,7 +60,7 @@ public final class IOUtils {
         } else {
             if (isFactoryPresent(c1)) {
                 boolean isMainFactory = Arrays.stream(c1.getDeclaredFields())
-                        .filter(field -> field.isAnnotationPresent(RegisterFactory.class))
+                        .filter(field -> isFactoryPresent(c1))
                         .findAny()
                         .map(Field::getType)
                         .map(type -> ItemFactory.class.isAssignableFrom(type)
@@ -75,11 +75,9 @@ public final class IOUtils {
     }
 
     public static boolean isFactoryPresent(Class<?> clazz) {
-        boolean annotationPresent = clazz.isAnnotationPresent(RegisterFactory.class);
-        if (annotationPresent) return true;
         Field[] declaredFields = clazz.getDeclaredFields();
         for (Field declaredField : declaredFields) {
-            if (declaredField.isAnnotationPresent(RegisterFactory.class)) return true;
+            if (ObjectFactory.class.isAssignableFrom(declaredField.getType())) return true;
         }
         return false;
     }

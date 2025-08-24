@@ -6,8 +6,7 @@ import java.util.List;
 
 public class FactoryPoolInitializer implements ObjectPoolInitializer {
     @Override
-    public void initialize(List<?> externalObjects) {
-        ObjectPool objectPool = InjectionPool.getInstance();
+    public void initialize(ObjectPool objectPool, List<?> externalObjects) {
         objectPool.putObject(new ItemFactory());
         objectPool.putObject(new BlockFactory());
         objectPool.putObject(new BiomeFactory());

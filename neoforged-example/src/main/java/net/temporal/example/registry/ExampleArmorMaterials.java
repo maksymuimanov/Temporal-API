@@ -2,7 +2,6 @@ package net.temporal.example.registry;
 
 import com.temporal.api.core.engine.io.context.InjectionPool;
 import com.temporal.api.core.engine.io.metadata.annotation.injection.Injected;
-import com.temporal.api.core.engine.io.metadata.annotation.injection.RegisterFactory;
 import com.temporal.api.core.registry.factory.common.ArmorMaterialFactory;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
@@ -14,7 +13,6 @@ import java.util.EnumMap;
 
 @Injected
 public final class ExampleArmorMaterials {
-    @RegisterFactory
     private static final ArmorMaterialFactory ARMOR_MATERIAL_FACTORY = InjectionPool.getFromInstance(ArmorMaterialFactory.class);
 
     public static Holder<ArmorMaterial> EXAMPLE_ARMOR_MATERIAL = ARMOR_MATERIAL_FACTORY.create("example", Util.make(new EnumMap<>(ArmorItem.Type.class), (map) -> {

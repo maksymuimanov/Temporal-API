@@ -10,7 +10,6 @@ import com.temporal.api.core.engine.io.metadata.annotation.event.AddCreativeMode
 import com.temporal.api.core.engine.io.metadata.annotation.event.SetupBow;
 import com.temporal.api.core.engine.io.metadata.annotation.event.SetupCrossbow;
 import com.temporal.api.core.engine.io.metadata.annotation.injection.Injected;
-import com.temporal.api.core.engine.io.metadata.annotation.injection.RegisterFactory;
 import com.temporal.api.core.engine.io.metadata.constant.CreativeModeTabType;
 import com.temporal.api.core.engine.io.metadata.constant.ItemModelType;
 import net.minecraft.world.item.ArmorItem;
@@ -19,7 +18,6 @@ import net.neoforged.neoforge.registries.DeferredItem;
 
 @Injected
 public final class ExampleItems {
-    @RegisterFactory
     private static final ExampleItemFactory ITEM_FACTORY = InjectionPool.getFromInstance(ExampleItemFactory.class);
 
     @AddCreativeModeTab(CreativeModeTabType.INGREDIENTS)

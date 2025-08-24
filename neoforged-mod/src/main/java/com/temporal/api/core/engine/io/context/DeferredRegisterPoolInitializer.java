@@ -8,8 +8,7 @@ import java.util.List;
 
 public class DeferredRegisterPoolInitializer implements ObjectPoolInitializer {
     @Override
-    public void initialize(List<?> externalObjects) {
-        ObjectPool objectPool = InjectionPool.getInstance();
+    public void initialize(ObjectPool objectPool, List<?> externalObjects) {
         objectPool.putObject("$Items", RegistryUtils.createItemRegistry());
         objectPool.putObject("$Blocks", RegistryUtils.createBlockRegistry());
         objectPool.putObject("$Biomes", RegistryUtils.createRegistry(Registries.BIOME));

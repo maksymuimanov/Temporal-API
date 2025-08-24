@@ -8,7 +8,6 @@ import com.temporal.api.core.engine.io.metadata.annotation.data.model.GenerateBl
 import com.temporal.api.core.engine.io.metadata.annotation.data.model.GenerateItemModel;
 import com.temporal.api.core.engine.io.metadata.annotation.event.AddCreativeModeTab;
 import com.temporal.api.core.engine.io.metadata.annotation.injection.Injected;
-import com.temporal.api.core.engine.io.metadata.annotation.injection.RegisterFactory;
 import com.temporal.api.core.engine.io.metadata.constant.BlockLootTableType;
 import com.temporal.api.core.engine.io.metadata.constant.BlockModelType;
 import com.temporal.api.core.engine.io.metadata.constant.CreativeModeTabType;
@@ -25,7 +24,6 @@ import net.temporal.example.worldgen.ExampleConfiguredFeatures;
 
 @Injected
 public final class ExampleBlocks {
-    @RegisterFactory
     private static final ExampleBlockFactory BLOCK_FACTORY = InjectionPool.getFromInstance(ExampleBlockFactory.class);
 
     @AddCreativeModeTab(CreativeModeTabType.BUILDING_BLOCKS)

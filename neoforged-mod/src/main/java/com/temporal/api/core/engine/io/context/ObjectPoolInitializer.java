@@ -4,5 +4,5 @@ import java.util.List;
 
 @FunctionalInterface
 public interface ObjectPoolInitializer {
-    void initialize(List<?> externalObjects);
+    void initialize(ObjectPool objectPool, List<?> externalObjects);
 }

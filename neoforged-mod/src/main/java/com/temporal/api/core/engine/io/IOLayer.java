@@ -1,10 +1,7 @@
 package com.temporal.api.core.engine.io;
 
 import com.temporal.api.core.engine.EngineLayer;
-import com.temporal.api.core.engine.io.context.ModContext;
-import com.temporal.api.core.engine.io.context.ObjectPool;
-import com.temporal.api.core.engine.io.context.ObjectPoolCleaner;
-import com.temporal.api.core.engine.io.context.ObjectPoolInitializer;
+import com.temporal.api.core.engine.io.context.*;
 import com.temporal.api.core.engine.io.metadata.consumer.AnnotationStrategyConsumer;
 import com.temporal.api.core.engine.io.metadata.consumer.AsyncStrategyConsumer;
 import com.temporal.api.core.engine.io.metadata.consumer.SimpleStrategyConsumer;
@@ -14,6 +11,7 @@ import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationSt
 import com.temporal.api.core.engine.io.metadata.strategy.method.MethodAnnotationStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.type.ClassAnnotationStrategy;
 import com.temporal.api.core.engine.io.resource.NeoMod;
+import net.neoforged.bus.api.IEventBus;
 
 import java.util.List;
 
@@ -29,6 +27,7 @@ public class IOLayer implements EngineLayer {
     private Class<?> modClass;
     private List<ObjectPoolInitializer> objectPoolInitializers;
     private List<?> externalSource;
+    private List<FactoryRegistrar> factoryRegistrars;
     private List<AnnotationProcessor<?>> simpleProcessors;
     private List<AnnotationProcessor<?>> asyncProcessors;
     private List<ObjectPoolCleaner> objectPoolCleaners;
@@ -38,11 +37,18 @@ public class IOLayer implements EngineLayer {
         NEO_MOD = NeoMod.create(this.modClass);
         ObjectPool objectPool = ModContext.getInstance()
                 .createPool(NEO_MOD.getModId());
-        objectPoolInitializers.forEach(initializer -> initializer.initialize(this.externalSource));
+        objectPoolInitializers.forEach(initializer ->
+                initializer.initialize(objectPool, this.externalSource));
         objectPool.getObjects(ObjectPoolInitializer.class)
-                .forEach(initializer -> initializer.initialize(this.externalSource));
-        simpleProcessors.forEach(annotationProcessor -> annotationProcessor.process(NEO_MOD.getClasses(), SIMPLE_STRATEGY_CONSUMER));
-        asyncProcessors.forEach(annotationProcessor -> annotationProcessor.process(NEO_MOD.getClasses(), ASYNC_STRATEGY_CONSUMER));
+                .forEach(initializer ->
+                        initializer.initialize(objectPool, this.externalSource));
+        IEventBus eventBus = objectPool.getObject(IEventBus.class);
+        factoryRegistrars.forEach(factoryRegistrar ->
+                factoryRegistrar.registerFactories(eventBus));
+        simpleProcessors.forEach(annotationProcessor ->
+                annotationProcessor.process(NEO_MOD.getClasses(), SIMPLE_STRATEGY_CONSUMER));
+        asyncProcessors.forEach(annotationProcessor ->
+                annotationProcessor.process(NEO_MOD.getClasses(), ASYNC_STRATEGY_CONSUMER));
         objectPoolCleaners.forEach(ObjectPoolCleaner::clear);
         objectPool.getObjects(ObjectPoolCleaner.class)
                 .forEach(ObjectPoolCleaner::clear);
@@ -58,6 +64,10 @@ public class IOLayer implements EngineLayer {
 
     public void setExternalSource(List<?> externalSource) {
         this.externalSource = externalSource;
+    }
+
+    public void setFactoryRegistrars(List<FactoryRegistrar> factoryRegistrars) {
+        this.factoryRegistrars = factoryRegistrars;
     }
 
     public void setSimpleProcessors(List<AnnotationProcessor<?>> simpleProcessors) {
