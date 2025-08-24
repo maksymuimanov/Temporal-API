@@ -13,6 +13,6 @@ import java.util.function.Supplier;
 public interface HangingSignSubFactory {
     default DeferredHolder<BlockEntityType<?>, BlockEntityType<HangingSignBlockEntity>> createHangingSign(String name, Supplier<CeilingHangingSignBlock> ceilingSignBlock, Supplier<WallHangingSignBlock> wallSignBlock) {
         BlockEntityTypeFactory factory = InjectionPool.getFromInstance(BlockEntityTypeFactory.class);
-        return factory.create(name, HangingSignBlockEntity::new, null, ceilingSignBlock.get(), wallSignBlock.get());
+        return factory.create(name, HangingSignBlockEntity::new, ceilingSignBlock.get(), wallSignBlock.get());
     }
 }

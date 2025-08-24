@@ -19,13 +19,8 @@ public class SimpleTabDirector implements TabDirector {
         return new SimpleTabDirector(new SimpleTabAdder(), event);
     }
 
-    public final TabDirector direct(ResourceKey<CreativeModeTab> tab, ItemLike... items) {
-        return this.direct(true, tab, items);
-    }
-
     @Override
-    @SafeVarargs
-    public final TabDirector direct(boolean condition, ResourceKey<CreativeModeTab> tab, ItemLike... items) {
+    public final TabDirector direct(boolean condition, ResourceKey<CreativeModeTab> tab, Iterable<ItemLike> items) {
         if (condition) {
             try {
                 this.tabAdder.addAllToTab(this.event, tab, items);

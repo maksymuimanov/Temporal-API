@@ -17,12 +17,12 @@ public class EngineBuilder {
     }
 
     public EngineBuilder addLayer(EngineLayer engineLayer) {
-        tasks.add(() -> layerContainer.add(engineLayer));
+        this.tasks.add(() -> this.layerContainer.add(engineLayer));
         return this;
     }
 
     public EngineBuilder disableLayer(Class<? extends EngineLayer> engineLayerClass) {
-        tasks.add(() -> layerContainer.delete(engineLayerClass));
+        this.tasks.add(() -> this.layerContainer.delete(engineLayerClass));
         return this;
     }
     
@@ -36,13 +36,13 @@ public class EngineBuilder {
 
     public LayerContainer build() {
         System.out.println(BANNER);
-        tasks.forEach(EngineTask::execute);
+        this.tasks.forEach(EngineTask::execute);
         ApiMod.LOGGER.info("Mod: {} has been registered as a TemporalEngine component!", IOLayer.NEO_MOD);
         return this.layerContainer;
     }
 
     protected void addTask(EngineTask task) {
-        tasks.add(task);
+        this.tasks.add(task);
     }
     
     protected void processLayer(EngineLayer engineLayer) {

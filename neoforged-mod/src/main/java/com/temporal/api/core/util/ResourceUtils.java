@@ -47,7 +47,9 @@ public final class ResourceUtils {
 
     @SuppressWarnings("unchecked")
     public static <T> @NotNull Stream<ResourceKey<T>> getResourceKeyStream(Class<?> resourceClassHolder) {
-        return IOUtils.getFieldStream(resourceClassHolder, o -> o instanceof ResourceKey, o -> (ResourceKey<T>) o);
+        return IOUtils.getStaticFieldStream(resourceClassHolder,
+                field -> ResourceKey.class.isAssignableFrom(field.getType()),
+                o -> (ResourceKey<T>) o);
     }
 
     public static String getResourceId(ResourceKey<?> resourceKey) {

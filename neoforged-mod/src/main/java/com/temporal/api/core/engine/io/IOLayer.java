@@ -29,8 +29,8 @@ public class IOLayer implements EngineLayer {
     private Class<?> modClass;
     private List<ObjectPoolInitializer> objectPoolInitializers;
     private List<?> externalSource;
-    private List<AnnotationProcessor<?>> asyncProcessors;
     private List<AnnotationProcessor<?>> simpleProcessors;
+    private List<AnnotationProcessor<?>> asyncProcessors;
     private List<ObjectPoolCleaner> objectPoolCleaners;
 
     @Override

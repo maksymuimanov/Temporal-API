@@ -4,8 +4,20 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.ItemLike;
 
-public interface TabDirector {
-    TabDirector direct(ResourceKey<CreativeModeTab> tab, ItemLike... items);
+import java.util.List;
 
-    TabDirector direct(boolean condition, ResourceKey<CreativeModeTab> tab, ItemLike... items);
+public interface TabDirector {
+    default TabDirector direct(ResourceKey<CreativeModeTab> tab, Iterable<ItemLike> items) {
+        return this.direct(true, tab, items);
+    }
+
+    default TabDirector direct(boolean condition, ResourceKey<CreativeModeTab> tab, ItemLike... items) {
+        return this.direct(condition, tab, List.of(items));
+    }
+
+    default TabDirector direct(ResourceKey<CreativeModeTab> tab, ItemLike... items) {
+        return this.direct(true, tab, items);
+    }
+
+    TabDirector direct(boolean condition, ResourceKey<CreativeModeTab> tab, Iterable<ItemLike> items);
 }

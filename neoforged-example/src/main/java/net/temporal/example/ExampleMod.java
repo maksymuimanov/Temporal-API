@@ -37,7 +37,6 @@ public class ExampleMod {
                 .addProcess((DependencyFunction) () -> ApiMod.LOGGER.info("I am async: 10"))
                 .build();
 
-
         NeoForge.EVENT_BUS.register(this);
     }
 

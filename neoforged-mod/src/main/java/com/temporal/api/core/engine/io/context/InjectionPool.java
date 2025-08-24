@@ -1,21 +1,27 @@
 package com.temporal.api.core.engine.io.context;
 
 import com.temporal.api.core.engine.io.IOLayer;
+import com.temporal.api.core.registry.factory.common.ObjectFactory;
+import net.neoforged.bus.api.IEventBus;
 
 import java.lang.reflect.Constructor;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Predicate;
 
-public class InjectionPool implements ObjectPool {
+public class InjectionPool implements ObjectPool, FactoryRegistrar {
     private final Map<ContextKey, Object> objects;
+    @SuppressWarnings("rawtypes")
+    private final List<Class<? extends ObjectFactory>> registeredFactories;
     private final Map<String, ContextKey> cachedNames;
     private final Map<Class<?>, ContextKey> cachedClasses;
 
     protected InjectionPool() {
         this.objects = new HashMap<>();
+        this.registeredFactories = new ArrayList<>();
         this.cachedNames = new ConcurrentHashMap<>();
         this.cachedClasses = new ConcurrentHashMap<>();
     }
@@ -126,6 +132,18 @@ public class InjectionPool implements ObjectPool {
                 .filter(predicate)
                 .findAny()
                 .orElse(null);
+    }
+
+    @Override
+    public <T, F extends ObjectFactory<T>> void registerFactories(F factory) {
+        IEventBus eventBus = this.getObject(IEventBus.class);
+        factory.register(eventBus);
+        this.registeredFactories.add(factory.getClass());
+    }
+
+    @Override
+    public boolean isFactoryRegistered(Class<? extends ObjectFactory<?>> factory) {
+        return this.registeredFactories.contains(factory);
     }
 
     public static <T> T getFromInstance(String key) {

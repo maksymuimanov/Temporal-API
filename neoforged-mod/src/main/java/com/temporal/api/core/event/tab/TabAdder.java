@@ -6,7 +6,7 @@ import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 
 public interface TabAdder {
-    void addAllToTab(BuildCreativeModeTabContentsEvent event, ResourceKey<CreativeModeTab> tab, ItemLike... items);
+    void addAllToTab(BuildCreativeModeTabContentsEvent event, ResourceKey<CreativeModeTab> tab, Iterable<ItemLike> items);
 
     void addToTab(BuildCreativeModeTabContentsEvent event, ResourceKey<CreativeModeTab> tab, ItemLike item);
 }

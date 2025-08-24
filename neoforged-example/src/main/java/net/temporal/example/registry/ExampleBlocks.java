@@ -6,10 +6,12 @@ import com.temporal.api.core.engine.io.metadata.annotation.data.GenerateBlockLoo
 import com.temporal.api.core.engine.io.metadata.annotation.data.language.TranslateEnglish;
 import com.temporal.api.core.engine.io.metadata.annotation.data.model.GenerateBlockModel;
 import com.temporal.api.core.engine.io.metadata.annotation.data.model.GenerateItemModel;
+import com.temporal.api.core.engine.io.metadata.annotation.event.AddCreativeModeTab;
 import com.temporal.api.core.engine.io.metadata.annotation.injection.Injected;
 import com.temporal.api.core.engine.io.metadata.annotation.injection.RegisterFactory;
 import com.temporal.api.core.engine.io.metadata.constant.BlockLootTableType;
 import com.temporal.api.core.engine.io.metadata.constant.BlockModelType;
+import com.temporal.api.core.engine.io.metadata.constant.CreativeModeTabType;
 import com.temporal.api.core.engine.io.metadata.constant.ItemModelType;
 import com.temporal.api.core.registry.factory.other.BlockPropertiesFactory;
 import net.minecraft.world.effect.MobEffects;
@@ -26,12 +28,14 @@ public final class ExampleBlocks {
     @RegisterFactory
     private static final ExampleBlockFactory BLOCK_FACTORY = InjectionPool.getFromInstance(ExampleBlockFactory.class);
 
+    @AddCreativeModeTab(CreativeModeTabType.BUILDING_BLOCKS)
     @GenerateItemModel(ItemModelType.CUBED)
     @GenerateBlockModel
     @GenerateBlockLootTable
     @TranslateEnglish("Example Block")
     public static final DeferredBlock<?> EXAMPLE_BLOCK = BLOCK_FACTORY.create("example_block", BlockPropertiesFactory.empty());
 
+    @AddCreativeModeTab(CreativeModeTabType.NATURAL_BLOCKS)
     @GenerateItemModel(ItemModelType.CUBED)
     @GenerateBlockModel
     @AddBlockTag({"minecraft:mineable/pickaxe", "minecraft:needs_diamond_tool"})
@@ -39,12 +43,14 @@ public final class ExampleBlocks {
     @TranslateEnglish("Example Ore")
     public static final DeferredBlock<?> EXAMPLE_ORE = BLOCK_FACTORY.create("example_ore", BlockPropertiesFactory.stone());
 
+    @AddCreativeModeTab(CreativeModeTabType.NATURAL_BLOCKS)
     @GenerateItemModel(ItemModelType.BLOCK_FLAT)
     @GenerateBlockModel(BlockModelType.CROSS)
     @GenerateBlockLootTable(BlockLootTableType.SILK_TOUCH)
     @TranslateEnglish("Example Grass")
     public static final DeferredBlock<?> EXAMPLE_GRASS = BLOCK_FACTORY.createFlower("example_grass", BlockPropertiesFactory.shortGrass(), MobEffects.DAMAGE_RESISTANCE, 1);
 
+    @AddCreativeModeTab(CreativeModeTabType.NATURAL_BLOCKS)
     @GenerateItemModel(ItemModelType.BLOCK_FLAT)
     @GenerateBlockModel(value = BlockModelType.FLOWER, additionalData = {"example:potted_example_flower"})
     @GenerateBlockLootTable(BlockLootTableType.SILK_TOUCH)
@@ -55,72 +61,84 @@ public final class ExampleBlocks {
     @TranslateEnglish("Potted Example Flower")
     public static final DeferredBlock<?> POTTED_EXAMPLE_FLOWER = BLOCK_FACTORY.createPottedFlower("potted_example_flower", EXAMPLE_FLOWER);
 
+    @AddCreativeModeTab(CreativeModeTabType.NATURAL_BLOCKS)
     @GenerateItemModel(ItemModelType.CUBED)
     @GenerateBlockModel(BlockModelType.CUTOUT_CUBED)
     @GenerateBlockLootTable(BlockLootTableType.SILK_TOUCH)
     @TranslateEnglish("Example Leaves")
     public static final DeferredBlock<?> EXAMPLE_LEAVES = BLOCK_FACTORY.createLeaves("example_leaves");
 
+    @AddCreativeModeTab(CreativeModeTabType.NATURAL_BLOCKS)
     @GenerateItemModel(ItemModelType.LOG)
     @GenerateBlockModel(BlockModelType.LOG)
     @GenerateBlockLootTable
     @TranslateEnglish("Example Stripped Log")
     public static final DeferredBlock<?> EXAMPLE_STRIPPED_LOG = BLOCK_FACTORY.createLog("example_stripped_log");
 
+    @AddCreativeModeTab(CreativeModeTabType.NATURAL_BLOCKS)
     @GenerateItemModel(ItemModelType.LOG)
     @GenerateBlockModel(BlockModelType.LOG)
     @GenerateBlockLootTable
     @TranslateEnglish("Example Log")
     public static final DeferredBlock<?> EXAMPLE_LOG = BLOCK_FACTORY.createLog("example_log", EXAMPLE_STRIPPED_LOG);
 
+    @AddCreativeModeTab(CreativeModeTabType.NATURAL_BLOCKS)
     @GenerateItemModel(ItemModelType.WOOD)
     @GenerateBlockModel(BlockModelType.WOOD)
     @GenerateBlockLootTable
     @TranslateEnglish("Example Stripped Wood")
     public static final DeferredBlock<?> EXAMPLE_STRIPPED_WOOD = BLOCK_FACTORY.createLog("example_stripped_wood");
 
+    @AddCreativeModeTab(CreativeModeTabType.NATURAL_BLOCKS)
     @GenerateItemModel(ItemModelType.WOOD)
     @GenerateBlockModel(BlockModelType.WOOD)
     @GenerateBlockLootTable
     @TranslateEnglish("Example Wood")
     public static final DeferredBlock<?> EXAMPLE_WOOD = BLOCK_FACTORY.createLog("example_wood", EXAMPLE_STRIPPED_WOOD);
 
+    @AddCreativeModeTab(CreativeModeTabType.BUILDING_BLOCKS)
     @GenerateItemModel(ItemModelType.BLOCK_FLAT)
     @GenerateBlockModel(BlockModelType.CROSS)
     @GenerateBlockLootTable
     @TranslateEnglish("Example Sapling")
     public static final DeferredBlock<?> EXAMPLE_SAPLING = BLOCK_FACTORY.createSapling("example_sapling", ExampleConfiguredFeatures.EXAMPLE_TREE_FEATURE);
 
+    @AddCreativeModeTab(CreativeModeTabType.BUILDING_BLOCKS)
     @GenerateItemModel(value = ItemModelType.CUBED)
     @GenerateBlockModel
     @GenerateBlockLootTable
     @TranslateEnglish("Example Planks")
     public static final DeferredBlock<?> EXAMPLE_PLANKS = BLOCK_FACTORY.create("example_planks", BlockPropertiesFactory.planks());
 
+    @AddCreativeModeTab(CreativeModeTabType.BUILDING_BLOCKS)
     @GenerateItemModel(value = ItemModelType.SLAB, additionalData = "example:example_planks")
     @GenerateBlockModel(value = BlockModelType.SLAB, additionalData = "example:example_planks")
     @GenerateBlockLootTable
     @TranslateEnglish("Example Slab")
     public static final DeferredBlock<?> EXAMPLE_SLAB = BLOCK_FACTORY.createSlab("example_planks_slab", BlockPropertiesFactory.planks());
 
+    @AddCreativeModeTab(CreativeModeTabType.BUILDING_BLOCKS)
     @GenerateItemModel(value = ItemModelType.STAIRS, additionalData = "example:example_planks")
     @GenerateBlockModel(value = BlockModelType.STAIRS, additionalData = "example:example_planks")
     @GenerateBlockLootTable
     @TranslateEnglish("Example Stairs")
     public static final DeferredBlock<?> EXAMPLE_STAIRS = BLOCK_FACTORY.createStair("example_planks_stairs", BlockPropertiesFactory.planks());
 
+    @AddCreativeModeTab(CreativeModeTabType.BUILDING_BLOCKS)
     @GenerateItemModel(value = ItemModelType.BUTTON, additionalData = "example:example_planks")
     @GenerateBlockModel(value = BlockModelType.BUTTON, additionalData = "example:example_planks")
     @GenerateBlockLootTable
     @TranslateEnglish("Example Button")
     public static final DeferredBlock<?> EXAMPLE_BUTTON = BLOCK_FACTORY.createButton("example_planks_button");
 
+    @AddCreativeModeTab(CreativeModeTabType.BUILDING_BLOCKS)
     @GenerateItemModel(value = ItemModelType.PRESSURE_PLATE, additionalData = "example:example_planks")
     @GenerateBlockModel(value = BlockModelType.PRESSURE_PLATE, additionalData = "example:example_planks")
     @GenerateBlockLootTable
     @TranslateEnglish("Example Pressure Plate")
     public static final DeferredBlock<?> EXAMPLE_PRESSURE_PLATE = BLOCK_FACTORY.createPressurePlate("example_planks_pressure_plate");
 
+    @AddCreativeModeTab(CreativeModeTabType.BUILDING_BLOCKS)
     @AddBlockTag("minecraft:fences")
     @GenerateItemModel(value = ItemModelType.FENCE, additionalData = "example:example_planks")
     @GenerateBlockModel(value = BlockModelType.FENCE, additionalData = "example:example_planks")
@@ -128,6 +146,7 @@ public final class ExampleBlocks {
     @TranslateEnglish("Example Fence")
     public static final DeferredBlock<?> EXAMPLE_FENCE = BLOCK_FACTORY.createFence("example_planks_fence");
 
+    @AddCreativeModeTab(CreativeModeTabType.BUILDING_BLOCKS)
     @AddBlockTag("minecraft:fence_gates")
     @GenerateItemModel(value = ItemModelType.FENCE_GATE, additionalData = "example:example_planks")
     @GenerateBlockModel(value = BlockModelType.FENCE_GATE, additionalData = "example:example_planks")

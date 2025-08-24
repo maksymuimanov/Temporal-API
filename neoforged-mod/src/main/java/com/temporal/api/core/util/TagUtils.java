@@ -72,6 +72,8 @@ public final class TagUtils {
 
     @SuppressWarnings("unchecked")
     public static <T> @NotNull Stream<TagKey<T>> getTagKeyStream(Class<?> tagClassHolder) {
-        return IOUtils.getFieldStream(tagClassHolder, o -> o instanceof TagKey, o -> (TagKey<T>) o);
+        return IOUtils.getStaticFieldStream(tagClassHolder,
+                field -> TagKey.class.isAssignableFrom(field.getType()),
+                o -> (TagKey<T>) o);
     }
 }

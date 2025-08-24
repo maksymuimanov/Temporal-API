@@ -20,7 +20,7 @@ public class IOBuilder {
     protected IOBuilder(EngineBuilder engineBuilder) {
         this.engineBuilder = engineBuilder;
         this.ioLayer = new IOLayer();
-        engineBuilder.addLayer(ioLayer);
+        this.engineBuilder.addLayer(this.ioLayer);
     }
 
     public IOBuilder modClass(Class<?> modClass) {
@@ -55,15 +55,15 @@ public class IOBuilder {
 
     public EngineBuilder and() {
         EngineTask task = () -> {
-            ioLayer.setModClass(modClass);
-            ioLayer.setContextInitializers(initializers);
-            ioLayer.setExternalSource(externalSource);
-            ioLayer.setSimpleProcessors(simpleProcessors);
-            ioLayer.setAsyncProcessors(asyncProcessors);
-            ioLayer.setContextCleaners(cleaners);
-            engineBuilder.processLayer(ioLayer);
+            this.ioLayer.setModClass(this.modClass);
+            this.ioLayer.setContextInitializers(this.initializers);
+            this.ioLayer.setExternalSource(this.externalSource);
+            this.ioLayer.setSimpleProcessors(this.simpleProcessors);
+            this.ioLayer.setAsyncProcessors(this.asyncProcessors);
+            this.ioLayer.setContextCleaners(this.cleaners);
+            this.engineBuilder.processLayer(this.ioLayer);
         };
-        engineBuilder.addTask(task);
-        return engineBuilder;
+        this.engineBuilder.addTask(task);
+        return this.engineBuilder;
     }
 }

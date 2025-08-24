@@ -11,8 +11,8 @@ import java.util.List;
 
 public class TemporalEngine {
     public static final List<ObjectPoolInitializer> DEFAULT_SIMPLE_INITIALIZERS = List.of(new DeferredRegisterPoolInitializer(), new FactoryPoolInitializer(), new EventBusPoolInitializer(), new ModContainerPoolInitializer());
-    public static final List<AnnotationProcessor<?>> DEFAULT_SIMPLE_PROCESSORS = List.of(new ClassAnnotationProcessor(), new StaticFieldAnnotationProcessor(), new FieldAnnotationProcessor(), new MethodAnnotationProcessor());
-    public static final List<EventHandler> DEFAULT_HANDLERS = List.of(new FMLClientSetupEventHandler(), new EntityRendererRegisterRendererEventHandler(), new EntityRendererRegisterLayerDefinitionEventHandler(), new DataEventHandler(), new FovModifierEventHandler());
+    public static final List<AnnotationProcessor<?>> DEFAULT_PROCESSORS = List.of(new ClassAnnotationProcessor(), new StaticFieldAnnotationProcessor(), new FieldAnnotationProcessor(), new MethodAnnotationProcessor());
+    public static final List<EventHandler> DEFAULT_HANDLERS = List.of(new FMLClientSetupEventHandler(), new EntityRendererRegisterRendererEventHandler(), new EntityRendererRegisterLayerDefinitionEventHandler(), new DataEventHandler(), new FovModifierEventHandler(), new CreativeModeTabEventHandler());
     protected static final String BANNER = """
                        _________ _________ ___     ___ _________ _________ _________ _________ ____
                        ---- ---- |   ----| |  \\   / | |  ___  | |  ___  | |  ___  | |  ___  | |  |
@@ -31,7 +31,7 @@ public class TemporalEngine {
                     .modClass(modClass)
                     .initializers(DEFAULT_SIMPLE_INITIALIZERS)
                     .externalSource(List.of(eventBus, modContainer))
-                    .simpleProcessors(DEFAULT_SIMPLE_PROCESSORS)
+                    .simpleProcessors(DEFAULT_PROCESSORS)
                     .asyncProcessors(Collections.emptyList())
                     .cleaners(Collections.emptyList())
                     .and()

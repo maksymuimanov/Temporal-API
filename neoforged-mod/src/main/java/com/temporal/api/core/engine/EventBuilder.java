@@ -13,7 +13,7 @@ public class EventBuilder {
     protected EventBuilder(EngineBuilder engineBuilder) {
         this.engineBuilder = engineBuilder;
         this.eventLayer = new EventLayer();
-        engineBuilder.addLayer(eventLayer);
+        this.engineBuilder.addLayer(this.eventLayer);
     }
 
     public EventBuilder handlers(List<EventHandler> handlers) {
@@ -23,11 +23,11 @@ public class EventBuilder {
 
     public EngineBuilder and() {
         EngineTask eventSetupTask = () -> {
-            eventLayer.setAdditionalEventHandlers(handlers);
-            engineBuilder.processLayer(eventLayer);
+            this.eventLayer.setAdditionalEventHandlers(handlers);
+            this.engineBuilder.processLayer(eventLayer);
         };
 
-        engineBuilder.addTask(eventSetupTask);
-        return engineBuilder;
+        this.engineBuilder.addTask(eventSetupTask);
+        return this.engineBuilder;
     }
 }

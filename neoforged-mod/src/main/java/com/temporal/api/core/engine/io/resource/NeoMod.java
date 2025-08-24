@@ -1,7 +1,6 @@
 package com.temporal.api.core.engine.io.resource;
 
 import com.google.common.base.MoreObjects;
-import com.temporal.api.core.engine.io.metadata.annotation.injection.Injected;
 import com.temporal.api.core.util.IOUtils;
 import net.neoforged.fml.common.Mod;
 
@@ -23,7 +22,7 @@ public class NeoMod {
     public static NeoMod create(Class<?> clazz) {
         String name = clazz.getSimpleName();
         String modId = clazz.getDeclaredAnnotation(Mod.class).value();
-        Set<Class<?>> classes = IOUtils.getAllClasses(modId, clazz, Injected.class);
+        Set<Class<?>> classes = IOUtils.getAllClasses(modId, clazz);
         return new NeoMod(name, clazz, modId, classes);
     }
 

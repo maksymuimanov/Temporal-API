@@ -23,7 +23,9 @@ public class EntityRendererRegisterRendererEventHandler implements EventHandler 
 
     @Override
     public void handle() {
-        IOLayer.SIMPLE_STRATEGY_CONSUMER.execute(IOLayer.STATIC_FIELD_EXECUTOR, strategies, IOLayer.NEO_MOD.getClasses());
-        subscribeModEvent(EntityRenderersEvent.RegisterRenderers.class, event -> RENDERING_REGISTRIES.forEach(consumer -> consumer.accept(event)));
+        subscribeModEvent(EntityRenderersEvent.RegisterRenderers.class, event -> {
+            IOLayer.SIMPLE_STRATEGY_CONSUMER.execute(IOLayer.STATIC_FIELD_EXECUTOR, strategies, IOLayer.NEO_MOD.getClasses());
+            RENDERING_REGISTRIES.forEach(consumer -> consumer.accept(event));
+        });
     }
 }

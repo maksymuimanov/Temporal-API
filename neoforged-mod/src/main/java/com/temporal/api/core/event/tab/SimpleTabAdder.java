@@ -8,7 +8,7 @@ import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 
 public class SimpleTabAdder implements TabAdder {
     @Override
-    public final void addAllToTab(BuildCreativeModeTabContentsEvent event, ResourceKey<CreativeModeTab> tab, ItemLike... items) {
+    public final void addAllToTab(BuildCreativeModeTabContentsEvent event, ResourceKey<CreativeModeTab> tab, Iterable<ItemLike> items) {
         for (ItemLike item : items) {
             addToTab(event, tab, item);
         }

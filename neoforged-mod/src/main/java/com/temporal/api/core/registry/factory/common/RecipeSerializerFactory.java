@@ -21,8 +21,6 @@ public class RecipeSerializerFactory extends AbstractObjectFactory<RecipeSeriali
         return this.create(name, () -> recipeSerializer);
     }
 
-
-
     @Override
     public DeferredRegister<RecipeSerializer<?>> getRegistry() {
         return recipeSerializers;
