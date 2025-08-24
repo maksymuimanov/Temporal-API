@@ -3,7 +3,6 @@ package com.temporal.api.core.engine.io.metadata.processor;
 import com.temporal.api.core.engine.io.IOLayer;
 import com.temporal.api.core.engine.io.metadata.executor.AnnotationExecutor;
 import com.temporal.api.core.engine.io.metadata.strategy.type.ClassAnnotationStrategy;
-import com.temporal.api.core.engine.io.metadata.strategy.type.injection.InjectedStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.type.injection.RegisterFactoryClassStrategy;
 import com.temporal.api.core.util.IOUtils;
 
@@ -13,7 +12,6 @@ import java.util.Map;
 
 public class ClassAnnotationProcessor implements AnnotationProcessor<ClassAnnotationStrategy<?>> {
     private final Map<Class<? extends Annotation>, ClassAnnotationStrategy<?>> strategies = IOUtils.createAnnotationStrategyMap(List.of(
-            new InjectedStrategy(),
             new RegisterFactoryClassStrategy()
     ));
 

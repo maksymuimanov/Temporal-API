@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class TemporalEngine {
-    public static final List<ObjectPoolInitializer> DEFAULT_SIMPLE_INITIALIZERS = List.of(new DeferredRegisterPoolInitializer(), new FactoryPoolInitializer(), new EventBusPoolInitializer(), new ModContainerPoolInitializer());
+    public static final List<ObjectPoolInitializer> DEFAULT_INITIALIZERS = List.of(new DeferredRegisterPoolInitializer(), new FactoryPoolInitializer(), new EventBusPoolInitializer(), new ModContainerPoolInitializer(), new InjectedObjectPoolInitializer());
     public static final List<AnnotationProcessor<?>> DEFAULT_PROCESSORS = List.of(new ClassAnnotationProcessor(), new StaticFieldAnnotationProcessor(), new FieldAnnotationProcessor(), new MethodAnnotationProcessor());
     public static final List<EventHandler> DEFAULT_HANDLERS = List.of(new FMLClientSetupEventHandler(), new EntityRendererRegisterRendererEventHandler(), new EntityRendererRegisterLayerDefinitionEventHandler(), new DataEventHandler(), new FovModifierEventHandler(), new CreativeModeTabEventHandler());
     protected static final String BANNER = """
@@ -29,7 +29,7 @@ public class TemporalEngine {
             return builder()
                     .configureIOLayer()
                     .modClass(modClass)
-                    .initializers(DEFAULT_SIMPLE_INITIALIZERS)
+                    .initializers(DEFAULT_INITIALIZERS)
                     .externalSource(List.of(eventBus, modContainer))
                     .simpleProcessors(DEFAULT_PROCESSORS)
                     .asyncProcessors(Collections.emptyList())
