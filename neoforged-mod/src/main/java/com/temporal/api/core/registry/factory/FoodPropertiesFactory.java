@@ -1,4 +1,4 @@
-package com.temporal.api.core.registry.factory.other;
+package com.temporal.api.core.registry.factory;
 
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Items;

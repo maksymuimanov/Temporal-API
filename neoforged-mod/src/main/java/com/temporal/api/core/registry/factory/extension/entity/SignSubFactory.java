@@ -1,7 +1,7 @@
 package com.temporal.api.core.registry.factory.extension.entity;
 
 import com.temporal.api.core.engine.io.context.InjectionPool;
-import com.temporal.api.core.registry.factory.common.BlockEntityTypeFactory;
+import com.temporal.api.core.registry.factory.BlockEntityTypeFactory;
 import net.minecraft.world.level.block.StandingSignBlock;
 import net.minecraft.world.level.block.WallSignBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;

@@ -1,4 +1,4 @@
-package com.temporal.api.core.registry.factory.other;
+package com.temporal.api.core.registry.factory;
 
 import com.temporal.api.core.engine.io.IOLayer;
 import net.minecraft.world.level.block.state.properties.BlockSetType;

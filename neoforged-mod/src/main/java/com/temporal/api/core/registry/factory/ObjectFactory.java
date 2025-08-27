@@ -1,4 +1,4 @@
-package com.temporal.api.core.registry.factory.common;
+package com.temporal.api.core.registry.factory;
 
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;

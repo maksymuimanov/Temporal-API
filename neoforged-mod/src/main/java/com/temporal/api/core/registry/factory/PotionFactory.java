@@ -1,4 +1,4 @@
-package com.temporal.api.core.registry.factory.common;
+package com.temporal.api.core.registry.factory;
 
 import com.temporal.api.core.engine.io.context.InjectionPool;
 import net.minecraft.core.Holder;
@@ -9,27 +9,19 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class PotionFactory extends AbstractObjectFactory<Potion> {
-    private final DeferredRegister<Potion> potions;
-
     public PotionFactory() {
         this(InjectionPool.getFromInstance("$Potions"));
     }
 
     public PotionFactory(DeferredRegister<Potion> potions) {
-        this.potions = potions;
-    }
-
-    public DeferredHolder<Potion, Potion> create(String name, MobEffectInstance mobEffectInstance) {
-        return create(name, () -> new Potion(name, mobEffectInstance));
+        super(potions);
     }
 
     public DeferredHolder<Potion, Potion> create(String name, Holder<MobEffect> effect, int duration) {
-        return create(name, () -> new Potion(name, new MobEffectInstance(effect, duration)));
+        return this.create(name, new MobEffectInstance(effect, duration));
     }
 
-
-    @Override
-    public DeferredRegister<Potion> getRegistry() {
-        return potions;
+    public DeferredHolder<Potion, Potion> create(String name, MobEffectInstance mobEffectInstance) {
+        return this.create(name, () -> new Potion(name, mobEffectInstance));
     }
 }

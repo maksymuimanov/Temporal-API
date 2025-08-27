@@ -1,8 +1,8 @@
 package com.temporal.api.core.registry.factory.extension.block;
 
 import com.temporal.api.core.engine.io.context.InjectionPool;
-import com.temporal.api.core.registry.factory.common.BlockFactory;
-import com.temporal.api.core.registry.factory.other.BlockPropertiesFactory;
+import com.temporal.api.core.registry.factory.BlockFactory;
+import com.temporal.api.core.registry.factory.BlockPropertiesFactory;
 import net.minecraft.world.level.block.StandingSignBlock;
 import net.minecraft.world.level.block.WallSignBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -13,7 +13,7 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 
 public interface SignSubFactory {
     default DeferredBlock<StandingSignBlock> createStandingSignWithoutItem(String name, float strength, WoodType woodType) {
-        return createStandingSignWithoutItem(name, BlockPropertiesFactory.wood(), strength, woodType);
+        return this.createStandingSignWithoutItem(name, BlockPropertiesFactory.wood(), strength, woodType);
     }
 
     default DeferredBlock<StandingSignBlock> createStandingSignWithoutItem(String name, BlockBehaviour.Properties properties, float strength, WoodType woodType) {
@@ -27,7 +27,7 @@ public interface SignSubFactory {
     }
 
     default DeferredBlock<WallSignBlock> createWallSignWithoutItem(String name, float strength, WoodType woodType) {
-        return createWallSignWithoutItem(name, BlockPropertiesFactory.wood(), strength, woodType);
+        return this.createWallSignWithoutItem(name, BlockPropertiesFactory.wood(), strength, woodType);
     }
 
     default DeferredBlock<WallSignBlock> createWallSignWithoutItem(String name, BlockBehaviour.Properties properties, float strength, WoodType woodType) {

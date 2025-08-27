@@ -1,4 +1,4 @@
-package com.temporal.api.core.registry.factory.other;
+package com.temporal.api.core.registry.factory;
 
 import com.temporal.api.core.engine.io.IOLayer;
 import net.minecraft.resources.ResourceKey;
@@ -12,9 +12,13 @@ public final class TreeGrowerFactory {
     }
 
     public static TreeGrower create(String name, ResourceKey<ConfiguredFeature<?, ?>> tree) {
+        return create(name, null, tree, null);
+    }
+
+    public static TreeGrower create(String name, ResourceKey<ConfiguredFeature<?, ?>> megaTree, ResourceKey<ConfiguredFeature<?, ?>> tree, ResourceKey<ConfiguredFeature<?, ?>> flowers) {
         return new TreeGrower(IOLayer.NEO_MOD.getModId() + ":" + name,
-                Optional.empty(),
+                Optional.ofNullable(megaTree),
                 Optional.of(tree),
-                Optional.empty());
+                Optional.ofNullable(flowers));
     }
 }

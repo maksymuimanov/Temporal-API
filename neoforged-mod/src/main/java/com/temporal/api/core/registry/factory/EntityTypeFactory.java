@@ -1,4 +1,4 @@
-package com.temporal.api.core.registry.factory.common;
+package com.temporal.api.core.registry.factory;
 
 import com.temporal.api.client.dto.Size;
 import com.temporal.api.core.engine.io.context.InjectionPool;
@@ -12,14 +12,12 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class EntityTypeFactory extends AbstractObjectFactory<EntityType<?>> {
-    private final DeferredRegister<EntityType<?>> entityTypes;
-
     public EntityTypeFactory() {
         this(InjectionPool.getFromInstance("$EntityTypes"));
     }
 
     public EntityTypeFactory(DeferredRegister<EntityType<?>> entityTypes) {
-        this.entityTypes = entityTypes;
+        super(entityTypes);
     }
 
     public <T extends Entity> DeferredHolder<EntityType<?>, EntityType<T>> create(String name, EntityType.EntityFactory<T> entityFactory, Size size, MobCategory category) {
@@ -33,10 +31,5 @@ public class EntityTypeFactory extends AbstractObjectFactory<EntityType<?>> {
 
     public <T extends Entity> DeferredHolder<EntityType<?>, EntityType<T>> create(String name, EntityType.Builder<T> builder, ResourceKey<EntityType<?>> entityType) {
         return this.create(name, () -> builder.build(entityType.registry().toString()));
-    }
-
-    @Override
-    public DeferredRegister<EntityType<?>> getRegistry() {
-        return entityTypes;
     }
 }

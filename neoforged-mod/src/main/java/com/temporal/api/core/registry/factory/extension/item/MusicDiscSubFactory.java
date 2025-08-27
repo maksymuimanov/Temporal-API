@@ -1,7 +1,7 @@
 package com.temporal.api.core.registry.factory.extension.item;
 
 import com.temporal.api.core.engine.io.context.InjectionPool;
-import com.temporal.api.core.registry.factory.common.ItemFactory;
+import com.temporal.api.core.registry.factory.ItemFactory;
 import com.temporal.api.core.util.ResourceUtils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -12,7 +12,7 @@ import net.neoforged.neoforge.registries.DeferredItem;
 
 public interface MusicDiscSubFactory {
     default DeferredItem<Item> createMusicDisc(String name, String soundId) {
-        return createMusicDisc(name, new Item.Properties(), soundId);
+        return this.createMusicDisc(name, new Item.Properties(), soundId);
     }
 
     default DeferredItem<Item> createMusicDisc(String name, Item.Properties properties, String soundId) {

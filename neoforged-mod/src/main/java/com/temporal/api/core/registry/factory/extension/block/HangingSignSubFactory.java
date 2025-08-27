@@ -1,8 +1,8 @@
 package com.temporal.api.core.registry.factory.extension.block;
 
 import com.temporal.api.core.engine.io.context.InjectionPool;
-import com.temporal.api.core.registry.factory.common.BlockFactory;
-import com.temporal.api.core.registry.factory.other.BlockPropertiesFactory;
+import com.temporal.api.core.registry.factory.BlockFactory;
+import com.temporal.api.core.registry.factory.BlockPropertiesFactory;
 import net.minecraft.world.level.block.CeilingHangingSignBlock;
 import net.minecraft.world.level.block.WallHangingSignBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -13,7 +13,7 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 
 public interface HangingSignSubFactory {
     default DeferredBlock<CeilingHangingSignBlock> createCeilingHangingSignWithoutItem(String name, float strength, WoodType woodType) {
-        return createCeilingHangingSignWithoutItem(name, BlockPropertiesFactory.wood(), strength, woodType);
+        return this.createCeilingHangingSignWithoutItem(name, BlockPropertiesFactory.wood(), strength, woodType);
     }
 
     default DeferredBlock<CeilingHangingSignBlock> createCeilingHangingSignWithoutItem(String name, BlockBehaviour.Properties properties, float strength, WoodType woodType) {
@@ -27,7 +27,7 @@ public interface HangingSignSubFactory {
     }
 
     default DeferredBlock<WallHangingSignBlock> createWallHangingSignWithoutItem(String name, float strength, WoodType woodType) {
-        return createWallHangingSignWithoutItem(name, BlockPropertiesFactory.wood(), strength, woodType);
+        return this.createWallHangingSignWithoutItem(name, BlockPropertiesFactory.wood(), strength, woodType);
     }
 
     default DeferredBlock<WallHangingSignBlock> createWallHangingSignWithoutItem(String name, BlockBehaviour.Properties properties, float strength, WoodType woodType) {

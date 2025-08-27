@@ -1,6 +1,6 @@
 package com.temporal.api.core.engine.io.context;
 
-import com.temporal.api.core.registry.factory.common.*;
+import com.temporal.api.core.registry.factory.*;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.temporal.api.core.registry.factory.other;
+package com.temporal.api.core.registry.factory;
 
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;

@@ -1,4 +1,4 @@
-package com.temporal.api.core.registry.factory.common;
+package com.temporal.api.core.registry.factory;
 
 import com.mojang.datafixers.types.Type;
 import com.temporal.api.core.engine.io.context.InjectionPool;
@@ -11,23 +11,16 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class BlockEntityTypeFactory extends AbstractObjectFactory<BlockEntityType<?>> {
-    private final DeferredRegister<BlockEntityType<?>> blockEntityTypes;
-
     public BlockEntityTypeFactory() {
         this(InjectionPool.getFromInstance("$BlockEntityTypes"));
     }
 
     public BlockEntityTypeFactory(DeferredRegister<BlockEntityType<?>> blockEntityTypes) {
-        this.blockEntityTypes = blockEntityTypes;
+        super(blockEntityTypes);
     }
 
     public <T extends BlockEntity> DeferredHolder<BlockEntityType<?>, BlockEntityType<T>> create(String name, BlockEntityType.BlockEntitySupplier<T> factory, Block... blocks) {
         Type<?> type = Util.fetchChoiceType(References.BLOCK_ENTITY, name);
         return this.create(name, () -> BlockEntityType.Builder.of(factory, blocks).build(type));
-    }
-
-    @Override
-    public DeferredRegister<BlockEntityType<?>> getRegistry() {
-        return blockEntityTypes;
     }
 }

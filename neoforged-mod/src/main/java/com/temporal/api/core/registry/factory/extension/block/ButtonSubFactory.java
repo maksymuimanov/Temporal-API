@@ -1,8 +1,8 @@
 package com.temporal.api.core.registry.factory.extension.block;
 
 import com.temporal.api.core.engine.io.context.InjectionPool;
-import com.temporal.api.core.registry.factory.common.BlockFactory;
-import com.temporal.api.core.registry.factory.other.BlockPropertiesFactory;
+import com.temporal.api.core.registry.factory.BlockFactory;
+import com.temporal.api.core.registry.factory.BlockPropertiesFactory;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.ButtonBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -11,19 +11,19 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 
 public interface ButtonSubFactory {
     default DeferredBlock<ButtonBlock> createButton(String name) {
-        return createButton(name, BlockPropertiesFactory.button());
+        return this.createButton(name, BlockPropertiesFactory.button());
     }
 
     default DeferredBlock<ButtonBlock> createButton(String name, BlockBehaviour.Properties properties) {
-        return createButton(name, properties, BlockSetType.OAK, 30);
+        return this.createButton(name, properties, BlockSetType.OAK, 30);
     }
 
     default DeferredBlock<ButtonBlock> createButton(String name, BlockBehaviour.Properties properties, BlockSetType setType, int ticksToStayPressed) {
-        return createButton(name, properties, new Item.Properties(), setType, ticksToStayPressed);
+        return this.createButton(name, properties, new Item.Properties(), setType, ticksToStayPressed);
     }
 
     default DeferredBlock<ButtonBlock> createButton(String name, BlockBehaviour.Properties properties, Item.Properties itemProperties) {
-        return createButton(name, properties, itemProperties, BlockSetType.OAK, 30);
+        return this.createButton(name, properties, itemProperties, BlockSetType.OAK, 30);
     }
 
     default DeferredBlock<ButtonBlock> createButton(String name, BlockBehaviour.Properties properties, Item.Properties itemProperties, BlockSetType setType, int ticksToStayPressed) {

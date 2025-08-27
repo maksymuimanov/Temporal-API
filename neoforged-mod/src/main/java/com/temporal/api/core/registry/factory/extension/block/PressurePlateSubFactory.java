@@ -1,8 +1,8 @@
 package com.temporal.api.core.registry.factory.extension.block;
 
 import com.temporal.api.core.engine.io.context.InjectionPool;
-import com.temporal.api.core.registry.factory.common.BlockFactory;
-import com.temporal.api.core.registry.factory.other.BlockPropertiesFactory;
+import com.temporal.api.core.registry.factory.BlockFactory;
+import com.temporal.api.core.registry.factory.BlockPropertiesFactory;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.PressurePlateBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -11,19 +11,19 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 
 public interface PressurePlateSubFactory {
     default DeferredBlock<PressurePlateBlock> createPressurePlate(String name) {
-        return createPressurePlate(name, BlockPropertiesFactory.pressurePlate());
+        return this.createPressurePlate(name, BlockPropertiesFactory.pressurePlate());
     }
 
     default DeferredBlock<PressurePlateBlock> createPressurePlate(String name, BlockBehaviour.Properties properties) {
-        return createPressurePlate(name, properties, BlockSetType.OAK);
+        return this.createPressurePlate(name, properties, BlockSetType.OAK);
     }
 
     default DeferredBlock<PressurePlateBlock> createPressurePlate(String name, BlockBehaviour.Properties properties, BlockSetType setType) {
-        return createPressurePlate(name, properties, new Item.Properties(), setType);
+        return this.createPressurePlate(name, properties, new Item.Properties(), setType);
     }
 
     default DeferredBlock<PressurePlateBlock> createPressurePlate(String name, BlockBehaviour.Properties properties, Item.Properties itemProperties) {
-        return createPressurePlate(name, properties, itemProperties, BlockSetType.OAK);
+        return this.createPressurePlate(name, properties, itemProperties, BlockSetType.OAK);
     }
 
     default DeferredBlock<PressurePlateBlock> createPressurePlate(String name, BlockBehaviour.Properties properties, Item.Properties itemProperties, BlockSetType setType) {

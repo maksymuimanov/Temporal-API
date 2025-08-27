@@ -12,7 +12,7 @@ import com.temporal.api.core.engine.io.metadata.constant.BlockLootTableType;
 import com.temporal.api.core.engine.io.metadata.constant.BlockModelType;
 import com.temporal.api.core.engine.io.metadata.constant.CreativeModeTabType;
 import com.temporal.api.core.engine.io.metadata.constant.ItemModelType;
-import com.temporal.api.core.registry.factory.other.BlockPropertiesFactory;
+import com.temporal.api.core.registry.factory.BlockPropertiesFactory;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.level.block.CeilingHangingSignBlock;
 import net.minecraft.world.level.block.StandingSignBlock;

@@ -3,8 +3,8 @@ package com.temporal.api.core.registry.factory.extension.block;
 import com.temporal.api.common.block.LogBlock;
 import com.temporal.api.common.block.StrippableLogBlock;
 import com.temporal.api.core.engine.io.context.InjectionPool;
-import com.temporal.api.core.registry.factory.common.BlockFactory;
-import com.temporal.api.core.registry.factory.other.BlockPropertiesFactory;
+import com.temporal.api.core.registry.factory.BlockFactory;
+import com.temporal.api.core.registry.factory.BlockPropertiesFactory;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -14,11 +14,11 @@ import java.util.function.Supplier;
 
 public interface LogSubFactory {
     default DeferredBlock<StrippableLogBlock> createLog(String name, Supplier<? extends Block> strippedBlock) {
-        return createLog(name, BlockPropertiesFactory.wood(), strippedBlock);
+        return this.createLog(name, BlockPropertiesFactory.wood(), strippedBlock);
     }
 
     default DeferredBlock<StrippableLogBlock> createLog(String name, BlockBehaviour.Properties properties, Supplier<? extends Block> strippedBlock) {
-        return createLog(name, properties, new Item.Properties(), strippedBlock);
+        return this.createLog(name, properties, new Item.Properties(), strippedBlock);
     }
 
     default DeferredBlock<StrippableLogBlock> createLog(String name, BlockBehaviour.Properties properties, Item.Properties itemProperties, Supplier<? extends Block> strippedBlock) {
@@ -27,11 +27,11 @@ public interface LogSubFactory {
     }
 
     default DeferredBlock<LogBlock> createLog(String name) {
-        return createLog(name, BlockPropertiesFactory.wood());
+        return this.createLog(name, BlockPropertiesFactory.wood());
     }
 
     default DeferredBlock<LogBlock> createLog(String name, BlockBehaviour.Properties properties) {
-        return createLog(name, properties, new Item.Properties());
+        return this.createLog(name, properties, new Item.Properties());
     }
 
     default DeferredBlock<LogBlock> createLog(String name, BlockBehaviour.Properties properties, Item.Properties itemProperties) {

@@ -1,4 +1,4 @@
-package com.temporal.api.core.registry.factory.common;
+package com.temporal.api.core.registry.factory;
 
 import com.temporal.api.core.engine.io.context.InjectionPool;
 import net.minecraft.network.chat.Component;
@@ -11,18 +11,16 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.Collection;
 
 public class CreativeModeTabFactory extends AbstractObjectFactory<CreativeModeTab> {
-    private final DeferredRegister<CreativeModeTab> creativeModeTabs;
-
     public CreativeModeTabFactory() {
         this(InjectionPool.getFromInstance("$CreativeModeTabs"));
     }
 
     public CreativeModeTabFactory(DeferredRegister<CreativeModeTab> creativeModeTabs) {
-        this.creativeModeTabs = creativeModeTabs;
+        super(creativeModeTabs);
     }
 
     public DeferredHolder<CreativeModeTab, CreativeModeTab> create(String name, Item icon, String translationId, Item... items) {
-        return create(name, () -> CreativeModeTab.builder()
+        return this.create(name, () -> CreativeModeTab.builder()
                 .icon(() -> new ItemStack(icon))
                 .title(Component.translatable(translationId))
                 .displayItems((displayParameters, output) -> {
@@ -33,15 +31,10 @@ public class CreativeModeTabFactory extends AbstractObjectFactory<CreativeModeTa
     }
 
     public DeferredHolder<CreativeModeTab, CreativeModeTab> create(String name, Item icon, String translationId, Collection<ItemStack> items) {
-        return create(name, () -> CreativeModeTab.builder()
+        return this.create(name, () -> CreativeModeTab.builder()
                 .icon(() -> new ItemStack(icon))
                 .title(Component.translatable(translationId))
                 .displayItems((displayParameters, output) -> output.acceptAll(items))
                 .build());
-    }
-
-    @Override
-    public DeferredRegister<CreativeModeTab> getRegistry() {
-        return creativeModeTabs;
     }
 }

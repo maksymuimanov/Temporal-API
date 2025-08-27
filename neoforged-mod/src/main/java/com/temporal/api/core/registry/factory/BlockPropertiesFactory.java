@@ -1,4 +1,4 @@
-package com.temporal.api.core.registry.factory.other;
+package com.temporal.api.core.registry.factory;
 
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;

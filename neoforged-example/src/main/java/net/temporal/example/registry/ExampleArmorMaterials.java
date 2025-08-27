@@ -2,7 +2,7 @@ package net.temporal.example.registry;
 
 import com.temporal.api.core.engine.io.context.InjectionPool;
 import com.temporal.api.core.engine.io.metadata.annotation.injection.Injected;
-import com.temporal.api.core.registry.factory.common.ArmorMaterialFactory;
+import com.temporal.api.core.registry.factory.ArmorMaterialFactory;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.world.item.ArmorItem;

@@ -2,7 +2,7 @@ package com.temporal.api.core.registry.factory.extension.entity;
 
 import com.temporal.api.client.dto.Size;
 import com.temporal.api.core.engine.io.context.InjectionPool;
-import com.temporal.api.core.registry.factory.common.EntityTypeFactory;
+import com.temporal.api.core.registry.factory.EntityTypeFactory;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.vehicle.Boat;
