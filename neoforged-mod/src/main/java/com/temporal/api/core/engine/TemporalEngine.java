@@ -22,7 +22,7 @@ public class TemporalEngine {
                           | |    |   --|   | |    | | |  -----| |  | |  | |   ---|  |  |-|  | |  |
                           | |    |  |      | |    | | | |       |  | |  | |  | |--| |  |-|  | |  |
                           | |    |  -----| | |    | | | |       |  ---  | |  | |  | |  | |  | |  -----|
-                          |-|    --------| |-|    |-| |-|       --------- |--| |--| |--| |--| --------| v1.9.0 : by w4t3rcs)
+                          |-|    --------| |-|    |-| |-|       --------- |--| |--| |--| |--| --------| v1.9.0 : by w4t3rcs :D
                     """;
 
     public static LayerContainer run(Class<?> modClass, IEventBus eventBus, ModContainer modContainer) {
@@ -31,20 +31,24 @@ public class TemporalEngine {
         }
     }
 
-    private static EngineBuilder defaultBuilder(Class<?> modClass, IEventBus eventBus, ModContainer modContainer) {
-        return emptyBuilder()
-                .configureIOLayer()
+    public static EngineBuilder defaultBuilder(Class<?> modClass, IEventBus eventBus, ModContainer modContainer) {
+        return defaultEventLayerBuilder(defaultIOLayerBuilder(emptyBuilder(), modClass, eventBus, modContainer).and()).and();
+    }
+
+    public static EventBuilder defaultEventLayerBuilder(EngineBuilder engineBuilder) {
+        return engineBuilder.configureEventLayer()
+                .handlers(DEFAULT_HANDLERS);
+    }
+
+    public static IOBuilder defaultIOLayerBuilder(EngineBuilder engineBuilder, Class<?> modClass, IEventBus eventBus, ModContainer modContainer) {
+        return engineBuilder.configureIOLayer()
                 .modClass(modClass)
                 .initializers(DEFAULT_INITIALIZERS)
                 .externalSource(List.of(eventBus, modContainer))
                 .factoryRegistrars(DEFAULT_FACTORY_REGISTRARS)
                 .simpleProcessors(DEFAULT_PROCESSORS)
                 .asyncProcessors(Collections.emptyList())
-                .cleaners(Collections.emptyList())
-                .and()
-                .configureEventLayer()
-                .handlers(DEFAULT_HANDLERS)
-                .and();
+                .cleaners(Collections.emptyList());
     }
 
     public static EngineBuilder emptyBuilder() {
