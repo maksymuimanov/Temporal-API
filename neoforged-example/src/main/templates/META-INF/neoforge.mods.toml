@@ -7,6 +7,7 @@ license = "${mod_license}"
     displayName = "${mod_name}"
     authors = "${mod_authors}"
     description = '''${mod_description}'''
+    enumExtensions = "META-INF/enumextensions.json"
 [[dependencies."${mod_id}"]]
     modId = "neoforge"
     type = "required"
@@ -22,6 +23,6 @@ license = "${mod_license}"
 [[dependencies."${mod_id}"]]
     modId = "temporalapi"
     type = "required"
-versionRange = "[1.9, 1.10)"
+    versionRange = "[1.9, 1.10)"
     ordering = "BEFORE"
     side = "BOTH"

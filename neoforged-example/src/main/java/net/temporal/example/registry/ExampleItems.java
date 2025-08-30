@@ -88,4 +88,14 @@ public final class ExampleItems {
     @GenerateItemModel
     @TranslateEnglish("Example Hanging Sign")
     public static final DeferredItem<?> EXAMPLE_HANGING_SIGN = ITEM_FACTORY.createHangingSign("example_hanging_sign", ExampleBlocks.EXAMPLE_HANGING_SIGN, ExampleBlocks.EXAMPLE_HANGING_WALL_SIGN);
+
+    @AddCreativeModeTab(CreativeModeTabType.TOOLS_AND_UTILITIES)
+    @GenerateItemModel
+    @TranslateEnglish("Example Boat")
+    public static final DeferredItem<?> EXAMPLE_BOAT = ITEM_FACTORY.createBoat("example_boat", "EXAMPLE");
+
+    @AddCreativeModeTab(CreativeModeTabType.TOOLS_AND_UTILITIES)
+    @GenerateItemModel
+    @TranslateEnglish("Example Chest Boat")
+    public static final DeferredItem<?> EXAMPLE_CHEST_BOAT = ITEM_FACTORY.createChestBoat("example_chest_boat", "EXAMPLE");
 }

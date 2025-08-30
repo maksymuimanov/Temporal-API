@@ -8,5 +8,5 @@ import com.temporal.api.core.registry.factory.extension.item.*;
 public final class ExampleItemFactory extends ItemFactory implements SwordSubFactory,
         BowSubFactory, CrossbowSubFactory,
         ArmorSubFactory,
-        SignSubFactory, HangingSignSubFactory {
+        SignSubFactory, HangingSignSubFactory, BoatSubFactory {
 }
