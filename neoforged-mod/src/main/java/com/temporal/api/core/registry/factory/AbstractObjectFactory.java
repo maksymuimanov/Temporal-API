@@ -1,15 +1,15 @@
 package com.temporal.api.core.registry.factory;
 
+import com.temporal.api.core.registry.TemporalRegister;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
 
 public abstract class AbstractObjectFactory<R> implements ObjectFactory<R> {
-    private final DeferredRegister<R> registry;
+    private final TemporalRegister<R> registry;
 
-    public AbstractObjectFactory(DeferredRegister<R> registry) {
+    public AbstractObjectFactory(TemporalRegister<R> registry) {
         this.registry = registry;
     }
 
@@ -19,12 +19,12 @@ public abstract class AbstractObjectFactory<R> implements ObjectFactory<R> {
     }
 
     @Override
-    public void register(IEventBus eventBus) {
-        this.getRegistry().register(eventBus);
+    public void register(IEventBus eventBus, Class<?>... containers) {
+        this.getRegistry().register(eventBus, containers);
     }
 
     @Override
-    public DeferredRegister<R> getRegistry() {
+    public TemporalRegister<R> getRegistry() {
         return registry;
     }
 }

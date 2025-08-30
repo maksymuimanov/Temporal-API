@@ -10,20 +10,12 @@ import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
 public interface PressurePlateSubFactory {
-    default DeferredBlock<PressurePlateBlock> createPressurePlate(String name) {
-        return this.createPressurePlate(name, BlockPropertiesFactory.pressurePlate());
-    }
-
-    default DeferredBlock<PressurePlateBlock> createPressurePlate(String name, BlockBehaviour.Properties properties) {
-        return this.createPressurePlate(name, properties, BlockSetType.OAK);
+    default DeferredBlock<PressurePlateBlock> createPressurePlate(String name, BlockSetType setType) {
+        return this.createPressurePlate(name, BlockPropertiesFactory.pressurePlate(), setType);
     }
 
     default DeferredBlock<PressurePlateBlock> createPressurePlate(String name, BlockBehaviour.Properties properties, BlockSetType setType) {
         return this.createPressurePlate(name, properties, new Item.Properties(), setType);
-    }
-
-    default DeferredBlock<PressurePlateBlock> createPressurePlate(String name, BlockBehaviour.Properties properties, Item.Properties itemProperties) {
-        return this.createPressurePlate(name, properties, itemProperties, BlockSetType.OAK);
     }
 
     default DeferredBlock<PressurePlateBlock> createPressurePlate(String name, BlockBehaviour.Properties properties, Item.Properties itemProperties, BlockSetType setType) {

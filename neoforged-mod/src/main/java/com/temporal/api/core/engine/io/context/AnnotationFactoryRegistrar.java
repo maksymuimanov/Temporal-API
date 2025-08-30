@@ -13,10 +13,10 @@ public class AnnotationFactoryRegistrar implements FactoryRegistrar {
                 .stream()
                 .filter(IOUtils::isFactoryPresent)
                 .forEach(clazz -> {
-                    IOUtils.getStaticFieldStream(clazz,
+                    IOUtils.getStaticFieldTypeStream(clazz,
                                     field -> field.isAnnotationPresent(RegisterFactory.class),
-                                    factory -> (ObjectFactory<?>) factory)
-                            .forEach(factory -> factory.register(eventBus));
+                                    type -> (ObjectFactory<?>) InjectionPool.getFromInstance(type))
+                            .forEach(factory -> factory.register(eventBus, clazz));
                 });
     }
 }

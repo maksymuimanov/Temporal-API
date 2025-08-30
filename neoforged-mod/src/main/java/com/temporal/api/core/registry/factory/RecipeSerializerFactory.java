@@ -1,17 +1,17 @@
 package com.temporal.api.core.registry.factory;
 
 import com.temporal.api.core.engine.io.context.InjectionPool;
+import com.temporal.api.core.registry.TemporalRegister;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class RecipeSerializerFactory extends AbstractObjectFactory<RecipeSerializer<?>> {
     public RecipeSerializerFactory() {
         this(InjectionPool.getFromInstance("$RecipeSerializers"));
     }
 
-    public RecipeSerializerFactory(DeferredRegister<RecipeSerializer<?>> recipeSerializers) {
+    public RecipeSerializerFactory(TemporalRegister<RecipeSerializer<?>> recipeSerializers) {
         super(recipeSerializers);
     }
 

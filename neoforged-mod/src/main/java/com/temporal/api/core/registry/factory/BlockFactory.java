@@ -1,12 +1,12 @@
 package com.temporal.api.core.registry.factory;
 
 import com.temporal.api.core.engine.io.context.InjectionPool;
+import com.temporal.api.core.registry.TemporalRegister;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.neoforge.registries.DeferredBlock;
-import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -18,11 +18,11 @@ public class BlockFactory extends AbstractObjectFactory<Block> {
         this(InjectionPool.getFromInstance("$Blocks"));
     }
 
-    public BlockFactory(DeferredRegister.Blocks blocks) {
+    public BlockFactory(TemporalRegister.TemporalBlocks blocks) {
         this(blocks, InjectionPool.getFromInstance(ItemFactory.class));
     }
 
-    public BlockFactory(DeferredRegister.Blocks blocks, ItemFactory itemFactory) {
+    public BlockFactory(TemporalRegister.TemporalBlocks blocks, ItemFactory itemFactory) {
         super(blocks);
         this.itemFactory = itemFactory;
     }
@@ -32,7 +32,7 @@ public class BlockFactory extends AbstractObjectFactory<Block> {
     }
 
     public <T extends Block> DeferredBlock<T> createWithoutItem(String name, BlockBehaviour.Properties properties, Function<BlockBehaviour.Properties, T> function) {
-        return ((DeferredRegister.Blocks) this.getRegistry()).registerBlock(name, function, properties);
+        return ((TemporalRegister.TemporalBlocks) this.getRegistry()).registerBlock(name, properties, function);
     }
 
     public DeferredBlock<Block> create(String name, BlockBehaviour.Properties properties) {
@@ -48,7 +48,7 @@ public class BlockFactory extends AbstractObjectFactory<Block> {
     }
 
     public <T extends Block> DeferredBlock<T> create(String name, BlockBehaviour.Properties properties, Function<BlockBehaviour.Properties, T> function, Item.Properties itemProperties) {
-        DeferredBlock<T> block = ((DeferredRegister.Blocks) this.getRegistry()).registerBlock(name, function, properties);
+        DeferredBlock<T> block = ((TemporalRegister.TemporalBlocks) this.getRegistry()).registerBlock(name, properties, function);
         this.itemFactory.create(name, itemProperties, props -> new BlockItem(block.value(), props));
         return block;
     }
@@ -59,7 +59,7 @@ public class BlockFactory extends AbstractObjectFactory<Block> {
     }
 
     public <T extends Block> DeferredBlock<T> create(String name, Supplier<T> supplier, Item.Properties itemProperties) {
-        DeferredBlock<T> block = ((DeferredRegister.Blocks) this.getRegistry()).register(name, supplier);
+        DeferredBlock<T> block = ((TemporalRegister.TemporalBlocks) this.getRegistry()).register(name, supplier);
         this.itemFactory.create(name, itemProperties, props -> new BlockItem(block.value(), props));
         return block;
     }

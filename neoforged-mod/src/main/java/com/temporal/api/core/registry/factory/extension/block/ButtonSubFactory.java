@@ -10,20 +10,20 @@ import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
 public interface ButtonSubFactory {
-    default DeferredBlock<ButtonBlock> createButton(String name) {
-        return this.createButton(name, BlockPropertiesFactory.button());
+    default DeferredBlock<ButtonBlock> createButton(String name, BlockSetType setType) {
+        return this.createButton(name, BlockPropertiesFactory.button(), setType);
     }
 
-    default DeferredBlock<ButtonBlock> createButton(String name, BlockBehaviour.Properties properties) {
-        return this.createButton(name, properties, BlockSetType.OAK, 30);
+    default DeferredBlock<ButtonBlock> createButton(String name, BlockBehaviour.Properties properties, BlockSetType setType) {
+        return this.createButton(name, properties, setType, 30);
     }
 
     default DeferredBlock<ButtonBlock> createButton(String name, BlockBehaviour.Properties properties, BlockSetType setType, int ticksToStayPressed) {
         return this.createButton(name, properties, new Item.Properties(), setType, ticksToStayPressed);
     }
 
-    default DeferredBlock<ButtonBlock> createButton(String name, BlockBehaviour.Properties properties, Item.Properties itemProperties) {
-        return this.createButton(name, properties, itemProperties, BlockSetType.OAK, 30);
+    default DeferredBlock<ButtonBlock> createButton(String name, BlockBehaviour.Properties properties, Item.Properties itemProperties, BlockSetType setType) {
+        return this.createButton(name, properties, itemProperties, setType, 30);
     }
 
     default DeferredBlock<ButtonBlock> createButton(String name, BlockBehaviour.Properties properties, Item.Properties itemProperties, BlockSetType setType, int ticksToStayPressed) {

@@ -5,10 +5,29 @@ import net.minecraft.core.HolderSet;
 
 import java.util.*;
 import java.util.function.Function;
+import java.util.function.IntFunction;
 import java.util.stream.Collector;
 
 public final class CollectionUtils {
     private CollectionUtils() {
+    }
+
+    public static <T, K extends T, V extends T> T[] toArray(Map<K, V> map, IntFunction<T[]> generator) {
+        List<T> list = new ArrayList<>(map.size() * 2);
+        map.forEach((key, value) -> {
+            list.add(key);
+            list.add(value);
+        });
+        return list.toArray(generator.apply(list.size()));
+    }
+
+    public static <T, K, V> T[] toArray(Map<K, V> map, Function<K, T> keyMapper, Function<V, T> valueMapper, IntFunction<T[]> generator) {
+        List<T> list = new ArrayList<>(map.size() * 2);
+        map.forEach((key, value) -> {
+            list.add(keyMapper.apply(key));
+            list.add(valueMapper.apply(value));
+        });
+        return list.toArray(generator.apply(list.size()));
     }
 
     public static <K, V, VR> Map<K, VR> createMap(Map<K, V> source, Function<V, VR> valueMapper) {

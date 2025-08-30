@@ -17,14 +17,17 @@ public final class RegistryUtils {
     private RegistryUtils() {
     }
 
+    @Deprecated(since = "1.9.0", forRemoval = true)
     public static DeferredRegister.Items createItemRegistry() {
         return DeferredRegister.createItems(IOLayer.NEO_MOD.getModId());
     }
 
+    @Deprecated(since = "1.9.0", forRemoval = true)
     public static DeferredRegister.Blocks createBlockRegistry() {
         return DeferredRegister.createBlocks(IOLayer.NEO_MOD.getModId());
     }
 
+    @Deprecated(since = "1.9.0", forRemoval = true)
     public static <T> DeferredRegister<T> createRegistry(ResourceKey<Registry<T>> registry) {
         return DeferredRegister.create(registry, IOLayer.NEO_MOD.getModId());
     }

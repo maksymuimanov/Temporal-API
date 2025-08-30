@@ -1,6 +1,7 @@
 package com.temporal.api.core.registry.factory;
 
 import com.temporal.api.core.engine.io.context.InjectionPool;
+import com.temporal.api.core.registry.TemporalRegister;
 import com.temporal.api.core.util.ResourceUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
@@ -11,7 +12,6 @@ import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.Arrays;
 import java.util.EnumMap;
@@ -24,7 +24,7 @@ public class ArmorMaterialFactory extends AbstractObjectFactory<ArmorMaterial> {
         this(InjectionPool.getFromInstance("$ArmorMaterials"));
     }
 
-    public ArmorMaterialFactory(DeferredRegister<ArmorMaterial> armorMaterials) {
+    public ArmorMaterialFactory(TemporalRegister<ArmorMaterial> armorMaterials) {
         super(armorMaterials);
     }
 

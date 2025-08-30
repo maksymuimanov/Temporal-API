@@ -13,7 +13,7 @@ public class TemporalEngine {
     public static final List<ObjectPoolInitializer> DEFAULT_INITIALIZERS = List.of(new DeferredRegisterPoolInitializer(), new FactoryPoolInitializer(), new EventBusPoolInitializer(), new ModContainerPoolInitializer(), new InjectedObjectPoolInitializer());
     public static final List<FactoryRegistrar> DEFAULT_FACTORY_REGISTRARS = List.of(new FieldTypeFactoryRegistrar());
     public static final List<AnnotationProcessor<?>> DEFAULT_PROCESSORS = List.of(new ClassAnnotationProcessor(), new StaticFieldAnnotationProcessor(), new FieldAnnotationProcessor(), new MethodAnnotationProcessor());
-    public static final List<EventHandler> DEFAULT_HANDLERS = List.of(new FMLClientSetupEventHandler(), new EntityRendererRegisterRendererEventHandler(), new EntityRendererRegisterLayerDefinitionEventHandler(), new DataEventHandler(), new FovModifierEventHandler(), new CreativeModeTabEventHandler());
+    public static final List<EventHandler> DEFAULT_HANDLERS = List.of(new FMLClientSetupEventHandler(), new EntityRendererRegisterRendererEventHandler(), new EntityRendererRegisterLayerDefinitionEventHandler(), new DataEventHandler(), new FovModifierEventHandler(), new CreativeModeTabEventHandler(), new BlockEntityTypeEventHandler());
     protected static final String BANNER = """
                        _________ _________ ___     ___ _________ _________ _________ _________ ____
                        ---- ---- |   ----| |  \\   / | |  ___  | |  ___  | |  ___  | |  ___  | |  |

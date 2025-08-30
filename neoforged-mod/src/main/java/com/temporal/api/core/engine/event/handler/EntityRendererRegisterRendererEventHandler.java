@@ -3,8 +3,6 @@ package com.temporal.api.core.engine.event.handler;
 import com.temporal.api.core.collection.TemporalQueue;
 import com.temporal.api.core.engine.io.IOLayer;
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
-import com.temporal.api.core.engine.io.metadata.strategy.field.event.RegisterHangingSignRendererStrategy;
-import com.temporal.api.core.engine.io.metadata.strategy.field.event.RegisterSignRendererStrategy;
 import com.temporal.api.core.util.IOUtils;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 
@@ -17,8 +15,7 @@ import java.util.function.Consumer;
 public class EntityRendererRegisterRendererEventHandler implements EventHandler {
     public static final Queue<Consumer<EntityRenderersEvent.RegisterRenderers>> RENDERING_REGISTRIES = new TemporalQueue<>();
     private final Map<Class<? extends Annotation>, FieldAnnotationStrategy<?>> strategies = IOUtils.createAnnotationStrategyMap(List.of(
-            new RegisterSignRendererStrategy(),
-            new RegisterHangingSignRendererStrategy()
+
     ));
 
     @Override

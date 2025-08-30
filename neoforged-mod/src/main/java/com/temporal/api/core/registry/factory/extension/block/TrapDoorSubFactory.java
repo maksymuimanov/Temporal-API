@@ -10,20 +10,12 @@ import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
 public interface TrapDoorSubFactory {
-    default DeferredBlock<TrapDoorBlock> createTrapDoor(String name) {
-        return this.createTrapDoor(name, BlockPropertiesFactory.trapDoor());
-    }
-
-    default DeferredBlock<TrapDoorBlock> createTrapDoor(String name, BlockBehaviour.Properties properties) {
-        return this.createTrapDoor(name, properties, BlockSetType.OAK);
+    default DeferredBlock<TrapDoorBlock> createTrapDoor(String name, BlockSetType setType) {
+        return this.createTrapDoor(name, BlockPropertiesFactory.trapDoor(), setType);
     }
 
     default DeferredBlock<TrapDoorBlock> createTrapDoor(String name, BlockBehaviour.Properties properties, BlockSetType setType) {
         return this.createTrapDoor(name, properties, new Item.Properties(), setType);
-    }
-
-    default DeferredBlock<TrapDoorBlock> createTrapDoor(String name, BlockBehaviour.Properties properties, Item.Properties itemProperties) {
-        return this.createTrapDoor(name, properties, itemProperties, BlockSetType.OAK);
     }
 
     default DeferredBlock<TrapDoorBlock> createTrapDoor(String name, BlockBehaviour.Properties properties, Item.Properties itemProperties, BlockSetType setType) {

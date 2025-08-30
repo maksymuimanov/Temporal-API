@@ -1,12 +1,12 @@
 package com.temporal.api.core.registry.factory;
 
 import com.temporal.api.core.engine.io.context.InjectionPool;
+import com.temporal.api.core.registry.TemporalRegister;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.Collection;
 
@@ -15,7 +15,7 @@ public class CreativeModeTabFactory extends AbstractObjectFactory<CreativeModeTa
         this(InjectionPool.getFromInstance("$CreativeModeTabs"));
     }
 
-    public CreativeModeTabFactory(DeferredRegister<CreativeModeTab> creativeModeTabs) {
+    public CreativeModeTabFactory(TemporalRegister<CreativeModeTab> creativeModeTabs) {
         super(creativeModeTabs);
     }
 

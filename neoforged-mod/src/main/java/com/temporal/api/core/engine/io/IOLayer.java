@@ -1,6 +1,7 @@
 package com.temporal.api.core.engine.io;
 
 import com.temporal.api.core.engine.EngineLayer;
+import com.temporal.api.core.engine.event.handler.EventHandler;
 import com.temporal.api.core.engine.io.context.*;
 import com.temporal.api.core.engine.io.metadata.consumer.AnnotationStrategyConsumer;
 import com.temporal.api.core.engine.io.metadata.consumer.AsyncStrategyConsumer;
@@ -12,6 +13,7 @@ import com.temporal.api.core.engine.io.metadata.strategy.method.MethodAnnotation
 import com.temporal.api.core.engine.io.metadata.strategy.type.ClassAnnotationStrategy;
 import com.temporal.api.core.engine.io.resource.NeoMod;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 
 import java.util.List;
 
@@ -45,10 +47,19 @@ public class IOLayer implements EngineLayer {
         IEventBus eventBus = objectPool.getObject(IEventBus.class);
         factoryRegistrars.forEach(factoryRegistrar ->
                 factoryRegistrar.registerFactories(eventBus));
-        simpleProcessors.forEach(annotationProcessor ->
-                annotationProcessor.process(NEO_MOD.getClasses(), SIMPLE_STRATEGY_CONSUMER));
-        asyncProcessors.forEach(annotationProcessor ->
-                annotationProcessor.process(NEO_MOD.getClasses(), ASYNC_STRATEGY_CONSUMER));
+        new EventHandler() {
+            @Override
+            public void handle() {
+                this.subscribeModEvent(FMLCommonSetupEvent.class, event -> {
+                    event.enqueueWork(() -> {
+                        simpleProcessors.forEach(annotationProcessor ->
+                                annotationProcessor.process(NEO_MOD.getClasses(), SIMPLE_STRATEGY_CONSUMER));
+                        asyncProcessors.forEach(annotationProcessor ->
+                                annotationProcessor.process(NEO_MOD.getClasses(), ASYNC_STRATEGY_CONSUMER));
+                    });
+                });
+            }
+        }.handle();
         objectPoolCleaners.forEach(ObjectPoolCleaner::clear);
         objectPool.getObjects(ObjectPoolCleaner.class)
                 .forEach(ObjectPoolCleaner::clear);
