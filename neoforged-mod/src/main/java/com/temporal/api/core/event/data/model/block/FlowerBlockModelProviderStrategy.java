@@ -14,7 +14,7 @@ public class FlowerBlockModelProviderStrategy implements BlockModelProviderStrat
         CROSS_PROVIDER.registerBlockModel(blockRegistry, provider);
         Block block = blockRegistry.value();
         String pottedId = additionalData[0];
-        Block pottedBlock = RegistryUtils.getBlockById(pottedId);
+        Block pottedBlock = RegistryUtils.getBlock(pottedId);
         String flowerPath = provider.getBlockPath(block);
         String pottedPath = provider.getBlockPath(pottedBlock);
         provider.simpleBlock(pottedBlock, provider.models()

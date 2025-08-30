@@ -33,7 +33,7 @@ public class ApiBlockModelProvider extends BlockStateProvider {
     }
 
     public <T extends Block> void familyMember(T block, String parentId, BiConsumer<T, ResourceLocation> blockModelRegistry) {
-        String parentBlockPath = this.getBlockPath(RegistryUtils.getBlockById(parentId));
+        String parentBlockPath = this.getBlockPath(RegistryUtils.getBlock(parentId));
         ResourceLocation parentTexture = ResourceUtils.parse(parentBlockPath);
         blockModelRegistry.accept(block, parentTexture);
     }

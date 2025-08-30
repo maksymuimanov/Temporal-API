@@ -40,8 +40,8 @@ public abstract class ApiBlockLootTableProvider extends BlockLootSubProvider {
     public void dropSharedSelf(DeferredBlock<?> block, Function<String, String> mapper) {
         Block mainBlock = block.value();
         String id = RegistryUtils.getIdFromRegistry(BuiltInRegistries.BLOCK, mainBlock);
-        Item item = RegistryUtils.getItemById(id);
-        Block sharedBlock = RegistryUtils.getBlockById(mapper.apply(id));
+        Item item = RegistryUtils.getItem(id);
+        Block sharedBlock = RegistryUtils.getBlock(mapper.apply(id));
         this.dropOther(mainBlock, item);
         this.dropOther(sharedBlock, item);
     }

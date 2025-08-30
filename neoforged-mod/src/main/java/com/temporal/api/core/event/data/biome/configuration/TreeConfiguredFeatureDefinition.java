@@ -37,12 +37,12 @@ public class TreeConfiguredFeatureDefinition implements ConfiguredFeatureDefinit
             FoliagePlacer foliagePlacer = getFoliagePlacer(data);
             FeatureSize featureSize = getFeatureSize(data);
             TreeConfiguration.TreeConfigurationBuilder builder = new TreeConfiguration.TreeConfigurationBuilder(
-                    BlockStateProvider.simple(RegistryUtils.getBlockById(data.logBlock())),
+                    BlockStateProvider.simple(RegistryUtils.getBlock(data.logBlock())),
                     trunkPlacer,
-                    BlockStateProvider.simple(RegistryUtils.getBlockById(data.leavesBlock())),
+                    BlockStateProvider.simple(RegistryUtils.getBlock(data.leavesBlock())),
                     foliagePlacer,
                     featureSize
-            ).dirt(BlockStateProvider.simple(RegistryUtils.getBlockById(data.rootBlock())));
+            ).dirt(BlockStateProvider.simple(RegistryUtils.getBlock(data.rootBlock())));
             builder = data.ignoreVines() ? builder.ignoreVines() : builder;
             return builder.build();
         } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {

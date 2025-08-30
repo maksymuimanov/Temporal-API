@@ -11,7 +11,7 @@ public class HangingSignBlockModelProviderStrategy implements BlockModelProvider
     @Override
     public void registerBlockModel(Holder<? extends Block> blockRegistry, ApiBlockModelProvider provider, String... additionalData) {
         CeilingHangingSignBlock block = (CeilingHangingSignBlock) blockRegistry.value();
-        WallHangingSignBlock wallBlock = (WallHangingSignBlock) RegistryUtils.getBlockById(additionalData[0]);
+        WallHangingSignBlock wallBlock = (WallHangingSignBlock) RegistryUtils.getBlock(additionalData[0]);
         provider.hangingSignBlock(block, wallBlock, ResourceUtils.parse(additionalData[1]));
     }
 }

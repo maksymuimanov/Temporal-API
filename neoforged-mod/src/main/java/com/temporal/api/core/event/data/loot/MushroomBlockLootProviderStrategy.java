@@ -10,7 +10,7 @@ public class MushroomBlockLootProviderStrategy implements LootProviderStrategy {
     public void generateLoot(Holder<? extends Block> blockRegistry, ApiBlockLootTableProvider provider, String... additionalData) {
         Block block = blockRegistry.value();
         String itemId = additionalData[0];
-        Item item = RegistryUtils.getItemById(itemId);
+        Item item = RegistryUtils.getItem(itemId);
         provider.add(block, provider.createMushroomBlockDrop(block, item));
     }
 }

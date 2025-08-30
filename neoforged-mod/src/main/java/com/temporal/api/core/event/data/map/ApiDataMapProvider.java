@@ -41,10 +41,10 @@ public class ApiDataMapProvider extends DataMapProvider {
                 compostableItemBuilder.add(compostable.item(), new Compostable(compostable.chance()), compostable.replace()));
         Builder<Oxidizable, Block> oxidizableBlockBuilder = this.builder(NeoForgeDataMaps.OXIDIZABLES);
         OXIDIZABLES.forEach(oxidizable ->
-                oxidizableBlockBuilder.add(oxidizable.block(), new Oxidizable(RegistryUtils.getBlockById(oxidizable.nextStageBlockId())), oxidizable.replace()));
+                oxidizableBlockBuilder.add(oxidizable.block(), new Oxidizable(RegistryUtils.getBlock(oxidizable.nextStageBlockId())), oxidizable.replace()));
         Builder<Waxable, Block> waxableBlockBuilder = this.builder(NeoForgeDataMaps.WAXABLES);
         WAXABLES.forEach(waxable ->
-                waxableBlockBuilder.add(waxable.block(), new Waxable(RegistryUtils.getBlockById(waxable.waxedBlock())), waxable.replace()));
+                waxableBlockBuilder.add(waxable.block(), new Waxable(RegistryUtils.getBlock(waxable.waxedBlock())), waxable.replace()));
         Builder<RaidHeroGift, VillagerProfession> raidHeroGiftVillagerProfessionBuilder = this.builder(NeoForgeDataMaps.RAID_HERO_GIFTS);
         RAID_HERO_GIFTS.forEach(raidHeroGift ->
                 raidHeroGiftVillagerProfessionBuilder.add(raidHeroGift.villagerProfession(), new RaidHeroGift(ResourceUtils.createKey(Registries.LOOT_TABLE, raidHeroGift.lootTablePath())), raidHeroGift.replace()));
@@ -53,6 +53,6 @@ public class ApiDataMapProvider extends DataMapProvider {
                 monsterRoomMobEntityTypeBuilder.add(monsterRoomMob.entity(), new MonsterRoomMob(Weight.of(monsterRoomMob.weight())), monsterRoomMob.replace()));
         Builder<ParrotImitation, EntityType<?>> parrotImitationEntityTypeBuilder = this.builder(NeoForgeDataMaps.PARROT_IMITATIONS);
         PARROT_IMITATIONS.forEach(parrotImitation ->
-                parrotImitationEntityTypeBuilder.add(parrotImitation.entity(), new ParrotImitation(RegistryUtils.getSoundEventById(parrotImitation.soundEventId())), parrotImitation.replace()));
+                parrotImitationEntityTypeBuilder.add(parrotImitation.entity(), new ParrotImitation(RegistryUtils.getSoundEvent(parrotImitation.soundEventId())), parrotImitation.replace()));
     }
 }

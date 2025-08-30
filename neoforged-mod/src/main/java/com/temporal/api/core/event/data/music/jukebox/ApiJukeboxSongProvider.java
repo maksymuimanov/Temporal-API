@@ -21,7 +21,7 @@ public class ApiJukeboxSongProvider implements JukeboxSongProvider {
         SONGS.forEach(description -> {
             ResourceKey<JukeboxSong> song = description.song();
             MutableComponent translationId = Component.translatable(Util.makeDescriptionId("jukebox_song", song.location()));
-            SoundEvent soundEvent = RegistryUtils.getSoundEventById(description.soundEvent());
+            SoundEvent soundEvent = RegistryUtils.getSoundEvent(description.soundEvent());
             context.register(song, new JukeboxSong(Holder.direct(soundEvent), translationId, description.lengthInSeconds(), description.comparatorOutput()));
         });
     }

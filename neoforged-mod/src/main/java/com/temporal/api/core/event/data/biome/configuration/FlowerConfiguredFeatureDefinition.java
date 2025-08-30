@@ -33,13 +33,13 @@ public class FlowerConfiguredFeatureDefinition implements ConfiguredFeatureDefin
                                         data.noiseScale(),
                                         data.noiseThreshold(),
                                         data.noiseHighChance(),
-                                        RegistryUtils.getBlockById(data.blockId()).defaultBlockState(),
+                                        RegistryUtils.getBlock(data.blockId()).defaultBlockState(),
                                         Arrays.stream(data.lowStateFlowers())
-                                                .map(RegistryUtils::getBlockById)
+                                                .map(RegistryUtils::getBlock)
                                                 .map(Block::defaultBlockState)
                                                 .toList(),
                                         Arrays.stream(data.highStateFlowers())
-                                                .map(RegistryUtils::getBlockById)
+                                                .map(RegistryUtils::getBlock)
                                                 .map(Block::defaultBlockState)
                                                 .toList()))));
     }

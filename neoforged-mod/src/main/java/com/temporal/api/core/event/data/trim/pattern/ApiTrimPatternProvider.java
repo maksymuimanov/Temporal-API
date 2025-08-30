@@ -23,7 +23,7 @@ public class ApiTrimPatternProvider implements TrimPatternProvider {
     public void registerTrimPatterns(BootstrapContext<TrimPattern> context) {
         TRIM_PATTERNS.forEach((trimPattern, description) -> {
             ResourceLocation location = trimPattern.location();
-            Holder<Item> itemHolder = RegistryUtils.getItemById(description.itemId()).getDefaultInstance().getItemHolder();
+            Holder<Item> itemHolder = RegistryUtils.getItem(description.itemId()).getDefaultInstance().getItemHolder();
             String descriptionId = Util.makeDescriptionId("trim_pattern", location);
             MutableComponent component = Component.translatable(descriptionId);
             context.register(trimPattern, new TrimPattern(location, itemHolder, component, description.decal()));

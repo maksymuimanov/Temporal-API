@@ -24,7 +24,7 @@ public class ApiTrimMaterialProvider implements TrimMaterialProvider {
     public void registerTrimMaterials(BootstrapContext<TrimMaterial> context) {
         TRIM_MATERIALS.forEach((trimMaterial, description) -> {
             String assetName = ResourceUtils.getResourceId(trimMaterial);
-            Item ingredient = RegistryUtils.getItemById(description.itemId());
+            Item ingredient = RegistryUtils.getItem(description.itemId());
             ResourceLocation location = trimMaterial.location();
             String descriptionId = Util.makeDescriptionId("trim_material", location);
             TextColor textColor = TextColor.parseColor(description.color()).getOrThrow();

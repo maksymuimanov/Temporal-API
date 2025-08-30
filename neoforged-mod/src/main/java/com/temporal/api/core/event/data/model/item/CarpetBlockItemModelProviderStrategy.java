@@ -11,7 +11,7 @@ public class CarpetBlockItemModelProviderStrategy implements ItemModelProviderSt
     @Override
     public void registerItemModel(Holder<? extends Item> itemRegistry, ApiItemModelProvider provider, String... additionalData) {
         Item item = itemRegistry.value();
-        Block block = RegistryUtils.getBlockById(additionalData[0]);
+        Block block = RegistryUtils.getBlock(additionalData[0]);
         String blockPath = provider.getItemPath(block.asItem(), ApiBlockModelProvider.BLOCK_PREFIX);
         provider.carpet(provider.getItemPath(item), ResourceUtils.parse(blockPath));
     }

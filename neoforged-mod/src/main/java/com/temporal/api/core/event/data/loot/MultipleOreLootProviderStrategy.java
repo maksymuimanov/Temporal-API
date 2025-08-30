@@ -20,7 +20,7 @@ public class MultipleOreLootProviderStrategy implements LootProviderStrategy {
         String itemId = additionalData[0];
         float itemCountMin = Float.parseFloat(additionalData[1]);
         float itemCountMax = Float.parseFloat(additionalData[2]);
-        Item item = RegistryUtils.getItemById(itemId);
+        Item item = RegistryUtils.getItem(itemId);
         HolderLookup.RegistryLookup<Enchantment> registrylookup = provider.getRegistries().lookupOrThrow(Registries.ENCHANTMENT);
         provider.add(block, provider.createSilkTouchDispatchTable(block, provider.applyExplosionDecay(block, LootItem.lootTableItem(item)
                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(itemCountMin, itemCountMax)))

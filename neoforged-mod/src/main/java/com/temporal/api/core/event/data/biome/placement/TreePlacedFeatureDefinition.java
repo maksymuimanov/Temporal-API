@@ -18,7 +18,7 @@ public class TreePlacedFeatureDefinition implements PlacedFeatureDefinition<Tree
     public List<PlacementModifier> getPlacementModifiers(ResourceKey<ConfiguredFeature<?, ?>> configuredFeatureKey, Tree.Placement data) {
         return VegetationPlacements.treePlacement(
                 PlacementUtils.countExtra(data.baseValue(), data.chance(), data.addedAmount()),
-                RegistryUtils.getBlockById(data.saplingBlock())
+                RegistryUtils.getBlock(data.saplingBlock())
         );
     }
 

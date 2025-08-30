@@ -26,7 +26,7 @@ public class OreConfiguredFeatureDefinition implements ConfiguredFeatureDefiniti
         var rules = BuiltInRegistries.BLOCK.stream()
                 .filter(reg -> Arrays.asList(replaceableBlocks).contains(RegistryUtils.getIdFromRegistry(BuiltInRegistries.BLOCK, reg)))
                 .map(BlockMatchTest::new)
-                .map(rule -> OreConfiguration.target(rule, RegistryUtils.getBlockById(data.blockId()).defaultBlockState()))
+                .map(rule -> OreConfiguration.target(rule, RegistryUtils.getBlock(data.blockId()).defaultBlockState()))
                 .toList();
         return new OreConfiguration(rules, data.size());
     }

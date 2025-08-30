@@ -11,7 +11,7 @@ public class SignBlockModelProviderStrategy implements BlockModelProviderStrateg
     @Override
     public void registerBlockModel(Holder<? extends Block> blockRegistry, ApiBlockModelProvider provider, String... additionalData) {
         StandingSignBlock block = (StandingSignBlock) blockRegistry.value();
-        WallSignBlock wallBlock = (WallSignBlock) RegistryUtils.getBlockById(additionalData[0]);
+        WallSignBlock wallBlock = (WallSignBlock) RegistryUtils.getBlock(additionalData[0]);
         provider.signBlock(block, wallBlock, ResourceUtils.parse(additionalData[1]));
     }
 }

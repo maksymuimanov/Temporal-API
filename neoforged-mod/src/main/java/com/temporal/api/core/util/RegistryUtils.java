@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.Objects;
@@ -32,12 +33,12 @@ public final class RegistryUtils {
         return DeferredRegister.create(registry, IOLayer.NEO_MOD.getModId());
     }
 
-    public static SoundEvent getSoundEventById(String id) {
+    public static SoundEvent getSoundEvent(String id) {
         return getObjectByCondition(BuiltInRegistries.SOUND_EVENT, soundEvent -> soundEvent.getLocation()
                 .equals(ResourceUtils.parse(id)));
     }
 
-    public static Item getItemById(String id) {
+    public static Item getItem(String id) {
         return getObjectByCondition(BuiltInRegistries.ITEM, item -> Objects.requireNonNull(item.getDefaultInstance()
                         .getItemHolder()
                         .getKey())
@@ -45,10 +46,17 @@ public final class RegistryUtils {
                 .equals(ResourceUtils.parse(id)));
     }
 
-    public static Block getBlockById(String id) {
+    public static Block getBlock(String id) {
         return getObjectByCondition(BuiltInRegistries.BLOCK, block -> Objects.requireNonNull(block.defaultBlockState()
                         .getBlockHolder()
                         .getKey())
+                .location()
+                .equals(ResourceUtils.parse(id)));
+    }
+
+    public static BlockEntityType<?> getBlockEntityType(String id) {
+        return getObjectByCondition(BuiltInRegistries.BLOCK_ENTITY_TYPE, blockEntityType -> Objects.requireNonNull(blockEntityType.builtInRegistryHolder())
+                .getKey()
                 .location()
                 .equals(ResourceUtils.parse(id)));
     }

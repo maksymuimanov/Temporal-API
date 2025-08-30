@@ -17,7 +17,7 @@ public class GrassLootProviderStrategy implements LootProviderStrategy {
     public void generateLoot(Holder<? extends Block> blockRegistry, ApiBlockLootTableProvider provider, String... additionalData) {
         Block block = blockRegistry.value();
         String itemId = additionalData[0];
-        Item item = RegistryUtils.getItemById(itemId);
+        Item item = RegistryUtils.getItem(itemId);
         HolderLookup.RegistryLookup<Enchantment> registrylookup = provider.getRegistries().lookupOrThrow(Registries.ENCHANTMENT);
         provider.add(block, provider.createShearsDispatchTable(block, provider.applyExplosionDecay(block, LootItem.lootTableItem(item)
                         .when(LootItemRandomChanceCondition.randomChance(0.125F)))

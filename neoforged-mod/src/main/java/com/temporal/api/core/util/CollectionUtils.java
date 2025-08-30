@@ -12,7 +12,18 @@ public final class CollectionUtils {
     private CollectionUtils() {
     }
 
-    public static <T, K extends T, V extends T> T[] toArray(Map<K, V> map, IntFunction<T[]> generator) {
+    public static <K, V> void putToListMap(Map<K, List<V>> map, K key, V value) {
+        boolean exists = map.containsKey(key);
+        if (exists) {
+            map.get(key).add(value);
+        } else {
+            List<V> list = new ArrayList<>();
+            list.add(value);
+            map.put(key, list);
+        }
+    }
+
+    public static <T, K extends T, V extends T> T[] mapToArray(Map<K, V> map, IntFunction<T[]> generator) {
         List<T> list = new ArrayList<>(map.size() * 2);
         map.forEach((key, value) -> {
             list.add(key);
@@ -21,7 +32,7 @@ public final class CollectionUtils {
         return list.toArray(generator.apply(list.size()));
     }
 
-    public static <T, K, V> T[] toArray(Map<K, V> map, Function<K, T> keyMapper, Function<V, T> valueMapper, IntFunction<T[]> generator) {
+    public static <T, K, V> T[] mapToArray(Map<K, V> map, Function<K, T> keyMapper, Function<V, T> valueMapper, IntFunction<T[]> generator) {
         List<T> list = new ArrayList<>(map.size() * 2);
         map.forEach((key, value) -> {
             list.add(keyMapper.apply(key));

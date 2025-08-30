@@ -13,9 +13,9 @@ public class CropLootProviderStrategy implements LootProviderStrategy {
     public void generateLoot(Holder<? extends Block> blockRegistry, ApiBlockLootTableProvider provider, String... additionalData) {
         Block block = blockRegistry.value();
         String grownItemId = additionalData[0];
-        Item grownItem = RegistryUtils.getItemById(grownItemId);
+        Item grownItem = RegistryUtils.getItem(grownItemId);
         String seedsItemId = additionalData[1];
-        Item seedsItem = RegistryUtils.getItemById(seedsItemId);
+        Item seedsItem = RegistryUtils.getItem(seedsItemId);
         int grownAge = Integer.parseInt(additionalData[2]);
         int minAge = Integer.parseInt(additionalData[3]);
         int maxAge = Integer.parseInt(additionalData[4]);

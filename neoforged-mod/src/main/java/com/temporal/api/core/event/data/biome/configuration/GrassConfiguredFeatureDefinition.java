@@ -26,7 +26,7 @@ public class GrassConfiguredFeatureDefinition implements ConfiguredFeatureDefini
         return FeatureUtils.simpleRandomPatchConfiguration(
                 data.tries(), PlacementUtils.onlyWhenEmpty(
                         Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
-                                BlockStateProvider.simple(RegistryUtils.getBlockById(data.blockId()))
+                                BlockStateProvider.simple(RegistryUtils.getBlock(data.blockId()))
                         )
                 )
         );

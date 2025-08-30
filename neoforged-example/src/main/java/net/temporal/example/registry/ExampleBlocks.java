@@ -6,9 +6,8 @@ import com.temporal.api.core.engine.io.metadata.annotation.data.GenerateBlockLoo
 import com.temporal.api.core.engine.io.metadata.annotation.data.language.TranslateEnglish;
 import com.temporal.api.core.engine.io.metadata.annotation.data.model.GenerateBlockModel;
 import com.temporal.api.core.engine.io.metadata.annotation.data.model.GenerateItemModel;
+import com.temporal.api.core.engine.io.metadata.annotation.event.AddBlockEntityType;
 import com.temporal.api.core.engine.io.metadata.annotation.event.AddCreativeModeTab;
-import com.temporal.api.core.engine.io.metadata.annotation.event.RegisterHangingSign;
-import com.temporal.api.core.engine.io.metadata.annotation.event.RegisterSign;
 import com.temporal.api.core.engine.io.metadata.annotation.injection.Injected;
 import com.temporal.api.core.engine.io.metadata.constant.BlockLootTableType;
 import com.temporal.api.core.engine.io.metadata.constant.BlockModelType;
@@ -154,28 +153,28 @@ public final class ExampleBlocks {
     public static final DeferredBlock<?> EXAMPLE_FENCE_GATE = BLOCK_FACTORY.createFenceGate("example_planks_fence_gate", ExampleWoodTypes.EXAMPLE_WOOD_TYPE);
 
     @AddBlockTag("minecraft:signs")
-    @GenerateItemModel
     @GenerateBlockModel(value = BlockModelType.SIGN, additionalData = {"example:example_wall_sign", "example:block/example_stripped_log"})
     @GenerateBlockLootTable(value = BlockLootTableType.OTHER, additionalData = "example:example_sign")
     @TranslateEnglish("Example Sign")
-    @RegisterSign("example:example_wall_sign")
+    @AddBlockEntityType("minecraft:sign")
     public static final DeferredBlock<StandingSignBlock> EXAMPLE_SIGN = BLOCK_FACTORY.createStandingSignWithoutItem("example_sign", 1f, ExampleWoodTypes.EXAMPLE_WOOD_TYPE);
 
     @AddBlockTag("minecraft:signs")
     @GenerateBlockLootTable(value = BlockLootTableType.OTHER, additionalData = "example:example_sign")
     @TranslateEnglish("Example Sign")
+    @AddBlockEntityType("minecraft:sign")
     public static final DeferredBlock<WallSignBlock> EXAMPLE_WALL_SIGN = BLOCK_FACTORY.createWallSignWithoutItem("example_wall_sign", 1f, ExampleWoodTypes.EXAMPLE_WOOD_TYPE);
 
     @AddBlockTag("minecraft:hanging_signs")
-    @GenerateItemModel
     @GenerateBlockModel(value = BlockModelType.HANGING_SIGN, additionalData = {"example:example_wall_hanging_sign", "example:block/example_stripped_log"})
     @GenerateBlockLootTable(value = BlockLootTableType.OTHER, additionalData = "example:example_hanging_sign")
     @TranslateEnglish("Example Hanging Sign")
-    @RegisterHangingSign("example:example_wall_hanging_sign")
+    @AddBlockEntityType("minecraft:hanging_sign")
     public static final DeferredBlock<CeilingHangingSignBlock> EXAMPLE_HANGING_SIGN = BLOCK_FACTORY.createCeilingHangingSignWithoutItem("example_hanging_sign", 1f, ExampleWoodTypes.EXAMPLE_WOOD_TYPE);
 
     @AddBlockTag("minecraft:hanging_signs")
     @GenerateBlockLootTable(value = BlockLootTableType.OTHER, additionalData = "example:example_hanging_sign")
     @TranslateEnglish("Example Hanging Sign")
+    @AddBlockEntityType("minecraft:hanging_sign")
     public static final DeferredBlock<WallHangingSignBlock> EXAMPLE_HANGING_WALL_SIGN = BLOCK_FACTORY.createWallHangingSignWithoutItem("example_wall_hanging_sign", 1f, ExampleWoodTypes.EXAMPLE_WOOD_TYPE);
 }
