@@ -3,13 +3,13 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "minecraft:copper_block"
-    },
-    {
-      "item": "minecraft:copper_block"
-    },
-    {
       "item": "minecraft:diamond"
+    },
+    {
+      "item": "minecraft:copper_block"
+    },
+    {
+      "item": "minecraft:copper_block"
     }
   ],
   "result": {

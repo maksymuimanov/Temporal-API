@@ -1,6 +1,7 @@
 package com.temporal.api.core.event.data.loot;
 
 import com.temporal.api.core.engine.io.context.InjectionPool;
+import com.temporal.api.core.registry.factory.BlockFactory;
 import com.temporal.api.core.util.RegistryUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
@@ -21,7 +22,6 @@ import net.minecraft.world.level.storage.loot.predicates.ConditionUserBuilder;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
 import net.neoforged.neoforge.registries.DeferredBlock;
-import net.neoforged.neoforge.registries.DeferredRegister;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
@@ -313,7 +313,8 @@ public abstract class ApiBlockLootTableProvider extends BlockLootSubProvider {
     @Override
     @NotNull
     protected Iterable<Block> getKnownBlocks() {
-        return InjectionPool.<DeferredRegister.Blocks>getFromInstance("$Blocks")
+        return InjectionPool.getFromInstance(BlockFactory.class)
+                .getRegistry()
                 .getEntries()
                 .stream()
                 .map(holder -> (Block) holder.get())
