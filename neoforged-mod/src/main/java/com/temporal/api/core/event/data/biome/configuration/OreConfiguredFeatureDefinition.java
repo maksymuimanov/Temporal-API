@@ -2,16 +2,22 @@ package com.temporal.api.core.event.data.biome.configuration;
 
 import com.temporal.api.core.event.data.biome.GenerationDescriptionContainer;
 import com.temporal.api.core.event.data.biome.dto.Ore;
+import com.temporal.api.core.event.data.preparer.tag.block.BlockTagDynamicPreparer;
 import com.temporal.api.core.util.CollectionUtils;
 import com.temporal.api.core.util.RegistryUtils;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
+import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class OreConfiguredFeatureDefinition implements ConfiguredFeatureDefinition<Ore.Configuration, OreConfiguration> {
@@ -22,13 +28,30 @@ public class OreConfiguredFeatureDefinition implements ConfiguredFeatureDefiniti
 
     @Override
     public OreConfiguration getFeatureConfiguration(ResourceKey<ConfiguredFeature<?, ?>> configuredFeatureKey, Ore.Configuration data) {
-        String[] replaceableBlocks = data.replaceableBlocks();
-        var rules = BuiltInRegistries.BLOCK.stream()
-                .filter(reg -> Arrays.asList(replaceableBlocks).contains(RegistryUtils.getIdFromRegistry(BuiltInRegistries.BLOCK, reg)))
-                .map(BlockMatchTest::new)
-                .map(rule -> OreConfiguration.target(rule, RegistryUtils.getBlock(data.blockId()).defaultBlockState()))
-                .toList();
-        return new OreConfiguration(rules, data.size());
+        List<OreConfiguration.TargetBlockState> rules = new ArrayList<>();
+        List<String> replaceableBlocksIds = List.of(data.replaceableBlocksIds());
+        if (!replaceableBlocksIds.isEmpty()) {
+            for (String id : replaceableBlocksIds) {
+                Block block = RegistryUtils.getBlock(id);
+                BlockMatchTest blockMatchTest = new BlockMatchTest(block);
+                OreConfiguration.TargetBlockState target = OreConfiguration.target(blockMatchTest, this.getBlockState(data));
+                rules.add(target);
+            }
+        }
+        String replaceableBlocksTag = data.replaceableBlocksTag();
+        if (!replaceableBlocksTag.isBlank()) {
+            TagKey<Block> blockTagKey = BlockTagDynamicPreparer.BLOCK_TAGS.get(replaceableBlocksTag);
+            TagMatchTest tagMatchTest = new TagMatchTest(blockTagKey);
+            OreConfiguration.TargetBlockState target = OreConfiguration.target(tagMatchTest, this.getBlockState(data));
+            rules.add(target);
+        }
+        if (rules.isEmpty()) throw new IllegalStateException("Ore rules are empty!");
+        return new OreConfiguration(rules, data.size(), data.discardChanceOnAirExposure());
+    }
+
+    @NotNull
+    private BlockState getBlockState(Ore.Configuration data) {
+        return RegistryUtils.getBlock(data.blockId()).defaultBlockState();
     }
 
     @Override

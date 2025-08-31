@@ -16,7 +16,8 @@ public final class ExampleConfiguredFeatures {
     @GenerateOre(
             configuration = @GenerateOre.Configuration(
                     blockId = "example:example_ore",
-                    replaceableBlocks = "minecraft:stone_ore_replaceables",
+                    replaceableBlocksIds = "minecraft:sand",
+                    replaceableBlocksTag = "minecraft:stone_ore_replaceables",
                     size = 17
             ),
             placement = @GenerateOre.Placement(

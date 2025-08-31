@@ -5,6 +5,7 @@ import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationSt
 import com.temporal.api.core.event.data.biome.GenerationDescriptionContainer;
 import com.temporal.api.core.event.data.biome.dto.Ore;
 import com.temporal.api.core.event.data.preparer.tag.biome.BiomeTagDynamicPreparer;
+import com.temporal.api.core.event.data.preparer.tag.block.BlockTagDynamicPreparer;
 import com.temporal.api.core.util.ResourceUtils;
 import com.temporal.api.core.util.TagUtils;
 import net.minecraft.resources.ResourceKey;
@@ -19,8 +20,9 @@ public class GenerateOreStrategy implements FieldAnnotationStrategy<GenerateOre>
         var annotationConfiguration = annotation.configuration();
         var annotationPlacement = annotation.placement();
         var annotationBiomeModifier = annotation.biomeModifier();
+        TagUtils.putTagContainer(BlockTagDynamicPreparer.TAG_CONTAINERS, annotationConfiguration.blockTagContainer());
         TagUtils.putTagContainer(BiomeTagDynamicPreparer.TAG_CONTAINERS, annotationBiomeModifier.biomeTagContainer());
-        var configuration = new Ore.Configuration(annotationConfiguration.blockId(), annotationConfiguration.replaceableBlocks(), annotationConfiguration.size());
+        var configuration = new Ore.Configuration(annotationConfiguration.blockId(), annotationConfiguration.replaceableBlocksIds(), annotationConfiguration.replaceableBlocksTag(), annotationConfiguration.size(), annotationConfiguration.discardChanceOnAirExposure());
         var placement = new Ore.Placement(annotationPlacement.rarity(), annotationPlacement.count(), annotationPlacement.shape(), annotationPlacement.from(), annotationPlacement.to());
         var biomeModifier = new Ore.BiomeModifier(annotationBiomeModifier.biomeTag());
         Ore ore = new Ore(ResourceUtils.getResourceId(configuredFeatureKey), configuration, placement, biomeModifier);

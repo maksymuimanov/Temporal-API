@@ -19,8 +19,11 @@ public @interface GenerateOre {
 
     @interface Configuration {
         String blockId();
-        String[] replaceableBlocks();
+        String[] replaceableBlocksIds() default {};
+        String replaceableBlocksTag() default "";
+        Class<?> blockTagContainer() default Object.class;
         int size() default 1;
+        float discardChanceOnAirExposure() default 0.0F;
     }
 
     @interface Placement {
