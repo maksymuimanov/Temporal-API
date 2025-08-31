@@ -98,4 +98,9 @@ public final class ExampleItems {
     @GenerateItemModel
     @TranslateEnglish("Example Chest Boat")
     public static final DeferredItem<?> EXAMPLE_CHEST_BOAT = ITEM_FACTORY.createChestBoat("example_chest_boat", "EXAMPLE");
+
+    @AddCreativeModeTab(CreativeModeTabType.SPAWN_EGGS)
+    @GenerateItemModel(ItemModelType.SPAWN_EGG)
+    @TranslateEnglish("Example Spawn Egg")
+    public static final DeferredItem<?> EXAMPLE_SPAWN_EGG = ITEM_FACTORY.createSpawnEgg("example_spawn_egg", ExampleEntityTypes.EXAMPLE_ENTITY, 0x473A24FF, 0x71634FFF);
 }

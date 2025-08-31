@@ -7,6 +7,7 @@ public enum ItemModelType {
     CROSSBOW,
     TRIMMED_ARMOR,
     POTION,
+    SPAWN_EGG,
     CUBED,
     BLOCK_FLAT,
     LOG,

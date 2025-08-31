@@ -14,6 +14,7 @@ public final class ItemModelDescriptionContainer {
     public static final Map<Holder<? extends Item>, String[]> CROSSBOW_ITEMS = new TemporalMap<>();
     public static final Map<Holder<? extends Item>, String[]> TRIMMED_ARMOR_ITEMS = new TemporalMap<>();
     public static final Map<Holder<? extends Item>, String[]> POTION_ITEMS = new TemporalMap<>();
+    public static final Map<Holder<? extends Item>, String[]> SPAWN_EGG_ITEMS = new TemporalMap<>();
     public static final Map<Holder<? extends Item>, String[]> CUBED_BLOCK_ITEMS = new TemporalMap<>();
     public static final Map<Holder<? extends Item>, String[]> BLOCK_FLAT_BLOCK_ITEMS = new TemporalMap<>();
     public static final Map<Holder<? extends Item>, String[]> LOG_BLOCK_ITEMS = new TemporalMap<>();

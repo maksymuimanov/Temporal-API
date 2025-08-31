@@ -18,6 +18,7 @@ public class ItemModelProviderStrategyConsumerImpl implements ItemModelProviderS
         CROSSBOW_ITEMS.forEach(registerItemModel(provider, CrossbowModelProviderStrategy::new));
         TRIMMED_ARMOR_ITEMS.forEach(registerItemModel(provider, TrimmedItemModelProviderStrategy::new));
         POTION_ITEMS.forEach(registerItemModel(provider, PotionItemModelProviderStrategy::new));
+        SPAWN_EGG_ITEMS.forEach(registerItemModel(provider, SpawnEggItemModelProviderStrategy::new));
         CUBED_BLOCK_ITEMS.forEach(registerItemModel(provider, CubedBlockItemModelProviderStrategy::new));
         BLOCK_FLAT_BLOCK_ITEMS.forEach(registerItemModel(provider, BlockFlatBlockItemModelProviderStrategy::new));
         LOG_BLOCK_ITEMS.forEach(registerItemModel(provider, LogBlockItemModelProviderStrategy::new));

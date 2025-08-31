@@ -30,6 +30,7 @@ public class GenerateItemModelStrategy implements FieldAnnotationStrategy<Genera
             case CROSSBOW -> ItemModelDescriptionContainer.CROSSBOW_ITEMS.put(registryObject, additionalData);
             case TRIMMED_ARMOR -> ItemModelDescriptionContainer.TRIMMED_ARMOR_ITEMS.put(registryObject, additionalData);
             case POTION -> ItemModelDescriptionContainer.POTION_ITEMS.put(registryObject, additionalData);
+            case SPAWN_EGG -> ItemModelDescriptionContainer.SPAWN_EGG_ITEMS.put(registryObject, additionalData);
             case CUBED -> ItemModelDescriptionContainer.CUBED_BLOCK_ITEMS.put(registryObject, additionalData);
             case BLOCK_FLAT -> ItemModelDescriptionContainer.BLOCK_FLAT_BLOCK_ITEMS.put(registryObject, additionalData);
             case LOG -> ItemModelDescriptionContainer.LOG_BLOCK_ITEMS.put(registryObject, additionalData);
