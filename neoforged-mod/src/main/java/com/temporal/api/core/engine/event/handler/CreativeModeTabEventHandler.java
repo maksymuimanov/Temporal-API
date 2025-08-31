@@ -27,7 +27,7 @@ public class CreativeModeTabEventHandler implements EventHandler {
     @Override
     public void handle() {
         subscribeModEvent(BuildCreativeModeTabContentsEvent.class, event -> {
-            IOLayer.SIMPLE_STRATEGY_CONSUMER.execute(IOLayer.STATIC_FIELD_EXECUTOR, STRATEGIES, IOLayer.NEO_MOD.getClasses());
+            IOLayer.ASYNC_STRATEGY_CONSUMER.execute(IOLayer.STATIC_FIELD_EXECUTOR, STRATEGIES, IOLayer.NEO_MOD.getClasses());
             TabDirector tabDirector = SimpleTabDirector.create(event);
             CREATIVE_MODE_TABS_CONTENT.forEach((tab, items) -> {
                 tabDirector.direct(tab, items.stream()

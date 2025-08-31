@@ -6,13 +6,11 @@ import com.temporal.api.core.engine.io.metadata.strategy.type.ClassAnnotationStr
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 
-import java.lang.annotation.Annotation;
-
 public class RegisterLayerDefinitionStrategy implements ClassAnnotationStrategy<RegisterLayerDefinition> {
     @Override
     public void execute(Class<?> clazz, Object object, RegisterLayerDefinition annotation) throws Exception {
-        ModelLayerLocation modelLayerLocation = (ModelLayerLocation) clazz.getDeclaredField(annotation.layerLocationFieldName()).get(object);
-        LayerDefinition layerDefinition = (LayerDefinition) clazz.getDeclaredMethod(annotation.layerLocationFieldName()).invoke(object);
+        ModelLayerLocation modelLayerLocation = (ModelLayerLocation) clazz.getDeclaredField(annotation.fieldName()).get(object);
+        LayerDefinition layerDefinition = (LayerDefinition) clazz.getDeclaredMethod(annotation.factoryMethodName()).invoke(object);
         EntityRendererRegisterLayerDefinitionEventHandler.LAYERS.put(modelLayerLocation, layerDefinition);
     }
 

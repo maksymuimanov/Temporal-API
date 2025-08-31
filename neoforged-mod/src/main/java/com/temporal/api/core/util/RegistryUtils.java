@@ -6,6 +6,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -56,6 +57,13 @@ public final class RegistryUtils {
 
     public static BlockEntityType<?> getBlockEntityType(String id) {
         return getObjectByCondition(BuiltInRegistries.BLOCK_ENTITY_TYPE, blockEntityType -> Objects.requireNonNull(blockEntityType.builtInRegistryHolder())
+                .getKey()
+                .location()
+                .equals(ResourceUtils.parse(id)));
+    }
+
+    public static EntityType<?> getEntityType(String id) {
+        return getObjectByCondition(BuiltInRegistries.ENTITY_TYPE, entityType -> Objects.requireNonNull(entityType.builtInRegistryHolder())
                 .getKey()
                 .location()
                 .equals(ResourceUtils.parse(id)));

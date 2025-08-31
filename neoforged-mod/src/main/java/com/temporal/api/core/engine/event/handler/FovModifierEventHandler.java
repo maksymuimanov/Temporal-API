@@ -14,6 +14,8 @@ public class FovModifierEventHandler implements EventHandler {
 
     @Override
     public void handle() {
-        subscribeEvent(ComputeFovModifierEvent.class, event -> BOWS.forEach(bow -> FOV_MODIFIER.modify(event, bow.get())));
+        subscribeEvent(ComputeFovModifierEvent.class, event -> {
+            BOWS.forEach(bow -> FOV_MODIFIER.modify(event, bow.get()));
+        });
     }
 }

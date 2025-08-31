@@ -22,7 +22,7 @@ public class EntityRendererRegisterLayerDefinitionEventHandler implements EventH
     @Override
     public void handle() {
         subscribeModEvent(EntityRenderersEvent.RegisterLayerDefinitions.class, event -> {
-            IOLayer.SIMPLE_STRATEGY_CONSUMER.execute(IOLayer.CLASS_EXECUTOR, strategies, IOLayer.NEO_MOD.getClasses());
+            IOLayer.ASYNC_STRATEGY_CONSUMER.execute(IOLayer.CLASS_EXECUTOR, strategies, IOLayer.NEO_MOD.getClasses());
             LAYERS.forEach((location, definition) -> event.registerLayerDefinition(location, () -> definition));
         });
     }

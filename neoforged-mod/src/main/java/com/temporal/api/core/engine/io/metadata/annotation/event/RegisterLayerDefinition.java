@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface RegisterLayerDefinition {
-    String layerLocationFieldName() default "LAYER_LOCATION";
+    String fieldName() default "LAYER_LOCATION";
 
-    String layerDefinitionFactoryMethodName() default "createBodyLayer";
+    String factoryMethodName() default "createBodyLayer";
 }

@@ -23,7 +23,7 @@ public class BlockEntityTypeEventHandler implements EventHandler {
     @Override
     public void handle() {
         subscribeModEvent(BlockEntityTypeAddBlocksEvent.class, event -> {
-            IOLayer.SIMPLE_STRATEGY_CONSUMER.execute(IOLayer.STATIC_FIELD_EXECUTOR, strategies, IOLayer.NEO_MOD.getClasses());
+            IOLayer.ASYNC_STRATEGY_CONSUMER.execute(IOLayer.STATIC_FIELD_EXECUTOR, strategies, IOLayer.NEO_MOD.getClasses());
             BLOCKS.forEach((type, holders) -> {
                 event.modify(type, holders.stream()
                         .map(Holder::value)

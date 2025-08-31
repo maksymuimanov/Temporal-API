@@ -3,6 +3,8 @@ package com.temporal.api.core.engine.event.handler;
 import com.temporal.api.core.collection.TemporalQueue;
 import com.temporal.api.core.engine.io.IOLayer;
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
+import com.temporal.api.core.engine.io.metadata.strategy.field.event.RegisterBlockEntityRendererStrategy;
+import com.temporal.api.core.engine.io.metadata.strategy.field.event.RegisterEntityRendererStrategy;
 import com.temporal.api.core.util.IOUtils;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 
@@ -15,13 +17,14 @@ import java.util.function.Consumer;
 public class EntityRendererRegisterRendererEventHandler implements EventHandler {
     public static final Queue<Consumer<EntityRenderersEvent.RegisterRenderers>> RENDERING_REGISTRIES = new TemporalQueue<>();
     private final Map<Class<? extends Annotation>, FieldAnnotationStrategy<?>> strategies = IOUtils.createAnnotationStrategyMap(List.of(
-
+            new RegisterEntityRendererStrategy(),
+            new RegisterBlockEntityRendererStrategy()
     ));
 
     @Override
     public void handle() {
         subscribeModEvent(EntityRenderersEvent.RegisterRenderers.class, event -> {
-            IOLayer.SIMPLE_STRATEGY_CONSUMER.execute(IOLayer.STATIC_FIELD_EXECUTOR, strategies, IOLayer.NEO_MOD.getClasses());
+            IOLayer.ASYNC_STRATEGY_CONSUMER.execute(IOLayer.STATIC_FIELD_EXECUTOR, strategies, IOLayer.NEO_MOD.getClasses());
             RENDERING_REGISTRIES.forEach(consumer -> consumer.accept(event));
         });
     }

@@ -36,7 +36,7 @@ public class FMLClientSetupEventHandler implements EventHandler {
     @Override
     public void handle() {
         subscribeModEvent(FMLClientSetupEvent.class, event -> {
-            IOLayer.SIMPLE_STRATEGY_CONSUMER.execute(IOLayer.STATIC_FIELD_EXECUTOR, strategies, IOLayer.NEO_MOD.getClasses());
+            IOLayer.ASYNC_STRATEGY_CONSUMER.execute(IOLayer.STATIC_FIELD_EXECUTOR, strategies, IOLayer.NEO_MOD.getClasses());
             WOOD_TYPE_STRATEGY.execute(WOOD_TYPES);
             event.enqueueWork(() -> {
                 BOW_STRATEGY.execute(BOWS);

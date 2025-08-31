@@ -1,6 +1,5 @@
 package com.temporal.api.core.registry.factory;
 
-import com.temporal.api.client.dto.Size;
 import com.temporal.api.core.engine.io.context.InjectionPool;
 import com.temporal.api.core.registry.TemporalRegister;
 import com.temporal.api.core.util.ResourceUtils;
@@ -20,9 +19,9 @@ public class EntityTypeFactory extends AbstractObjectFactory<EntityType<?>> {
         super(entityTypes);
     }
 
-    public <T extends Entity> DeferredHolder<EntityType<?>, EntityType<T>> create(String name, EntityType.EntityFactory<T> entityFactory, Size size, MobCategory category) {
+    public <T extends Entity> DeferredHolder<EntityType<?>, EntityType<T>> create(String name, EntityType.EntityFactory<T> entityFactory, MobCategory category, float width, float height) {
         return this.create(name, EntityType.Builder.of(entityFactory, category)
-                .sized(size.width(), size.height()));
+                .sized(width, height));
     }
 
     public <T extends Entity> DeferredHolder<EntityType<?>, EntityType<T>> create(String name, EntityType.Builder<T> builder) {

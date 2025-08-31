@@ -2,8 +2,8 @@ package com.temporal.api.core.engine.io.metadata.processor;
 
 import com.temporal.api.core.engine.io.IOLayer;
 import com.temporal.api.core.engine.io.metadata.executor.AnnotationExecutor;
-import com.temporal.api.core.engine.io.metadata.strategy.method.ExecuteStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.method.MethodAnnotationStrategy;
+import com.temporal.api.core.engine.io.metadata.strategy.method.injection.ExecuteStrategy;
 import com.temporal.api.core.util.IOUtils;
 
 import java.lang.annotation.Annotation;
