@@ -2,7 +2,7 @@ package com.temporal.api.core.engine.io.metadata.strategy.type.data;
 
 import com.temporal.api.core.engine.io.metadata.annotation.data.RegisterAdvancement;
 import com.temporal.api.core.engine.io.metadata.strategy.type.ClassAnnotationStrategy;
-import com.temporal.api.core.event.data.advancement.AdvancementGenerationHolder;
+import com.temporal.api.core.event.data.advancement.AdvancementDescription;
 import com.temporal.api.core.event.data.advancement.AdvancementStrategy;
 import com.temporal.api.core.event.data.advancement.ApiAdvancementProvider;
 
@@ -12,13 +12,13 @@ public class RegisterAdvancementStrategy implements ClassAnnotationStrategy<Regi
     @Override
     public void execute(Class<?> clazz, Object object, RegisterAdvancement annotation) throws Exception {
         Constructor<?> constructor = clazz.getDeclaredConstructor();
-        AdvancementGenerationHolder advancementGenerationHolder = (AdvancementGenerationHolder) constructor.newInstance();
+        AdvancementDescription advancementDescription = (AdvancementDescription) constructor.newInstance();
         if (AdvancementStrategy.class.equals(annotation.value())) {
-            ApiAdvancementProvider.ADVANCEMENTS.add(advancementGenerationHolder);
+            ApiAdvancementProvider.ADVANCEMENTS.add(advancementDescription);
         } else {
             Class<? extends AdvancementStrategy> strategyClass = annotation.value();
             AdvancementStrategy advancementStrategy = strategyClass.getDeclaredConstructor().newInstance();
-            ApiAdvancementProvider.CUSTOM_ADVANCEMENTS.put(advancementGenerationHolder, advancementStrategy);
+            ApiAdvancementProvider.CUSTOM_ADVANCEMENTS.put(advancementDescription, advancementStrategy);
         }
     }
 

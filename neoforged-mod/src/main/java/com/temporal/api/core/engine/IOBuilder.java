@@ -2,6 +2,7 @@ package com.temporal.api.core.engine;
 
 import com.temporal.api.core.engine.io.IOLayer;
 import com.temporal.api.core.engine.io.context.FactoryRegistrar;
+import com.temporal.api.core.engine.io.context.ModClassScanner;
 import com.temporal.api.core.engine.io.context.ObjectPoolCleaner;
 import com.temporal.api.core.engine.io.context.ObjectPoolInitializer;
 import com.temporal.api.core.engine.io.metadata.processor.AnnotationProcessor;
@@ -12,6 +13,7 @@ public class IOBuilder {
     private final EngineBuilder engineBuilder;
     private final IOLayer ioLayer;
     private Class<?> modClass;
+    private List<ModClassScanner> classScanners;
     private List<ObjectPoolInitializer> initializers;
     private List<?> externalSource;
     private List<FactoryRegistrar> factoryRegistrars;
@@ -27,6 +29,11 @@ public class IOBuilder {
 
     public IOBuilder modClass(Class<?> modClass) {
         this.modClass = modClass;
+        return this;
+    }
+
+    public IOBuilder classScanners(List<ModClassScanner> classScanners) {
+        this.classScanners = classScanners;
         return this;
     }
 
@@ -63,6 +70,7 @@ public class IOBuilder {
     public EngineBuilder and() {
         EngineTask task = () -> {
             this.ioLayer.setModClass(this.modClass);
+            this.ioLayer.setClassScanners(this.classScanners);
             this.ioLayer.setContextInitializers(this.initializers);
             this.ioLayer.setExternalSource(this.externalSource);
             this.ioLayer.setFactoryRegistrars(this.factoryRegistrars);

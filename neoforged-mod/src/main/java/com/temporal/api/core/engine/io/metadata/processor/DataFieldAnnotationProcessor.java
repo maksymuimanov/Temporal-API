@@ -8,14 +8,14 @@ import com.temporal.api.core.engine.io.metadata.strategy.field.data.biome.*;
 import com.temporal.api.core.engine.io.metadata.strategy.field.data.language.*;
 import com.temporal.api.core.engine.io.metadata.strategy.field.data.model.*;
 import com.temporal.api.core.engine.io.metadata.strategy.field.data.properties.*;
-import com.temporal.api.core.util.IOUtils;
+import com.temporal.api.core.util.ReflectionUtils;
 
 import java.lang.annotation.Annotation;
 import java.util.List;
 import java.util.Map;
 
 public class DataFieldAnnotationProcessor implements AnnotationProcessor<FieldAnnotationStrategy<?>> {
-    private final Map<Class<? extends Annotation>, FieldAnnotationStrategy<?>> strategies = IOUtils.createAnnotationStrategyMap(List.of(
+    private final Map<Class<? extends Annotation>, FieldAnnotationStrategy<?>> strategies = ReflectionUtils.createAnnotationStrategyMap(List.of(
             new GenerateBlockModelStrategy(),
             new GenerateItemModelStrategy(),
             new GenerateBlockLootTableStrategy(),

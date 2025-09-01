@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class ApiSoundProvider extends SoundDefinitionsProvider {
-    public static final Map<SoundGenerationDescription, List<SoundHolder>> SOUNDS = new TemporalMap<>();
+    public static final Map<SoundHolder, List<SoundDescription>> SOUNDS = new TemporalMap<>();
 
     public ApiSoundProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
         super(output, IOLayer.NEO_MOD.getModId(), existingFileHelper);
@@ -21,18 +21,18 @@ public class ApiSoundProvider extends SoundDefinitionsProvider {
     @Override
     public void registerSounds() {
         final String modId = IOLayer.NEO_MOD.getModId();
-        SOUNDS.forEach((description, soundHolders) -> {
+        SOUNDS.forEach((holder, descriptions) -> {
             SoundDefinition soundDefinition = definition();
-            soundHolders.forEach(soundHolder -> soundDefinition.with(
-                    sound(modId + ":" + soundHolder.id(), soundHolder.type())
-                            .volume(soundHolder.volume())
-                            .pitch(soundHolder.pitch())
-                            .weight(soundHolder.weight())
-                            .attenuationDistance(soundHolder.attenuationDistance())
-                            .stream(soundHolder.stream())
-                            .preload(soundHolder.preload())));
-            add(description.sound().value(), soundDefinition.subtitle("sound." + modId + "." + Objects.requireNonNull(description.sound().getKey()).location().getPath())
-                    .replace(description.replace()));
+            descriptions.forEach(soundDescription -> soundDefinition.with(
+                    sound(modId + ":" + soundDescription.id(), soundDescription.type())
+                            .volume(soundDescription.volume())
+                            .pitch(soundDescription.pitch())
+                            .weight(soundDescription.weight())
+                            .attenuationDistance(soundDescription.attenuationDistance())
+                            .stream(soundDescription.stream())
+                            .preload(soundDescription.preload())));
+            add(holder.sound().value(), soundDefinition.subtitle("sound." + modId + "." + Objects.requireNonNull(holder.sound().getKey()).location().getPath())
+                    .replace(holder.replace()));
         });
     }
 }

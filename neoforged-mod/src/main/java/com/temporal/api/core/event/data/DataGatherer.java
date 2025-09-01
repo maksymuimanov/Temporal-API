@@ -33,7 +33,7 @@ public interface DataGatherer {
 
     void addParticleProvider(GatherDataEvent event);
 
-    void addJsonProvider(GatherDataEvent event);
+    void addFileProvider(GatherDataEvent event);
 
     @NotNull
     PackOutput getPackOutput(GatherDataEvent event);

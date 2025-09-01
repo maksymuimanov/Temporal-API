@@ -3,7 +3,7 @@ package com.temporal.api.core.engine.io.metadata.strategy.field.data.model;
 import com.temporal.api.core.engine.io.metadata.annotation.data.model.GenerateParticleSpriteSet;
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.event.data.particle.ApiParticleProvider;
-import com.temporal.api.core.event.data.particle.ParticleSprite;
+import com.temporal.api.core.event.data.particle.ParticleDescription;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleType;
 
@@ -13,8 +13,8 @@ public class GenerateParticleSpriteSetStrategy implements FieldAnnotationStrateg
     @Override
     public void execute(Field field, Object object, GenerateParticleSpriteSet annotation) throws Exception {
         Holder<ParticleType<?>> particleType = (Holder<ParticleType<?>>) field.get(object);
-        ParticleSprite particleSprite = new ParticleSprite(annotation.id(), annotation.count(), annotation.reverse());
-        ApiParticleProvider.PARTICLE_SPRITES.put(particleType, particleSprite);
+        ParticleDescription particleDescription = new ParticleDescription(annotation.id(), annotation.count(), annotation.reverse());
+        ApiParticleProvider.PARTICLE_SPRITES.put(particleType, particleDescription);
     }
 
     @Override

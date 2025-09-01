@@ -14,7 +14,7 @@ import net.minecraft.world.item.JukeboxSong;
 import java.util.Queue;
 
 public class ApiJukeboxSongProvider implements JukeboxSongProvider {
-    public static final Queue<JukeboxSongDescriptionHolder> SONGS = new TemporalQueue<>();
+    public static final Queue<JukeboxSongDescription> SONGS = new TemporalQueue<>();
 
     @Override
     public void registerSong(BootstrapContext<JukeboxSong> context) {

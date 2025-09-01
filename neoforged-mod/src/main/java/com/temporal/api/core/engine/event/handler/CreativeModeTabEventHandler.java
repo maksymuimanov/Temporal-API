@@ -5,7 +5,7 @@ import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationSt
 import com.temporal.api.core.engine.io.metadata.strategy.field.event.AddCreativeModeTabStrategy;
 import com.temporal.api.core.event.tab.SimpleTabDirector;
 import com.temporal.api.core.event.tab.TabDirector;
-import com.temporal.api.core.util.IOUtils;
+import com.temporal.api.core.util.ReflectionUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
@@ -20,7 +20,7 @@ import java.util.Map;
 
 public class CreativeModeTabEventHandler implements EventHandler {
     public static final Map<ResourceKey<CreativeModeTab>, List<Holder<? extends Item>>> CREATIVE_MODE_TABS_CONTENT = new HashMap<>();
-    private static final Map<Class<? extends Annotation>, FieldAnnotationStrategy<?>> STRATEGIES = IOUtils.createAnnotationStrategyMap(List.of(
+    private static final Map<Class<? extends Annotation>, FieldAnnotationStrategy<?>> STRATEGIES = ReflectionUtils.createAnnotationStrategyMap(List.of(
             new AddCreativeModeTabStrategy()
     ));
 

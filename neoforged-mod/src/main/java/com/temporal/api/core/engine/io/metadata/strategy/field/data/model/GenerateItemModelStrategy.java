@@ -1,12 +1,12 @@
 package com.temporal.api.core.engine.io.metadata.strategy.field.data.model;
 
-import com.temporal.api.core.collection.SimplePair;
 import com.temporal.api.core.engine.io.metadata.annotation.data.model.GenerateItemModel;
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.event.data.model.item.ItemModelDescriptionContainer;
 import com.temporal.api.core.event.data.model.item.ItemModelProviderStrategy;
-import com.temporal.api.core.util.IOUtils;
+import com.temporal.api.core.util.ReflectionUtils;
 import net.minecraft.core.Holder;
+import net.minecraft.util.Tuple;
 import net.minecraft.world.item.Item;
 
 import java.lang.reflect.Field;
@@ -14,13 +14,13 @@ import java.lang.reflect.Field;
 public class GenerateItemModelStrategy implements FieldAnnotationStrategy<GenerateItemModel> {
     @Override
     public void execute(Field field, Object object, GenerateItemModel annotation) throws Exception {
-        Holder<? extends Item> registryObject = IOUtils.getItemHolder(field, object);
+        Holder<? extends Item> registryObject = ReflectionUtils.getItemHolder(field, object);
         String[] additionalData = annotation.additionalData();
         if (!ItemModelProviderStrategy.class.equals(annotation.custom())) {
             ItemModelProviderStrategy providerStrategy = annotation.custom()
                     .getDeclaredConstructor()
                     .newInstance();
-            ItemModelDescriptionContainer.CUSTOM_MODELS.put(new SimplePair<>(registryObject, additionalData), providerStrategy);
+            ItemModelDescriptionContainer.CUSTOM_MODELS.put(new Tuple<>(registryObject, additionalData), providerStrategy);
             return;
         }
         switch (annotation.value()) {

@@ -3,14 +3,15 @@ package com.temporal.api.core.engine.io.metadata.strategy.field.event;
 import com.temporal.api.core.engine.event.handler.FMLClientSetupEventHandler;
 import com.temporal.api.core.engine.io.metadata.annotation.event.SetupCrossbow;
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
-import net.neoforged.neoforge.registries.DeferredItem;
+import net.minecraft.core.Holder;
+import net.minecraft.world.item.Item;
 
 import java.lang.reflect.Field;
 
 public class SetupCrossbowStrategy implements FieldAnnotationStrategy<SetupCrossbow> {
     @Override
     public void execute(Field field, Object object, SetupCrossbow annotation) throws Exception {
-        DeferredItem<?> crossbowItem = (DeferredItem<?>) field.get(object);
+        Holder<? extends Item> crossbowItem = (Holder<? extends Item>) field.get(object);
         FMLClientSetupEventHandler.CROSSBOWS.add(crossbowItem);
     }
 

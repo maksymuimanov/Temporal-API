@@ -19,15 +19,15 @@ public final class WorldGenerationUtils {
     private WorldGenerationUtils() {
     }
 
-    public static List<PlacementModifier> commonOrePlacement(int count, PlacementModifier heightRange) {
-        return orePlacement(CountPlacement.of(count), heightRange);
+    public static List<PlacementModifier> createCommonOrePlacement(int count, PlacementModifier heightRange) {
+        return createOrePlacement(CountPlacement.of(count), heightRange);
     }
 
-    public static List<PlacementModifier> rareOrePlacement(int chance, PlacementModifier heightRange) {
-        return orePlacement(RarityFilter.onAverageOnceEvery(chance), heightRange);
+    public static List<PlacementModifier> createRareOrePlacement(int chance, PlacementModifier heightRange) {
+        return createOrePlacement(RarityFilter.onAverageOnceEvery(chance), heightRange);
     }
 
-    public static List<PlacementModifier> orePlacement(PlacementModifier countPlacement, PlacementModifier heightRange) {
+    public static List<PlacementModifier> createOrePlacement(PlacementModifier countPlacement, PlacementModifier heightRange) {
         return List.of(countPlacement, InSquarePlacement.spread(), heightRange, BiomeFilter.biome());
     }
 

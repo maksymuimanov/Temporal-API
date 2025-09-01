@@ -2,7 +2,7 @@ package com.temporal.api.core.event.data.biome.placement;
 
 import com.temporal.api.core.event.data.biome.GenerationDescriptionContainer;
 import com.temporal.api.core.event.data.biome.dto.Flower;
-import com.temporal.api.core.util.CollectionUtils;
+import com.temporal.api.core.util.MapUtils;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -25,6 +25,6 @@ public class FlowerPlacedFeatureDefinition implements PlacedFeatureDefinition<Fl
 
     @Override
     public Map<ResourceKey<ConfiguredFeature<?, ?>>, Flower.Placement> getDataSource() {
-        return CollectionUtils.createMap(GenerationDescriptionContainer.FLOWERS, Flower::placement);
+        return MapUtils.createMap(GenerationDescriptionContainer.FLOWERS, Flower::placement);
     }
 }

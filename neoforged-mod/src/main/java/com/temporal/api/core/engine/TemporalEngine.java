@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class TemporalEngine {
+    public static final List<ModClassScanner> DEFAULT_CLASS_SCANNERS = List.of(new ClasspathModClassScanner());
     public static final List<ObjectPoolInitializer> DEFAULT_INITIALIZERS = List.of(new DeferredRegisterPoolInitializer(), new FactoryPoolInitializer(), new EventBusPoolInitializer(), new ModContainerPoolInitializer(), new InjectedObjectPoolInitializer());
     public static final List<FactoryRegistrar> DEFAULT_FACTORY_REGISTRARS = List.of(new FieldTypeFactoryRegistrar());
     public static final List<AnnotationProcessor<?>> DEFAULT_PROCESSORS = List.of(new ClassAnnotationProcessor(), new StaticFieldAnnotationProcessor(), new FieldAnnotationProcessor(), new MethodAnnotationProcessor());
@@ -43,6 +44,7 @@ public class TemporalEngine {
     public static IOBuilder defaultIOLayerBuilder(EngineBuilder engineBuilder, Class<?> modClass, IEventBus eventBus, ModContainer modContainer) {
         return engineBuilder.configureIOLayer()
                 .modClass(modClass)
+                .classScanners(DEFAULT_CLASS_SCANNERS)
                 .initializers(DEFAULT_INITIALIZERS)
                 .externalSource(List.of(eventBus, modContainer))
                 .factoryRegistrars(DEFAULT_FACTORY_REGISTRARS)

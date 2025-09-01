@@ -52,6 +52,6 @@ public class ApiBlockModelProvider extends BlockStateProvider {
     }
 
     public String getBlockPath(Block block) {
-        return RegistryUtils.getIdFromRegistry(BuiltInRegistries.BLOCK, block, BLOCK_PREFIX);
+        return RegistryUtils.getObjectName(BuiltInRegistries.BLOCK, block, BLOCK_PREFIX);
     }
 }

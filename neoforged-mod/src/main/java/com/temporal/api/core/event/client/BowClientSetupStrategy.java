@@ -1,18 +1,17 @@
 package com.temporal.api.core.event.client;
 
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredItem;
 
 import java.util.List;
 
-public class BowClientSetupStrategy implements ClientSetupStrategy<DeferredItem<?>> {
+public class BowClientSetupStrategy implements ClientSetupStrategy<Holder<? extends Item>> {
     @Override
-    public void execute(List<DeferredItem<?>> source) {
+    public void execute(List<Holder<? extends Item>> source) {
         source.stream()
-                .map(DeferredHolder::get)
+                .map(Holder::value)
                 .forEach(bow -> {
                     registerPull(bow);
                     registerPulling(bow);

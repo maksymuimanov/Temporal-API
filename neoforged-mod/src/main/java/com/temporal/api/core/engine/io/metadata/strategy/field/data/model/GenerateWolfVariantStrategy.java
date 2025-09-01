@@ -2,7 +2,7 @@ package com.temporal.api.core.engine.io.metadata.strategy.field.data.model;
 
 import com.temporal.api.core.engine.io.metadata.annotation.data.model.GenerateWolfVariant;
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
-import com.temporal.api.core.event.data.preparer.tag.biome.BiomeTagDynamicPreparer;
+import com.temporal.api.core.event.data.preparer.tag.BiomeTagDynamicPreparer;
 import com.temporal.api.core.event.data.wolf.ApiWolfVariantProvider;
 import com.temporal.api.core.event.data.wolf.WolfVariantDescriptionHolder;
 import com.temporal.api.core.util.TagUtils;

@@ -2,7 +2,7 @@ package com.temporal.api.core.event.data.biome.placement;
 
 import com.temporal.api.core.event.data.biome.GenerationDescriptionContainer;
 import com.temporal.api.core.event.data.biome.dto.Ore;
-import com.temporal.api.core.util.CollectionUtils;
+import com.temporal.api.core.util.MapUtils;
 import com.temporal.api.core.util.WorldGenerationUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
@@ -23,13 +23,13 @@ public class OrePlacedFeatureDefinition implements PlacedFeatureDefinition<Ore.P
             case TRIANGLE -> HeightRangePlacement.triangle(anchorFrom, anchorTo);
         };
         return switch (data.rarity()) {
-            case RARE -> WorldGenerationUtils.rareOrePlacement(data.count(), heightRangePlacement);
-            case COMMON -> WorldGenerationUtils.commonOrePlacement(data.count(), heightRangePlacement);
+            case RARE -> WorldGenerationUtils.createRareOrePlacement(data.count(), heightRangePlacement);
+            case COMMON -> WorldGenerationUtils.createCommonOrePlacement(data.count(), heightRangePlacement);
         };
     }
 
     @Override
     public Map<ResourceKey<ConfiguredFeature<?, ?>>, Ore.Placement> getDataSource() {
-        return CollectionUtils.createMap(GenerationDescriptionContainer.ORES, Ore::placement);
+        return MapUtils.createMap(GenerationDescriptionContainer.ORES, Ore::placement);
     }
 }

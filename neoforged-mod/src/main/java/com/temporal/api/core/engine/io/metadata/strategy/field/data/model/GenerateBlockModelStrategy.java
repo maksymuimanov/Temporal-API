@@ -1,11 +1,11 @@
 package com.temporal.api.core.engine.io.metadata.strategy.field.data.model;
 
-import com.temporal.api.core.collection.SimplePair;
 import com.temporal.api.core.engine.io.metadata.annotation.data.model.GenerateBlockModel;
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.event.data.model.block.BlockModelDescriptionContainer;
 import com.temporal.api.core.event.data.model.block.BlockModelProviderStrategy;
 import net.minecraft.core.Holder;
+import net.minecraft.util.Tuple;
 import net.minecraft.world.level.block.Block;
 
 import java.lang.reflect.Field;
@@ -19,7 +19,7 @@ public class GenerateBlockModelStrategy implements FieldAnnotationStrategy<Gener
             BlockModelProviderStrategy providerStrategy = annotation.custom()
                     .getDeclaredConstructor()
                     .newInstance();
-            BlockModelDescriptionContainer.CUSTOM_MODELS.put(new SimplePair<>(registryObject, additionalData), providerStrategy);
+            BlockModelDescriptionContainer.CUSTOM_MODELS.put(new Tuple<>(registryObject, additionalData), providerStrategy);
             return;
         }
         switch (annotation.value()) {

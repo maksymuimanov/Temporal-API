@@ -42,6 +42,6 @@ public class ApiItemModelProvider extends ItemModelProvider {
     }
 
     protected String getItemPath(Item item, String prefix) {
-        return RegistryUtils.getIdFromRegistry(BuiltInRegistries.ITEM, item, prefix);
+        return RegistryUtils.getObjectName(BuiltInRegistries.ITEM, item, prefix);
     }
 }

@@ -16,7 +16,6 @@ public class BowFOVModifier implements FOVModifier {
         }
     }
 
-
     private boolean checkItems(ComputeFovModifierEvent event, Item... items) {
         return Arrays.stream(items).map(item -> checkUsingItem(event, item)).filter(condition -> condition.equals(Boolean.TRUE)).findAny().orElse(false);
     }

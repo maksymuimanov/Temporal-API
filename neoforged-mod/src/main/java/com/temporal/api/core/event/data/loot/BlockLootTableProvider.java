@@ -1,9 +1,9 @@
 package com.temporal.api.core.event.data.loot;
 
-import com.temporal.api.core.collection.Pair;
 import com.temporal.api.core.collection.TemporalMap;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.util.Tuple;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
 
@@ -27,7 +27,7 @@ public class BlockLootTableProvider extends ApiBlockLootTableProvider {
     public static final Map<Holder<? extends Block>, String[]> DOORS = new TemporalMap<>();
     public static final Map<Holder<? extends Block>, String[]> OTHER = new TemporalMap<>();
     public static final Map<Holder<? extends Block>, String[]> EMPTY = new TemporalMap<>();
-    public static final Map<Pair<Holder<? extends Block>, String[]>, LootProviderStrategy> CUSTOM_LOOT = new TemporalMap<>();
+    public static final Map<Tuple<Holder<? extends Block>, String[]>, LootProviderStrategy> CUSTOM_LOOT = new TemporalMap<>();
 
     protected BlockLootTableProvider(HolderLookup.Provider registries) {
         super(registries);
@@ -50,7 +50,7 @@ public class BlockLootTableProvider extends ApiBlockLootTableProvider {
         DOORS.forEach(generateLootTable(this, DoorLootProviderStrategy::new));
         OTHER.forEach(generateLootTable(this, OtherLootProviderStrategy::new));
         EMPTY.forEach(generateLootTable(this, EmptyLootProviderStrategy::new));
-        CUSTOM_LOOT.forEach((key, strategy) -> strategy.generateLoot(key.getLeft(), this, key.getRight()));
+        CUSTOM_LOOT.forEach((key, strategy) -> strategy.generateLoot(key.getA(), this, key.getB()));
     }
 
     @Override

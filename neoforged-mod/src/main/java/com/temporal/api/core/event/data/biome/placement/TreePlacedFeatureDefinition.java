@@ -2,7 +2,7 @@ package com.temporal.api.core.event.data.biome.placement;
 
 import com.temporal.api.core.event.data.biome.GenerationDescriptionContainer;
 import com.temporal.api.core.event.data.biome.dto.Tree;
-import com.temporal.api.core.util.CollectionUtils;
+import com.temporal.api.core.util.MapUtils;
 import com.temporal.api.core.util.RegistryUtils;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
@@ -24,6 +24,6 @@ public class TreePlacedFeatureDefinition implements PlacedFeatureDefinition<Tree
 
     @Override
     public Map<ResourceKey<ConfiguredFeature<?, ?>>, Tree.Placement> getDataSource() {
-        return CollectionUtils.createMap(GenerationDescriptionContainer.TREES, Tree::placement);
+        return MapUtils.createMap(GenerationDescriptionContainer.TREES, Tree::placement);
     }
 }

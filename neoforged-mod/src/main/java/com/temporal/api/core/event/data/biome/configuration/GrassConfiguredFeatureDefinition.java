@@ -2,7 +2,7 @@ package com.temporal.api.core.event.data.biome.configuration;
 
 import com.temporal.api.core.event.data.biome.GenerationDescriptionContainer;
 import com.temporal.api.core.event.data.biome.dto.Grass;
-import com.temporal.api.core.util.CollectionUtils;
+import com.temporal.api.core.util.MapUtils;
 import com.temporal.api.core.util.RegistryUtils;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
@@ -34,6 +34,6 @@ public class GrassConfiguredFeatureDefinition implements ConfiguredFeatureDefini
 
     @Override
     public Map<ResourceKey<ConfiguredFeature<?, ?>>, Grass.Configuration> getDataSource() {
-        return CollectionUtils.createMap(GenerationDescriptionContainer.GRASSES, Grass::configuration);
+        return MapUtils.createMap(GenerationDescriptionContainer.GRASSES, Grass::configuration);
     }
 }

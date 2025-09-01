@@ -9,7 +9,7 @@ import net.minecraft.world.damagesource.DamageType;
 import java.util.Map;
 
 public class ApiDamageTypeProvider implements DamageTypeProvider {
-    public static final Map<ResourceKey<DamageType>, DamageTypeDescriptionHolder> DAMAGE_TYPES = new TemporalMap<>();
+    public static final Map<ResourceKey<DamageType>, DamageTypeDescription> DAMAGE_TYPES = new TemporalMap<>();
 
     @Override
     public void registerDamageTypes(BootstrapContext<DamageType> context) {

@@ -1,17 +1,17 @@
 package com.temporal.api.core.event.client;
 
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredItem;
+import net.minecraft.world.item.Item;
 
 import java.util.List;
 
-public class ShieldClientSetupStrategy implements ClientSetupStrategy<DeferredItem<?>> {
+public class ShieldClientSetupStrategy implements ClientSetupStrategy<Holder<? extends Item>> {
     @Override
-    public void execute(List<DeferredItem<?>> source) {
+    public void execute(List<Holder<? extends Item>> source) {
         source.stream()
-                .map(DeferredHolder::get)
+                .map(Holder::value)
                 .forEach(shield -> {
                     ItemProperties.register(shield,
                             ResourceLocation.withDefaultNamespace("blocking"),

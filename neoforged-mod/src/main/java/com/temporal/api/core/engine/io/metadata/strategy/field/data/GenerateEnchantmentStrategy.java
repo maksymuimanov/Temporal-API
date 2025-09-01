@@ -5,7 +5,7 @@ import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationSt
 import com.temporal.api.core.event.data.enchantment.ApiEnchantmentProvider;
 import com.temporal.api.core.event.data.enchantment.EnchantmentCompatibility;
 import com.temporal.api.core.event.data.enchantment.EnchantmentCost;
-import com.temporal.api.core.event.data.enchantment.EnchantmentDescriptionHolder;
+import com.temporal.api.core.event.data.enchantment.EnchantmentDescription;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.enchantment.Enchantment;
 
@@ -20,7 +20,7 @@ public class GenerateEnchantmentStrategy implements FieldAnnotationStrategy<Gene
         GenerateEnchantment.Cost minCost = annotation.minCost();
         GenerateEnchantment.Cost maxCost = annotation.maxCost();
         EnchantmentCost enchantmentCost = new EnchantmentCost(Enchantment.dynamicCost(minCost.base(), minCost.perLevelAboveFirst()), Enchantment.dynamicCost(maxCost.base(), maxCost.perLevelAboveFirst()), annotation.anvilCost());
-        EnchantmentDescriptionHolder descriptionHolder = new EnchantmentDescriptionHolder(enchantmentCompatibility, annotation.weight(), annotation.maxLevel(), enchantmentCost, annotation.equipmentSlots());
+        EnchantmentDescription descriptionHolder = new EnchantmentDescription(enchantmentCompatibility, annotation.weight(), annotation.maxLevel(), enchantmentCost, annotation.equipmentSlots());
         ApiEnchantmentProvider.ENCHANTMENTS.put(enchantment, descriptionHolder);
     }
 

@@ -1,6 +1,7 @@
 package com.temporal.api.core.event.data.sound;
 
-import net.neoforged.neoforge.common.data.SoundDefinition;
+import net.minecraft.core.Holder;
+import net.minecraft.sounds.SoundEvent;
 
-public record SoundHolder(String id, SoundDefinition.SoundType type, double volume, double pitch, int weight, int attenuationDistance, boolean stream, boolean preload) {
+public record SoundHolder(Holder<SoundEvent> sound, boolean replace) {
 }

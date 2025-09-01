@@ -4,14 +4,14 @@ import com.temporal.api.core.engine.io.IOLayer;
 import com.temporal.api.core.engine.io.metadata.executor.AnnotationExecutor;
 import com.temporal.api.core.engine.io.metadata.strategy.type.ClassAnnotationStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.type.data.*;
-import com.temporal.api.core.util.IOUtils;
+import com.temporal.api.core.util.ReflectionUtils;
 
 import java.lang.annotation.Annotation;
 import java.util.List;
 import java.util.Map;
 
 public class DataClassAnnotationProcessor implements AnnotationProcessor<ClassAnnotationStrategy<?>> {
-    private final Map<Class<? extends Annotation>, ClassAnnotationStrategy<?>> strategies = IOUtils.createAnnotationStrategyMap(List.of(
+    private final Map<Class<? extends Annotation>, ClassAnnotationStrategy<?>> strategies = ReflectionUtils.createAnnotationStrategyMap(List.of(
             new RegisterTagContainerStrategy(),
             new RegisterRecipeStrategy(),
             new RegisterGlobalLootModifierStrategy(),

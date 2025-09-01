@@ -2,7 +2,6 @@ package com.temporal.api.core.event.data.advancement;
 
 import com.temporal.api.core.util.ResourceUtils;
 import net.minecraft.advancements.Advancement;
-import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.advancements.AdvancementSubProvider;
 import org.jetbrains.annotations.NotNull;
@@ -10,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.function.Consumer;
 
 public interface AdvancementStrategy {
-    void generateAdvancement(@NotNull AdvancementGenerationHolder advancement, @NotNull HolderLookup.Provider provider, @NotNull Consumer<AdvancementHolder> consumer);
+    void generateAdvancement(@NotNull AdvancementDescription advancement, @NotNull HolderLookup.Provider provider, @NotNull Consumer<net.minecraft.advancements.AdvancementHolder> consumer);
 
     default Advancement.Builder createBuilder() {
         return Advancement.Builder.advancement();
@@ -20,7 +19,7 @@ public interface AdvancementStrategy {
         builder.parent(AdvancementSubProvider.createPlaceholder(parentRoot));
     }
 
-    default void saveAdvancement(@NotNull Advancement.Builder builder, @NotNull Consumer<AdvancementHolder> consumer, String id) {
+    default void saveAdvancement(@NotNull Advancement.Builder builder, @NotNull Consumer<net.minecraft.advancements.AdvancementHolder> consumer, String id) {
         builder.save(consumer, ResourceUtils.parse(id).toString());
     }
 }

@@ -5,7 +5,7 @@ import com.temporal.api.core.engine.io.IOLayer;
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.field.event.RegisterBlockEntityRendererStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.field.event.RegisterEntityRendererStrategy;
-import com.temporal.api.core.util.IOUtils;
+import com.temporal.api.core.util.ReflectionUtils;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 
 import java.lang.annotation.Annotation;
@@ -16,7 +16,7 @@ import java.util.function.Consumer;
 
 public class EntityRendererRegisterRendererEventHandler implements EventHandler {
     public static final Queue<Consumer<EntityRenderersEvent.RegisterRenderers>> RENDERING_REGISTRIES = new TemporalQueue<>();
-    private final Map<Class<? extends Annotation>, FieldAnnotationStrategy<?>> strategies = IOUtils.createAnnotationStrategyMap(List.of(
+    private final Map<Class<? extends Annotation>, FieldAnnotationStrategy<?>> strategies = ReflectionUtils.createAnnotationStrategyMap(List.of(
             new RegisterEntityRendererStrategy(),
             new RegisterBlockEntityRendererStrategy()
     ));

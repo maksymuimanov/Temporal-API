@@ -2,12 +2,10 @@ package com.temporal.api.core.engine.io.metadata.strategy.type.data;
 
 import com.temporal.api.core.engine.io.metadata.annotation.data.RegisterTagContainer;
 import com.temporal.api.core.engine.io.metadata.strategy.type.ClassAnnotationStrategy;
-import com.temporal.api.core.event.data.preparer.tag.biome.BiomeTagDynamicPreparer;
-import com.temporal.api.core.event.data.preparer.tag.block.BlockTagDynamicPreparer;
-import com.temporal.api.core.event.data.preparer.tag.enchantment.EnchantmentTagDynamicPreparer;
-import com.temporal.api.core.event.data.preparer.tag.item.ItemTagDynamicPreparer;
-
-import java.lang.annotation.Annotation;
+import com.temporal.api.core.event.data.preparer.tag.BiomeTagDynamicPreparer;
+import com.temporal.api.core.event.data.preparer.tag.BlockTagDynamicPreparer;
+import com.temporal.api.core.event.data.preparer.tag.EnchantmentTagDynamicPreparer;
+import com.temporal.api.core.event.data.preparer.tag.ItemTagDynamicPreparer;
 
 public class RegisterTagContainerStrategy implements ClassAnnotationStrategy<RegisterTagContainer> {
     @Override

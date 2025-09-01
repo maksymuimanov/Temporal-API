@@ -1,5 +1,7 @@
 {
   "block.example.example_block": "Example Block",
+  "block.example.example_flower": "Example Flower",
+  "block.example.example_grass": "Example Grass",
   "block.example.example_hanging_sign": "Example Hanging Sign",
   "block.example.example_leaves": "Example Leaves",
   "block.example.example_log": "Example Log",
@@ -13,6 +15,7 @@
   "block.example.example_planks_stairs": "Example Stairs",
   "block.example.example_sapling": "Example Sapling",
   "block.example.example_sign": "Example Sign",
+  "block.example.example_stripped_log": "Example Stripped Log",
   "block.example.example_stripped_wood": "Example Stripped Wood",
   "block.example.example_wall_hanging_sign": "Example Hanging Sign",
   "block.example.example_wall_sign": "Example Sign",
@@ -30,6 +33,7 @@
   "item.example.example_fuel": "Example Fuel",
   "item.example.example_grass": "Example Grass",
   "item.example.example_hanging_sign": "Example Hanging Sign",
+  "item.example.example_helmet": "Example Helmet",
   "item.example.example_ingot": "Example Ingot",
   "item.example.example_leaves": "Example Leaves",
   "item.example.example_leggings": "Example Leggings",
@@ -51,5 +55,7 @@
   "item.example.example_wall_hanging_sign": "Example Hanging Sign",
   "item.example.example_wall_sign": "Example Sign",
   "item.example.example_wood": "Example Wood",
-  "item.example.potted_example_flower": "Potted Example Flower"
+  "item.example.potted_example_flower": "Potted Example Flower",
+  "painting.example.example.title": "Example Painting",
+  "sound.example.example_sound": "Example Sound"
 }

@@ -8,7 +8,7 @@ import net.minecraft.world.entity.decoration.PaintingVariant;
 import java.util.Queue;
 
 public class ApiPaintingVariantProvider implements PaintingVariantProvider {
-    public static final Queue<PaintingHolder> PAINTINGS = new TemporalQueue<>();
+    public static final Queue<PaintingVariantDescription> PAINTINGS = new TemporalQueue<>();
 
     @Override
     public void registerPaintingVariant(BootstrapContext<PaintingVariant> context) {

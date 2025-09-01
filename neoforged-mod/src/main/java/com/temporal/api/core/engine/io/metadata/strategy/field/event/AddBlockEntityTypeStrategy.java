@@ -3,7 +3,7 @@ package com.temporal.api.core.engine.io.metadata.strategy.field.event;
 import com.temporal.api.core.engine.event.handler.BlockEntityTypeEventHandler;
 import com.temporal.api.core.engine.io.metadata.annotation.event.AddBlockEntityType;
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
-import com.temporal.api.core.util.CollectionUtils;
+import com.temporal.api.core.util.MapUtils;
 import com.temporal.api.core.util.RegistryUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.world.level.block.Block;
@@ -16,7 +16,7 @@ public class AddBlockEntityTypeStrategy implements FieldAnnotationStrategy<AddBl
     public void execute(Field field, Object object, AddBlockEntityType annotation) throws Exception {
         Holder<Block> blockHolder = (Holder<Block>) field.get(object);
         BlockEntityType<?> blockEntityType = RegistryUtils.getBlockEntityType(annotation.value());
-        CollectionUtils.putToListMap(BlockEntityTypeEventHandler.BLOCKS, blockEntityType, blockHolder);
+        MapUtils.putToListMap(BlockEntityTypeEventHandler.BLOCKS, blockEntityType, blockHolder);
     }
 
     @Override

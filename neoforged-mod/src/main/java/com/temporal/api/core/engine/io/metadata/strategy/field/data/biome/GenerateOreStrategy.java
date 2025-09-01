@@ -4,8 +4,8 @@ import com.temporal.api.core.engine.io.metadata.annotation.data.biome.GenerateOr
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.event.data.biome.GenerationDescriptionContainer;
 import com.temporal.api.core.event.data.biome.dto.Ore;
-import com.temporal.api.core.event.data.preparer.tag.biome.BiomeTagDynamicPreparer;
-import com.temporal.api.core.event.data.preparer.tag.block.BlockTagDynamicPreparer;
+import com.temporal.api.core.event.data.preparer.tag.BiomeTagDynamicPreparer;
+import com.temporal.api.core.event.data.preparer.tag.BlockTagDynamicPreparer;
 import com.temporal.api.core.util.ResourceUtils;
 import com.temporal.api.core.util.TagUtils;
 import net.minecraft.resources.ResourceKey;

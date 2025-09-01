@@ -1,7 +1,7 @@
 package com.temporal.api.core.event.data.recipe;
 
 import com.temporal.api.core.collection.TemporalQueue;
-import com.temporal.api.core.event.data.recipe.holder.*;
+import com.temporal.api.core.event.data.recipe.description.*;
 import com.temporal.api.core.event.data.recipe.strategy.*;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
@@ -21,16 +21,16 @@ import java.util.Queue;
 import java.util.concurrent.CompletableFuture;
 
 public class ApiRecipeProvider extends RecipeProvider {
-    public static final Queue<RecipeHolder> RECIPES = new TemporalQueue<>();
-    private static final RecipeStrategy<ShapelessRecipeHolder> SHAPELESS_RECIPE_STRATEGY = new ShapelessRecipeStrategy();
-    private static final RecipeStrategy<ShapedRecipeHolder> SHAPED_RECIPE_STRATEGY = new ShapedRecipeStrategy();
-    private static final RecipeStrategy<BlastingRecipeHolder> BLASTING_RECIPE_STRATEGY = new BlastingRecipeStrategy();
-    private static final RecipeStrategy<SmeltingRecipeHolder> SMELTING_RECIPE_STRATEGY = new SmeltingRecipeStrategy();
-    private static final RecipeStrategy<SmokingRecipeHolder> SMOKING_RECIPE_STRATEGY = new SmokingRecipeStrategy();
-    private static final RecipeStrategy<CampfireCookingRecipeHolder> CAMPFIRE_COOKING_RECIPE_STRATEGY = new CampfireCookingRecipeStrategy();
-    private static final RecipeStrategy<SmithingTrimRecipeHolder> SMITHING_TRIM_RECIPE_STRATEGY = new SmithingTrimRecipeStrategy();
-    private static final RecipeStrategy<SmithingTransformRecipeHolder> SMITHING_TRANSFORM_RECIPE_STRATEGY = new SmithingTransformRecipeStrategy();
-    private static final RecipeStrategy<StoneCuttingRecipeHolder> STONE_CUTTING_RECIPE_STRATEGY_RECIPE_STRATEGY = new StoneCuttingRecipeStrategy();
+    public static final Queue<RecipeDescription> RECIPES = new TemporalQueue<>();
+    private static final RecipeStrategy<ShapelessRecipeDescription> SHAPELESS_RECIPE_STRATEGY = new ShapelessRecipeStrategy();
+    private static final RecipeStrategy<ShapedRecipeDescription> SHAPED_RECIPE_STRATEGY = new ShapedRecipeStrategy();
+    private static final RecipeStrategy<BlastingRecipeDescription> BLASTING_RECIPE_STRATEGY = new BlastingRecipeStrategy();
+    private static final RecipeStrategy<SmeltingRecipeDescription> SMELTING_RECIPE_STRATEGY = new SmeltingRecipeStrategy();
+    private static final RecipeStrategy<SmokingRecipeDescription> SMOKING_RECIPE_STRATEGY = new SmokingRecipeStrategy();
+    private static final RecipeStrategy<CampfireCookingRecipeDescription> CAMPFIRE_COOKING_RECIPE_STRATEGY = new CampfireCookingRecipeStrategy();
+    private static final RecipeStrategy<SmithingTrimRecipeDescription> SMITHING_TRIM_RECIPE_STRATEGY = new SmithingTrimRecipeStrategy();
+    private static final RecipeStrategy<SmithingTransformRecipeDescription> SMITHING_TRANSFORM_RECIPE_STRATEGY = new SmithingTransformRecipeStrategy();
+    private static final RecipeStrategy<StoneCuttingRecipeDescription> STONE_CUTTING_RECIPE_STRATEGY_RECIPE_STRATEGY = new StoneCuttingRecipeStrategy();
 
     public ApiRecipeProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries);
@@ -40,15 +40,15 @@ public class ApiRecipeProvider extends RecipeProvider {
     protected void buildRecipes(@NotNull RecipeOutput output) {
         RECIPES.forEach(undefinedRecipe -> {
             switch (undefinedRecipe) {
-                case ShapelessRecipeHolder recipe -> SHAPELESS_RECIPE_STRATEGY.saveRecipe(recipe, this, output);
-                case ShapedRecipeHolder recipe -> SHAPED_RECIPE_STRATEGY.saveRecipe(recipe, this, output);
-                case BlastingRecipeHolder recipe -> BLASTING_RECIPE_STRATEGY.saveRecipe(recipe, this, output);
-                case SmeltingRecipeHolder recipe -> SMELTING_RECIPE_STRATEGY.saveRecipe(recipe, this, output);
-                case SmokingRecipeHolder recipe -> SMOKING_RECIPE_STRATEGY.saveRecipe(recipe, this, output);
-                case CampfireCookingRecipeHolder recipe -> CAMPFIRE_COOKING_RECIPE_STRATEGY.saveRecipe(recipe, this, output);
-                case SmithingTrimRecipeHolder recipe -> SMITHING_TRIM_RECIPE_STRATEGY.saveRecipe(recipe, this, output);
-                case SmithingTransformRecipeHolder recipe -> SMITHING_TRANSFORM_RECIPE_STRATEGY.saveRecipe(recipe, this, output);
-                case StoneCuttingRecipeHolder recipe -> STONE_CUTTING_RECIPE_STRATEGY_RECIPE_STRATEGY.saveRecipe(recipe, this, output);
+                case ShapelessRecipeDescription recipe -> SHAPELESS_RECIPE_STRATEGY.saveRecipe(recipe, this, output);
+                case ShapedRecipeDescription recipe -> SHAPED_RECIPE_STRATEGY.saveRecipe(recipe, this, output);
+                case BlastingRecipeDescription recipe -> BLASTING_RECIPE_STRATEGY.saveRecipe(recipe, this, output);
+                case SmeltingRecipeDescription recipe -> SMELTING_RECIPE_STRATEGY.saveRecipe(recipe, this, output);
+                case SmokingRecipeDescription recipe -> SMOKING_RECIPE_STRATEGY.saveRecipe(recipe, this, output);
+                case CampfireCookingRecipeDescription recipe -> CAMPFIRE_COOKING_RECIPE_STRATEGY.saveRecipe(recipe, this, output);
+                case SmithingTrimRecipeDescription recipe -> SMITHING_TRIM_RECIPE_STRATEGY.saveRecipe(recipe, this, output);
+                case SmithingTransformRecipeDescription recipe -> SMITHING_TRANSFORM_RECIPE_STRATEGY.saveRecipe(recipe, this, output);
+                case StoneCuttingRecipeDescription recipe -> STONE_CUTTING_RECIPE_STRATEGY_RECIPE_STRATEGY.saveRecipe(recipe, this, output);
                 case null, default -> {}
             }
         });

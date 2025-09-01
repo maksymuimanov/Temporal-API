@@ -2,8 +2,8 @@ package com.temporal.api.core.event.data.biome.modifier;
 
 import com.temporal.api.core.event.data.biome.GenerationDescriptionContainer;
 import com.temporal.api.core.event.data.biome.dto.Grass;
-import com.temporal.api.core.event.data.preparer.tag.biome.BiomeTagDynamicPreparer;
-import com.temporal.api.core.util.CollectionUtils;
+import com.temporal.api.core.event.data.preparer.tag.BiomeTagDynamicPreparer;
+import com.temporal.api.core.util.MapUtils;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderSet;
 import net.minecraft.resources.ResourceKey;
@@ -28,6 +28,6 @@ public class GrassBiomeModifierDefinition implements BiomeModifierDefinition<Gra
 
     @Override
     public Map<ResourceKey<ConfiguredFeature<?, ?>>, Grass.BiomeModifier> getDataSource() {
-        return CollectionUtils.createMap(GenerationDescriptionContainer.GRASSES, Grass::biomeModifier);
+        return MapUtils.createMap(GenerationDescriptionContainer.GRASSES, Grass::biomeModifier);
     }
 }

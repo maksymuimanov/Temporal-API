@@ -23,40 +23,45 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 public final class TagUtils {
-    public static TagKey<BannerPattern> createBannerPatternTag(String name) {
-        return createTag(Registries.BANNER_PATTERN, name);
+    public static TagKey<Item> createItemTag(String id) {
+        return ItemTags.create(ResourceUtils.parse(id));
     }
 
-    public static TagKey<BiomeModifier> createBiomeModifierTag(String name) {
-        return createTag(NeoForgeRegistries.Keys.BIOME_MODIFIERS, name);
+    public static TagKey<Block> createBlockTag(String id) {
+        return BlockTags.create(ResourceUtils.parse(id));
     }
 
-    public static TagKey<Biome> createBiomeTag(String name) {
-        return createTag(Registries.BIOME, name);
+    public TagKey<EntityType<?>> createEntityTypeTag(String id) {
+        return createTag(Registries.ENTITY_TYPE, id);
     }
 
-    public static TagKey<Block> createBlockTag(String name) {
-        return BlockTags.create(ResourceUtils.parse(name));
+    public static TagKey<Fluid> createFluidTag(String id) {
+        return FluidTags.create(ResourceUtils.parse(id));
     }
 
-    public TagKey<EntityType<?>> createEntityTypeTag(String name) {
-        return createTag(Registries.ENTITY_TYPE, name);
+    public static TagKey<BannerPattern> createBannerPatternTag(String id) {
+        return createTag(Registries.BANNER_PATTERN, id);
     }
 
-    public static TagKey<Fluid> createFluidTag(String name) {
-        return FluidTags.create(ResourceUtils.parse(name));
+    public static TagKey<BiomeModifier> createBiomeModifierTag(String id) {
+        return createTag(NeoForgeRegistries.Keys.BIOME_MODIFIERS, id);
     }
 
-    public static TagKey<Item> createItemTag(String name) {
-        return ItemTags.create(ResourceUtils.parse(name));
+    public static TagKey<Biome> createBiomeTag(String id) {
+        return createTag(Registries.BIOME, id);
     }
 
-    public static TagKey<Structure> createStructureTag(String name) {
-        return createTag(Registries.STRUCTURE, name);
+    public static TagKey<Structure> createStructureTag(String id) {
+        return createTag(Registries.STRUCTURE, id);
     }
 
-    public static <T> TagKey<T> createTag(ResourceKey<? extends Registry<T>> registry, String name) {
-        return TagKey.create(registry, ResourceUtils.parse(name));
+    public static <T> TagKey<T> createTag(ResourceKey<? extends Registry<T>> registry, String id) {
+        return TagKey.create(registry, ResourceUtils.parse(id));
+    }
+
+    public static <T> void putTagKey(TagKey<T> tag, Map<String, TagKey<T>> data) {
+        String path = tag.location().toString();
+        data.put(path, tag);
     }
 
     public static void putTagContainer(Set<Class<?>> tagContainers, Class<?> tagContainer) {
@@ -65,14 +70,9 @@ public final class TagUtils {
         }
     }
 
-    public static <T> void putTagKey(TagKey<T> tag, Map<String, TagKey<T>> data) {
-        String path = tag.location().toString();
-        data.put(path, tag);
-    }
-
     @SuppressWarnings("unchecked")
     public static <T> @NotNull Stream<TagKey<T>> getTagKeyStream(Class<?> tagClassHolder) {
-        return IOUtils.getStaticFieldStream(tagClassHolder,
+        return ReflectionUtils.getStaticFieldStream(tagClassHolder,
                 field -> TagKey.class.isAssignableFrom(field.getType()),
                 o -> (TagKey<T>) o);
     }

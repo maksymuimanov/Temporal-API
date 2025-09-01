@@ -2,8 +2,8 @@ package com.temporal.api.core.event.data.biome.configuration;
 
 import com.temporal.api.core.event.data.biome.GenerationDescriptionContainer;
 import com.temporal.api.core.event.data.biome.dto.Ore;
-import com.temporal.api.core.event.data.preparer.tag.block.BlockTagDynamicPreparer;
-import com.temporal.api.core.util.CollectionUtils;
+import com.temporal.api.core.event.data.preparer.tag.BlockTagDynamicPreparer;
+import com.temporal.api.core.util.MapUtils;
 import com.temporal.api.core.util.RegistryUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
@@ -56,6 +56,6 @@ public class OreConfiguredFeatureDefinition implements ConfiguredFeatureDefiniti
 
     @Override
     public Map<ResourceKey<ConfiguredFeature<?, ?>>, Ore.Configuration> getDataSource() {
-        return CollectionUtils.createMap(GenerationDescriptionContainer.ORES, Ore::configuration);
+        return MapUtils.createMap(GenerationDescriptionContainer.ORES, Ore::configuration);
     }
 }

@@ -1,8 +1,8 @@
 package com.temporal.api.core.event.data.model.item;
 
-import com.temporal.api.core.collection.Pair;
 import com.temporal.api.core.collection.TemporalMap;
 import net.minecraft.core.Holder;
+import net.minecraft.util.Tuple;
 import net.minecraft.world.item.Item;
 
 import java.util.Map;
@@ -29,7 +29,7 @@ public final class ItemModelDescriptionContainer {
     public static final Map<Holder<? extends Item>, String[]> WALL_BLOCK_ITEMS = new TemporalMap<>();
     public static final Map<Holder<? extends Item>, String[]> BARREL_BLOCK_ITEMS = new TemporalMap<>();
     public static final Map<Holder<? extends Item>, String[]> CARPET_BLOCK_ITEMS = new TemporalMap<>();
-    public static final Map<Pair<Holder<? extends Item>, String[]>, ItemModelProviderStrategy> CUSTOM_MODELS = new TemporalMap<>();
+    public static final Map<Tuple<Holder<? extends Item>, String[]>, ItemModelProviderStrategy> CUSTOM_MODELS = new TemporalMap<>();
 
     private ItemModelDescriptionContainer() {
     }

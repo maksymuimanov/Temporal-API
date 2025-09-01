@@ -2,9 +2,9 @@ package com.temporal.api.core.engine.io.metadata.strategy.field.data.model;
 
 import com.temporal.api.core.engine.io.metadata.annotation.data.model.GeneratePainting;
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
-import com.temporal.api.core.event.data.json.PlaceablePaintingProvider;
+import com.temporal.api.core.event.data.file.PlaceablePaintingProvider;
 import com.temporal.api.core.event.data.painting.ApiPaintingVariantProvider;
-import com.temporal.api.core.event.data.painting.PaintingHolder;
+import com.temporal.api.core.event.data.painting.PaintingVariantDescription;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.decoration.PaintingVariant;
 
@@ -14,8 +14,8 @@ public class GeneratePaintingStrategy implements FieldAnnotationStrategy<Generat
     @Override
     public void execute(Field field, Object object, GeneratePainting annotation) throws Exception {
         ResourceKey<PaintingVariant> paintingVariant = (ResourceKey<PaintingVariant>) field.get(object);
-        PaintingHolder paintingHolder = new PaintingHolder(paintingVariant, annotation.width(), annotation.height());
-        ApiPaintingVariantProvider.PAINTINGS.add(paintingHolder);
+        PaintingVariantDescription paintingVariantDescription = new PaintingVariantDescription(paintingVariant, annotation.width(), annotation.height());
+        ApiPaintingVariantProvider.PAINTINGS.add(paintingVariantDescription);
         PlaceablePaintingProvider.PLACEABLES.add(paintingVariant);
     }
 

@@ -4,7 +4,7 @@ import com.temporal.api.core.collection.TemporalMap;
 import com.temporal.api.core.engine.io.IOLayer;
 import com.temporal.api.core.engine.io.metadata.strategy.method.MethodAnnotationStrategy;
 import com.temporal.api.core.engine.io.metadata.strategy.method.event.CreateEntityAttributesStrategy;
-import com.temporal.api.core.util.IOUtils;
+import com.temporal.api.core.util.ReflectionUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -17,7 +17,7 @@ import java.util.Map;
 
 public class EntityAttributeEventHandler implements EventHandler {
     public static final Map<Holder<? extends EntityType<?>>, AttributeSupplier.Builder> ENTITY_ATTRIBUTES = new TemporalMap<>();
-    private static final Map<Class<? extends Annotation>, MethodAnnotationStrategy<?>> STRATEGIES = IOUtils.createAnnotationStrategyMap(List.of(
+    private static final Map<Class<? extends Annotation>, MethodAnnotationStrategy<?>> STRATEGIES = ReflectionUtils.createAnnotationStrategyMap(List.of(
             new CreateEntityAttributesStrategy()
     ));
 

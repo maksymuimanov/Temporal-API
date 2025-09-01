@@ -1,9 +1,9 @@
 package com.temporal.api.core.event.data;
 
 import com.temporal.api.core.event.data.advancement.AdvancementProviderFactory;
-import com.temporal.api.core.event.data.json.AtlasTrimProvider;
-import com.temporal.api.core.event.data.json.JsonProvider;
-import com.temporal.api.core.event.data.json.PlaceablePaintingProvider;
+import com.temporal.api.core.event.data.file.AtlasTrimProvider;
+import com.temporal.api.core.event.data.file.FileProvider;
+import com.temporal.api.core.event.data.file.PlaceablePaintingProvider;
 import com.temporal.api.core.event.data.language.provider.*;
 import com.temporal.api.core.event.data.loot.LootTableProviderFactory;
 import com.temporal.api.core.event.data.map.ApiDataMapProvider;
@@ -13,15 +13,14 @@ import com.temporal.api.core.event.data.modifier.ApiGlobalLootModifierProvider;
 import com.temporal.api.core.event.data.pack.ApiDatapackProvider;
 import com.temporal.api.core.event.data.particle.ApiParticleProvider;
 import com.temporal.api.core.event.data.preparer.DynamicPreparer;
-import com.temporal.api.core.event.data.preparer.tag.biome.BiomeTagDynamicPreparer;
-import com.temporal.api.core.event.data.preparer.tag.block.BlockTagDynamicPreparer;
-import com.temporal.api.core.event.data.preparer.tag.enchantment.EnchantmentTagDynamicPreparer;
-import com.temporal.api.core.event.data.preparer.tag.item.ItemTagDynamicPreparer;
+import com.temporal.api.core.event.data.preparer.tag.BiomeTagDynamicPreparer;
+import com.temporal.api.core.event.data.preparer.tag.BlockTagDynamicPreparer;
+import com.temporal.api.core.event.data.preparer.tag.EnchantmentTagDynamicPreparer;
+import com.temporal.api.core.event.data.preparer.tag.ItemTagDynamicPreparer;
 import com.temporal.api.core.event.data.recipe.ApiRecipeProvider;
 import com.temporal.api.core.event.data.sound.ApiSoundProvider;
-import com.temporal.api.core.event.data.tag.biome.ApiBiomeTagsProvider;
-import com.temporal.api.core.event.data.tag.block.ApiBlockTagsProvider;
-import com.temporal.api.core.event.data.tag.item.ApiItemTagsProvider;
+import com.temporal.api.core.event.data.tag.ApiBlockTagsProvider;
+import com.temporal.api.core.event.data.tag.ApiItemTagsProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -47,7 +46,7 @@ public class ApiDataGenerator implements DataGatherer {
         addAdvancementProvider(event);
         addSoundProvider(event);
         addParticleProvider(event);
-        addJsonProvider(event);
+        addFileProvider(event);
     }
 
     @Override
@@ -151,7 +150,6 @@ public class ApiDataGenerator implements DataGatherer {
         ApiBlockTagsProvider blockTagsProvider = new ApiBlockTagsProvider(packOutput, lookupProvider, existingFileHelper);
         generator.addProvider(event.includeServer(), blockTagsProvider);
         generator.addProvider(event.includeServer(), new ApiItemTagsProvider(packOutput, lookupProvider, blockTagsProvider.contentsGetter(), existingFileHelper));
-        generator.addProvider(event.includeServer(), new ApiBiomeTagsProvider(packOutput, lookupProvider, existingFileHelper));
     }
 
     @Override
@@ -195,11 +193,11 @@ public class ApiDataGenerator implements DataGatherer {
     }
 
     @Override
-    public void addJsonProvider(GatherDataEvent event) {
+    public void addFileProvider(GatherDataEvent event) {
         List.of(
                 new PlaceablePaintingProvider(),
                 new AtlasTrimProvider()
-        ).forEach(JsonProvider::registerFiles);
+        ).forEach(FileProvider::registerFiles);
     }
 
     @Override

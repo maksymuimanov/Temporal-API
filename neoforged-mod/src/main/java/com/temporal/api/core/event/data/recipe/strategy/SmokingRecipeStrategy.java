@@ -2,19 +2,19 @@ package com.temporal.api.core.event.data.recipe.strategy;
 
 import com.temporal.api.core.engine.io.IOLayer;
 import com.temporal.api.core.event.data.recipe.ApiRecipeProvider;
-import com.temporal.api.core.event.data.recipe.holder.SmokingRecipeHolder;
+import com.temporal.api.core.event.data.recipe.description.SmokingRecipeDescription;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
 import net.minecraft.world.item.crafting.Ingredient;
 import org.jetbrains.annotations.NotNull;
 
-public class SmokingRecipeStrategy implements RecipeStrategy<SmokingRecipeHolder> {
+public class SmokingRecipeStrategy implements RecipeStrategy<SmokingRecipeDescription> {
     @Override
-    public void saveRecipe(SmokingRecipeHolder recipeHolder, ApiRecipeProvider recipeProvider, @NotNull RecipeOutput recipeOutput) {
-        SimpleCookingRecipeBuilder.smoking(Ingredient.of(recipeHolder.getIngredient()), recipeHolder.getRecipeCategory(), recipeHolder.getResult(),
-                        recipeHolder.getExperience(), recipeHolder.getCookingTime())
-                .group(recipeHolder.getGroup())
-                .unlockedBy(ApiRecipeProvider.getHasName(recipeHolder.getIngredient()), ApiRecipeProvider.has(recipeHolder.getIngredient()))
-                .save(recipeOutput, IOLayer.NEO_MOD.getModId() + ":" + ApiRecipeProvider.getItemName(recipeHolder.getResult()) + recipeHolder.getName() + "_" + ApiRecipeProvider.getItemName(recipeHolder.getIngredient()));
+    public void saveRecipe(SmokingRecipeDescription description, ApiRecipeProvider recipeProvider, @NotNull RecipeOutput recipeOutput) {
+        SimpleCookingRecipeBuilder.smoking(Ingredient.of(description.getIngredient()), description.getRecipeCategory(), description.getResult(),
+                        description.getExperience(), description.getCookingTime())
+                .group(description.getGroup())
+                .unlockedBy(ApiRecipeProvider.getHasName(description.getIngredient()), ApiRecipeProvider.has(description.getIngredient()))
+                .save(recipeOutput, IOLayer.NEO_MOD.getModId() + ":" + ApiRecipeProvider.getItemName(description.getResult()) + description.getName() + "_" + ApiRecipeProvider.getItemName(description.getIngredient()));
     }
 }

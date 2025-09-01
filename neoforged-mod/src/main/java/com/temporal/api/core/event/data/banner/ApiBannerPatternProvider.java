@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.entity.BannerPattern;
 import java.util.Queue;
 
 public class ApiBannerPatternProvider implements BannerPatternProvider {
-    public static final Queue<BannerPatternDescriptionHolder> PATTERNS = new TemporalQueue<>();
+    public static final Queue<BannerPatternDescription> PATTERNS = new TemporalQueue<>();
 
     @Override
     public void addVariant(BootstrapContext<BannerPattern> context) {

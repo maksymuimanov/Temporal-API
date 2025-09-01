@@ -33,7 +33,7 @@ public class ItemModelProviderStrategyConsumerImpl implements ItemModelProviderS
         WALL_BLOCK_ITEMS.forEach(registerItemModel(provider, WallBlockItemModelProviderStrategy::new));
         BARREL_BLOCK_ITEMS.forEach(registerItemModel(provider, BarrelBlockItemModelProviderStrategy::new));
         CARPET_BLOCK_ITEMS.forEach(registerItemModel(provider, CarpetBlockItemModelProviderStrategy::new));
-        CUSTOM_MODELS.forEach((key, value) -> value.registerItemModel(key.getLeft(), provider, key.getRight()));
+        CUSTOM_MODELS.forEach((key, value) -> value.registerItemModel(key.getA(), provider, key.getB()));
     }
 
     @Override

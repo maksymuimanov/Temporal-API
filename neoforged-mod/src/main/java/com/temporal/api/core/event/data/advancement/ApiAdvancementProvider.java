@@ -4,7 +4,6 @@ import com.temporal.api.core.collection.TemporalMap;
 import com.temporal.api.core.collection.TemporalQueue;
 import com.temporal.api.core.util.ResourceUtils;
 import net.minecraft.advancements.Advancement;
-import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.core.HolderLookup;
@@ -17,11 +16,11 @@ import java.util.Queue;
 import java.util.function.Consumer;
 
 public class ApiAdvancementProvider implements AdvancementSubProvider {
-    public static final Queue<AdvancementGenerationHolder> ADVANCEMENTS = new TemporalQueue<>();
-    public static final Map<AdvancementGenerationHolder, AdvancementStrategy> CUSTOM_ADVANCEMENTS = new TemporalMap<>();
+    public static final Queue<AdvancementDescription> ADVANCEMENTS = new TemporalQueue<>();
+    public static final Map<AdvancementDescription, AdvancementStrategy> CUSTOM_ADVANCEMENTS = new TemporalMap<>();
 
     @Override
-    public void generate(@NotNull HolderLookup.Provider provider, @NotNull Consumer<AdvancementHolder> consumer) {
+    public void generate(@NotNull HolderLookup.Provider provider, @NotNull Consumer<net.minecraft.advancements.AdvancementHolder> consumer) {
         ADVANCEMENTS.forEach(advancement -> {
             Advancement.Builder builder = Advancement.Builder.advancement();
             builder.parent(AdvancementSubProvider.createPlaceholder(advancement.getParentRoot()));

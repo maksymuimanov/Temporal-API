@@ -11,6 +11,7 @@ public class InjectedObjectPoolInitializer implements ObjectPoolInitializer {
     public void initialize(ObjectPool objectPool, List<?> externalObjects) {
         IOLayer.NEO_MOD.getClasses()
                 .forEach(clazz -> {
+                    if (!clazz.isAnnotationPresent(Injected.class)) return;
                     Injected annotation = clazz.getDeclaredAnnotation(Injected.class);
                     String modCondition = annotation.mandatoryMod();
                     if (annotation.value() && (modCondition.isBlank() || ModList.get().isLoaded(modCondition))) {

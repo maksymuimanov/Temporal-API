@@ -34,7 +34,7 @@ public class BlockModelProviderStrategyConsumerImpl implements BlockModelProvide
         CARPETS.forEach(registerBlockModel(provider, CarpetBlockModelProviderStrategy::new));
         PANES.forEach(registerBlockModel(provider, PaneBlockModelProviderStrategy::new));
         RAILS.forEach(registerBlockModel(provider, RailBlockModelProviderStrategy::new));
-        CUSTOM_MODELS.forEach((key, value) -> value.registerBlockModel(key.getLeft(), provider, key.getRight()));
+        CUSTOM_MODELS.forEach((key, value) -> value.registerBlockModel(key.getA(), provider, key.getB()));
     }
 
     @Override

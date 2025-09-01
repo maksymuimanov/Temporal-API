@@ -45,13 +45,6 @@ public final class ResourceUtils {
         return ResourceLocation.fromNamespaceAndPath(IOLayer.NEO_MOD.getModId(), id);
     }
 
-    @SuppressWarnings("unchecked")
-    public static <T> @NotNull Stream<ResourceKey<T>> getResourceKeyStream(Class<?> resourceClassHolder) {
-        return IOUtils.getStaticFieldStream(resourceClassHolder,
-                field -> ResourceKey.class.isAssignableFrom(field.getType()),
-                o -> (ResourceKey<T>) o);
-    }
-
     public static String getResourceId(ResourceKey<?> resourceKey) {
         if (resourceKey == null) throw new RuntimeException("ResourceKey is null");
         return resourceKey.location().toString();
@@ -60,5 +53,12 @@ public final class ResourceUtils {
     public static String getResourceId(TagKey<?> tagKey) {
         if (tagKey == null) throw new RuntimeException("ResourceKey is null");
         return tagKey.location().toString();
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T> @NotNull Stream<ResourceKey<T>> getResourceKeyStream(Class<?> resourceClassHolder) {
+        return ReflectionUtils.getStaticFieldStream(resourceClassHolder,
+                field -> ResourceKey.class.isAssignableFrom(field.getType()),
+                o -> (ResourceKey<T>) o);
     }
 }

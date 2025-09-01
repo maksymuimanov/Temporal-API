@@ -1,11 +1,11 @@
 package com.temporal.api.core.engine.io.metadata.strategy.field.data;
 
-import com.temporal.api.core.collection.SimplePair;
 import com.temporal.api.core.engine.io.metadata.annotation.data.GenerateBlockLootTable;
 import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.event.data.loot.BlockLootTableProvider;
 import com.temporal.api.core.event.data.loot.LootProviderStrategy;
 import net.minecraft.core.Holder;
+import net.minecraft.util.Tuple;
 import net.minecraft.world.level.block.Block;
 
 import java.lang.reflect.Field;
@@ -19,7 +19,7 @@ public class GenerateBlockLootTableStrategy implements FieldAnnotationStrategy<G
             LootProviderStrategy providerStrategy = annotation.custom()
                     .getDeclaredConstructor()
                     .newInstance();
-            BlockLootTableProvider.CUSTOM_LOOT.put(new SimplePair<>(registryObject, additionalData), providerStrategy);
+            BlockLootTableProvider.CUSTOM_LOOT.put(new Tuple<>(registryObject, additionalData), providerStrategy);
             return;
         }
         switch (annotation.value()) {

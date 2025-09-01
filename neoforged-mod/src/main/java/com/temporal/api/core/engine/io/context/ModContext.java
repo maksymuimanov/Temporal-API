@@ -1,7 +1,7 @@
 package com.temporal.api.core.engine.io.context;
 
 import com.temporal.api.core.engine.io.IOLayer;
-import com.temporal.api.core.engine.io.resource.NeoMod;
+import com.temporal.api.core.engine.io.NeoMod;
 import com.temporal.api.core.exception.PoolCreationException;
 import com.temporal.api.core.exception.PoolDeletionException;
 import com.temporal.api.core.exception.PoolGettingException;

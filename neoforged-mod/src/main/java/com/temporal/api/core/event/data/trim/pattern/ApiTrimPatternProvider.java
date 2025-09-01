@@ -1,7 +1,7 @@
 package com.temporal.api.core.event.data.trim.pattern;
 
 import com.temporal.api.core.collection.TemporalMap;
-import com.temporal.api.core.event.data.json.AtlasTrimProvider;
+import com.temporal.api.core.event.data.file.AtlasTrimProvider;
 import com.temporal.api.core.util.RegistryUtils;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.Queue;
 
 public class ApiTrimPatternProvider implements TrimPatternProvider {
-    public static final Map<ResourceKey<TrimPattern>, TrimPatternDescriptionHolder> TRIM_PATTERNS = new TemporalMap<>();
+    public static final Map<ResourceKey<TrimPattern>, TrimPatternDescription> TRIM_PATTERNS = new TemporalMap<>();
 
     @Override
     public void registerTrimPatterns(BootstrapContext<TrimPattern> context) {
@@ -27,7 +27,7 @@ public class ApiTrimPatternProvider implements TrimPatternProvider {
             String descriptionId = Util.makeDescriptionId("trim_pattern", location);
             MutableComponent component = Component.translatable(descriptionId);
             context.register(trimPattern, new TrimPattern(location, itemHolder, component, description.decal()));
-            Queue<ResourceLocation> patternLocations = AtlasTrimProvider.TRIM_INFO.getLeft();
+            Queue<ResourceLocation> patternLocations = AtlasTrimProvider.TRIM_INFO.getA();
             patternLocations.offer(location);
         });
     }
