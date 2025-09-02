@@ -21,6 +21,7 @@
   "block.example.example_wall_sign": "Example Sign",
   "block.example.example_wood": "Example Wood",
   "block.example.potted_example_flower": "Potted Example Flower",
+  "item.example.example_armor_trim_smithing_template": "Example Armor Trim Smithing Template",
   "item.example.example_block": "Example Block",
   "item.example.example_boat": "Example Boat",
   "item.example.example_boots": "Example Boots",
@@ -57,5 +58,7 @@
   "item.example.example_wood": "Example Wood",
   "item.example.potted_example_flower": "Potted Example Flower",
   "painting.example.example.title": "Example Painting",
-  "sound.example.example_sound": "Example Sound"
+  "sound.example.example_sound": "Example Sound",
+  "trim_material.example.example": "Example Trim Material",
+  "trim_pattern.example.example": "Example Trim Pattern"
 }

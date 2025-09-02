@@ -1,8 +1,7 @@
 package com.temporal.api.core.engine.event.data;
 
 import com.temporal.api.core.engine.event.data.advancement.AdvancementProviderFactory;
-import com.temporal.api.core.engine.event.data.file.AtlasTrimProvider;
-import com.temporal.api.core.engine.event.data.file.FileProvider;
+import com.temporal.api.core.engine.event.data.file.AtlasArmorTrimProvider;
 import com.temporal.api.core.engine.event.data.file.PlaceablePaintingProvider;
 import com.temporal.api.core.engine.event.data.language.provider.*;
 import com.temporal.api.core.engine.event.data.loot.LootTableProviderFactory;
@@ -194,10 +193,10 @@ public class ApiDataGenerator implements DataGatherer {
 
     @Override
     public void addFileProvider(GatherDataEvent event) {
-        List.of(
-                new PlaceablePaintingProvider(),
-                new AtlasTrimProvider()
-        ).forEach(FileProvider::registerFiles);
+        final DataGenerator generator = getDataGenerator(event);
+        final PackOutput packOutput = getPackOutput(event);
+        generator.addProvider(event.includeClient(), new AtlasArmorTrimProvider(packOutput));
+        generator.addProvider(event.includeServer(), new PlaceablePaintingProvider(packOutput));
     }
 
     @Override

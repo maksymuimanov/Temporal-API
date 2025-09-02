@@ -51,8 +51,18 @@ public final class ResourceUtils {
     }
 
     public static String getResourceId(TagKey<?> tagKey) {
-        if (tagKey == null) throw new RuntimeException("ResourceKey is null");
+        if (tagKey == null) throw new RuntimeException("TagKey is null");
         return tagKey.location().toString();
+    }
+
+    public static String getResourceName(ResourceKey<?> resourceKey) {
+        if (resourceKey == null) throw new RuntimeException("ResourceKey is null");
+        return resourceKey.location().getPath();
+    }
+
+    public static String getResourceName(TagKey<?> tagKey) {
+        if (tagKey == null) throw new RuntimeException("TagKey is null");
+        return tagKey.location().getPath();
     }
 
     @SuppressWarnings("unchecked")

@@ -1,8 +1,8 @@
-package com.temporal.api.core.file.formatter;
+package com.temporal.api.core.text;
 
-public class StringFileContentFormatter implements FileContentFormatter<String> {
+public class SimpleStringFormatter implements StringFormatter {
     @Override
-    public String format(String body, Object... arguments) {
+    public String format(String body, String... arguments) {
         if (arguments == null || arguments.length == 0) return body;
         StringBuilder result = new StringBuilder();
         boolean isOpen = false;
@@ -11,7 +11,7 @@ public class StringFileContentFormatter implements FileContentFormatter<String> 
         for (int i = 0; i < chars.length; i++) {
             if (chars[i] == '$' && chars[i + 1] == '{') {
                 isOpen = true;
-                result.append(arguments[index].toString());
+                result.append(arguments[index]);
                 continue;
             } else if (isOpen && chars[i] == '}') {
                 isOpen = false;

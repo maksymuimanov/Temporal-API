@@ -3,12 +3,10 @@ package net.temporal.example.registry;
 import com.temporal.api.core.engine.context.InjectionPool;
 import com.temporal.api.core.engine.metadata.annotation.data.GenerateSound;
 import com.temporal.api.core.engine.metadata.annotation.data.language.TranslateEnglish;
-import com.temporal.api.core.engine.metadata.annotation.injection.Injected;
 import com.temporal.api.core.engine.registry.factory.SoundEventFactory;
 import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundEvent;
 
-@Injected
 public final class ExampleSounds {
     private static final SoundEventFactory SOUND_EVENT_FACTORY = InjectionPool.getFromInstance(SoundEventFactory.class);
 

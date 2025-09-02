@@ -1,0 +1,9 @@
+{
+  "asset_name": "example",
+  "description": {
+    "color": "#829499",
+    "translate": "trim_material.example.example"
+  },
+  "ingredient": "example:example_ingot",
+  "item_model_index": 0.2
+}

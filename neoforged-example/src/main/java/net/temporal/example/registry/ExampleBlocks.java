@@ -8,7 +8,6 @@ import com.temporal.api.core.engine.metadata.annotation.data.model.GenerateBlock
 import com.temporal.api.core.engine.metadata.annotation.data.model.GenerateItemModel;
 import com.temporal.api.core.engine.metadata.annotation.event.AddBlockEntityType;
 import com.temporal.api.core.engine.metadata.annotation.event.AddCreativeModeTab;
-import com.temporal.api.core.engine.metadata.annotation.injection.Injected;
 import com.temporal.api.core.engine.metadata.constant.BlockLootTableType;
 import com.temporal.api.core.engine.metadata.constant.BlockModelType;
 import com.temporal.api.core.engine.metadata.constant.CreativeModeTabType;
@@ -22,7 +21,6 @@ import net.minecraft.world.level.block.WallSignBlock;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.temporal.example.worldgen.ExampleConfiguredFeatures;
 
-@Injected
 public final class ExampleBlocks {
     private static final ExampleBlockFactory BLOCK_FACTORY = InjectionPool.getFromInstance(ExampleBlockFactory.class);
 

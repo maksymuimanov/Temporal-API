@@ -1,7 +1,6 @@
 package net.temporal.example.registry;
 
 import com.temporal.api.core.engine.context.InjectionPool;
-import com.temporal.api.core.engine.metadata.annotation.injection.Injected;
 import com.temporal.api.core.engine.registry.factory.ArmorMaterialFactory;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
@@ -11,7 +10,6 @@ import net.temporal.example.tag.ExampleItemTags;
 
 import java.util.EnumMap;
 
-@Injected
 public final class ExampleArmorMaterials {
     private static final ArmorMaterialFactory ARMOR_MATERIAL_FACTORY = InjectionPool.getFromInstance(ArmorMaterialFactory.class);
 

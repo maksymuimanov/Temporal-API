@@ -4,14 +4,12 @@ import com.temporal.api.core.engine.metadata.annotation.data.biome.GenerateFlowe
 import com.temporal.api.core.engine.metadata.annotation.data.biome.GenerateGrass;
 import com.temporal.api.core.engine.metadata.annotation.data.biome.GenerateOre;
 import com.temporal.api.core.engine.metadata.annotation.data.biome.GenerateTree;
-import com.temporal.api.core.engine.metadata.annotation.injection.Injected;
 import com.temporal.api.core.engine.metadata.constant.OrePlacementShape;
 import com.temporal.api.core.util.ResourceUtils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 
-@Injected
 public final class ExampleConfiguredFeatures {
     @GenerateOre(
             configuration = @GenerateOre.Configuration(

@@ -1,7 +1,7 @@
 package com.temporal.api.core.engine.event.data.trim.material;
 
 import com.temporal.api.core.collection.TemporalMap;
-import com.temporal.api.core.engine.event.data.file.AtlasTrimProvider;
+import com.temporal.api.core.engine.event.data.file.AtlasArmorTrimProvider;
 import com.temporal.api.core.util.RegistryUtils;
 import com.temporal.api.core.util.ResourceUtils;
 import net.minecraft.Util;
@@ -23,7 +23,7 @@ public class ApiTrimMaterialProvider implements TrimMaterialProvider {
     @Override
     public void registerTrimMaterials(BootstrapContext<TrimMaterial> context) {
         TRIM_MATERIALS.forEach((trimMaterial, description) -> {
-            String assetName = ResourceUtils.getResourceId(trimMaterial);
+            String assetName = ResourceUtils.getResourceName(trimMaterial);
             Item ingredient = RegistryUtils.getItem(description.itemId());
             ResourceLocation location = trimMaterial.location();
             String descriptionId = Util.makeDescriptionId("trim_material", location);
@@ -31,8 +31,7 @@ public class ApiTrimMaterialProvider implements TrimMaterialProvider {
             Style style = Style.EMPTY.withColor(textColor);
             MutableComponent component = Component.translatable(descriptionId).withStyle(style);
             context.register(trimMaterial, TrimMaterial.create(assetName, ingredient, description.itemModelIndex(), component, Map.of()));
-            Map<String, ResourceLocation> materialLocations = AtlasTrimProvider.TRIM_INFO.getB();
-            materialLocations.put(assetName, location);
+            AtlasArmorTrimProvider.TRIM_MATERIALS_LOCATIONS.put(assetName, location);
         });
     }
 

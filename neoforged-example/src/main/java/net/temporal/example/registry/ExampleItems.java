@@ -9,20 +9,18 @@ import com.temporal.api.core.engine.metadata.annotation.data.properties.FurnaceF
 import com.temporal.api.core.engine.metadata.annotation.event.AddCreativeModeTab;
 import com.temporal.api.core.engine.metadata.annotation.event.SetupBow;
 import com.temporal.api.core.engine.metadata.annotation.event.SetupCrossbow;
-import com.temporal.api.core.engine.metadata.annotation.injection.Injected;
 import com.temporal.api.core.engine.metadata.constant.CreativeModeTabType;
 import com.temporal.api.core.engine.metadata.constant.ItemModelType;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Tiers;
 import net.neoforged.neoforge.registries.DeferredItem;
 
-@Injected
 public final class ExampleItems {
     private static final ExampleItemFactory ITEM_FACTORY = InjectionPool.getFromInstance(ExampleItemFactory.class);
 
     @AddCreativeModeTab(CreativeModeTabType.INGREDIENTS)
     @GenerateItemModel
-    @AddItemTag("example:repairs_example_armor")
+    @AddItemTag({"example:repairs_example_armor", "minecraft:trim_materials"})
     @TranslateEnglish("Example Ingot")
     public static final DeferredItem<?> EXAMPLE_INGOT = ITEM_FACTORY.create("example_ingot");
 
@@ -54,6 +52,11 @@ public final class ExampleItems {
     @AddItemTag("minecraft:trimmable_armor")
     @TranslateEnglish("Example Boots")
     public static final DeferredItem<?> EXAMPLE_BOOTS = ITEM_FACTORY.createArmor("example_boots", ExampleArmorMaterials.EXAMPLE_ARMOR_MATERIAL, ArmorItem.Type.BOOTS);
+
+    @AddCreativeModeTab(CreativeModeTabType.INGREDIENTS)
+    @GenerateItemModel
+    @TranslateEnglish("Example Armor Trim Smithing Template")
+    public static final DeferredItem<?> EXAMPLE_ARMOR_TRIM_SMITHING_TEMPLATE = ITEM_FACTORY.createSmithingTemplate("example_armor_trim_smithing_template", "example:example");
 
     @AddCreativeModeTab(CreativeModeTabType.COMBAT)
     @SetupBow

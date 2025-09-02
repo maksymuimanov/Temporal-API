@@ -1,7 +1,6 @@
 package net.temporal.example.entity;
 
 import com.temporal.api.core.engine.metadata.annotation.event.CreateEntityAttributes;
-import com.temporal.api.core.engine.metadata.annotation.injection.Injected;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -10,7 +9,6 @@ import net.minecraft.world.entity.animal.Turtle;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
-@Injected
 public class ExampleEntity extends Turtle {
     public ExampleEntity(EntityType<? extends ExampleEntity> entityType, Level level) {
         super(entityType, level);
