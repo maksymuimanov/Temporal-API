@@ -1,9 +1,10 @@
 package com.temporal.api.core.engine.event.handler;
 
 import com.temporal.api.core.collection.TemporalMap;
-import com.temporal.api.core.engine.io.IOLayer;
-import com.temporal.api.core.engine.io.metadata.strategy.method.MethodAnnotationStrategy;
-import com.temporal.api.core.engine.io.metadata.strategy.method.event.CreateEntityAttributesStrategy;
+import com.temporal.api.core.engine.context.ModContext;
+import com.temporal.api.core.engine.metadata.MetadataLayer;
+import com.temporal.api.core.engine.metadata.strategy.method.MethodAnnotationStrategy;
+import com.temporal.api.core.engine.metadata.strategy.method.event.CreateEntityAttributesStrategy;
 import com.temporal.api.core.util.ReflectionUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.world.entity.EntityType;
@@ -25,7 +26,7 @@ public class EntityAttributeEventHandler implements EventHandler {
     @Override
     public void handle() {
         this.subscribeModEvent(EntityAttributeCreationEvent.class, event -> {
-            IOLayer.ASYNC_STRATEGY_CONSUMER.execute(IOLayer.STATIC_METHOD_EXECUTOR, STRATEGIES, IOLayer.NEO_MOD.getClasses());
+            MetadataLayer.ASYNC_STRATEGY_CONSUMER.execute(MetadataLayer.STATIC_METHOD_EXECUTOR, STRATEGIES, ModContext.NEO_MOD.getClasses());
             ENTITY_ATTRIBUTES.forEach((holder, attributes) -> {
                 event.put((EntityType<? extends LivingEntity>) holder.value(), attributes.build());
             });

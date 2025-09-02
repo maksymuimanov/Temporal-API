@@ -1,7 +1,7 @@
 package net.temporal.example.entity;
 
-import com.temporal.api.core.engine.io.metadata.annotation.event.CreateEntityAttributes;
-import com.temporal.api.core.engine.io.metadata.annotation.injection.Injected;
+import com.temporal.api.core.engine.metadata.annotation.event.CreateEntityAttributes;
+import com.temporal.api.core.engine.metadata.annotation.injection.Injected;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;

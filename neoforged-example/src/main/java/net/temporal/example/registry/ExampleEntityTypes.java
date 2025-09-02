@@ -1,9 +1,9 @@
 package net.temporal.example.registry;
 
-import com.temporal.api.core.engine.io.context.InjectionPool;
-import com.temporal.api.core.engine.io.metadata.annotation.event.RegisterEntityRenderer;
-import com.temporal.api.core.engine.io.metadata.annotation.injection.Injected;
-import com.temporal.api.core.registry.factory.EntityTypeFactory;
+import com.temporal.api.core.engine.context.InjectionPool;
+import com.temporal.api.core.engine.metadata.annotation.event.RegisterEntityRenderer;
+import com.temporal.api.core.engine.metadata.annotation.injection.Injected;
+import com.temporal.api.core.engine.registry.factory.EntityTypeFactory;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.neoforged.neoforge.registries.DeferredHolder;

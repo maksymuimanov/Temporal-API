@@ -1,10 +1,11 @@
 package com.temporal.api.core.engine.event.handler;
 
 import com.temporal.api.core.collection.TemporalQueue;
-import com.temporal.api.core.engine.io.IOLayer;
-import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
-import com.temporal.api.core.engine.io.metadata.strategy.field.event.RegisterBlockEntityRendererStrategy;
-import com.temporal.api.core.engine.io.metadata.strategy.field.event.RegisterEntityRendererStrategy;
+import com.temporal.api.core.engine.context.ModContext;
+import com.temporal.api.core.engine.metadata.MetadataLayer;
+import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
+import com.temporal.api.core.engine.metadata.strategy.field.event.RegisterBlockEntityRendererStrategy;
+import com.temporal.api.core.engine.metadata.strategy.field.event.RegisterEntityRendererStrategy;
 import com.temporal.api.core.util.ReflectionUtils;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 
@@ -24,7 +25,7 @@ public class EntityRendererRegisterRendererEventHandler implements EventHandler 
     @Override
     public void handle() {
         subscribeModEvent(EntityRenderersEvent.RegisterRenderers.class, event -> {
-            IOLayer.ASYNC_STRATEGY_CONSUMER.execute(IOLayer.STATIC_FIELD_EXECUTOR, strategies, IOLayer.NEO_MOD.getClasses());
+            MetadataLayer.ASYNC_STRATEGY_CONSUMER.execute(MetadataLayer.STATIC_FIELD_EXECUTOR, strategies, ModContext.NEO_MOD.getClasses());
             RENDERING_REGISTRIES.forEach(consumer -> consumer.accept(event));
         });
     }

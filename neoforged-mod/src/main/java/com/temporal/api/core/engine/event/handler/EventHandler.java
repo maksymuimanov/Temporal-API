@@ -1,7 +1,7 @@
 package com.temporal.api.core.engine.event.handler;
 
+import com.temporal.api.core.engine.context.InjectionPool;
 import com.temporal.api.core.engine.event.adapter.EventAdapter;
-import com.temporal.api.core.engine.io.context.InjectionPool;
 import net.neoforged.bus.api.Event;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.NeoForge;

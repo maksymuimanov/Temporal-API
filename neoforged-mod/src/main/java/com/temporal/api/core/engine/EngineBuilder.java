@@ -1,17 +1,30 @@
 package com.temporal.api.core.engine;
 
 import com.temporal.api.ApiMod;
-import com.temporal.api.core.engine.io.IOLayer;
+import com.temporal.api.core.engine.context.ModContext;
+import com.temporal.api.core.engine.event.EventLayerBuilder;
+import com.temporal.api.core.engine.finalization.FinalizationLayerBuilder;
+import com.temporal.api.core.engine.metadata.MetadataLayerBuilder;
+import com.temporal.api.core.engine.registry.RegistryLayerBuilder;
+import com.temporal.api.core.engine.setup.InitializationLayerBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.temporal.api.core.engine.TemporalEngine.BANNER;
-
 public class EngineBuilder {
-    private static final String LOAD_MESSAGE = "{} has been loaded!";
+    protected static final String BANNER = """
+                       .__________. ._______. .__     __. ._______. ._______. ._______. ._______. .__.
+                       |----  ----| |   ----| |  \\   /  | |  ___  | |  ___  | |  ___  | |  ___  | |  |
+                           |  |     |  |      | | \\ / | | |  | |  | |  | |  | |  | |  | |  | |  | |  |
+                           |  |     |   --|   | |     | | |  | |  | |  | |  | |  |-|  | |  | |  | |  |
+                           |  |     |   --|   | |     | | |  -----| |  | |  | |   .--|  |  |-|  | |  |
+                           |  |     |  |      | |     | | | |       |  | |  | |  | |--| |  |-|  | |  |
+                           |  |     |  -----| | |     | | | |       |  ---  | |  | |  | |  | |  | |  -----|
+                           |--|     |-------| |-|     |-| |-|       |-------| |--| |--| |--| |--| |-------| v1.9.0 by w4t3rcs :D
+                    """;
+    private static final int DEFAULT_LAYER_COUNT = 5;
     private final LayerContainer layerContainer = LayerContainer.getInstance();
-    private final List<EngineTask> tasks = new ArrayList<>(2);
+    private final List<EngineTask> tasks = new ArrayList<>(DEFAULT_LAYER_COUNT);
 
     protected EngineBuilder() {
     }
@@ -26,27 +39,41 @@ public class EngineBuilder {
         return this;
     }
     
-    public IOBuilder configureIOLayer() {
-        return new IOBuilder(this);
+    public InitializationLayerBuilder configureInitializationLayer() {
+        return new InitializationLayerBuilder(this);
     }
 
-    public EventBuilder configureEventLayer() {
-        return new EventBuilder(this);
+    public RegistryLayerBuilder configureRegistryLayer() {
+        return new RegistryLayerBuilder(this);
+    }
+
+    public MetadataLayerBuilder configureMetadataLayer() {
+        return new MetadataLayerBuilder(this);
+    }
+
+    public EventLayerBuilder configureEventLayer() {
+        return new EventLayerBuilder(this);
+    }
+
+    public FinalizationLayerBuilder configureFinalizationLayer() {
+        return new FinalizationLayerBuilder(this);
     }
 
     public LayerContainer build() {
         System.out.println(BANNER);
         this.tasks.forEach(EngineTask::execute);
-        ApiMod.LOGGER.info("Mod: {} has been registered as a TemporalEngine component!", IOLayer.NEO_MOD);
+        ApiMod.LOGGER.info("Mod: {} has been registered as a TemporalEngine component!", ModContext.NEO_MOD.getModId());
         return this.layerContainer;
     }
 
-    protected void addTask(EngineTask task) {
+    public void addTask(EngineTask task) {
         this.tasks.add(task);
     }
     
-    protected void processLayer(EngineLayer engineLayer) {
+    public void processLayer(EngineLayer engineLayer) {
+        String layerName = engineLayer.getClass().getName();
+        ApiMod.LOGGER.info("Layer: {} is going to be processed!", layerName);
         engineLayer.processAllTasks();
-        ApiMod.LOGGER.info(LOAD_MESSAGE, engineLayer.getClass().getSimpleName());
+        ApiMod.LOGGER.info("Layer: {} has been processed!", layerName);
     }
 }

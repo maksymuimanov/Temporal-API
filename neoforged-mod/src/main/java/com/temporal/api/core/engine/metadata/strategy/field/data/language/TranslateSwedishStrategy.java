@@ -1,0 +1,15 @@
+package com.temporal.api.core.engine.metadata.strategy.field.data.language;
+
+import com.temporal.api.core.engine.event.data.language.provider.SwedishProvider;
+import com.temporal.api.core.engine.metadata.annotation.data.language.TranslateSwedish;
+
+public class TranslateSwedishStrategy extends TranslationStrategy<TranslateSwedish> {
+    public TranslateSwedishStrategy() {
+        super(SwedishProvider.class);
+    }
+
+    @Override
+    public Class<? extends TranslateSwedish> getAnnotationClass() {
+        return TranslateSwedish.class;
+    }
+}

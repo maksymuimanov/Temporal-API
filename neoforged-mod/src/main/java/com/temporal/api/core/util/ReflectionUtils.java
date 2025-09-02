@@ -1,7 +1,7 @@
 package com.temporal.api.core.util;
 
-import com.temporal.api.core.engine.io.metadata.strategy.AnnotationStrategy;
-import com.temporal.api.core.registry.factory.ObjectFactory;
+import com.temporal.api.core.engine.metadata.strategy.AnnotationStrategy;
+import com.temporal.api.core.engine.registry.factory.ObjectFactory;
 import net.minecraft.core.Holder;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredBlock;

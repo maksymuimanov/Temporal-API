@@ -1,10 +1,11 @@
 package com.temporal.api.core.engine.event.handler;
 
-import com.temporal.api.core.engine.io.IOLayer;
-import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
-import com.temporal.api.core.engine.io.metadata.strategy.field.event.AddCreativeModeTabStrategy;
-import com.temporal.api.core.event.tab.SimpleTabDirector;
-import com.temporal.api.core.event.tab.TabDirector;
+import com.temporal.api.core.engine.context.ModContext;
+import com.temporal.api.core.engine.event.tab.SimpleTabDirector;
+import com.temporal.api.core.engine.event.tab.TabDirector;
+import com.temporal.api.core.engine.metadata.MetadataLayer;
+import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
+import com.temporal.api.core.engine.metadata.strategy.field.event.AddCreativeModeTabStrategy;
 import com.temporal.api.core.util.ReflectionUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
@@ -27,7 +28,7 @@ public class CreativeModeTabEventHandler implements EventHandler {
     @Override
     public void handle() {
         subscribeModEvent(BuildCreativeModeTabContentsEvent.class, event -> {
-            IOLayer.ASYNC_STRATEGY_CONSUMER.execute(IOLayer.STATIC_FIELD_EXECUTOR, STRATEGIES, IOLayer.NEO_MOD.getClasses());
+            if (CREATIVE_MODE_TABS_CONTENT.isEmpty()) MetadataLayer.ASYNC_STRATEGY_CONSUMER.execute(MetadataLayer.STATIC_FIELD_EXECUTOR, STRATEGIES, ModContext.NEO_MOD.getClasses());
             TabDirector tabDirector = SimpleTabDirector.create(event);
             CREATIVE_MODE_TABS_CONTENT.forEach((tab, items) -> {
                 tabDirector.direct(tab, items.stream()
@@ -35,7 +36,6 @@ public class CreativeModeTabEventHandler implements EventHandler {
                         .map(item -> (ItemLike) item)
                         .toList());
             });
-            CREATIVE_MODE_TABS_CONTENT.clear();
         });
     }
 }

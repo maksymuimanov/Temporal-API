@@ -1,6 +1,6 @@
 package com.temporal.api.core.util;
 
-import com.temporal.api.core.engine.io.IOLayer;
+import com.temporal.api.core.engine.context.ModContext;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -42,7 +42,7 @@ public final class ResourceUtils {
     }
 
     public static ResourceLocation createLocation(String id) {
-        return ResourceLocation.fromNamespaceAndPath(IOLayer.NEO_MOD.getModId(), id);
+        return ResourceLocation.fromNamespaceAndPath(ModContext.NEO_MOD.getModId(), id);
     }
 
     public static String getResourceId(ResourceKey<?> resourceKey) {

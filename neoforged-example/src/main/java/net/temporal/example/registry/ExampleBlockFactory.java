@@ -1,8 +1,8 @@
 package net.temporal.example.registry;
 
-import com.temporal.api.core.engine.io.metadata.annotation.injection.Injected;
-import com.temporal.api.core.registry.factory.BlockFactory;
-import com.temporal.api.core.registry.factory.extension.block.*;
+import com.temporal.api.core.engine.metadata.annotation.injection.Injected;
+import com.temporal.api.core.engine.registry.extension.block.*;
+import com.temporal.api.core.engine.registry.factory.BlockFactory;
 
 @Injected(true)
 public final class ExampleBlockFactory extends BlockFactory implements FlowerSubFactory,

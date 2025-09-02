@@ -1,11 +1,11 @@
 package net.temporal.example.worldgen;
 
-import com.temporal.api.core.engine.io.metadata.annotation.data.biome.GenerateFlower;
-import com.temporal.api.core.engine.io.metadata.annotation.data.biome.GenerateGrass;
-import com.temporal.api.core.engine.io.metadata.annotation.data.biome.GenerateOre;
-import com.temporal.api.core.engine.io.metadata.annotation.data.biome.GenerateTree;
-import com.temporal.api.core.engine.io.metadata.annotation.injection.Injected;
-import com.temporal.api.core.engine.io.metadata.constant.OrePlacementShape;
+import com.temporal.api.core.engine.metadata.annotation.data.biome.GenerateFlower;
+import com.temporal.api.core.engine.metadata.annotation.data.biome.GenerateGrass;
+import com.temporal.api.core.engine.metadata.annotation.data.biome.GenerateOre;
+import com.temporal.api.core.engine.metadata.annotation.data.biome.GenerateTree;
+import com.temporal.api.core.engine.metadata.annotation.injection.Injected;
+import com.temporal.api.core.engine.metadata.constant.OrePlacementShape;
 import com.temporal.api.core.util.ResourceUtils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;

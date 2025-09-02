@@ -1,12 +1,13 @@
 package com.temporal.api.core.engine.event.handler;
 
-import com.temporal.api.core.engine.io.IOLayer;
-import com.temporal.api.core.engine.io.metadata.strategy.field.FieldAnnotationStrategy;
-import com.temporal.api.core.engine.io.metadata.strategy.field.event.SetupBowStrategy;
-import com.temporal.api.core.engine.io.metadata.strategy.field.event.SetupCrossbowStrategy;
-import com.temporal.api.core.engine.io.metadata.strategy.field.event.SetupShieldStrategy;
-import com.temporal.api.core.engine.io.metadata.strategy.field.event.SetupWoodTypeStrategy;
-import com.temporal.api.core.event.client.*;
+import com.temporal.api.core.engine.context.ModContext;
+import com.temporal.api.core.engine.event.client.*;
+import com.temporal.api.core.engine.metadata.MetadataLayer;
+import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
+import com.temporal.api.core.engine.metadata.strategy.field.event.SetupBowStrategy;
+import com.temporal.api.core.engine.metadata.strategy.field.event.SetupCrossbowStrategy;
+import com.temporal.api.core.engine.metadata.strategy.field.event.SetupShieldStrategy;
+import com.temporal.api.core.engine.metadata.strategy.field.event.SetupWoodTypeStrategy;
 import com.temporal.api.core.util.ReflectionUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.world.item.Item;
@@ -37,7 +38,7 @@ public class FMLClientSetupEventHandler implements EventHandler {
     @Override
     public void handle() {
         subscribeModEvent(FMLClientSetupEvent.class, event -> {
-            IOLayer.ASYNC_STRATEGY_CONSUMER.execute(IOLayer.STATIC_FIELD_EXECUTOR, strategies, IOLayer.NEO_MOD.getClasses());
+            MetadataLayer.ASYNC_STRATEGY_CONSUMER.execute(MetadataLayer.STATIC_FIELD_EXECUTOR, strategies, ModContext.NEO_MOD.getClasses());
             WOOD_TYPE_STRATEGY.execute(WOOD_TYPES);
             event.enqueueWork(() -> {
                 BOW_STRATEGY.execute(BOWS);
