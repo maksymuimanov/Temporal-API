@@ -11,9 +11,4 @@ public class ItalianProvider extends ApiLanguageProvider {
     public ItalianProvider(PackOutput output) {
         super(output, "it_it");
     }
-
-    @Override
-    public Map<String, String> getTranslations() {
-        return TRANSLATIONS;
-    }
 }

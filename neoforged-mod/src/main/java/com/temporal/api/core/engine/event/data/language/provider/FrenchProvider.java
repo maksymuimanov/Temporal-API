@@ -11,9 +11,4 @@ public class FrenchProvider extends ApiLanguageProvider {
     public FrenchProvider(PackOutput output) {
         super(output, "fr_fr");
     }
-
-    @Override
-    public Map<String, String> getTranslations() {
-        return TRANSLATIONS;
-    }
 }

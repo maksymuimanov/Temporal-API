@@ -11,9 +11,4 @@ public class GermanProvider extends ApiLanguageProvider {
     public GermanProvider(PackOutput output) {
         super(output, "de_de");
     }
-
-    @Override
-    public Map<String, String> getTranslations() {
-        return TRANSLATIONS;
-    }
 }

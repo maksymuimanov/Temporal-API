@@ -11,9 +11,4 @@ public class FilipinoProvider extends ApiLanguageProvider {
     public FilipinoProvider(PackOutput output) {
         super(output, "fil_ph");
     }
-
-    @Override
-    public Map<String, String> getTranslations() {
-        return TRANSLATIONS;
-    }
 }

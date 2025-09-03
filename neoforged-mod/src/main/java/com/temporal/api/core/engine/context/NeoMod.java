@@ -2,7 +2,7 @@ package com.temporal.api.core.engine.context;
 
 import com.google.common.base.MoreObjects;
 import com.temporal.api.ApiMod;
-import com.temporal.api.core.engine.setup.scanner.ModClassScanner;
+import com.temporal.api.core.engine.initialization.scanner.ModClassScanner;
 import net.neoforged.fml.common.Mod;
 
 import java.util.LinkedHashSet;

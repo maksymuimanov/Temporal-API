@@ -11,9 +11,4 @@ public class PersianProvider extends ApiLanguageProvider {
     public PersianProvider(PackOutput output) {
         super(output, "fa_ir");
     }
-
-    @Override
-    public Map<String, String> getTranslations() {
-        return TRANSLATIONS;
-    }
 }

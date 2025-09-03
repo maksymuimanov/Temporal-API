@@ -4,46 +4,38 @@ import com.temporal.api.core.collection.TemporalMap;
 import com.temporal.api.core.collection.TemporalQueue;
 import com.temporal.api.core.json.AtlasArmorTrimsRepresentation;
 import com.temporal.api.core.json.JsonRepresentation;
+import com.temporal.api.core.util.ResourceUtils;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.armortrim.TrimMaterial;
+import net.minecraft.world.item.armortrim.TrimMaterials;
+import net.minecraft.world.item.armortrim.TrimPattern;
+import net.minecraft.world.item.armortrim.TrimPatterns;
 
 import java.util.*;
 
 public class AtlasArmorTrimProvider extends SingleFileProvider {
     public static final Queue<ResourceLocation> TRIM_PATTERNS_LOCATIONS = new TemporalQueue<>();
     public static final Map<String, ResourceLocation> TRIM_MATERIALS_LOCATIONS = new TemporalMap<>();
-    private static final List<String> DEFAULT_TRIM_PATTERNS = new ArrayList<>();
-    private static final Map<String, String> DEFAULT_TRIM_MATERIALS = new HashMap<>();
+    public static final String PATH = "atlases/armor_trims.json";
+    public static final String TRIMS_MODELS_ARMOR_PATH = "trims/models/armor/";
+    public static final String LEGGINGS_SUFFIX = "_leggings";
+    public static final String TRIMS_COLOR_PALETTES_PATH = "trims/color_palettes/";
+    public static final String PALETTED_PERMUTATIONS_TYPE = "paletted_permutations";
+    public static final String PALETTE_KEY_PATH = "trims/color_palettes/trim_palette";
+    protected static final List<String> DEFAULT_TRIM_PATTERNS = new ArrayList<>();
+    protected static final Map<String, String> DEFAULT_TRIM_MATERIALS = new HashMap<>();
 
     static {
-        addDefaultTrimPattern("bolt");
-        addDefaultTrimPattern("coast");
-        addDefaultTrimPattern("dune");
-        addDefaultTrimPattern("eye");
-        addDefaultTrimPattern("flow");
-        addDefaultTrimPattern("host");
-        addDefaultTrimPattern("raiser");
-        addDefaultTrimPattern("rib");
-        addDefaultTrimPattern("sentry");
-        addDefaultTrimPattern("shaper");
-        addDefaultTrimPattern("silence");
-        addDefaultTrimPattern("snout");
-        addDefaultTrimPattern("spire");
-        addDefaultTrimPattern("tide");
-        addDefaultTrimPattern("vex");
-        addDefaultTrimPattern("ward");
-        addDefaultTrimPattern("wayfinder");
-        addDefaultTrimPattern("wild");
-        addDefaultTrimMaterial("quartz");
-        addDefaultTrimMaterial("iron");
-        addDefaultTrimMaterial("gold");
-        addDefaultTrimMaterial("diamond");
-        addDefaultTrimMaterial("netherite");
-        addDefaultTrimMaterial("redstone");
-        addDefaultTrimMaterial("copper");
-        addDefaultTrimMaterial("emerald");
-        addDefaultTrimMaterial("lapis");
-        addDefaultTrimMaterial("amethyst");
+        ResourceUtils.<TrimPattern>getResourceKeyStream(TrimPatterns.class)
+                .map(ResourceKey::location)
+                .map(ResourceLocation::getPath)
+                .forEach(AtlasArmorTrimProvider::addDefaultTrimPattern);
+        ResourceUtils.<TrimMaterial>getResourceKeyStream(TrimMaterials.class)
+                .map(ResourceKey::location)
+                .map(ResourceLocation::getPath)
+                .forEach(AtlasArmorTrimProvider::addDefaultTrimMaterial);
         addDefaultTrimMaterial("iron_darker");
         addDefaultTrimMaterial("gold_darker");
         addDefaultTrimMaterial("diamond_darker");
@@ -51,42 +43,55 @@ public class AtlasArmorTrimProvider extends SingleFileProvider {
     }
 
     protected static void addDefaultTrimPattern(String name) {
-        String id = "trims/models/armor/" + name;
+        String id = TRIMS_MODELS_ARMOR_PATH + name;
         DEFAULT_TRIM_PATTERNS.add(id);
-        DEFAULT_TRIM_PATTERNS.add(id + "_leggings");
+        DEFAULT_TRIM_PATTERNS.add(id + LEGGINGS_SUFFIX);
     }
 
     protected static void addDefaultTrimMaterial(String name) {
-        DEFAULT_TRIM_MATERIALS.put(name, "trims/color_palettes/" + name);
+        DEFAULT_TRIM_MATERIALS.put(name, TRIMS_COLOR_PALETTES_PATH + name);
     }
 
     public AtlasArmorTrimProvider(PackOutput output) {
-        super(output, PackOutput.Target.RESOURCE_PACK, "atlases/armor_trims.json", ResourceLocation.DEFAULT_NAMESPACE);
+        super(output, PackOutput.Target.RESOURCE_PACK, PATH, ResourceLocation.DEFAULT_NAMESPACE);
     }
 
     @Override
     public void registerFile() {
+        List<String> textures = this.createTextures();
+        AtlasArmorTrimsRepresentation.Permutations permutations = this.createPermutations();
+        AtlasArmorTrimsRepresentation.Source[] sources = this.createSources(textures, permutations);
+        JsonRepresentation representation = new AtlasArmorTrimsRepresentation(false, sources);
+        this.define(representation);
+    }
+
+    protected AtlasArmorTrimsRepresentation.Source[] createSources(List<String> textures, AtlasArmorTrimsRepresentation.Permutations permutations) {
+        AtlasArmorTrimsRepresentation.Source source = new AtlasArmorTrimsRepresentation.Source(
+                PALETTED_PERMUTATIONS_TYPE,
+                textures,
+                PALETTE_KEY_PATH,
+                permutations
+        );
+        return new AtlasArmorTrimsRepresentation.Source[]{source};
+    }
+
+    protected List<String> createTextures() {
         List<String> trimPatterns = new ArrayList<>(DEFAULT_TRIM_PATTERNS);
         TRIM_PATTERNS_LOCATIONS.forEach(location -> {
             String namespace = location.getNamespace();
             String path = location.getPath();
-            String id = namespace + ":trims/models/armor/" + path;
+            String id = namespace + ":" + TRIMS_MODELS_ARMOR_PATH + path;
             trimPatterns.add(id);
-            trimPatterns.add(id + "_leggings");
+            trimPatterns.add(id + LEGGINGS_SUFFIX);
         });
+        return trimPatterns;
+    }
+
+    protected AtlasArmorTrimsRepresentation.Permutations createPermutations() {
         Map<String, String> trimMaterials = new HashMap<>(DEFAULT_TRIM_MATERIALS);
         TRIM_MATERIALS_LOCATIONS.forEach((key, value) -> {
-            trimMaterials.put(key, value.getNamespace() + ":trims/color_palettes/" + value.getPath());
+            trimMaterials.put(key, value.getNamespace() + ":" + TRIMS_COLOR_PALETTES_PATH + value.getPath());
         });
-        AtlasArmorTrimsRepresentation.Permutation permutation = new AtlasArmorTrimsRepresentation.Permutation(trimMaterials);
-        AtlasArmorTrimsRepresentation.Source source = new AtlasArmorTrimsRepresentation.Source(
-                "paletted_permutations",
-                trimPatterns,
-                "trims/color_palettes/trim_palette",
-                permutation
-        );
-        AtlasArmorTrimsRepresentation.Source[] sources = {source};
-        JsonRepresentation representation = new AtlasArmorTrimsRepresentation(false, sources);
-        this.define(representation);
+        return new AtlasArmorTrimsRepresentation.Permutations(trimMaterials);
     }
 }

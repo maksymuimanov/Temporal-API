@@ -11,9 +11,4 @@ public class FinnishProvider extends ApiLanguageProvider {
     public FinnishProvider(PackOutput output) {
         super(output, "fi_fi");
     }
-
-    @Override
-    public Map<String, String> getTranslations() {
-        return TRANSLATIONS;
-    }
 }

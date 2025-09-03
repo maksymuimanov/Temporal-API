@@ -11,9 +11,4 @@ public class BosnianProvider extends ApiLanguageProvider {
     public BosnianProvider(PackOutput output) {
         super(output, "bs_ba");
     }
-
-    @Override
-    public Map<String, String> getTranslations() {
-        return TRANSLATIONS;
-    }
 }

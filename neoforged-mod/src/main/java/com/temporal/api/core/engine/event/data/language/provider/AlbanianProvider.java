@@ -11,9 +11,4 @@ public class AlbanianProvider extends ApiLanguageProvider {
     public AlbanianProvider(PackOutput output) {
         super(output, "sq_al");
     }
-
-    @Override
-    public Map<String, String> getTranslations() {
-        return TRANSLATIONS;
-    }
 }

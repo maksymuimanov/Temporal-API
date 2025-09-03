@@ -11,9 +11,4 @@ public class SerbianProvider extends ApiLanguageProvider {
     public SerbianProvider(PackOutput output) {
         super(output, "sr_sp");
     }
-
-    @Override
-    public Map<String, String> getTranslations() {
-        return TRANSLATIONS;
-    }
 }

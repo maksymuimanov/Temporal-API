@@ -11,9 +11,4 @@ public class VietnameseProvider extends ApiLanguageProvider {
     public VietnameseProvider(PackOutput output) {
         super(output, "vi_vn");
     }
-
-    @Override
-    public Map<String, String> getTranslations() {
-        return TRANSLATIONS;
-    }
 }

@@ -11,9 +11,4 @@ public class DanishProvider extends ApiLanguageProvider {
     public DanishProvider(PackOutput output) {
         super(output, "da_dk");
     }
-
-    @Override
-    public Map<String, String> getTranslations() {
-        return TRANSLATIONS;
-    }
 }

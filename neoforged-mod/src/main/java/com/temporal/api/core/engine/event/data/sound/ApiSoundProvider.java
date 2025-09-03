@@ -2,6 +2,7 @@ package com.temporal.api.core.engine.event.data.sound;
 
 import com.temporal.api.core.collection.TemporalMap;
 import com.temporal.api.core.engine.context.ModContext;
+import net.minecraft.Util;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.common.data.SoundDefinition;
@@ -13,6 +14,7 @@ import java.util.Objects;
 
 public class ApiSoundProvider extends SoundDefinitionsProvider {
     public static final Map<SoundHolder, List<SoundDescription>> SOUNDS = new TemporalMap<>();
+    public static final String SOUND_TYPE = "sound";
 
     public ApiSoundProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
         super(output, ModContext.NEO_MOD.getModId(), existingFileHelper);
@@ -31,7 +33,8 @@ public class ApiSoundProvider extends SoundDefinitionsProvider {
                             .attenuationDistance(soundDescription.attenuationDistance())
                             .stream(soundDescription.stream())
                             .preload(soundDescription.preload())));
-            add(holder.sound().value(), soundDefinition.subtitle("sound." + modId + "." + Objects.requireNonNull(holder.sound().getKey()).location().getPath())
+            String subtitle = Util.makeDescriptionId(SOUND_TYPE, Objects.requireNonNull(holder.sound().getKey()).location());
+            add(holder.sound().value(), soundDefinition.subtitle(subtitle)
                     .replace(holder.replace()));
         });
     }

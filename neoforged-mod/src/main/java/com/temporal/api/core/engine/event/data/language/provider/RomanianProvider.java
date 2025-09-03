@@ -11,9 +11,4 @@ public class RomanianProvider extends ApiLanguageProvider {
     public RomanianProvider(PackOutput output) {
         super(output, "ro_ro");
     }
-
-    @Override
-    public Map<String, String> getTranslations() {
-        return TRANSLATIONS;
-    }
 }

@@ -11,9 +11,4 @@ public class SwedishProvider extends ApiLanguageProvider {
     public SwedishProvider(PackOutput output) {
         super(output, "sv_se");
     }
-
-    @Override
-    public Map<String, String> getTranslations() {
-        return TRANSLATIONS;
-    }
 }

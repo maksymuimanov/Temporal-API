@@ -17,13 +17,14 @@ import java.util.Map;
 
 public class ApiTrimPatternProvider implements TrimPatternProvider {
     public static final Map<ResourceKey<TrimPattern>, TrimPatternDescription> TRIM_PATTERNS = new TemporalMap<>();
+    public static final String TRIM_PATTERN_TYPE = "trim_pattern";
 
     @Override
     public void registerTrimPatterns(BootstrapContext<TrimPattern> context) {
         TRIM_PATTERNS.forEach((trimPattern, description) -> {
             ResourceLocation location = trimPattern.location();
             Holder<Item> itemHolder = RegistryUtils.getItem(description.itemId()).getDefaultInstance().getItemHolder();
-            String descriptionId = Util.makeDescriptionId("trim_pattern", location);
+            String descriptionId = Util.makeDescriptionId(TRIM_PATTERN_TYPE, location);
             MutableComponent component = Component.translatable(descriptionId);
             context.register(trimPattern, new TrimPattern(location, itemHolder, component, description.decal()));
             AtlasArmorTrimProvider.TRIM_PATTERNS_LOCATIONS.offer(location);

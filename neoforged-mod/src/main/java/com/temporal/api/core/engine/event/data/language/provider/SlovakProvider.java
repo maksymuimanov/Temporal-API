@@ -11,9 +11,4 @@ public class SlovakProvider extends ApiLanguageProvider {
     public SlovakProvider(PackOutput output) {
         super(output, "sk_sk");
     }
-
-    @Override
-    public Map<String, String> getTranslations() {
-        return TRANSLATIONS;
-    }
 }

@@ -11,9 +11,4 @@ public class PolishProvider extends ApiLanguageProvider {
     public PolishProvider(PackOutput output) {
         super(output, "pl_pl");
     }
-
-    @Override
-    public Map<String, String> getTranslations() {
-        return TRANSLATIONS;
-    }
 }

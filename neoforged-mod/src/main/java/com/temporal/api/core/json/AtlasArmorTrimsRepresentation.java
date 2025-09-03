@@ -4,10 +4,14 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import java.io.Serial;
 import java.util.List;
 import java.util.Map;
 
 public record AtlasArmorTrimsRepresentation(boolean replace, Source[] sources) implements JsonRepresentation {
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     @Override
     public JsonElement toJson() {
         JsonObject jsonObject = new JsonObject();
@@ -21,7 +25,7 @@ public record AtlasArmorTrimsRepresentation(boolean replace, Source[] sources) i
         return jsonObject;
     }
 
-    public record Source(String type, List<String> textures, String paletteKey, Permutation permutation) implements JsonRepresentation {
+    public record Source(String type, List<String> textures, String paletteKey, Permutations permutations) implements JsonRepresentation {
         @Override
         public JsonElement toJson() {
             JsonObject jsonObject = new JsonObject();
@@ -32,12 +36,12 @@ public record AtlasArmorTrimsRepresentation(boolean replace, Source[] sources) i
             }
             jsonObject.add("textures", textureJsonArray);
             jsonObject.addProperty("palette_key", paletteKey);
-            jsonObject.add("permutations", permutation.toJson());
+            jsonObject.add("permutations", permutations.toJson());
             return jsonObject;
         }
     }
 
-    public record Permutation(Map<String, String> permutations) implements JsonRepresentation {
+    public record Permutations(Map<String, String> permutations) implements JsonRepresentation {
         @Override
         public JsonElement toJson() {
             JsonObject jsonObject = new JsonObject();

@@ -11,9 +11,4 @@ public class DutchProvider extends ApiLanguageProvider {
     public DutchProvider(PackOutput output) {
         super(output, "nl_nl");
     }
-
-    @Override
-    public Map<String, String> getTranslations() {
-        return TRANSLATIONS;
-    }
 }

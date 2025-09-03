@@ -6,11 +6,16 @@ import net.minecraft.advancements.Criterion;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.ItemLike;
-import oshi.util.tuples.Pair;
 
 import javax.annotation.Nullable;
+import java.lang.reflect.Field;
+import java.util.Map;
+import java.util.Set;
 
 public interface AdvancementDescription {
+    String TITLE_ID_FIELD_NAME = "TITLE_ID";
+    String DESCRIPTION_ID_FIELD_NAME = "DESCRIPTION_ID";
+
     String getId();
 
     String getParentRoot();
@@ -18,19 +23,29 @@ public interface AdvancementDescription {
     ItemLike icon();
 
     default Component getTitleComponent() {
-        return Component.translatable(getTitle());
+        return Component.translatable(this.getTitle());
     }
 
     default String getTitle() {
-        return getId() + ".title";
+        return getStringField(TITLE_ID_FIELD_NAME);
     }
 
     default Component getDescriptionComponent() {
-        return Component.translatable(getTitle());
+        return Component.translatable(this.getTitle());
     }
 
     default String getDescription() {
-        return getId() + ".description";
+        return getStringField(DESCRIPTION_ID_FIELD_NAME);
+    }
+
+    default String getStringField(String fieldName) {
+        try {
+            Field field = this.getClass().getDeclaredField(fieldName);
+            field.setAccessible(true);
+            return field.get(this).toString();
+        } catch (IllegalAccessException | NoSuchFieldException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Nullable
@@ -48,7 +63,7 @@ public interface AdvancementDescription {
 
     int getExperience();
 
-    Pair<String, Criterion<?>> getCriterion();
+    Map<String, Criterion<?>> getCriterions();
 
-    AdvancementRequirements getRequirements();
+    AdvancementRequirements getRequirements(Set<String> criterions);
 }

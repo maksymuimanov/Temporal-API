@@ -11,9 +11,4 @@ public class SwissGermanProvider extends ApiLanguageProvider {
     public SwissGermanProvider(PackOutput output) {
         super(output, "de_ch");
     }
-
-    @Override
-    public Map<String, String> getTranslations() {
-        return TRANSLATIONS;
-    }
 }

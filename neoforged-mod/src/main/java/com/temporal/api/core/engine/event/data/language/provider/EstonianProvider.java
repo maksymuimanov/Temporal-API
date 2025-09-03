@@ -11,9 +11,4 @@ public class EstonianProvider extends ApiLanguageProvider {
     public EstonianProvider(PackOutput output) {
         super(output, "et_ee");
     }
-
-    @Override
-    public Map<String, String> getTranslations() {
-        return TRANSLATIONS;
-    }
 }

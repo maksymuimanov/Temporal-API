@@ -11,9 +11,4 @@ public class GreekProvider extends ApiLanguageProvider {
     public GreekProvider(PackOutput output) {
         super(output, "el_gr");
     }
-
-    @Override
-    public Map<String, String> getTranslations() {
-        return TRANSLATIONS;
-    }
 }

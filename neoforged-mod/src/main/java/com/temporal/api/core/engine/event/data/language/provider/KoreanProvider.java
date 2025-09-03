@@ -11,9 +11,4 @@ public class KoreanProvider extends ApiLanguageProvider {
     public KoreanProvider(PackOutput output) {
         super(output, "ko_kr");
     }
-
-    @Override
-    public Map<String, String> getTranslations() {
-        return TRANSLATIONS;
-    }
 }

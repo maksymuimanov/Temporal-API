@@ -11,9 +11,4 @@ public class LithuanianProvider extends ApiLanguageProvider {
     public LithuanianProvider(PackOutput output) {
         super(output, "lt_lt");
     }
-
-    @Override
-    public Map<String, String> getTranslations() {
-        return TRANSLATIONS;
-    }
 }

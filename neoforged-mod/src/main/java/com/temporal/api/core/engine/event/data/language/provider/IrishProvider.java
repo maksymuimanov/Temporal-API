@@ -11,9 +11,4 @@ public class IrishProvider extends ApiLanguageProvider {
     public IrishProvider(PackOutput output) {
         super(output, "ga_ie");
     }
-
-    @Override
-    public Map<String, String> getTranslations() {
-        return TRANSLATIONS;
-    }
 }

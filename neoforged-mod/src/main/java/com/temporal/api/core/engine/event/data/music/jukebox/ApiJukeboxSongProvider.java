@@ -10,17 +10,20 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.JukeboxSong;
+import org.jetbrains.annotations.ApiStatus;
 
 import java.util.Queue;
 
+@ApiStatus.Experimental
 public class ApiJukeboxSongProvider implements JukeboxSongProvider {
     public static final Queue<JukeboxSongDescription> SONGS = new TemporalQueue<>();
+    public static final String JUKEBOX_SONG_TYPE = "jukebox_song";
 
     @Override
     public void registerSong(BootstrapContext<JukeboxSong> context) {
         SONGS.forEach(description -> {
             ResourceKey<JukeboxSong> song = description.song();
-            MutableComponent translationId = Component.translatable(Util.makeDescriptionId("jukebox_song", song.location()));
+            MutableComponent translationId = Component.translatable(Util.makeDescriptionId(JUKEBOX_SONG_TYPE, song.location()));
             SoundEvent soundEvent = RegistryUtils.getSoundEvent(description.soundEvent());
             context.register(song, new JukeboxSong(Holder.direct(soundEvent), translationId, description.lengthInSeconds(), description.comparatorOutput()));
         });

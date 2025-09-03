@@ -11,9 +11,4 @@ public class CzechProvider extends ApiLanguageProvider {
     public CzechProvider(PackOutput output) {
         super(output, "cs_cz");
     }
-
-    @Override
-    public Map<String, String> getTranslations() {
-        return TRANSLATIONS;
-    }
 }

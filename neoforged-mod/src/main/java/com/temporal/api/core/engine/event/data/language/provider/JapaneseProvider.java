@@ -11,9 +11,4 @@ public class JapaneseProvider extends ApiLanguageProvider {
     public JapaneseProvider(PackOutput output) {
         super(output, "ja_jp");
     }
-
-    @Override
-    public Map<String, String> getTranslations() {
-        return TRANSLATIONS;
-    }
 }

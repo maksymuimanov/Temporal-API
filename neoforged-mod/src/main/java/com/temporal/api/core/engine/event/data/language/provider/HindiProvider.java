@@ -11,9 +11,4 @@ public class HindiProvider extends ApiLanguageProvider {
     public HindiProvider(PackOutput output) {
         super(output, "hi_in");
     }
-
-    @Override
-    public Map<String, String> getTranslations() {
-        return TRANSLATIONS;
-    }
 }

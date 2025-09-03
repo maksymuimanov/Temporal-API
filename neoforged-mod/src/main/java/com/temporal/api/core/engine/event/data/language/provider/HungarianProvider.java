@@ -11,9 +11,4 @@ public class HungarianProvider extends ApiLanguageProvider {
     public HungarianProvider(PackOutput output) {
         super(output, "hu_hu");
     }
-
-    @Override
-    public Map<String, String> getTranslations() {
-        return TRANSLATIONS;
-    }
 }

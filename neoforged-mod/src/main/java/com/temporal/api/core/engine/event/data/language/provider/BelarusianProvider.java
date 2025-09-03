@@ -11,9 +11,4 @@ public class BelarusianProvider extends ApiLanguageProvider {
     public BelarusianProvider(PackOutput output) {
         super(output, "be_by");
     }
-
-    @Override
-    public Map<String, String> getTranslations() {
-        return TRANSLATIONS;
-    }
 }

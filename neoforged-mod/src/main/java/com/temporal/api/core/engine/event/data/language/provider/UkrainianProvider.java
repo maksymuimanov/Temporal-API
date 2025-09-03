@@ -11,9 +11,4 @@ public class UkrainianProvider extends ApiLanguageProvider {
     public UkrainianProvider(PackOutput output) {
         super(output, "uk_ua");
     }
-
-    @Override
-    public Map<String, String> getTranslations() {
-        return TRANSLATIONS;
-    }
 }

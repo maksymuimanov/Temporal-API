@@ -11,9 +11,4 @@ public class LatvianProvider extends ApiLanguageProvider {
     public LatvianProvider(PackOutput output) {
         super(output, "lv_lv");
     }
-
-    @Override
-    public Map<String, String> getTranslations() {
-        return TRANSLATIONS;
-    }
 }

@@ -11,9 +11,4 @@ public class ThaiProvider extends ApiLanguageProvider {
     public ThaiProvider(PackOutput output) {
         super(output, "th_th");
     }
-
-    @Override
-    public Map<String, String> getTranslations() {
-        return TRANSLATIONS;
-    }
 }

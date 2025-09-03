@@ -9,10 +9,12 @@ import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.Enchantment;
+import org.jetbrains.annotations.ApiStatus;
 
 import java.util.Map;
 
 //TODO: For the future updates: this class should either be refactored or contain more effect holders - #w4t3rcs
+@ApiStatus.Experimental
 public class ApiEnchantmentProvider implements EnchantmentProvider {
     public static final Map<ResourceKey<Enchantment>, EnchantmentDescription> ENCHANTMENTS = new TemporalMap<>();
     public static final Map<ResourceKey<Enchantment>, EnchantmentEntityEffectHolder> ENTITY_EFFECTS = new TemporalMap<>();

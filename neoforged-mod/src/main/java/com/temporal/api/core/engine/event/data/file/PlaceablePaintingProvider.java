@@ -12,7 +12,7 @@ import java.util.Queue;
 
 public class PlaceablePaintingProvider extends SingleFileProvider {
     public static final Queue<ResourceKey<PaintingVariant>> PLACEABLES = new TemporalQueue<>();
-    protected static final String PATH = "tags/painting_variant/placeable.json";
+    public static final String PATH = "tags/painting_variant/placeable.json";
 
     public PlaceablePaintingProvider(PackOutput output) {
         super(output, PackOutput.Target.DATA_PACK, PATH, ResourceLocation.DEFAULT_NAMESPACE);

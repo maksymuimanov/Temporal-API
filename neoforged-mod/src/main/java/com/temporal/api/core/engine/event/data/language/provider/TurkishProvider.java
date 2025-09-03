@@ -11,9 +11,4 @@ public class TurkishProvider extends ApiLanguageProvider {
     public TurkishProvider(PackOutput output) {
         super(output, "tr_tr");
     }
-
-    @Override
-    public Map<String, String> getTranslations() {
-        return TRANSLATIONS;
-    }
 }

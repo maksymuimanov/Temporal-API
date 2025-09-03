@@ -4,9 +4,9 @@ import com.temporal.api.ApiMod;
 import com.temporal.api.core.engine.context.ModContext;
 import com.temporal.api.core.engine.event.EventLayerBuilder;
 import com.temporal.api.core.engine.finalization.FinalizationLayerBuilder;
+import com.temporal.api.core.engine.initialization.InitializationLayerBuilder;
 import com.temporal.api.core.engine.metadata.MetadataLayerBuilder;
 import com.temporal.api.core.engine.registry.RegistryLayerBuilder;
-import com.temporal.api.core.engine.setup.InitializationLayerBuilder;
 
 import java.util.ArrayList;
 import java.util.List;

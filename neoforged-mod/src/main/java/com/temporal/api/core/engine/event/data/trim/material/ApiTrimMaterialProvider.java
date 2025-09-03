@@ -19,6 +19,7 @@ import java.util.Map;
 
 public class ApiTrimMaterialProvider implements TrimMaterialProvider {
     public static final Map<ResourceKey<TrimMaterial>, TrimMaterialDescription> TRIM_MATERIALS = new TemporalMap<>();
+    public static final String TRIM_MATERIAL_TYPE = "trim_material";
 
     @Override
     public void registerTrimMaterials(BootstrapContext<TrimMaterial> context) {
@@ -26,7 +27,7 @@ public class ApiTrimMaterialProvider implements TrimMaterialProvider {
             String assetName = ResourceUtils.getResourceName(trimMaterial);
             Item ingredient = RegistryUtils.getItem(description.itemId());
             ResourceLocation location = trimMaterial.location();
-            String descriptionId = Util.makeDescriptionId("trim_material", location);
+            String descriptionId = Util.makeDescriptionId(TRIM_MATERIAL_TYPE, location);
             TextColor textColor = TextColor.parseColor(description.color()).getOrThrow();
             Style style = Style.EMPTY.withColor(textColor);
             MutableComponent component = Component.translatable(descriptionId).withStyle(style);

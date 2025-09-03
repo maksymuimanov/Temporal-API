@@ -22,12 +22,12 @@
         "redstone": "trims/color_palettes/redstone"
       },
       "textures": [
-        "trims/models/armor/coast",
-        "trims/models/armor/coast_leggings",
         "trims/models/armor/sentry",
         "trims/models/armor/sentry_leggings",
         "trims/models/armor/dune",
         "trims/models/armor/dune_leggings",
+        "trims/models/armor/coast",
+        "trims/models/armor/coast_leggings",
         "trims/models/armor/wild",
         "trims/models/armor/wild_leggings",
         "trims/models/armor/ward",
@@ -54,6 +54,10 @@
         "trims/models/armor/raiser_leggings",
         "trims/models/armor/host",
         "trims/models/armor/host_leggings",
+        "trims/models/armor/flow",
+        "trims/models/armor/flow_leggings",
+        "trims/models/armor/bolt",
+        "trims/models/armor/bolt_leggings",
         "example:trims/models/armor/example",
         "example:trims/models/armor/example_leggings"
       ]

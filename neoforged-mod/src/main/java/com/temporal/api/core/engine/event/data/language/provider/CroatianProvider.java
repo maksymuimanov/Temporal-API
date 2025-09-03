@@ -11,9 +11,4 @@ public class CroatianProvider extends ApiLanguageProvider {
     public CroatianProvider(PackOutput output) {
         super(output, "hr_hr");
     }
-
-    @Override
-    public Map<String, String> getTranslations() {
-        return TRANSLATIONS;
-    }
 }

@@ -11,9 +11,4 @@ public class HebrewProvider extends ApiLanguageProvider {
     public HebrewProvider(PackOutput output) {
         super(output, "he_il");
     }
-
-    @Override
-    public Map<String, String> getTranslations() {
-        return TRANSLATIONS;
-    }
 }

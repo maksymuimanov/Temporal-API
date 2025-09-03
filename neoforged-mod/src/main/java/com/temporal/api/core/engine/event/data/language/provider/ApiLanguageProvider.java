@@ -23,6 +23,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BannerPattern;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,6 +46,7 @@ public abstract class ApiLanguageProvider extends LanguageProvider {
     public static final KeyTransformer<ResourceKey<PaintingVariant>> PAINTING_VARIANT_TRANSFORMER = new PaintingVariantTransformer();
     public static final KeyTransformer<Component> COMPONENT_TRANSFORMER = new ComponentTransformer();
     public static final KeyTransformer<String> STRING_TRANSFORMER = new StringTransformer();
+    public static final String TRANSLATIONS_FIELD_NAME = "TRANSLATIONS";
 
     static {
         REGISTRY_KEY_TRANSFORMERS.put(ITEM_TRANSFORMER, Registries.ITEM);
@@ -73,5 +75,14 @@ public abstract class ApiLanguageProvider extends LanguageProvider {
         this.getTranslations().forEach(this::add);
     }
 
-    public abstract Map<String, String> getTranslations();
+    @SuppressWarnings("unchecked")
+    public Map<String, String> getTranslations() {
+        try {
+            Field field = this.getClass().getDeclaredField(TRANSLATIONS_FIELD_NAME);
+            field.setAccessible(true);
+            return (Map<String, String>) field.get(this);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

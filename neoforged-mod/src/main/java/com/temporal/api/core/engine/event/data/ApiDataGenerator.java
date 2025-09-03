@@ -87,7 +87,7 @@ public class ApiDataGenerator implements DataGatherer {
     public void addLanguageProvider(GatherDataEvent event) {
         final DataGenerator generator = getDataGenerator(event);
         final PackOutput packOutput = getPackOutput(event);
-        generator.addProvider(event.includeClient(), new EnglishProvider(packOutput));
+        generator.addProvider(event.includeClient(), new AmericanEnglishProvider(packOutput));
         generator.addProvider(event.includeClient(), new UkrainianProvider(packOutput));
         generator.addProvider(event.includeClient(), new PolishProvider(packOutput));
         generator.addProvider(event.includeClient(), new GermanProvider(packOutput));
@@ -119,7 +119,7 @@ public class ApiDataGenerator implements DataGatherer {
         generator.addProvider(event.includeClient(), new KoreanProvider(packOutput));
         generator.addProvider(event.includeClient(), new LatvianProvider(packOutput));
         generator.addProvider(event.includeClient(), new LithuanianProvider(packOutput));
-        generator.addProvider(event.includeClient(), new MandarinProvider(packOutput));
+        generator.addProvider(event.includeClient(), new SimplifiedChineseProvider(packOutput));
         generator.addProvider(event.includeClient(), new PersianProvider(packOutput));
         generator.addProvider(event.includeClient(), new PortugueseProvider(packOutput));
         generator.addProvider(event.includeClient(), new RomanianProvider(packOutput));

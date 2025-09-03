@@ -1,4 +1,6 @@
 {
+  "advancement.example.example.description": "Example Description for Example Advancement",
+  "advancement.example.example.title": "Example Advancement",
   "block.example.example_block": "Example Block",
   "block.example.example_flower": "Example Flower",
   "block.example.example_grass": "Example Grass",

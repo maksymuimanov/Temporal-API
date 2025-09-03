@@ -11,9 +11,4 @@ public class PortugueseProvider extends ApiLanguageProvider {
     public PortugueseProvider(PackOutput output) {
         super(output, "pt_pt");
     }
-
-    @Override
-    public Map<String, String> getTranslations() {
-        return TRANSLATIONS;
-    }
 }

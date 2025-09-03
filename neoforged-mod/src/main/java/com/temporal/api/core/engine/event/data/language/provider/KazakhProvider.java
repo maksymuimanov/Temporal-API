@@ -11,9 +11,4 @@ public class KazakhProvider extends ApiLanguageProvider {
     public KazakhProvider(PackOutput output) {
         super(output, "kk_kz");
     }
-
-    @Override
-    public Map<String, String> getTranslations() {
-        return TRANSLATIONS;
-    }
 }

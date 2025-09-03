@@ -11,9 +11,4 @@ public class IcelandicProvider extends ApiLanguageProvider {
     public IcelandicProvider(PackOutput output) {
         super(output, "is_is");
     }
-
-    @Override
-    public Map<String, String> getTranslations() {
-        return TRANSLATIONS;
-    }
 }

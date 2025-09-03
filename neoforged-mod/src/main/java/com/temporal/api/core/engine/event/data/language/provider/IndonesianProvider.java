@@ -11,9 +11,4 @@ public class IndonesianProvider extends ApiLanguageProvider {
     public IndonesianProvider(PackOutput output) {
         super(output, "id_id");
     }
-
-    @Override
-    public Map<String, String> getTranslations() {
-        return TRANSLATIONS;
-    }
 }
