@@ -31,7 +31,7 @@ public interface AdvancementDescription {
     }
 
     default Component getDescriptionComponent() {
-        return Component.translatable(this.getTitle());
+        return Component.translatable(this.getDescription());
     }
 
     default String getDescription() {
