@@ -13,7 +13,7 @@ public abstract class AbstractTagDynamicPreparer<T> implements DynamicPreparer {
         this.getTagContainers()
                 .stream()
                 .flatMap(TagUtils::<T>getTagKeyStream)
-                .forEach(tag -> TagUtils.putTagKey(tag, this.getTags()));
+                .forEach(tag -> TagUtils.putTag(tag, this.getTags()));
     }
 
     public abstract Set<Class<?>> getTagContainers();

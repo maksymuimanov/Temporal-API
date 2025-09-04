@@ -7,7 +7,7 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 import java.util.List;
 
-public class DeferredRegisterPoolInitializer implements ObjectPoolInitializer {
+public class TemporalRegisterPoolInitializer implements ObjectPoolInitializer {
     @Override
     public void initialize(ObjectPool objectPool, List<?> externalObjects) {
         objectPool.putObject("$Items", TemporalRegister.createItems());

@@ -4,5 +4,5 @@ public enum TagContainerType {
     ITEM,
     BLOCK,
     BIOME,
-    ENCHANTMENT,
+    ENCHANTMENT
 }

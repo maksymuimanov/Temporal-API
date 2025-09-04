@@ -1,11 +1,11 @@
 package net.temporal.example.registry;
 
 import com.temporal.api.core.engine.context.InjectionPool;
-import com.temporal.api.core.engine.metadata.annotation.data.AddBlockTag;
 import com.temporal.api.core.engine.metadata.annotation.data.GenerateBlockLootTable;
 import com.temporal.api.core.engine.metadata.annotation.data.language.TranslateAmericanEnglish;
 import com.temporal.api.core.engine.metadata.annotation.data.model.GenerateBlockModel;
 import com.temporal.api.core.engine.metadata.annotation.data.model.GenerateItemModel;
+import com.temporal.api.core.engine.metadata.annotation.data.tag.AddBlockTag;
 import com.temporal.api.core.engine.metadata.annotation.event.AddBlockEntityType;
 import com.temporal.api.core.engine.metadata.annotation.event.AddCreativeModeTab;
 import com.temporal.api.core.engine.metadata.constant.BlockLootTableType;

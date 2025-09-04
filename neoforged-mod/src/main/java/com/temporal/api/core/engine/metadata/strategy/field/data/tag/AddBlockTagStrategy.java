@@ -1,8 +1,8 @@
-package com.temporal.api.core.engine.metadata.strategy.field.data;
+package com.temporal.api.core.engine.metadata.strategy.field.data.tag;
 
 import com.temporal.api.core.engine.event.data.preparer.tag.BlockTagDynamicPreparer;
 import com.temporal.api.core.engine.event.data.tag.ApiBlockTagsProvider;
-import com.temporal.api.core.engine.metadata.annotation.data.AddBlockTag;
+import com.temporal.api.core.engine.metadata.annotation.data.tag.AddBlockTag;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.util.MapUtils;
 import com.temporal.api.core.util.TagUtils;

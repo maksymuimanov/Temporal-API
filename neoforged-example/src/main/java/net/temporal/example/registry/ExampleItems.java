@@ -1,11 +1,11 @@
 package net.temporal.example.registry;
 
 import com.temporal.api.core.engine.context.InjectionPool;
-import com.temporal.api.core.engine.metadata.annotation.data.AddItemTag;
 import com.temporal.api.core.engine.metadata.annotation.data.language.TranslateAmericanEnglish;
 import com.temporal.api.core.engine.metadata.annotation.data.model.GenerateItemModel;
 import com.temporal.api.core.engine.metadata.annotation.data.properties.Compostable;
 import com.temporal.api.core.engine.metadata.annotation.data.properties.FurnaceFuel;
+import com.temporal.api.core.engine.metadata.annotation.data.tag.AddItemTag;
 import com.temporal.api.core.engine.metadata.annotation.event.AddCreativeModeTab;
 import com.temporal.api.core.engine.metadata.annotation.event.SetupBow;
 import com.temporal.api.core.engine.metadata.annotation.event.SetupCrossbow;
@@ -14,6 +14,7 @@ import com.temporal.api.core.engine.metadata.constant.ItemModelType;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Tiers;
 import net.neoforged.neoforge.registries.DeferredItem;
+import net.temporal.example.tag.ExampleBannerPatternTags;
 
 public final class ExampleItems {
     private static final ExampleItemFactory ITEM_FACTORY = InjectionPool.getFromInstance(ExampleItemFactory.class);
@@ -106,4 +107,9 @@ public final class ExampleItems {
     @GenerateItemModel(ItemModelType.SPAWN_EGG)
     @TranslateAmericanEnglish("Example Spawn Egg")
     public static final DeferredItem<?> EXAMPLE_SPAWN_EGG = ITEM_FACTORY.createSpawnEgg("example_spawn_egg", ExampleEntityTypes.EXAMPLE_ENTITY, 0x473A24FF, 0x71634FFF);
+
+    @AddCreativeModeTab(CreativeModeTabType.INGREDIENTS)
+    @GenerateItemModel
+    @TranslateAmericanEnglish("Banner Pattern")
+    public static final DeferredItem<?> EXAMPLE_BANNER_ITEM = ITEM_FACTORY.createBannerPattern("example_banner_pattern", ExampleBannerPatternTags.EXAMPLE);
 }

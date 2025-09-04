@@ -23,35 +23,35 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 public final class TagUtils {
-    public static TagKey<Item> createItemTag(String id) {
+    public static TagKey<Item> createItem(String id) {
         return ItemTags.create(ResourceUtils.parse(id));
     }
 
-    public static TagKey<Block> createBlockTag(String id) {
+    public static TagKey<Block> createBlock(String id) {
         return BlockTags.create(ResourceUtils.parse(id));
     }
 
-    public TagKey<EntityType<?>> createEntityTypeTag(String id) {
+    public TagKey<EntityType<?>> createEntityType(String id) {
         return createTag(Registries.ENTITY_TYPE, id);
     }
 
-    public static TagKey<Fluid> createFluidTag(String id) {
+    public static TagKey<Fluid> createFluid(String id) {
         return FluidTags.create(ResourceUtils.parse(id));
     }
 
-    public static TagKey<BannerPattern> createBannerPatternTag(String id) {
+    public static TagKey<BannerPattern> createBannerPattern(String id) {
         return createTag(Registries.BANNER_PATTERN, id);
     }
 
-    public static TagKey<BiomeModifier> createBiomeModifierTag(String id) {
+    public static TagKey<BiomeModifier> createBiomeModifier(String id) {
         return createTag(NeoForgeRegistries.Keys.BIOME_MODIFIERS, id);
     }
 
-    public static TagKey<Biome> createBiomeTag(String id) {
+    public static TagKey<Biome> createBiome(String id) {
         return createTag(Registries.BIOME, id);
     }
 
-    public static TagKey<Structure> createStructureTag(String id) {
+    public static TagKey<Structure> createStructure(String id) {
         return createTag(Registries.STRUCTURE, id);
     }
 
@@ -59,7 +59,7 @@ public final class TagUtils {
         return TagKey.create(registry, ResourceUtils.parse(id));
     }
 
-    public static <T> void putTagKey(TagKey<T> tag, Map<String, TagKey<T>> data) {
+    public static <T> void putTag(TagKey<T> tag, Map<String, TagKey<T>> data) {
         String path = tag.location().toString();
         data.put(path, tag);
     }

@@ -8,6 +8,8 @@ import com.temporal.api.core.engine.metadata.strategy.field.data.biome.*;
 import com.temporal.api.core.engine.metadata.strategy.field.data.language.*;
 import com.temporal.api.core.engine.metadata.strategy.field.data.model.*;
 import com.temporal.api.core.engine.metadata.strategy.field.data.properties.*;
+import com.temporal.api.core.engine.metadata.strategy.field.data.tag.AddBlockTagStrategy;
+import com.temporal.api.core.engine.metadata.strategy.field.data.tag.AddItemTagStrategy;
 import com.temporal.api.core.util.ReflectionUtils;
 
 import java.lang.annotation.Annotation;

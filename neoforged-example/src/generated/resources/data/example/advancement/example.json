@@ -14,7 +14,7 @@
   },
   "display": {
     "description": {
-      "translate": "advancement.example.example.title"
+      "translate": "advancement.example.example.description"
     },
     "icon": {
       "count": 1,
