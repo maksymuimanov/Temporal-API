@@ -4,14 +4,15 @@ import com.temporal.api.core.engine.event.data.map.ApiDataMapProvider;
 import com.temporal.api.core.engine.event.data.map.WaxableDto;
 import com.temporal.api.core.engine.metadata.annotation.data.properties.Waxable;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
-import net.neoforged.neoforge.registries.DeferredBlock;
+import net.minecraft.core.Holder;
+import net.minecraft.world.level.block.Block;
 
 import java.lang.reflect.Field;
 
 public class WaxableStrategy implements FieldAnnotationStrategy<Waxable> {
     @Override
     public void execute(Field field, Object object, Waxable annotation) throws Exception {
-        DeferredBlock<?> block = (DeferredBlock<?>) field.get(object);
+        Holder<? extends Block> block = (Holder<? extends Block>) field.get(object);
         WaxableDto waxableDto = new WaxableDto(block, annotation.waxedBlock(), annotation.replace());
         ApiDataMapProvider.WAXABLES.add(waxableDto);
     }

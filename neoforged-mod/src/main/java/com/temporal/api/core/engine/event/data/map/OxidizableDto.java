@@ -1,6 +1,7 @@
 package com.temporal.api.core.engine.event.data.map;
 
-import net.neoforged.neoforge.registries.DeferredBlock;
+import net.minecraft.core.Holder;
+import net.minecraft.world.level.block.Block;
 
-public record OxidizableDto(DeferredBlock<?> block, String nextStageBlockId, boolean replace) {
+public record OxidizableDto(Holder<? extends Block> block, String nextStageBlockId, boolean replace) {
 }

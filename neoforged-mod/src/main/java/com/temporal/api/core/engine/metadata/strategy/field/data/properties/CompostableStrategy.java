@@ -4,22 +4,17 @@ import com.temporal.api.core.engine.event.data.map.ApiDataMapProvider;
 import com.temporal.api.core.engine.event.data.map.CompostableDto;
 import com.temporal.api.core.engine.metadata.annotation.data.properties.Compostable;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
+import com.temporal.api.core.util.ReflectionUtils;
 import net.minecraft.core.Holder;
-import net.neoforged.neoforge.registries.DeferredBlock;
-import net.neoforged.neoforge.registries.DeferredItem;
+import net.minecraft.world.item.Item;
 
 import java.lang.reflect.Field;
 
 public class CompostableStrategy implements FieldAnnotationStrategy<Compostable> {
     @Override
     public void execute(Field field, Object object, Compostable annotation) throws Exception {
-        CompostableDto compostableDto;
-        Object o = field.get(object);
-        compostableDto = switch (o) {
-            case DeferredItem<?> item -> new CompostableDto(item, annotation.chance(), annotation.replace());
-            case DeferredBlock<?> block -> new CompostableDto(Holder.direct(block.asItem()), annotation.chance(), annotation.replace());
-            case null, default -> throw new RuntimeException();
-        };
+        Holder<? extends Item> itemHolder = ReflectionUtils.getItemHolder(field, object);
+        CompostableDto compostableDto = new CompostableDto(itemHolder, annotation.chance(), annotation.replace());
         ApiDataMapProvider.COMPOSTABLES.add(compostableDto);
     }
 

@@ -4,8 +4,10 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.entity.BannerPattern;
 
 public class BannerPatternTransformer implements KeyTransformer<ResourceKey<BannerPattern>> {
+    public static final String PREFIX = "block.minecraft.banner.";
+
     @Override
     public String transform(ResourceKey<BannerPattern> bannerPattern) {
-        return "block.minecraft.banner." + bannerPattern.location().toShortLanguageKey();
+        return PREFIX + bannerPattern.location().toShortLanguageKey();
     }
 }

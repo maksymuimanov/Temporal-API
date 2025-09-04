@@ -1,6 +1,7 @@
 package com.temporal.api.core.engine.event.data.map;
 
-import net.neoforged.neoforge.registries.DeferredBlock;
+import net.minecraft.core.Holder;
+import net.minecraft.world.level.block.Block;
 
-public record WaxableDto(DeferredBlock<?> block, String waxedBlock, boolean replace) {
+public record WaxableDto(Holder<? extends Block> block, String waxedBlock, boolean replace) {
 }

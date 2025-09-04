@@ -3,6 +3,7 @@ package com.temporal.api.core.engine.event.data.map;
 import com.temporal.api.core.collection.TemporalQueue;
 import com.temporal.api.core.util.RegistryUtils;
 import com.temporal.api.core.util.ResourceUtils;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -32,19 +33,20 @@ public class ApiDataMapProvider extends DataMapProvider {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     protected void gather(@NotNull HolderLookup.Provider provider) {
         Builder<FurnaceFuel, Item> fuelItemBuilder = this.builder(NeoForgeDataMaps.FURNACE_FUELS);
         FURNACE_FUELS.forEach(fuel ->
-                fuelItemBuilder.add(fuel.item(), new FurnaceFuel(fuel.burnTime()), fuel.replace()));
+                fuelItemBuilder.add((Holder<Item>) fuel.item(), new FurnaceFuel(fuel.burnTime()), fuel.replace()));
         Builder<Compostable, Item> compostableItemBuilder = this.builder(NeoForgeDataMaps.COMPOSTABLES);
         COMPOSTABLES.forEach(compostable ->
-                compostableItemBuilder.add(compostable.item(), new Compostable(compostable.chance()), compostable.replace()));
+                compostableItemBuilder.add((Holder<Item>) compostable.item(), new Compostable(compostable.chance()), compostable.replace()));
         Builder<Oxidizable, Block> oxidizableBlockBuilder = this.builder(NeoForgeDataMaps.OXIDIZABLES);
         OXIDIZABLES.forEach(oxidizable ->
-                oxidizableBlockBuilder.add(oxidizable.block(), new Oxidizable(RegistryUtils.getBlock(oxidizable.nextStageBlockId())), oxidizable.replace()));
+                oxidizableBlockBuilder.add((Holder<Block>) oxidizable.block(), new Oxidizable(RegistryUtils.getBlock(oxidizable.nextStageBlockId())), oxidizable.replace()));
         Builder<Waxable, Block> waxableBlockBuilder = this.builder(NeoForgeDataMaps.WAXABLES);
         WAXABLES.forEach(waxable ->
-                waxableBlockBuilder.add(waxable.block(), new Waxable(RegistryUtils.getBlock(waxable.waxedBlock())), waxable.replace()));
+                waxableBlockBuilder.add((Holder<Block>) waxable.block(), new Waxable(RegistryUtils.getBlock(waxable.waxedBlock())), waxable.replace()));
         Builder<RaidHeroGift, VillagerProfession> raidHeroGiftVillagerProfessionBuilder = this.builder(NeoForgeDataMaps.RAID_HERO_GIFTS);
         RAID_HERO_GIFTS.forEach(raidHeroGift ->
                 raidHeroGiftVillagerProfessionBuilder.add(raidHeroGift.villagerProfession(), new RaidHeroGift(ResourceUtils.createKey(Registries.LOOT_TABLE, raidHeroGift.lootTablePath())), raidHeroGift.replace()));

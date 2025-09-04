@@ -34,7 +34,6 @@ public class DataFieldAnnotationProcessor implements AnnotationProcessor<FieldAn
             new MonsterRoomMobStrategy(),
             new ParrotImitationStrategy(),
             new GenerateSoundStrategy(),
-            new GenerateJukeboxSongStrategy(),
             new GeneratePaintingStrategy(),
             new GenerateParticleSpriteSetStrategy(),
             new GenerateEnchantmentStrategy(),
