@@ -1,0 +1,15 @@
+package com.temporal.api.core.engine.metadata.strategy.field.data.language;
+
+import com.temporal.api.core.engine.event.data.language.provider.NorthernSamiProvider;
+import com.temporal.api.core.engine.metadata.annotation.data.language.TranslateNorthernSami;
+
+public class TranslateNorthernSamiStrategy extends TranslationStrategy<TranslateNorthernSami> {
+    public TranslateNorthernSamiStrategy() {
+        super(NorthernSamiProvider.class);
+    }
+
+    @Override
+    public Class<? extends TranslateNorthernSami> getAnnotationClass() {
+        return TranslateNorthernSami.class;
+    }
+}

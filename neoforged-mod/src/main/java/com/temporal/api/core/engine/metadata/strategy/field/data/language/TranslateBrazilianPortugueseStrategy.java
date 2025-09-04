@@ -1,0 +1,15 @@
+package com.temporal.api.core.engine.metadata.strategy.field.data.language;
+
+import com.temporal.api.core.engine.event.data.language.provider.BrazilianPortugueseProvider;
+import com.temporal.api.core.engine.metadata.annotation.data.language.TranslateBrazilianPortuguese;
+
+public class TranslateBrazilianPortugueseStrategy extends TranslationStrategy<TranslateBrazilianPortuguese> {
+    public TranslateBrazilianPortugueseStrategy() {
+        super(BrazilianPortugueseProvider.class);
+    }
+
+    @Override
+    public Class<? extends TranslateBrazilianPortuguese> getAnnotationClass() {
+        return TranslateBrazilianPortuguese.class;
+    }
+}
