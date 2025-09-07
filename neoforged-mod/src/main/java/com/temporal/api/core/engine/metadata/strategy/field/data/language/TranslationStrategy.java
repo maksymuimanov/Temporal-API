@@ -65,8 +65,8 @@ public abstract class TranslationStrategy<A extends Annotation> implements Field
     protected <T> void putTranslation(T key, String value, String suffix, KeyTransformer<T> keyTransformer) {
         try {
             Map<String, String> translationMap = (Map<String, String>) this.translationProvider.getDeclaredField(ApiLanguageProvider.TRANSLATIONS_FIELD_NAME).get(null);
-            String transformedKey = suffix.isBlank() ? keyTransformer.transform(key) : keyTransformer.transform(key) + "." + suffix;
-            translationMap.put(transformedKey, value);
+            String translationKey = suffix.isBlank() ? keyTransformer.transform(key) : keyTransformer.transform(key) + "." + suffix;
+            translationMap.put(translationKey, value);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

@@ -1,6 +1,8 @@
 package com.temporal.api.core.engine.event.data.language.provider;
 
 import com.temporal.api.core.engine.context.ModContext;
+import com.temporal.api.core.engine.event.data.language.resolver.SimpleTranslationPlaceholderResolver;
+import com.temporal.api.core.engine.event.data.language.resolver.TranslationPlaceholderResolver;
 import com.temporal.api.core.engine.event.data.language.transformer.*;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
@@ -42,6 +44,7 @@ public abstract class ApiLanguageProvider extends LanguageProvider {
     public static final KeyTransformer<ResourceKey<PaintingVariant>> PAINTING_VARIANT_TRANSFORMER = new PaintingVariantTransformer();
     public static final KeyTransformer<Component> COMPONENT_TRANSFORMER = new ComponentTransformer();
     public static final KeyTransformer<String> STRING_TRANSFORMER = new StringTransformer();
+    public static final TranslationPlaceholderResolver PLACEHOLDER_RESOLVER = new SimpleTranslationPlaceholderResolver();
     public static final String TRANSLATIONS_FIELD_NAME = "TRANSLATIONS";
 
     static {
@@ -74,7 +77,12 @@ public abstract class ApiLanguageProvider extends LanguageProvider {
         try {
             Field field = this.getClass().getDeclaredField(TRANSLATIONS_FIELD_NAME);
             field.setAccessible(true);
-            return (Map<String, String>) field.get(this);
+            Map<String, String> translationsField = new HashMap<>((Map<String, String>) field.get(this));
+            HashMap<String, String> result = new HashMap<>();
+            translationsField.forEach((key, value) -> {
+                result.put(key, PLACEHOLDER_RESOLVER.resolve(value, translationsField));
+            });
+            return result;
         } catch (NoSuchFieldException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
