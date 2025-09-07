@@ -1,5 +1,6 @@
 package com.temporal.api.core.util;
 
+import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -14,12 +15,15 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BannerPattern;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.material.Fluid;
+import net.neoforged.neoforge.common.extensions.IHolderExtension;
 import net.neoforged.neoforge.common.world.BiomeModifier;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public final class TagUtils {
@@ -75,5 +79,16 @@ public final class TagUtils {
         return ReflectionUtils.getStaticFieldStream(tagClassHolder,
                 field -> TagKey.class.isAssignableFrom(field.getType()),
                 o -> (TagKey<T>) o);
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T> Map<String, List<ResourceKey<T>>> mapTagHolderMap(Map<String, List<Holder<? extends T>>> tagHolderMap) {
+        return tagHolderMap.entrySet()
+                .stream()
+                .collect(Collectors.toMap(Map.Entry::getKey, v -> v.getValue()
+                        .stream()
+                        .map(holder -> (Holder<T>) holder)
+                        .map(IHolderExtension::getKey)
+                        .toList()));
     }
 }

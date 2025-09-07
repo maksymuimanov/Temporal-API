@@ -1,13 +1,21 @@
 package com.temporal.api.core.util;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 
 public final class MapUtils {
     private MapUtils() {
+    }
+
+    public static <K, V> void putToSetMap(Map<K, Set<V>> map, K key, V value) {
+        boolean exists = map.containsKey(key);
+        if (exists) {
+            map.get(key).add(value);
+        } else {
+            Set<V> set = new HashSet<>();
+            set.add(value);
+            map.put(key, set);
+        }
     }
 
     public static <K, V> void putToListMap(Map<K, List<V>> map, K key, V value) {

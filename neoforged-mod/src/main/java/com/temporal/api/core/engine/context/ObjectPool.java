@@ -7,13 +7,15 @@ public interface ObjectPool {
 
     <T> T getObject(Class<? extends T> key);
 
-    ContextKey getContextKey(String name);
+    InjectionKey getContextKey(String name);
 
-    ContextKey getContextKey(Class<?> clazz);
+    InjectionKey getContextKey(Class<?> clazz);
 
     <T> List<? extends T> getObjects(Class<T> commonInterface);
 
     List<?> getAllObjects();
+
+    <T> void putObject(String keyName, Class<? extends T> keyClass);
 
     <T> void putObject(Class<? extends T> key);
 
@@ -23,7 +25,7 @@ public interface ObjectPool {
 
     <T> void putObject(Class<? extends T> key, T value);
 
-    <T> void putObject(ContextKey key, T value);
+    <T> void putObject(InjectionKey key, T value);
 
     <T> void removeObject(Class<? extends T> key);
 

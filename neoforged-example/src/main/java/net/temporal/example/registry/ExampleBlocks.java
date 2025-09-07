@@ -163,14 +163,14 @@ public final class ExampleBlocks {
     @AddBlockEntityType("minecraft:sign")
     public static final DeferredBlock<WallSignBlock> EXAMPLE_WALL_SIGN = BLOCK_FACTORY.createWallSignWithoutItem("example_wall_sign", 1f, ExampleWoodTypes.EXAMPLE_WOOD_TYPE);
 
-    @AddBlockTag("minecraft:hanging_signs")
+    @AddBlockTag("minecraft:ceiling_hanging_signs")
     @GenerateBlockModel(value = BlockModelType.HANGING_SIGN, additionalData = {"example:example_wall_hanging_sign", "example:block/example_stripped_log"})
     @GenerateBlockLootTable(value = BlockLootTableType.OTHER, additionalData = "example:example_hanging_sign")
     @TranslateAmericanEnglish("Example Hanging Sign")
     @AddBlockEntityType("minecraft:hanging_sign")
     public static final DeferredBlock<CeilingHangingSignBlock> EXAMPLE_HANGING_SIGN = BLOCK_FACTORY.createCeilingHangingSignWithoutItem("example_hanging_sign", 1f, ExampleWoodTypes.EXAMPLE_WOOD_TYPE);
 
-    @AddBlockTag("minecraft:hanging_signs")
+    @AddBlockTag("minecraft:wall_hanging_signs")
     @GenerateBlockLootTable(value = BlockLootTableType.OTHER, additionalData = "example:example_hanging_sign")
     @TranslateAmericanEnglish("Example Hanging Sign")
     @AddBlockEntityType("minecraft:hanging_sign")

@@ -3,12 +3,12 @@ package com.temporal.api.core.engine.event.handler;
 import com.temporal.api.core.engine.context.ModContext;
 import com.temporal.api.core.engine.event.client.*;
 import com.temporal.api.core.engine.metadata.MetadataLayer;
+import com.temporal.api.core.engine.metadata.annotation.event.SetupBow;
+import com.temporal.api.core.engine.metadata.annotation.event.SetupCrossbow;
+import com.temporal.api.core.engine.metadata.annotation.event.SetupShield;
+import com.temporal.api.core.engine.metadata.annotation.event.SetupWoodType;
+import com.temporal.api.core.engine.metadata.pool.SimpleStrategyPool;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
-import com.temporal.api.core.engine.metadata.strategy.field.event.SetupBowStrategy;
-import com.temporal.api.core.engine.metadata.strategy.field.event.SetupCrossbowStrategy;
-import com.temporal.api.core.engine.metadata.strategy.field.event.SetupShieldStrategy;
-import com.temporal.api.core.engine.metadata.strategy.field.event.SetupWoodTypeStrategy;
-import com.temporal.api.core.util.ReflectionUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.state.properties.WoodType;
@@ -28,16 +28,11 @@ public class FMLClientSetupEventHandler implements EventHandler {
     private static final ClientSetupStrategy<Holder<? extends Item>> CROSSBOW_STRATEGY = new CrossbowClientSetupStrategy();
     private static final ClientSetupStrategy<Holder<? extends Item>> SHIELD_STRATEGY = new ShieldClientSetupStrategy();
     private static final ClientSetupStrategy<WoodType> WOOD_TYPE_STRATEGY = new WoodTypeClientSetupStrategy();
-    private final Map<Class<? extends Annotation>, FieldAnnotationStrategy<?>> strategies = ReflectionUtils.createAnnotationStrategyMap(List.of(
-            new SetupBowStrategy(),
-            new SetupCrossbowStrategy(),
-            new SetupShieldStrategy(),
-            new SetupWoodTypeStrategy()
-    ));
 
     @Override
     public void handle() {
-        subscribeModEvent(FMLClientSetupEvent.class, event -> {
+        this.subscribeModEvent(FMLClientSetupEvent.class, event -> {
+            Map<Class<? extends Annotation>, FieldAnnotationStrategy<?>> strategies = SimpleStrategyPool.getInstance().getStrategies(SetupBow.class, SetupCrossbow.class, SetupShield.class, SetupWoodType.class);
             MetadataLayer.ASYNC_STRATEGY_CONSUMER.execute(MetadataLayer.STATIC_FIELD_EXECUTOR, strategies, ModContext.NEO_MOD.getClasses());
             WOOD_TYPE_STRATEGY.execute(WOOD_TYPES);
             event.enqueueWork(() -> {

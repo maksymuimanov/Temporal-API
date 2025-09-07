@@ -10,4 +10,5 @@ import java.lang.annotation.Target;
 public @interface TranslateEcuadorianSpanish {
     String id() default "";
     String value();
+    String suffix() default "";
 }

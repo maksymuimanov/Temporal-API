@@ -18,8 +18,9 @@ import com.temporal.api.core.engine.event.data.preparer.tag.EnchantmentTagDynami
 import com.temporal.api.core.engine.event.data.preparer.tag.ItemTagDynamicPreparer;
 import com.temporal.api.core.engine.event.data.recipe.ApiRecipeProvider;
 import com.temporal.api.core.engine.event.data.sound.ApiSoundProvider;
-import com.temporal.api.core.engine.event.data.tag.ApiBlockTagsProvider;
-import com.temporal.api.core.engine.event.data.tag.ApiItemTagsProvider;
+import com.temporal.api.core.engine.event.data.tag.BannerPatternTagsProvider;
+import com.temporal.api.core.engine.event.data.tag.BlockTagsProvider;
+import com.temporal.api.core.engine.event.data.tag.ItemTagsProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -233,11 +234,9 @@ public class ApiDataGenerator implements DataGatherer {
     public void addTagProvider(GatherDataEvent event) {
         final DataGenerator generator = getDataGenerator(event);
         final PackOutput packOutput = getPackOutput(event);
-        final ExistingFileHelper existingFileHelper = getExistingFileHelper(event);
-        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
-        ApiBlockTagsProvider blockTagsProvider = new ApiBlockTagsProvider(packOutput, lookupProvider, existingFileHelper);
-        generator.addProvider(event.includeServer(), blockTagsProvider);
-        generator.addProvider(event.includeServer(), new ApiItemTagsProvider(packOutput, lookupProvider, blockTagsProvider.contentsGetter(), existingFileHelper));
+        generator.addProvider(event.includeServer(), new BlockTagsProvider(packOutput));
+        generator.addProvider(event.includeServer(), new ItemTagsProvider(packOutput));
+        generator.addProvider(event.includeServer(), new BannerPatternTagsProvider(packOutput));
     }
 
     @Override

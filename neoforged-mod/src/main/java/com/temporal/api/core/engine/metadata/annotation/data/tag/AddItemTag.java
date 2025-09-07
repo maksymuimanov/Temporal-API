@@ -9,5 +9,4 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface AddItemTag {
     String[] value();
-    Class<?> tagContainer() default Object.class;
 }

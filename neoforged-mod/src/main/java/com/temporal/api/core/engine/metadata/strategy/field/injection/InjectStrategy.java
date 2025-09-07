@@ -3,6 +3,7 @@ package com.temporal.api.core.engine.metadata.strategy.field.injection;
 import com.temporal.api.core.engine.context.InjectionPool;
 import com.temporal.api.core.engine.context.ObjectPool;
 import com.temporal.api.core.engine.metadata.annotation.injection.Inject;
+import com.temporal.api.core.engine.metadata.annotation.injection.Injected;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 
 import java.lang.reflect.Field;
@@ -11,8 +12,18 @@ public class InjectStrategy implements FieldAnnotationStrategy<Inject> {
     @Override
     public void execute(Field field, Object object, Inject annotation) throws Exception {
         ObjectPool objectPool = InjectionPool.getInstance();
-        field.set(object, objectPool.getObject(field.getType()));
-        objectPool.putObject(object);
+        String beanName = annotation.value();
+        Object poolObject = beanName.isBlank() ? objectPool.getObject(field.getType()) : objectPool.getObject(beanName);
+        field.set(object, poolObject);
+        Class<?> objectClass = object.getClass();
+        Injected injected = objectClass.getDeclaredAnnotation(Injected.class);
+        if (!injected.isContextObject()) throw new IllegalStateException("@Inject annotation can be applied if class is annotated with @Injected(isContextObject=true)");
+        String rootBeanName = injected.value();
+        if (rootBeanName.isBlank()) {
+            objectPool.putObject(objectClass);
+        } else {
+            objectPool.putObject(rootBeanName, objectClass);
+        }
     }
 
     @Override

@@ -6,15 +6,20 @@ import com.google.gson.JsonObject;
 import net.minecraft.resources.ResourceLocation;
 
 import java.io.Serial;
+import java.util.List;
 
-public record ResourceLocationsRepresentation(boolean replace, ResourceLocation[] values) implements JsonRepresentation {
+public record ResourceLocationsRepresentation(Boolean replace, List<ResourceLocation> values) implements JsonRepresentation {
     @Serial
     private static final long serialVersionUID = 1L;
+
+    public ResourceLocationsRepresentation(List<ResourceLocation> values) {
+        this(null, values);
+    }
 
     @Override
     public JsonElement toJson() {
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("replace", replace);
+        if (replace != null) jsonObject.addProperty("replace", replace);
         JsonArray jsonArray = new JsonArray();
         for (ResourceLocation value : values) {
             jsonArray.add(value.toString());

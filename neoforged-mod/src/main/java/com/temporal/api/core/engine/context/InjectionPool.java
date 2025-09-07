@@ -8,9 +8,9 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Predicate;
 
 public class InjectionPool implements ObjectPool {
-    private final Map<ContextKey, Object> objects;
-    private final Map<String, ContextKey> cachedNames;
-    private final Map<Class<?>, ContextKey> cachedClasses;
+    private final Map<InjectionKey, Object> objects;
+    private final Map<String, InjectionKey> cachedNames;
+    private final Map<Class<?>, InjectionKey> cachedClasses;
 
     protected InjectionPool() {
         this.objects = new HashMap<>();
@@ -21,8 +21,8 @@ public class InjectionPool implements ObjectPool {
     @Override
     @SuppressWarnings("unchecked")
     public <T> T getObject(String key) {
-        ContextKey contextKey = this.getContextKey(key);
-        return (T) this.objects.get(contextKey);
+        InjectionKey injectionKey = this.getContextKey(key);
+        return (T) this.objects.get(injectionKey);
     }
 
     @Override
@@ -37,13 +37,13 @@ public class InjectionPool implements ObjectPool {
     }
 
     @Override
-    public ContextKey getContextKey(String name) {
+    public InjectionKey getContextKey(String name) {
         return cachedNames.computeIfAbsent(name, (id) ->
                 this.getContextKey(key -> id.equals(key.getName())));
     }
 
     @Override
-    public ContextKey getContextKey(Class<?> clazz) {
+    public InjectionKey getContextKey(Class<?> clazz) {
         return cachedClasses.computeIfAbsent(clazz, (id) ->
                 this.getContextKey(key -> id.equals(key.getClazz())));
 
@@ -66,6 +66,17 @@ public class InjectionPool implements ObjectPool {
     }
 
     @Override
+    public <T> void putObject(String keyName, Class<? extends T> keyClass) {
+        try {
+            Constructor<? extends T> constructor = keyClass.getDeclaredConstructor();
+            T value = constructor.newInstance();
+            this.putObject(keyName, value);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
     public <T> void putObject(Class<? extends T> key) {
         try {
             Constructor<? extends T> constructor = key.getDeclaredConstructor();
@@ -83,16 +94,16 @@ public class InjectionPool implements ObjectPool {
 
     @Override
     public <T> void putObject(String key, T value) {
-        this.putObject(new ContextKey(key, value.getClass()), value);
+        this.putObject(new InjectionKey(key, value.getClass()), value);
     }
 
     @Override
     public <T> void putObject(Class<? extends T> key, T value) {
-        this.putObject(new ContextKey(key), value);
+        this.putObject(new InjectionKey(key), value);
     }
 
     @Override
-    public <T> void putObject(ContextKey key, T value) {
+    public <T> void putObject(InjectionKey key, T value) {
         this.objects.put(key, value);
         this.cachedNames.put(key.getName(), key);
         this.cachedClasses.put(key.getClazz(), key);
@@ -100,9 +111,9 @@ public class InjectionPool implements ObjectPool {
 
     @Override
     public <T> void removeObject(Class<? extends T> key) {
-        ContextKey contextKey = this.getContextKey(key);
-        this.objects.remove(contextKey);
-        this.cachedNames.remove(contextKey.getName());
+        InjectionKey injectionKey = this.getContextKey(key);
+        this.objects.remove(injectionKey);
+        this.cachedNames.remove(injectionKey.getName());
         this.cachedClasses.remove(key);
     }
 
@@ -118,7 +129,7 @@ public class InjectionPool implements ObjectPool {
         this.cachedClasses.clear();
     }
 
-    private ContextKey getContextKey(Predicate<? super ContextKey> predicate) {
+    private InjectionKey getContextKey(Predicate<? super InjectionKey> predicate) {
         return this.objects.keySet()
                 .stream()
                 .filter(predicate)

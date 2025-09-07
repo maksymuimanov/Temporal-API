@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.decoration.PaintingVariant;
 
+import java.util.List;
 import java.util.Queue;
 
 public class PlaceablePaintingProvider extends SingleFileProvider {
@@ -20,10 +21,10 @@ public class PlaceablePaintingProvider extends SingleFileProvider {
 
     @Override
     public void registerFile() {
-        ResourceLocation[] placeables = PLACEABLES.stream()
+        List<ResourceLocation> placeables = PLACEABLES.stream()
                 .map(ResourceKey::location)
-                .toArray(ResourceLocation[]::new);
-        JsonRepresentation representation = new ResourceLocationsRepresentation(false, placeables);
+                .toList();
+        JsonRepresentation representation = new ResourceLocationsRepresentation(placeables);
         this.define(representation);
         PLACEABLES.clear();
     }

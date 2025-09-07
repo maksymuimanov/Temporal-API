@@ -2,12 +2,14 @@ package com.temporal.api.core.engine.metadata;
 
 import com.temporal.api.core.engine.EngineBuilder;
 import com.temporal.api.core.engine.EngineTask;
-import com.temporal.api.core.engine.metadata.processor.*;
+import com.temporal.api.core.engine.metadata.processor.AnnotationProcessor;
+import com.temporal.api.core.engine.metadata.processor.FieldAnnotationProcessor;
+import com.temporal.api.core.engine.metadata.processor.MethodAnnotationProcessor;
 
 import java.util.List;
 
 public class MetadataLayerBuilder {
-    private static final List<AnnotationProcessor<?>> DEFAULT_SIMPLE_PROCESSORS = List.of(new ClassAnnotationProcessor(), new StaticFieldAnnotationProcessor(), new FieldAnnotationProcessor(), new MethodAnnotationProcessor());
+    private static final List<AnnotationProcessor<?>> DEFAULT_SIMPLE_PROCESSORS = List.of(new FieldAnnotationProcessor(), new MethodAnnotationProcessor());
     private static final List<AnnotationProcessor<?>> DEFAULT_ASYNC_PROCESSORS = List.of();
     private final EngineBuilder engineBuilder;
     private final MetadataLayer metadataLayer;

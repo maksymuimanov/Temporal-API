@@ -10,4 +10,5 @@ import java.lang.annotation.Target;
 public @interface TranslateGreek {
     String id() default "";
     String value();
+    String suffix() default "";
 }

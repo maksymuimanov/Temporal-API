@@ -1,18 +1,19 @@
 package com.temporal.api.core.util;
 
-import com.temporal.api.core.engine.metadata.strategy.AnnotationStrategy;
 import com.temporal.api.core.engine.registry.factory.ObjectFactory;
 import net.minecraft.core.Holder;
 import net.minecraft.world.item.Item;
+import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.registries.DeferredBlock;
+import net.neoforged.neoforgespi.language.ModFileScanData;
 import org.jetbrains.annotations.NotNull;
 import org.objectweb.asm.Type;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Modifier;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Map;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -30,13 +31,13 @@ public final class ReflectionUtils {
         return false;
     }
 
-    public static Class<?> forType(Type type, Class<?> dependencyClass) {
-        return forName(type.getClassName(), dependencyClass);
+    public static Class<?> forType(Type type, Class<?> rootClass) {
+        return forName(type.getClassName(), rootClass);
     }
 
-    public static Class<?> forName(String name, Class<?> dependencyClass) {
+    public static Class<?> forName(String name, Class<?> rootClass) {
         try {
-            return Class.forName(name, false, dependencyClass.getClassLoader());
+            return Class.forName(name, false, rootClass.getClassLoader());
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -63,12 +64,6 @@ public final class ReflectionUtils {
                 .map(mapper);
     }
 
-    public static <T, S extends AnnotationStrategy<T, ? extends Annotation>> Map<Class<? extends Annotation>, S> createAnnotationStrategyMap(Collection<S> strategies) {
-        return strategies.stream()
-                .distinct()
-                .collect(Collectors.toMap(AnnotationStrategy::getAnnotationClass, strategy -> strategy));
-    }
-
 
     @SuppressWarnings("unchecked")
     public static Holder<? extends Item> getItemHolder(Field field, Object object) throws Exception {
@@ -79,5 +74,42 @@ public final class ReflectionUtils {
         } else {
             return (Holder<? extends Item>) field.get(object);
         }
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <P, T extends P> Set<T> getSubclassFamily(String modId, Class<?> rootClass, String packageName, Class<? extends P> parent) {
+        return getPackageClasses(modId, rootClass, packageName)
+                .stream()
+                .filter(parent::isAssignableFrom)
+                .filter(clazz -> !(clazz.isAnnotation() || clazz.isInterface() || clazz.isEnum() || Modifier.isAbstract(clazz.getModifiers())))
+                .map(clazz -> {
+                    try {
+                        return clazz.getConstructor();
+                    } catch (NoSuchMethodException e) {
+                        throw new RuntimeException(e);
+                    }
+                })
+                .map(constructor -> {
+                    try {
+                        constructor.setAccessible(true);
+                        return (T) constructor.newInstance();
+                    } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
+                        throw new RuntimeException(e);
+                    }
+                })
+                .collect(Collectors.toSet());
+    }
+
+    public static Set<Class<?>> getPackageClasses(String modId, Class<?> rootClass, String packageName) {
+        return ModList.get()
+                .getModFileById(modId)
+                .getFile()
+                .getScanResult()
+                .getClasses()
+                .stream()
+                .map(ModFileScanData.ClassData::clazz)
+                .map(clazz -> forType(clazz, rootClass))
+                .filter(clazz -> clazz.getName().startsWith(packageName))
+                .collect(Collectors.toSet());
     }
 }

@@ -15,8 +15,13 @@ public class InjectedObjectPoolInitializer implements ObjectPoolInitializer {
                     if (!clazz.isAnnotationPresent(Injected.class)) return;
                     Injected annotation = clazz.getDeclaredAnnotation(Injected.class);
                     String modCondition = annotation.mandatoryMod();
-                    if (annotation.value() && (modCondition.isBlank() || ModList.get().isLoaded(modCondition))) {
-                        objectPool.putObject(clazz);
+                    if (annotation.isContextObject() && (modCondition.isBlank() || ModList.get().isLoaded(modCondition))) {
+                        String beanName = annotation.value();
+                        if (beanName.isBlank()) {
+                            objectPool.putObject(clazz);
+                        } else {
+                            objectPool.putObject(beanName, clazz);
+                        }
                     }
                 });
     }

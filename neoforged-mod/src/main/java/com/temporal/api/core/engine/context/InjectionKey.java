@@ -1,14 +1,14 @@
 package com.temporal.api.core.engine.context;
 
-public final class ContextKey {
+public final class InjectionKey {
     private String name;
     private Class<?> clazz;
 
-    public ContextKey(Class<?> clazz) {
+    public InjectionKey(Class<?> clazz) {
         this(clazz.getSimpleName(), clazz);
     }
 
-    public ContextKey(String name, Class<?> clazz) {
+    public InjectionKey(String name, Class<?> clazz) {
         this.name = name;
         this.clazz = clazz;
     }

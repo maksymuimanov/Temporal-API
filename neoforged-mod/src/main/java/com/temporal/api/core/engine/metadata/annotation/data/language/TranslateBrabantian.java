@@ -10,4 +10,5 @@ import java.lang.annotation.Target;
 public @interface TranslateBrabantian {
     String id() default "";
     String value();
+    String suffix() default "";
 }

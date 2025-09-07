@@ -1,10 +1,7 @@
 package com.temporal.api.core.engine.event.data.file;
 
 import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
 import com.temporal.api.core.json.JsonRepresentation;
-import com.temporal.api.core.text.SimpleStringFormatter;
-import com.temporal.api.core.text.StringFormatter;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
@@ -13,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import java.nio.file.Path;
 import java.util.concurrent.CompletableFuture;
 
-public abstract class SingleFileProvider implements DataProvider {
+public abstract class SingleFileProvider implements FileProvider {
     private final PackOutput output;
     private final PackOutput.Target target;
     private final String path;
@@ -41,32 +38,13 @@ public abstract class SingleFileProvider implements DataProvider {
         return CompletableFuture.allOf();
     }
 
-    abstract void registerFile();
-
-    protected void define(String content, String... arguments) {
-        SimpleStringFormatter simpleFileContentFormatter = new SimpleStringFormatter();
-        this.define(content, arguments, simpleFileContentFormatter);
-    }
-
-    protected final void define(String content, String[] arguments, StringFormatter... formatters) {
-        String formatted = content;
-        for (StringFormatter formatter : formatters) {
-            formatted = formatter.format(formatted, arguments);
-        }
-        this.content = JsonParser.parseString(formatted);
-    }
+    public abstract void registerFile();
 
     protected final void define(JsonRepresentation representation) {
         this.content = representation.toJson();
     }
 
-    private CompletableFuture<?> save(final CachedOutput cache, final Path targetFile) {
+    protected CompletableFuture<?> save(final CachedOutput cache, final Path targetFile) {
         return DataProvider.saveStable(cache, this.content, targetFile);
-    }
-
-    @Override
-    @NotNull
-    public String getName() {
-        return this.getClass().getSimpleName();
     }
 }
