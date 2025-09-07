@@ -1,6 +1,4 @@
-package com.temporal.api.core.engine.metadata.annotation.event;
-
-import net.minecraft.client.renderer.entity.EntityRenderer;
+package com.temporal.api.core.engine.metadata.annotation.event.block;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -9,6 +7,6 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface RegisterEntityRenderer {
-    Class<? extends EntityRenderer<?>> value();
+public @interface AddBlockEntityType {
+    String value();
 }

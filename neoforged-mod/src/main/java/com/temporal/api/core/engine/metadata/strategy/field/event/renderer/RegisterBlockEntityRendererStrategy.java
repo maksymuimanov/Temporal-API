@@ -1,7 +1,7 @@
-package com.temporal.api.core.engine.metadata.strategy.field.event;
+package com.temporal.api.core.engine.metadata.strategy.field.event.renderer;
 
 import com.temporal.api.core.engine.event.handler.EntityRendererRegisterRendererEventHandler;
-import com.temporal.api.core.engine.metadata.annotation.event.RegisterBlockEntityRenderer;
+import com.temporal.api.core.engine.metadata.annotation.event.renderer.RegisterBlockEntityRenderer;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.core.Holder;

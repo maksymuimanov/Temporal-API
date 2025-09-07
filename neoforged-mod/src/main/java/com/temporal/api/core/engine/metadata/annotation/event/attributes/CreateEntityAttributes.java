@@ -1,4 +1,4 @@
-package com.temporal.api.core.engine.metadata.annotation.event;
+package com.temporal.api.core.engine.metadata.annotation.event.attributes;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

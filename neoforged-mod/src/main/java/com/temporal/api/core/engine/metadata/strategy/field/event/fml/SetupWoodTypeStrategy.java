@@ -1,7 +1,7 @@
-package com.temporal.api.core.engine.metadata.strategy.field.event;
+package com.temporal.api.core.engine.metadata.strategy.field.event.fml;
 
 import com.temporal.api.core.engine.event.handler.FMLClientSetupEventHandler;
-import com.temporal.api.core.engine.metadata.annotation.event.SetupWoodType;
+import com.temporal.api.core.engine.metadata.annotation.event.fml.SetupWoodType;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import net.minecraft.world.level.block.state.properties.WoodType;
 

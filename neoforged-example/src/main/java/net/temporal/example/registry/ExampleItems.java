@@ -6,9 +6,9 @@ import com.temporal.api.core.engine.metadata.annotation.data.model.GenerateItemM
 import com.temporal.api.core.engine.metadata.annotation.data.properties.Compostable;
 import com.temporal.api.core.engine.metadata.annotation.data.properties.FurnaceFuel;
 import com.temporal.api.core.engine.metadata.annotation.data.tag.AddItemTag;
-import com.temporal.api.core.engine.metadata.annotation.event.AddCreativeModeTab;
-import com.temporal.api.core.engine.metadata.annotation.event.SetupBow;
-import com.temporal.api.core.engine.metadata.annotation.event.SetupCrossbow;
+import com.temporal.api.core.engine.metadata.annotation.event.creative.AddCreativeModeTab;
+import com.temporal.api.core.engine.metadata.annotation.event.fml.SetupBow;
+import com.temporal.api.core.engine.metadata.annotation.event.fml.SetupCrossbow;
 import com.temporal.api.core.engine.metadata.constant.CreativeModeTabType;
 import com.temporal.api.core.engine.metadata.constant.ItemModelType;
 import net.minecraft.world.item.ArmorItem;

@@ -6,8 +6,8 @@ import com.temporal.api.core.engine.metadata.annotation.data.language.TranslateA
 import com.temporal.api.core.engine.metadata.annotation.data.model.GenerateBlockModel;
 import com.temporal.api.core.engine.metadata.annotation.data.model.GenerateItemModel;
 import com.temporal.api.core.engine.metadata.annotation.data.tag.AddBlockTag;
-import com.temporal.api.core.engine.metadata.annotation.event.AddBlockEntityType;
-import com.temporal.api.core.engine.metadata.annotation.event.AddCreativeModeTab;
+import com.temporal.api.core.engine.metadata.annotation.event.block.AddBlockEntityType;
+import com.temporal.api.core.engine.metadata.annotation.event.creative.AddCreativeModeTab;
 import com.temporal.api.core.engine.metadata.constant.BlockLootTableType;
 import com.temporal.api.core.engine.metadata.constant.BlockModelType;
 import com.temporal.api.core.engine.metadata.constant.CreativeModeTabType;

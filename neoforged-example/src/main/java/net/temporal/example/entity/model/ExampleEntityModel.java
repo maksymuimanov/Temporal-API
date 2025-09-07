@@ -2,7 +2,7 @@ package net.temporal.example.entity.model;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.temporal.api.core.engine.metadata.annotation.event.RegisterLayerDefinition;
+import com.temporal.api.core.engine.metadata.annotation.event.layer.RegisterLayerDefinition;
 import com.temporal.api.core.util.ResourceUtils;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;

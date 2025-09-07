@@ -1,7 +1,7 @@
-package com.temporal.api.core.engine.metadata.strategy.method.event;
+package com.temporal.api.core.engine.metadata.strategy.method.event.attributes;
 
 import com.temporal.api.core.engine.event.handler.EntityAttributeEventHandler;
-import com.temporal.api.core.engine.metadata.annotation.event.CreateEntityAttributes;
+import com.temporal.api.core.engine.metadata.annotation.event.attributes.CreateEntityAttributes;
 import com.temporal.api.core.engine.metadata.strategy.method.MethodAnnotationStrategy;
 import com.temporal.api.core.util.RegistryUtils;
 import net.minecraft.core.Holder;

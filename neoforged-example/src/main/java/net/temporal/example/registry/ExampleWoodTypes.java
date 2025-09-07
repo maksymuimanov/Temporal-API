@@ -1,6 +1,6 @@
 package net.temporal.example.registry;
 
-import com.temporal.api.core.engine.metadata.annotation.event.SetupWoodType;
+import com.temporal.api.core.engine.metadata.annotation.event.fml.SetupWoodType;
 import com.temporal.api.core.engine.registry.factory.WoodTypeFactory;
 import net.minecraft.world.level.block.state.properties.WoodType;
 

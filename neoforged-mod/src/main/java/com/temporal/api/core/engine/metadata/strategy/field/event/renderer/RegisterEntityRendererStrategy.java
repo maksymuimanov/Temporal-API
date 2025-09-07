@@ -1,7 +1,7 @@
-package com.temporal.api.core.engine.metadata.strategy.field.event;
+package com.temporal.api.core.engine.metadata.strategy.field.event.renderer;
 
 import com.temporal.api.core.engine.event.handler.EntityRendererRegisterRendererEventHandler;
-import com.temporal.api.core.engine.metadata.annotation.event.RegisterEntityRenderer;
+import com.temporal.api.core.engine.metadata.annotation.event.renderer.RegisterEntityRenderer;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

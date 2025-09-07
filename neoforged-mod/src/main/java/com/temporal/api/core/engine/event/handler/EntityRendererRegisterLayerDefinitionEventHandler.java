@@ -2,8 +2,8 @@ package com.temporal.api.core.engine.event.handler;
 
 import com.temporal.api.core.collection.TemporalMap;
 import com.temporal.api.core.engine.context.ModContext;
+import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
 import com.temporal.api.core.engine.metadata.MetadataLayer;
-import com.temporal.api.core.engine.metadata.annotation.event.RegisterLayerDefinition;
 import com.temporal.api.core.engine.metadata.pool.SimpleStrategyPool;
 import com.temporal.api.core.engine.metadata.strategy.type.ClassAnnotationStrategy;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -19,7 +19,7 @@ public class EntityRendererRegisterLayerDefinitionEventHandler implements EventH
     @Override
     public void handle() {
         this.subscribeModEvent(EntityRenderersEvent.RegisterLayerDefinitions.class, event -> {
-            Map<Class<? extends Annotation>, ClassAnnotationStrategy<?>> strategies = SimpleStrategyPool.getInstance().getStrategies(RegisterLayerDefinition.class);
+            Map<Class<? extends Annotation>, ClassAnnotationStrategy<?>> strategies = SimpleStrategyPool.getInstance().getStrategies(StrategyPoolInitializer.DEFAULT_CLASS_LAYER_EVENT);
             MetadataLayer.ASYNC_STRATEGY_CONSUMER.execute(MetadataLayer.CLASS_EXECUTOR, strategies, ModContext.NEO_MOD.getClasses());
             LAYERS.forEach((location, definition) -> event.registerLayerDefinition(location, () -> definition));
         });

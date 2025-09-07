@@ -1,7 +1,7 @@
-package com.temporal.api.core.engine.metadata.strategy.field.event;
+package com.temporal.api.core.engine.metadata.strategy.field.event.block;
 
 import com.temporal.api.core.engine.event.handler.BlockEntityTypeEventHandler;
-import com.temporal.api.core.engine.metadata.annotation.event.AddBlockEntityType;
+import com.temporal.api.core.engine.metadata.annotation.event.block.AddBlockEntityType;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.util.MapUtils;
 import com.temporal.api.core.util.RegistryUtils;

@@ -1,4 +1,4 @@
-package com.temporal.api.core.engine.metadata.annotation.event;
+package com.temporal.api.core.engine.metadata.annotation.event.renderer;
 
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 

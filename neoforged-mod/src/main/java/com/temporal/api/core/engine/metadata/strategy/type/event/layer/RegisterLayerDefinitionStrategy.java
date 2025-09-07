@@ -1,7 +1,7 @@
-package com.temporal.api.core.engine.metadata.strategy.type.event;
+package com.temporal.api.core.engine.metadata.strategy.type.event.layer;
 
 import com.temporal.api.core.engine.event.handler.EntityRendererRegisterLayerDefinitionEventHandler;
-import com.temporal.api.core.engine.metadata.annotation.event.RegisterLayerDefinition;
+import com.temporal.api.core.engine.metadata.annotation.event.layer.RegisterLayerDefinition;
 import com.temporal.api.core.engine.metadata.strategy.type.ClassAnnotationStrategy;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
