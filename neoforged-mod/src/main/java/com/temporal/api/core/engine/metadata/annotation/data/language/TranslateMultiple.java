@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 public @interface TranslateMultiple {
     TranslateAfrikaans[] afrikaans() default {};
     TranslateAlbanian[] albanian() default {};
-    TranslateAlbanian[] americanEnglish() default {};
+    TranslateAmericanEnglish[] americanEnglish() default {};
     TranslateAndalusian[] andalusian() default {};
     TranslateArabic[] arabic() default {};
     TranslateArgentianSpanish[] argentianSpanish() default {};

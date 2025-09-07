@@ -2,6 +2,7 @@ package net.temporal.example.registry;
 
 import com.temporal.api.core.engine.context.InjectionPool;
 import com.temporal.api.core.engine.metadata.annotation.data.language.TranslateAmericanEnglish;
+import com.temporal.api.core.engine.metadata.annotation.data.language.TranslateMultiple;
 import com.temporal.api.core.engine.metadata.annotation.data.model.GenerateItemModel;
 import com.temporal.api.core.engine.metadata.annotation.data.properties.Compostable;
 import com.temporal.api.core.engine.metadata.annotation.data.properties.FurnaceFuel;
@@ -110,6 +111,9 @@ public final class ExampleItems {
 
     @AddCreativeModeTab(CreativeModeTabType.INGREDIENTS)
     @GenerateItemModel
-    @TranslateAmericanEnglish("Banner Pattern")
+    @TranslateMultiple(americanEnglish = {
+            @TranslateAmericanEnglish("Banner Pattern"),
+            @TranslateAmericanEnglish(value = "Example Banner Pattern", suffix = "desc")
+    })
     public static final DeferredItem<?> EXAMPLE_BANNER_ITEM = ITEM_FACTORY.createBannerPattern("example_banner_pattern", ExampleBannerPatternTags.EXAMPLE);
 }

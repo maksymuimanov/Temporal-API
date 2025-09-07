@@ -1,8 +1,9 @@
-package com.temporal.api.core.text;
+package com.temporal.api.core.engine.event.data.language.resolver;
 
-public class SimpleStringFormatter implements StringFormatter {
+public class SimplePlaceholderResolver implements PlaceholderResolver {
+    //TODO
     @Override
-    public String format(String body, String... arguments) {
+    public String resolve(String body, String... arguments) {
         if (arguments == null || arguments.length == 0) return body;
         StringBuilder result = new StringBuilder();
         boolean isOpen = false;

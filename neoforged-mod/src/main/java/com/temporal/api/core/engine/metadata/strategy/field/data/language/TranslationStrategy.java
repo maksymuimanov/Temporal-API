@@ -35,10 +35,10 @@ public abstract class TranslationStrategy<A extends Annotation> implements Field
         String value = (String) valueMethod.invoke(annotation);
         Method suffixMethod = annotationClass.getDeclaredMethod(TRANSLATION_SUFFIX_METHOD);
         String suffix = (String) suffixMethod.invoke(annotation);
-        this.putDynamicTranslation(id, value, suffix, o);
+        this.directTranslation(id, value, suffix, o);
     }
 
-    protected void putDynamicTranslation(String possibleKey, String value, String suffix, Object o) {
+    protected void directTranslation(String possibleKey, String value, String suffix, Object o) {
         if (!possibleKey.isBlank()) {
             this.putTranslation(possibleKey, value, suffix, ApiLanguageProvider.STRING_TRANSFORMER);
         } else {
@@ -64,7 +64,7 @@ public abstract class TranslationStrategy<A extends Annotation> implements Field
 
     protected <T> void putTranslation(T key, String value, String suffix, KeyTransformer<T> keyTransformer) {
         try {
-            Map<String, String> translationMap = (Map<String, String>) this.translationProvider.getDeclaredField("TRANSLATIONS").get(null);
+            Map<String, String> translationMap = (Map<String, String>) this.translationProvider.getDeclaredField(ApiLanguageProvider.TRANSLATIONS_FIELD_NAME).get(null);
             String transformedKey = suffix.isBlank() ? keyTransformer.transform(key) : keyTransformer.transform(key) + "." + suffix;
             translationMap.put(transformedKey, value);
         } catch (Exception e) {
