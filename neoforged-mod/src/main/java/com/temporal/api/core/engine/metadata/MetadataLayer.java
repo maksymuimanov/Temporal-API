@@ -25,8 +25,8 @@ public class MetadataLayer implements EngineLayer {
     public static final AnnotationExecutor<MethodAnnotationStrategy<?>> METHOD_EXECUTOR = new MethodExecutor();
     public static final AnnotationExecutor<FieldAnnotationStrategy<?>> STATIC_FIELD_EXECUTOR = new StaticFieldExecutor();
     public static final AnnotationExecutor<MethodAnnotationStrategy<?>> STATIC_METHOD_EXECUTOR = new StaticMethodExecutor();
-    private List<AnnotationProcessor<?>> simpleProcessors;
-    private List<AnnotationProcessor<?>> asyncProcessors;
+    private List<AnnotationProcessor> simpleProcessors;
+    private List<AnnotationProcessor> asyncProcessors;
 
     @Override
     public void processAllTasks() {
@@ -34,11 +34,11 @@ public class MetadataLayer implements EngineLayer {
         commonSetupEventHandler.handle();
     }
 
-    public void setSimpleProcessors(List<AnnotationProcessor<?>> simpleProcessors) {
+    public void setSimpleProcessors(List<AnnotationProcessor> simpleProcessors) {
         this.simpleProcessors = simpleProcessors;
     }
 
-    public void setAsyncProcessors(List<AnnotationProcessor<?>> asyncProcessors) {
+    public void setAsyncProcessors(List<AnnotationProcessor> asyncProcessors) {
         this.asyncProcessors = asyncProcessors;
     }
 
@@ -51,10 +51,10 @@ public class MetadataLayer implements EngineLayer {
                     ApiMod.LOGGER.debug("Processing {} simple annotation processors", simpleProcessors.size());
                     Set<Class<?>> classes = ModContext.NEO_MOD.getClasses();
                     simpleProcessors.forEach(annotationProcessor ->
-                            annotationProcessor.process(classes, SIMPLE_STRATEGY_CONSUMER));
+                            annotationProcessor.process(SIMPLE_STRATEGY_CONSUMER, classes));
                     ApiMod.LOGGER.debug("Processing {} async annotation processors", asyncProcessors.size());
                     asyncProcessors.forEach(annotationProcessor ->
-                            annotationProcessor.process(classes, ASYNC_STRATEGY_CONSUMER));
+                            annotationProcessor.process(ASYNC_STRATEGY_CONSUMER, classes));
                 });
             });
         }

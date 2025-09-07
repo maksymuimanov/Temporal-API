@@ -20,7 +20,7 @@ public class EntityRendererRegisterRendererEventHandler implements EventHandler 
     public void handle() {
         this.subscribeModEvent(EntityRenderersEvent.RegisterRenderers.class, event -> {
             Map<Class<? extends Annotation>, FieldAnnotationStrategy<?>> strategies = SimpleStrategyPool.getInstance().getStrategies(StrategyPoolInitializer.DEFAULT_FIELD_EVENT_RENDERER);
-            MetadataLayer.ASYNC_STRATEGY_CONSUMER.execute(MetadataLayer.STATIC_FIELD_EXECUTOR, strategies, ModContext.NEO_MOD.getClasses());
+            MetadataLayer.ASYNC_STRATEGY_CONSUMER.execute(MetadataLayer.STATIC_FIELD_EXECUTOR, strategies, ModContext.ALL_CLASSES);
             RENDERING_REGISTRIES.forEach(consumer -> consumer.accept(event));
         });
     }

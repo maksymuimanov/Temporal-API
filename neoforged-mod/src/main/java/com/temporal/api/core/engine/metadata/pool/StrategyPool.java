@@ -9,9 +9,13 @@ import java.util.Map;
 public interface StrategyPool {
     <T, S extends AnnotationStrategy<T, ?>, R extends S> Map<Class<? extends Annotation>, R> getStrategies(Collection<Class<? extends Annotation>> annotationClasses);
 
-    <T, S extends AnnotationStrategy<T, ?>, R extends S> Map<Class<? extends Annotation>, R> getStrategies(Class<? extends Annotation>... annotationClasses);
+    <T, S extends AnnotationStrategy<T, ?>, R extends S> Map<Class<? extends Annotation>, R> getStrategies(Class<? extends Annotation> annotationClass, Class<? extends Annotation>... annotationClasses);
+
+    <T, S extends AnnotationStrategy<T, ?>, R extends S> Map<Class<? extends Annotation>, R> getStrategies(String name, String... names);
 
     <T, S extends AnnotationStrategy<T, ?>, R extends S> Map<Class<? extends Annotation>, R> getStrategies(String name);
+
+    <T, S extends AnnotationStrategy<T, ?>, R extends S> Map<Class<? extends Annotation>, R> getStrategies(StrategyScope scope, StrategyScope... scopes);
 
     <T, S extends AnnotationStrategy<T, ?>, R extends S> Map<Class<? extends Annotation>, R> getStrategies(StrategyScope scope);
 

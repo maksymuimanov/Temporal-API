@@ -20,9 +20,10 @@ public class InitializationLayer implements EngineLayer {
     @Override
     public void processAllTasks() {
         NeoMod mod = NeoMod.create(this.modClass, this.classScanners);
-        ModContext.NEO_MOD = mod;
         String modId = mod.getModId();
         Set<Class<?>> classes = mod.getClasses();
+        ModContext.NEO_MOD = mod;
+        ModContext.ALL_CLASSES.addAll(classes);
         ApiMod.LOGGER.info("NeoMod dependency created: (modId={}, classes={})", modId, classes.size());
         ObjectPool objectPool = ModContext.getInstance()
                 .createPool(modId);

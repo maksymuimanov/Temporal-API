@@ -1,25 +1,22 @@
 package com.temporal.api.core.engine.event.handler;
 
+import com.temporal.api.core.engine.context.ModContext;
 import com.temporal.api.core.engine.event.data.ApiDataGenerator;
 import com.temporal.api.core.engine.event.data.DataGatherer;
+import com.temporal.api.core.engine.metadata.MetadataLayer;
+import com.temporal.api.core.engine.metadata.pool.SimpleStrategyPool;
 import com.temporal.api.core.engine.metadata.processor.AnnotationProcessor;
-import com.temporal.api.core.engine.metadata.processor.DataClassAnnotationProcessor;
-import com.temporal.api.core.engine.metadata.processor.DataFieldAnnotationProcessor;
+import com.temporal.api.core.engine.metadata.processor.DataAnnotationProcessor;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
-import java.util.List;
-
-import static com.temporal.api.core.engine.context.ModContext.NEO_MOD;
-import static com.temporal.api.core.engine.metadata.MetadataLayer.ASYNC_STRATEGY_CONSUMER;
-
 public class DataEventHandler implements EventHandler {
-    private static final List<AnnotationProcessor<?>> DATA_PROCESSORS = List.of(new DataClassAnnotationProcessor(), new DataFieldAnnotationProcessor());
+    private static final AnnotationProcessor DATA_ANNOTATION_PROCESSOR = new DataAnnotationProcessor();
     private static final DataGatherer GENERATOR = new ApiDataGenerator();
 
     @Override
     public void handle() {
-        subscribeModEvent(GatherDataEvent.class, event -> {
-            DATA_PROCESSORS.forEach(annotationProcessor -> annotationProcessor.process(NEO_MOD.getClasses(), ASYNC_STRATEGY_CONSUMER));
+        this.subscribeModEvent(GatherDataEvent.class, event -> {
+            DATA_ANNOTATION_PROCESSOR.process(MetadataLayer.ASYNC_STRATEGY_CONSUMER, SimpleStrategyPool.getInstance(), ModContext.NEO_MOD.getClasses());
             GENERATOR.gatherData(event);
         });
     }

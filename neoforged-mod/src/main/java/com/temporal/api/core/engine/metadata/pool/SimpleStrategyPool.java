@@ -25,18 +25,34 @@ public class SimpleStrategyPool implements StrategyPool {
     @Override
     @SuppressWarnings("unchecked")
     public <T, S extends AnnotationStrategy<T, ?>, R extends S> Map<Class<? extends Annotation>, R> getStrategies(Collection<Class<? extends Annotation>> annotationClasses) {
-        return this.getStrategies(annotationClasses.toArray(Class[]::new));
+        Map<Class<? extends Annotation>, R> strategies = new HashMap<>();
+        for (Class<? extends Annotation> anotherAnnotationClass : annotationClasses) {
+            R anotherAnnotationStrategy = (R) this.getStrategy(anotherAnnotationClass);
+            strategies.put(anotherAnnotationClass, anotherAnnotationStrategy);
+        }
+        return strategies;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public <T, S extends AnnotationStrategy<T, ?>, R extends S> Map<Class<? extends Annotation>, R> getStrategies(Class<? extends Annotation>... annotationClasses) {
+    public <T, S extends AnnotationStrategy<T, ?>, R extends S> Map<Class<? extends Annotation>, R> getStrategies(Class<? extends Annotation> annotationClass, Class<? extends Annotation>... annotationClasses) {
         Map<Class<? extends Annotation>, R> strategies = new HashMap<>();
-        for (Class<? extends Annotation> annotationClass : annotationClasses) {
-            R strategy = (R) this.getStrategy(annotationClass);
-            strategies.put(annotationClass, strategy);
+        R annotationStrategy = (R) this.getStrategy(annotationClass);
+        strategies.put(annotationClass, annotationStrategy);
+        for (Class<? extends Annotation> anotherAnnotationClass : annotationClasses) {
+            R anotherAnnotationStrategy = (R) this.getStrategy(anotherAnnotationClass);
+            strategies.put(anotherAnnotationClass, anotherAnnotationStrategy);
         }
         return strategies;
+    }
+
+    @Override
+    public <T, S extends AnnotationStrategy<T, ?>, R extends S> Map<Class<? extends Annotation>, R> getStrategies(String name, String... names) {
+        Map<Class<? extends Annotation>, R> strategyMap = this.getStrategies(name);
+        for (String anotherName : names) {
+            strategyMap.putAll(this.getStrategies(anotherName));
+        }
+        return strategyMap;
     }
 
     @Override
@@ -47,6 +63,15 @@ public class SimpleStrategyPool implements StrategyPool {
                 .findAny()
                 .orElseThrow();
         return this.getStrategies(scope);
+    }
+
+    @Override
+    public <T, S extends AnnotationStrategy<T, ?>, R extends S> Map<Class<? extends Annotation>, R> getStrategies(StrategyScope scope, StrategyScope... scopes) {
+        Map<Class<? extends Annotation>, R> strategyMap = this.getStrategies(scope);
+        for (StrategyScope anotherScope : scopes) {
+            strategyMap.putAll(this.getStrategies(anotherScope));
+        }
+        return strategyMap;
     }
 
     @Override

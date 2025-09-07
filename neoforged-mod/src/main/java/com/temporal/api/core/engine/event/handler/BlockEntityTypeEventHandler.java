@@ -22,7 +22,7 @@ public class BlockEntityTypeEventHandler implements EventHandler {
     public void handle() {
         this.subscribeModEvent(BlockEntityTypeAddBlocksEvent.class, event -> {
             Map<Class<? extends Annotation>, FieldAnnotationStrategy<?>> strategies = SimpleStrategyPool.getInstance().getStrategies(StrategyPoolInitializer.DEFAULT_FIELD_EVENT_BLOCK);
-            MetadataLayer.ASYNC_STRATEGY_CONSUMER.execute(MetadataLayer.STATIC_FIELD_EXECUTOR, strategies, ModContext.NEO_MOD.getClasses());
+            MetadataLayer.ASYNC_STRATEGY_CONSUMER.execute(MetadataLayer.STATIC_FIELD_EXECUTOR, strategies, ModContext.ALL_CLASSES);
             BLOCKS.forEach((type, holders) -> {
                 event.modify(type, holders.stream()
                         .map(Holder::value)

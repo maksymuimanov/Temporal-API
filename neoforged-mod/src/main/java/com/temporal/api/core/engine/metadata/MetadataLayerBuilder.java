@@ -3,18 +3,17 @@ package com.temporal.api.core.engine.metadata;
 import com.temporal.api.core.engine.EngineBuilder;
 import com.temporal.api.core.engine.EngineTask;
 import com.temporal.api.core.engine.metadata.processor.AnnotationProcessor;
-import com.temporal.api.core.engine.metadata.processor.FieldAnnotationProcessor;
-import com.temporal.api.core.engine.metadata.processor.MethodAnnotationProcessor;
+import com.temporal.api.core.engine.metadata.processor.InjectionAnnotationProcessor;
 
 import java.util.List;
 
 public class MetadataLayerBuilder {
-    private static final List<AnnotationProcessor<?>> DEFAULT_SIMPLE_PROCESSORS = List.of(new FieldAnnotationProcessor(), new MethodAnnotationProcessor());
-    private static final List<AnnotationProcessor<?>> DEFAULT_ASYNC_PROCESSORS = List.of();
+    private static final List<AnnotationProcessor> DEFAULT_SIMPLE_PROCESSORS = List.of(new InjectionAnnotationProcessor());
+    private static final List<AnnotationProcessor> DEFAULT_ASYNC_PROCESSORS = List.of();
     private final EngineBuilder engineBuilder;
     private final MetadataLayer metadataLayer;
-    private List<AnnotationProcessor<?>> simpleProcessors = DEFAULT_SIMPLE_PROCESSORS;
-    private List<AnnotationProcessor<?>> asyncProcessors = DEFAULT_ASYNC_PROCESSORS;
+    private List<AnnotationProcessor> simpleProcessors = DEFAULT_SIMPLE_PROCESSORS;
+    private List<AnnotationProcessor> asyncProcessors = DEFAULT_ASYNC_PROCESSORS;
 
     public MetadataLayerBuilder(EngineBuilder engineBuilder) {
         this.engineBuilder = engineBuilder;
@@ -22,12 +21,12 @@ public class MetadataLayerBuilder {
         this.engineBuilder.addLayer(this.metadataLayer);
     }
 
-    public MetadataLayerBuilder simpleProcessors(List<AnnotationProcessor<?>> simpleProcessors) {
+    public MetadataLayerBuilder simpleProcessors(List<AnnotationProcessor> simpleProcessors) {
         this.simpleProcessors = simpleProcessors;
         return this;
     }
 
-    public MetadataLayerBuilder asyncProcessors(List<AnnotationProcessor<?>> asyncProcessors) {
+    public MetadataLayerBuilder asyncProcessors(List<AnnotationProcessor> asyncProcessors) {
         this.asyncProcessors = asyncProcessors;
         return this;
     }

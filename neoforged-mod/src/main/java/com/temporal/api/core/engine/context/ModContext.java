@@ -5,10 +5,13 @@ import com.temporal.api.core.exception.PoolDeletionException;
 import com.temporal.api.core.exception.PoolGettingException;
 
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class ModContext implements Context<String, InjectionPool> {
     public static volatile NeoMod NEO_MOD;
+    public static final Set<Class<?>> ALL_CLASSES = new LinkedHashSet<>();
     private static volatile ModContext instance;
     private final Map<NeoMod, InjectionPool> injectionPools = new HashMap<>();
 

@@ -20,7 +20,7 @@ public class EntityRendererRegisterLayerDefinitionEventHandler implements EventH
     public void handle() {
         this.subscribeModEvent(EntityRenderersEvent.RegisterLayerDefinitions.class, event -> {
             Map<Class<? extends Annotation>, ClassAnnotationStrategy<?>> strategies = SimpleStrategyPool.getInstance().getStrategies(StrategyPoolInitializer.DEFAULT_CLASS_LAYER_EVENT);
-            MetadataLayer.ASYNC_STRATEGY_CONSUMER.execute(MetadataLayer.CLASS_EXECUTOR, strategies, ModContext.NEO_MOD.getClasses());
+            MetadataLayer.ASYNC_STRATEGY_CONSUMER.execute(MetadataLayer.CLASS_EXECUTOR, strategies, ModContext.ALL_CLASSES);
             LAYERS.forEach((location, definition) -> event.registerLayerDefinition(location, () -> definition));
         });
     }

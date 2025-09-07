@@ -1,25 +1,17 @@
 package com.temporal.api.core.engine.metadata.processor;
 
-import com.temporal.api.ApiMod;
 import com.temporal.api.core.engine.metadata.consumer.AnnotationStrategyConsumer;
-import com.temporal.api.core.engine.metadata.executor.AnnotationExecutor;
-import com.temporal.api.core.engine.metadata.strategy.AnnotationStrategy;
+import com.temporal.api.core.engine.metadata.pool.SimpleStrategyPool;
+import com.temporal.api.core.engine.metadata.pool.StrategyPool;
 
-import java.lang.annotation.Annotation;
-import java.util.Map;
 import java.util.Set;
 
-public interface AnnotationProcessor<S extends AnnotationStrategy<?, ?>> {
-    default void process(Set<Class<?>> classes, AnnotationStrategyConsumer consumer) {
-        try {
-            consumer.execute(getExecutor(), getStrategies(), classes);
-        } catch (Exception e) {
-            ApiMod.LOGGER.error(e.getMessage());
-            throw new RuntimeException(e);
-        }
+@FunctionalInterface
+public interface AnnotationProcessor {
+    default void process(AnnotationStrategyConsumer consumer, Set<Class<?>> classes) {
+        final StrategyPool strategyPool = SimpleStrategyPool.getInstance();
+        this.process(consumer, strategyPool, classes);
     }
 
-    AnnotationExecutor<S> getExecutor();
-
-    Map<Class<? extends Annotation>, S> getStrategies();
+    void process(AnnotationStrategyConsumer consumer, StrategyPool strategyPool, Set<Class<?>> classes);
 }
