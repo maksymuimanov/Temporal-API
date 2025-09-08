@@ -13,9 +13,8 @@ public class GenerateDamageTypeStrategy implements FieldAnnotationStrategy<Gener
     @Override
     public void execute(Field field, Object object, GenerateDamageType annotation) throws Exception {
         ResourceKey<DamageType> damageType = (ResourceKey<DamageType>) field.get(object);
-        DamageTypeDescription descriptionHolder = new DamageTypeDescription(annotation.damageScaling(), annotation.exhaustion(), annotation.effects(), annotation.messageType());
-        ApiDamageTypeProvider.DAMAGE_TYPES.put(damageType, descriptionHolder);
-
+        DamageTypeDescription description = new DamageTypeDescription(annotation.damageScaling(), annotation.exhaustion(), annotation.effects(), annotation.messageType());
+        ApiDamageTypeProvider.DAMAGE_TYPES.put(damageType, description);
     }
 
     @Override

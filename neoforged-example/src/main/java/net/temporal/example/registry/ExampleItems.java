@@ -15,6 +15,7 @@ import com.temporal.api.core.engine.metadata.constant.ItemModelType;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Tiers;
 import net.neoforged.neoforge.registries.DeferredItem;
+import net.temporal.example.jukebox.ExampleJukeboxSongs;
 import net.temporal.example.tag.ExampleBannerPatternTags;
 
 public final class ExampleItems {
@@ -116,4 +117,9 @@ public final class ExampleItems {
             @TranslateAmericanEnglish(value = "Example Banner Pattern", suffix = "desc")
     })
     public static final DeferredItem<?> EXAMPLE_BANNER_ITEM = ITEM_FACTORY.createBannerPattern("example_banner_pattern", ExampleBannerPatternTags.EXAMPLE);
+
+    @AddCreativeModeTab(CreativeModeTabType.INGREDIENTS)
+    @GenerateItemModel
+    @TranslateAmericanEnglish("Example Music Disc")
+    public static final DeferredItem<?> EXAMPLE_MUSIC_DISC = ITEM_FACTORY.createMusicDisc("example_music_disc", ExampleJukeboxSongs.EXAMPLE_JUKEBOX_SONG);
 }

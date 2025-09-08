@@ -15,6 +15,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.decoration.PaintingVariant;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.JukeboxSong;
 import net.minecraft.world.item.armortrim.TrimMaterial;
 import net.minecraft.world.item.armortrim.TrimPattern;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -41,6 +42,7 @@ public abstract class ApiLanguageProvider extends LanguageProvider {
     public static final KeyTransformer<ResourceKey<TrimMaterial>> TRIM_MATERIAL_TRANSFORMER = new TrimMaterialTransformer();
     public static final KeyTransformer<ResourceKey<TrimPattern>> TRIM_PATTERN_TRANSFORMER = new TrimPatternTransformer();
     public static final KeyTransformer<ResourceKey<BannerPattern>> BANNER_PATTERN_TRANSFORMER = new BannerPatternTransformer();
+    public static final KeyTransformer<ResourceKey<JukeboxSong>> JUKEBOX_SONG_TRANSFORMER = new JukeboxSongTransformer();
     public static final KeyTransformer<ResourceKey<DamageType>> DAMAGE_TYPE_TRANSFORMER = new DamageTypeTransformer();
     public static final KeyTransformer<ResourceKey<PaintingVariant>> PAINTING_VARIANT_TRANSFORMER = new PaintingVariantTransformer();
     public static final KeyTransformer<Component> COMPONENT_TRANSFORMER = new ComponentTransformer();
@@ -63,6 +65,7 @@ public abstract class ApiLanguageProvider extends LanguageProvider {
         REGISTRY_KEY_TRANSFORMERS.put(TRIM_MATERIAL_TRANSFORMER, Registries.TRIM_MATERIAL);
         REGISTRY_KEY_TRANSFORMERS.put(TRIM_PATTERN_TRANSFORMER, Registries.TRIM_PATTERN);
         REGISTRY_KEY_TRANSFORMERS.put(BANNER_PATTERN_TRANSFORMER, Registries.BANNER_PATTERN);
+        REGISTRY_KEY_TRANSFORMERS.put(JUKEBOX_SONG_TRANSFORMER, Registries.JUKEBOX_SONG);
         REGISTRY_KEY_TRANSFORMERS.put(DAMAGE_TYPE_TRANSFORMER, Registries.DAMAGE_TYPE);
         REGISTRY_KEY_TRANSFORMERS.put(PAINTING_VARIANT_TRANSFORMER, Registries.PAINTING_VARIANT);
         TRANSLATION_PLACEHOLDER_RESOLVERS.add(KEY_TRANSLATION_PLACEHOLDER_RESOLVER);

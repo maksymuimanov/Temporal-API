@@ -62,6 +62,7 @@
   "item.example.example_leaves": "Example Leaves",
   "item.example.example_leggings": "Example Leggings",
   "item.example.example_log": "Example Log",
+  "item.example.example_music_disc": "Example Music Disc",
   "item.example.example_ore": "Example Ore",
   "item.example.example_planks": "Example Planks",
   "item.example.example_planks_button": "Example Button",
@@ -80,7 +81,9 @@
   "item.example.example_wall_sign": "Example Sign",
   "item.example.example_wood": "Example Wood",
   "item.example.potted_example_flower": "Potted Example Flower",
+  "jukebox_song.example.example": "Example Jukebox Song",
   "painting.example.example.title": "Example Painting",
+  "sound.example.example_jukebox_song_sound": "Example Jukebox Song Sound",
   "sound.example.example_sound": "Example Sound",
   "trim_material.example.example": "Example Trim Material",
   "trim_pattern.example.example": "Example Trim Pattern"

@@ -2,8 +2,6 @@ package com.temporal.api.core.engine.registry.extension.item;
 
 import com.temporal.api.core.engine.context.InjectionPool;
 import com.temporal.api.core.engine.registry.factory.ItemFactory;
-import com.temporal.api.core.util.ResourceUtils;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.JukeboxSong;
@@ -11,15 +9,14 @@ import net.minecraft.world.item.Rarity;
 import net.neoforged.neoforge.registries.DeferredItem;
 
 public interface MusicDiscSubFactory {
-    default DeferredItem<Item> createMusicDisc(String name, String soundId) {
-        return this.createMusicDisc(name, new Item.Properties(), soundId);
+    default DeferredItem<Item> createMusicDisc(String name, ResourceKey<JukeboxSong> jukeboxSong) {
+        return this.createMusicDisc(name, new Item.Properties(), jukeboxSong);
     }
 
-    default DeferredItem<Item> createMusicDisc(String name, Item.Properties properties, String soundId) {
+    default DeferredItem<Item> createMusicDisc(String name, Item.Properties properties, ResourceKey<JukeboxSong> jukeboxSong) {
         ItemFactory itemFactory = InjectionPool.getFromInstance(ItemFactory.class);
-        ResourceKey<JukeboxSong> songResourceKey = ResourceUtils.createKey(Registries.JUKEBOX_SONG, soundId);
         return itemFactory.create(name, properties.stacksTo(1)
-                .jukeboxPlayable(songResourceKey)
+                .jukeboxPlayable(jukeboxSong)
                 .rarity(Rarity.RARE), Item::new);
     }
 }
