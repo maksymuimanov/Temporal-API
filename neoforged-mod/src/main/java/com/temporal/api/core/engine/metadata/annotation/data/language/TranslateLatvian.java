@@ -10,5 +10,6 @@ import java.lang.annotation.Target;
 public @interface TranslateLatvian {
     String id() default "";
     String value();
+    String prefix() default "";
     String suffix() default "";
 }

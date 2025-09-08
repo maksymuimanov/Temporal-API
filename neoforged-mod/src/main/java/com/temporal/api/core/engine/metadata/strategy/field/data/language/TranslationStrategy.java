@@ -18,6 +18,7 @@ import java.util.Objects;
 public abstract class TranslationStrategy<A extends Annotation> implements FieldAnnotationStrategy<A> {
     public static final String TRANSLATION_ID_METHOD = "id";
     public static final String TRANSLATION_VALUE_METHOD = "value";
+    public static final String TRANSLATION_PREFIX_METHOD = "prefix";
     public static final String TRANSLATION_SUFFIX_METHOD = "suffix";
     private final Class<?> translationProvider;
 
@@ -33,39 +34,43 @@ public abstract class TranslationStrategy<A extends Annotation> implements Field
         String id = (String) idMethod.invoke(annotation);
         Method valueMethod = annotationClass.getDeclaredMethod(TRANSLATION_VALUE_METHOD);
         String value = (String) valueMethod.invoke(annotation);
+        Method prefixMethod = annotationClass.getDeclaredMethod(TRANSLATION_PREFIX_METHOD);
+        String prefix = (String) prefixMethod.invoke(annotation);
         Method suffixMethod = annotationClass.getDeclaredMethod(TRANSLATION_SUFFIX_METHOD);
         String suffix = (String) suffixMethod.invoke(annotation);
-        this.directTranslation(id, value, suffix, o);
+        this.directTranslation(id, value, prefix, suffix, o);
     }
 
-    protected void directTranslation(String possibleKey, String value, String suffix, Object o) {
+    protected void directTranslation(String possibleKey, String value, String prefix, String suffix, Object o) {
         if (!possibleKey.isBlank()) {
-            this.putTranslation(possibleKey, value, suffix, ApiLanguageProvider.STRING_TRANSFORMER);
+            this.putTranslation(possibleKey, value, prefix, suffix, ApiLanguageProvider.STRING_TRANSFORMER);
         } else {
             switch (o) {
-                case String stringField -> this.putTranslation(stringField, value, suffix, ApiLanguageProvider.STRING_TRANSFORMER);
-                case Component component -> this.putTranslation(component, value, suffix, ApiLanguageProvider.COMPONENT_TRANSFORMER);
-                case Holder<?> holder -> this.putTranslation(Objects.requireNonNull(holder.getKey()), value, suffix);
-                case ResourceKey<?> key -> this.putTranslation(key, value, suffix);
+                case String stringField -> this.putTranslation(stringField, value, prefix, suffix, ApiLanguageProvider.STRING_TRANSFORMER);
+                case Component component -> this.putTranslation(component, value, prefix, suffix, ApiLanguageProvider.COMPONENT_TRANSFORMER);
+                case Holder<?> holder -> this.putTranslation(Objects.requireNonNull(holder.getKey()), value, prefix, suffix);
+                case ResourceKey<?> key -> this.putTranslation(key, value, prefix, suffix);
                 default -> throw new IllegalStateException("Unexpected value: " + o);
             }
         }
     }
 
-    protected <T> void putTranslation(ResourceKey<T> key, String value, String suffix) {
+    protected <T> void putTranslation(ResourceKey<T> key, String value, String prefix, String suffix) {
         ResourceKey<Registry<T>> registryKey = key.registryKey();
         ApiLanguageProvider.REGISTRY_KEY_TRANSFORMERS.entrySet()
                 .stream()
                 .filter(entry -> registryKey.equals(entry.getValue()))
                 .map(Map.Entry::getKey)
                 .map(transformer -> (KeyTransformer<ResourceKey<T>>) transformer)
-                .forEach(transformer -> this.putTranslation(key, value, suffix, transformer));
+                .forEach(transformer -> this.putTranslation(key, value, prefix, suffix, transformer));
     }
 
-    protected <T> void putTranslation(T key, String value, String suffix, KeyTransformer<T> keyTransformer) {
+    protected <T> void putTranslation(T key, String value, String prefix, String suffix, KeyTransformer<T> keyTransformer) {
         try {
             Map<String, String> translationMap = (Map<String, String>) this.translationProvider.getDeclaredField(ApiLanguageProvider.TRANSLATIONS_FIELD_NAME).get(null);
-            String translationKey = suffix.isBlank() ? keyTransformer.transform(key) : keyTransformer.transform(key) + "." + suffix;
+            String translationKey = keyTransformer.transform(key);
+            if (!prefix.isBlank()) translationKey = prefix + "." + translationKey;
+            if (!suffix.isBlank()) translationKey = translationKey + "." + suffix;
             translationMap.put(translationKey, value);
         } catch (Exception e) {
             throw new RuntimeException(e);

@@ -41,6 +41,7 @@
   "block.minecraft.banner.example.example.white": "White Example Banner Pattern",
   "block.minecraft.banner.example.example.yellow": "Yellow Example Banner Pattern",
   "damage.example.example": "Example Damage",
+  "death.attack.damage.example.example": "Killed by Example Damage",
   "item.example.example_armor_trim_smithing_template": "Example Armor Trim Smithing Template",
   "item.example.example_banner_pattern": "Banner Pattern",
   "item.example.example_banner_pattern.desc": "Example Banner Pattern",

@@ -10,5 +10,6 @@ import java.lang.annotation.Target;
 public @interface TranslateWelsh {
     String id() default "";
     String value();
+    String prefix() default "";
     String suffix() default "";
 }

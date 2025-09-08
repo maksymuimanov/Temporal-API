@@ -10,5 +10,6 @@ import java.lang.annotation.Target;
 public @interface TranslateShakespeareanEnglish {
     String id() default "";
     String value();
+    String prefix() default "";
     String suffix() default "";
 }

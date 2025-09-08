@@ -10,5 +10,6 @@ import java.lang.annotation.Target;
 public @interface TranslateJapanese {
     String id() default "";
     String value();
+    String prefix() default "";
     String suffix() default "";
 }
