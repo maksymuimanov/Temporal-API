@@ -1,8 +1,7 @@
 package com.temporal.api.core.engine.event.data.language.provider;
 
 import com.temporal.api.core.engine.context.ModContext;
-import com.temporal.api.core.engine.event.data.language.resolver.SimpleTranslationPlaceholderResolver;
-import com.temporal.api.core.engine.event.data.language.resolver.TranslationPlaceholderResolver;
+import com.temporal.api.core.engine.event.data.language.resolver.*;
 import com.temporal.api.core.engine.event.data.language.transformer.*;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
@@ -24,7 +23,9 @@ import net.minecraft.world.level.block.entity.BannerPattern;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public abstract class ApiLanguageProvider extends LanguageProvider {
@@ -44,7 +45,10 @@ public abstract class ApiLanguageProvider extends LanguageProvider {
     public static final KeyTransformer<ResourceKey<PaintingVariant>> PAINTING_VARIANT_TRANSFORMER = new PaintingVariantTransformer();
     public static final KeyTransformer<Component> COMPONENT_TRANSFORMER = new ComponentTransformer();
     public static final KeyTransformer<String> STRING_TRANSFORMER = new StringTransformer();
-    public static final TranslationPlaceholderResolver PLACEHOLDER_RESOLVER = new SimpleTranslationPlaceholderResolver();
+    public static final TranslationValueResolver SIMPLE_TRANSLATION_VALUE_RESOLVER = new SimpleTranslationValueResolver();
+    public static final List<TranslationPlaceholderResolver> TRANSLATION_PLACEHOLDER_RESOLVERS = new ArrayList<>();
+    public static final TranslationPlaceholderResolver KEY_TRANSLATION_PLACEHOLDER_RESOLVER = new KeyTranslationPlaceholderResolver();
+    public static final TranslationPlaceholderResolver THIS_TRANSLATION_PLACEHOLDER_RESOLVER = new ThisTranslationPlaceholderResolver();
     public static final String TRANSLATIONS_FIELD_NAME = "TRANSLATIONS";
 
     static {
@@ -61,6 +65,8 @@ public abstract class ApiLanguageProvider extends LanguageProvider {
         REGISTRY_KEY_TRANSFORMERS.put(BANNER_PATTERN_TRANSFORMER, Registries.BANNER_PATTERN);
         REGISTRY_KEY_TRANSFORMERS.put(DAMAGE_TYPE_TRANSFORMER, Registries.DAMAGE_TYPE);
         REGISTRY_KEY_TRANSFORMERS.put(PAINTING_VARIANT_TRANSFORMER, Registries.PAINTING_VARIANT);
+        TRANSLATION_PLACEHOLDER_RESOLVERS.add(KEY_TRANSLATION_PLACEHOLDER_RESOLVER);
+        TRANSLATION_PLACEHOLDER_RESOLVERS.add(THIS_TRANSLATION_PLACEHOLDER_RESOLVER);
     }
 
     public ApiLanguageProvider(PackOutput output, String locale) {
@@ -80,7 +86,7 @@ public abstract class ApiLanguageProvider extends LanguageProvider {
             Map<String, String> translationsField = new HashMap<>((Map<String, String>) field.get(this));
             HashMap<String, String> result = new HashMap<>();
             translationsField.forEach((key, value) -> {
-                result.put(key, PLACEHOLDER_RESOLVER.resolve(value, translationsField));
+                result.put(key, SIMPLE_TRANSLATION_VALUE_RESOLVER.resolve(key, value, translationsField, TRANSLATION_PLACEHOLDER_RESOLVERS));
             });
             return result;
         } catch (NoSuchFieldException | IllegalAccessException e) {
