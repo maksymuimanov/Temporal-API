@@ -10,7 +10,6 @@ public class FactoryPoolInitializer implements ObjectPoolInitializer {
     public void initialize(ObjectPool objectPool, List<?> externalObjects) {
         objectPool.putObject(new ItemFactory());
         objectPool.putObject(new BlockFactory());
-        objectPool.putObject(new BiomeFactory());
         objectPool.putObject(new CreativeModeTabFactory());
         objectPool.putObject(new EffectFactory());
         objectPool.putObject(new EntityTypeFactory());
@@ -19,11 +18,20 @@ public class FactoryPoolInitializer implements ObjectPoolInitializer {
         objectPool.putObject(new PoiTypeFactory());
         objectPool.putObject(new PotionFactory());
         objectPool.putObject(new RecipeSerializerFactory());
+        objectPool.putObject(new RecipeTypeFactory());
         objectPool.putObject(new SoundEventFactory());
         objectPool.putObject(new VillagerProfessionFactory());
         objectPool.putObject(new LootModifierSerializerFactory());
         objectPool.putObject(new MenuTypeFactory());
         objectPool.putObject(new TriggerFactory());
         objectPool.putObject(new ArmorMaterialFactory());
+        objectPool.putObject(new AttachmentTypeFactory());
+        objectPool.putObject(new CarverFactory());
+        objectPool.putObject(new DataComponentTypeFactory());
+        objectPool.putObject(new FluidFactory());
+        objectPool.putObject(new FluidTypeFactory());
+        objectPool.putObject(new FoliagePlacerTypeFactory());
+        objectPool.putObject(new TreeDecoratorTypeFactory());
+        objectPool.putObject(new TrunkPlacerTypeFactory());
     }
 }
