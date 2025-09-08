@@ -9,7 +9,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.entity.BannerPattern;
 
-public class ExampleBannerPatterns {
+public final class ExampleBannerPatterns {
     @TranslateMultiple(americanEnglish = {
             @TranslateAmericanEnglish("Example Banner Pattern"),
             @TranslateAmericanEnglish(value = "Black {this$}", suffix = "black"),

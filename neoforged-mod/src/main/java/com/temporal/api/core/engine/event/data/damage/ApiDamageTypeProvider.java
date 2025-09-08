@@ -7,11 +7,9 @@ import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageType;
-import org.jetbrains.annotations.ApiStatus;
 
 import java.util.Map;
 
-@ApiStatus.Experimental
 public class ApiDamageTypeProvider implements DamageTypeProvider {
     public static final Map<ResourceKey<DamageType>, DamageTypeDescription> DAMAGE_TYPES = new TemporalMap<>();
 
