@@ -25,7 +25,7 @@ public class CreativeModeTabEventHandler implements EventHandler {
     @Override
     public void handle() {
         this.subscribeModEvent(BuildCreativeModeTabContentsEvent.class, event -> {
-            Map<Class<? extends Annotation>, FieldAnnotationStrategy<?>> strategies = SimpleStrategyPool.getInstance().getStrategies(StrategyPoolInitializer.DEFAULT_FIELD_EVENT_CREATIVE);
+            Map<Class<? extends Annotation>, FieldAnnotationStrategy<?>> strategies = SimpleStrategyPool.getInstance().getAll(StrategyPoolInitializer.DEFAULT_FIELD_EVENT_CREATIVE);
             if (CREATIVE_MODE_TABS_CONTENT.isEmpty()) MetadataLayer.ASYNC_STRATEGY_CONSUMER.execute(MetadataLayer.STATIC_FIELD_EXECUTOR, strategies, ModContext.ALL_CLASSES);
             TabDirector tabDirector = SimpleTabDirector.create(event);
             CREATIVE_MODE_TABS_CONTENT.forEach((tab, items) -> {

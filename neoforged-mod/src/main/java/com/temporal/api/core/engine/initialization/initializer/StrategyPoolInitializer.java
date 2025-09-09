@@ -33,9 +33,9 @@ public class StrategyPoolInitializer implements ObjectPoolInitializer {
                     Strategy annotation = clazz.getDeclaredAnnotation(Strategy.class);
                     StrategyScope scope = new StrategyScope(annotation.value());
                     if (!Annotation.class.equals(annotation.override())) {
-                        strategyPool.removeStrategy(annotation.override());
+                        strategyPool.remove(annotation.override());
                     }
-                    strategyPool.putStrategy(scope, (Class<? extends AnnotationStrategy<?, ?>>) clazz);
+                    strategyPool.put(scope, (Class<? extends AnnotationStrategy<?, ?>>) clazz);
                 });
         objectPool.put(strategyPool);
     }

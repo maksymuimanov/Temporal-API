@@ -21,7 +21,7 @@ public class EntityAttributeEventHandler implements EventHandler {
     @Override
     public void handle() {
         this.subscribeModEvent(EntityAttributeCreationEvent.class, event -> {
-            Map<Class<? extends Annotation>, MethodAnnotationStrategy<?>> strategies = SimpleStrategyPool.getInstance().getStrategies(StrategyPoolInitializer.DEFAULT_METHOD_EVENT_ATTRIBUTES);
+            Map<Class<? extends Annotation>, MethodAnnotationStrategy<?>> strategies = SimpleStrategyPool.getInstance().getAll(StrategyPoolInitializer.DEFAULT_METHOD_EVENT_ATTRIBUTES);
             MetadataLayer.ASYNC_STRATEGY_CONSUMER.execute(MetadataLayer.STATIC_METHOD_EXECUTOR, strategies, ModContext.ALL_CLASSES);
             ENTITY_ATTRIBUTES.forEach((holder, attributes) -> {
                 event.put((EntityType<? extends LivingEntity>) holder.value(), attributes.build());

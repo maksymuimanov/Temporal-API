@@ -29,7 +29,7 @@ public class FMLClientSetupEventHandler implements EventHandler {
     @Override
     public void handle() {
         this.subscribeModEvent(FMLClientSetupEvent.class, event -> {
-            Map<Class<? extends Annotation>, FieldAnnotationStrategy<?>> strategies = SimpleStrategyPool.getInstance().getStrategies(StrategyPoolInitializer.DEFAULT_FIELD_EVENT_FML);
+            Map<Class<? extends Annotation>, FieldAnnotationStrategy<?>> strategies = SimpleStrategyPool.getInstance().getAll(StrategyPoolInitializer.DEFAULT_FIELD_EVENT_FML);
             MetadataLayer.ASYNC_STRATEGY_CONSUMER.execute(MetadataLayer.STATIC_FIELD_EXECUTOR, strategies, ModContext.ALL_CLASSES);
             WOOD_TYPE_STRATEGY.execute(WOOD_TYPES);
             event.enqueueWork(() -> {
