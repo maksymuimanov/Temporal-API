@@ -8,11 +8,11 @@ import net.minecraft.resources.ResourceLocation;
 import java.io.Serial;
 import java.util.List;
 
-public record ResourceLocationsRepresentation(Boolean replace, List<ResourceLocation> values) implements JsonRepresentation {
+public record ResourceLocationListRepresentation(Boolean replace, List<ResourceLocation> values) implements JsonRepresentation {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    public ResourceLocationsRepresentation(List<ResourceLocation> values) {
+    public ResourceLocationListRepresentation(List<ResourceLocation> values) {
         this(null, values);
     }
 

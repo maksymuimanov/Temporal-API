@@ -6,11 +6,9 @@ import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.entity.BannerPattern;
-import org.jetbrains.annotations.ApiStatus;
 
 import java.util.Queue;
 
-@ApiStatus.Experimental
 public class ApiBannerPatternProvider implements BannerPatternProvider {
     public static final Queue<BannerPatternDescription> PATTERNS = new TemporalQueue<>();
 

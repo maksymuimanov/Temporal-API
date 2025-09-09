@@ -8,7 +8,7 @@ import java.io.Serial;
 import java.util.List;
 import java.util.Map;
 
-public record AtlasArmorTrimsRepresentation(boolean replace, Source[] sources) implements JsonRepresentation {
+public record AtlasArmorTrimRepresentation(boolean replace, Source[] sources) implements JsonRepresentation {
     @Serial
     private static final long serialVersionUID = 1L;
 

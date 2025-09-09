@@ -2,7 +2,7 @@ package com.temporal.api.core.engine.event.data.file;
 
 import com.temporal.api.core.collection.TemporalQueue;
 import com.temporal.api.core.json.JsonRepresentation;
-import com.temporal.api.core.json.ResourceLocationsRepresentation;
+import com.temporal.api.core.json.ResourceLocationListRepresentation;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -24,7 +24,7 @@ public class PlaceablePaintingProvider extends SingleFileProvider {
         List<ResourceLocation> placeables = PLACEABLES.stream()
                 .map(ResourceKey::location)
                 .toList();
-        JsonRepresentation representation = new ResourceLocationsRepresentation(placeables);
+        JsonRepresentation representation = new ResourceLocationListRepresentation(placeables);
         this.define(representation);
         PLACEABLES.clear();
     }

@@ -3,7 +3,7 @@ package com.temporal.api.core.engine.event.data.tag;
 import com.temporal.api.core.engine.event.data.file.FileSource;
 import com.temporal.api.core.engine.event.data.file.MultiFileProvider;
 import com.temporal.api.core.json.JsonRepresentation;
-import com.temporal.api.core.json.ResourceLocationsRepresentation;
+import com.temporal.api.core.json.ResourceLocationListRepresentation;
 import com.temporal.api.core.util.ResourceUtils;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
@@ -29,7 +29,7 @@ public abstract class AbstractTagsProvider<T> extends MultiFileProvider {
             List<ResourceLocation> locations = keys.stream()
                     .map(ResourceKey::location)
                     .toList();
-            JsonRepresentation representation = new ResourceLocationsRepresentation(locations);
+            JsonRepresentation representation = new ResourceLocationListRepresentation(locations);
             this.define(fileSource, representation);
         });
         tagContents.clear();
