@@ -19,6 +19,7 @@ public class StrategyPoolInitializer implements ObjectPoolInitializer {
     public static final String DEFAULT_FIELD_EVENT_CREATIVE = "default_field_event_creative";
     public static final String DEFAULT_FIELD_EVENT_FML = "default_field_event_fml";
     public static final String DEFAULT_FIELD_EVENT_RENDERER = "default_field_event_renderer";
+    public static final String DEFAULT_FIELD_EVENT_PARTICLE = "default_field_event_particle";
     public static final String DEFAULT_FIELD_DATA = "default_field_data";
     public static final String DEFAULT_METHOD_INJECTION = "default_method_injection";
     public static final String DEFAULT_METHOD_EVENT_ATTRIBUTES = "default_method_event_attributes";

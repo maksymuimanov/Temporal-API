@@ -7,11 +7,9 @@ import net.minecraft.core.particles.ParticleType;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.common.data.ParticleDescriptionProvider;
-import org.jetbrains.annotations.ApiStatus;
 
 import java.util.Map;
 
-@ApiStatus.Experimental
 public class ApiParticleProvider extends ParticleDescriptionProvider {
     public static final Map<Holder<ParticleType<?>>, ParticleDescription> PARTICLE_SPRITES = new TemporalMap<>();
 

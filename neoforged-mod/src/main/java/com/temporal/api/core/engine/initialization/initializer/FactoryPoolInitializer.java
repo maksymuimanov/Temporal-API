@@ -14,7 +14,7 @@ public class FactoryPoolInitializer implements ObjectPoolInitializer {
         objectPool.put(new EffectFactory());
         objectPool.put(new EntityTypeFactory());
         objectPool.put(new BlockEntityTypeFactory());
-        objectPool.put(new ParticleFactory());
+        objectPool.put(new ParticleTypeFactory());
         objectPool.put(new PoiTypeFactory());
         objectPool.put(new PotionFactory());
         objectPool.put(new RecipeSerializerFactory());

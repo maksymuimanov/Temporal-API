@@ -6,12 +6,12 @@ import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
-public class ParticleFactory extends AbstractObjectFactory<ParticleType<?>> {
-    public ParticleFactory() {
+public class ParticleTypeFactory extends AbstractObjectFactory<ParticleType<?>> {
+    public ParticleTypeFactory() {
         this(InjectionPool.getFromInstance("$ParticleTypes"));
     }
 
-    public ParticleFactory(TemporalRegister<ParticleType<?>> particleTypes) {
+    public ParticleTypeFactory(TemporalRegister<ParticleType<?>> particleTypes) {
         super(particleTypes);
     }
 

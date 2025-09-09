@@ -7,7 +7,7 @@ import com.temporal.api.core.engine.event.handler.*;
 import java.util.List;
 
 public class EventLayerBuilder {
-    private static final List<EventHandler> DEFAULT_EVENT_HANDLERS = List.of(new FMLClientSetupEventHandler(), new EntityAttributeEventHandler(), new EntityRendererRegisterRendererEventHandler(), new EntityRendererRegisterLayerDefinitionEventHandler(), new DataEventHandler(), new FovModifierEventHandler(), new CreativeModeTabEventHandler(), new BlockEntityTypeEventHandler());
+    private static final List<EventHandler> DEFAULT_EVENT_HANDLERS = List.of(new FMLClientSetupEventHandler(), new EntityAttributeEventHandler(), new EntityRendererRegisterRendererEventHandler(), new EntityRendererRegisterLayerDefinitionEventHandler(), new DataEventHandler(), new FovModifierEventHandler(), new CreativeModeTabEventHandler(), new BlockEntityTypeEventHandler(), new RegisterParticleProvidersEventHandler());
     private final EngineBuilder engineBuilder;
     private final EventLayer eventLayer;
     private List<EventHandler> eventHandlers = DEFAULT_EVENT_HANDLERS;
