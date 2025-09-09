@@ -2,7 +2,7 @@ package com.temporal.api.core.engine.metadata.strategy.field.data.model;
 
 import com.temporal.api.core.engine.event.data.preparer.tag.BiomeTagDynamicPreparer;
 import com.temporal.api.core.engine.event.data.wolf.ApiWolfVariantProvider;
-import com.temporal.api.core.engine.event.data.wolf.WolfVariantDescriptionHolder;
+import com.temporal.api.core.engine.event.data.wolf.WolfVariantDescription;
 import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
 import com.temporal.api.core.engine.metadata.annotation.data.model.GenerateWolfVariant;
 import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
@@ -19,7 +19,7 @@ public class GenerateWolfVariantStrategy implements FieldAnnotationStrategy<Gene
     public void execute(Field field, Object object, GenerateWolfVariant annotation) throws Exception {
         ResourceKey<WolfVariant> variantResourceKey = (ResourceKey<WolfVariant>) field.get(object);
         TagUtils.putTagContainer(BiomeTagDynamicPreparer.TAG_CONTAINERS, annotation.biomeTagContainer());
-        ApiWolfVariantProvider.VARIANTS.add(new WolfVariantDescriptionHolder(variantResourceKey, annotation.biomeTag()));
+        ApiWolfVariantProvider.VARIANTS.add(new WolfVariantDescription(variantResourceKey, annotation.biomeTag()));
     }
 
     @Override

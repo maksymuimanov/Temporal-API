@@ -1,0 +1,6 @@
+{
+  "angry_texture": "example:entity/wolf/example_angry",
+  "biomes": "#minecraft:is_nether",
+  "tame_texture": "example:entity/wolf/example_tame",
+  "wild_texture": "example:entity/wolf/example"
+}
