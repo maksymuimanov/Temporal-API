@@ -1,7 +1,10 @@
 package com.temporal.api.core.engine.context;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -20,16 +23,16 @@ public class InjectionPool implements ObjectPool {
 
     @Override
     @SuppressWarnings("unchecked")
-    public <T> T getObject(String key) {
-        InjectionKey injectionKey = this.getContextKey(key);
-        return (T) this.objects.get(injectionKey);
+    public <T> T get(String name) {
+        InjectionKey key = this.getKey(name);
+        return (T) this.objects.get(key);
     }
 
     @Override
-    public <T> T getObject(Class<? extends T> key) {
-        Object object = this.objects.get(this.getContextKey(key));
+    public <T> T get(Class<? extends T> key) {
+        Object object = this.objects.get(this.getKey(key));
         if (object == null) {
-            List<? extends T> list = this.getObjects(key);
+            List<? extends T> list = this.getAll(key);
             if (!list.isEmpty()) object = list.getFirst();
         }
 
@@ -37,20 +40,35 @@ public class InjectionPool implements ObjectPool {
     }
 
     @Override
-    public InjectionKey getContextKey(String name) {
+    @SuppressWarnings("unchecked")
+    public <T> T get(InjectionKey key) {
+        return (T) this.objects.get(key);
+    }
+
+    @Override
+    public InjectionKey getKey(String name) {
         return cachedNames.computeIfAbsent(name, (id) ->
-                this.getContextKey(key -> id.equals(key.getName())));
+                this.getKey(key -> id.equals(key.getName())));
     }
 
     @Override
-    public InjectionKey getContextKey(Class<?> clazz) {
+    public InjectionKey getKey(Class<?> clazz) {
         return cachedClasses.computeIfAbsent(clazz, (id) ->
-                this.getContextKey(key -> id.equals(key.getClazz())));
+                this.getKey(key -> id.equals(key.getClazz())));
 
     }
 
     @Override
-    public <T> List<? extends T> getObjects(Class<T> commonInterface) {
+    public InjectionKey getKey(Predicate<? super InjectionKey> predicate) {
+        return this.objects.keySet()
+                .stream()
+                .filter(predicate)
+                .findAny()
+                .orElse(null);
+    }
+
+    @Override
+    public <T> List<? extends T> getAll(Class<T> commonInterface) {
         return this.objects.values()
                 .stream()
                 .filter(commonInterface::isInstance)
@@ -59,96 +77,109 @@ public class InjectionPool implements ObjectPool {
     }
 
     @Override
-    public List<?> getAllObjects() {
+    public List<?> getAll() {
         return this.objects.values()
                 .stream()
                 .toList();
     }
 
     @Override
-    public <T> void putObject(String keyName, Class<? extends T> keyClass) {
+    public <T> void put(String name, Class<? extends T> clazz) {
         try {
-            Constructor<? extends T> constructor = keyClass.getDeclaredConstructor();
+            Constructor<? extends T> constructor = clazz.getDeclaredConstructor();
             T value = constructor.newInstance();
-            this.putObject(keyName, value);
+            this.put(name, value);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
     @Override
-    public <T> void putObject(Class<? extends T> key) {
+    public <T> void put(Class<? extends T> clazz) {
         try {
-            Constructor<? extends T> constructor = key.getDeclaredConstructor();
+            Constructor<? extends T> constructor = clazz.getDeclaredConstructor();
             T value = constructor.newInstance();
-            this.putObject(key, value);
+            this.put(clazz, value);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
     @Override
-    public <T> void putObject(T value) {
-        this.putObject(value.getClass(), value);
+    public <T> void put(T value) {
+        this.put(value.getClass(), value);
     }
 
     @Override
-    public <T> void putObject(String key, T value) {
-        this.putObject(new InjectionKey(key, value.getClass()), value);
+    public <T> void put(String key, T value) {
+        this.put(new InjectionKey(key, value.getClass()), value);
     }
 
     @Override
-    public <T> void putObject(Class<? extends T> key, T value) {
-        this.putObject(new InjectionKey(key), value);
+    public <T> void put(Class<? extends T> key, T value) {
+        this.put(new InjectionKey(key), value);
     }
 
     @Override
-    public <T> void putObject(InjectionKey key, T value) {
+    public <T> void put(InjectionKey key, T value) {
         this.objects.put(key, value);
         this.cachedNames.put(key.getName(), key);
         this.cachedClasses.put(key.getClazz(), key);
     }
 
     @Override
-    public <T> void removeObject(Class<? extends T> key) {
-        InjectionKey injectionKey = this.getContextKey(key);
+    public <T> void remove(Class<? extends T> key) {
+        InjectionKey injectionKey = this.getKey(key);
         this.objects.remove(injectionKey);
         this.cachedNames.remove(injectionKey.getName());
         this.cachedClasses.remove(key);
     }
 
     @Override
-    public <T> void removeObject(T value) {
-        this.removeObject(value.getClass());
+    public <T> void remove(T value) {
+        this.remove(value.getClass());
     }
 
     @Override
-    public void removeAllObjects() {
+    public void clear() {
         this.objects.clear();
         this.cachedNames.clear();
         this.cachedClasses.clear();
     }
 
-    private InjectionKey getContextKey(Predicate<? super InjectionKey> predicate) {
-        return this.objects.keySet()
-                .stream()
-                .filter(predicate)
-                .findAny()
-                .orElse(null);
+    @Override
+    public boolean contains(String name) {
+        return this.cachedNames.containsKey(name) || this.contains(this.getKey(name));
+    }
+
+    @Override
+    public boolean contains(Class<?> clazz) {
+        return this.cachedClasses.containsKey(clazz) || this.contains(this.getKey(clazz));
+    }
+
+    @Override
+    public boolean contains(InjectionKey key) {
+        return this.objects.containsKey(key);
     }
 
     public static <T> T getFromInstance(String key) {
         ObjectPool objectPool = InjectionPool.getInstance();
-        return objectPool.getObject(key);
+        return objectPool.get(key);
     }
 
     public static <T> T getFromInstance(Class<? extends T> key) {
         ObjectPool objectPool = InjectionPool.getInstance();
-        return objectPool.getObject(key);
+        return objectPool.get(key);
     }
 
     public static InjectionPool getInstance() {
         return ModContext.getInstance()
                 .getPool(ModContext.NEO_MOD.getModId());
+    }
+
+    @Override
+    @NotNull
+    public Iterator<Object> iterator() {
+        return this.objects.values().iterator();
     }
 }

@@ -6,7 +6,7 @@ import java.lang.annotation.Annotation;
 import java.util.Collection;
 import java.util.Map;
 
-public interface StrategyPool {
+public interface StrategyPool extends Iterable<AnnotationStrategy<?, ?>> {
     <T, S extends AnnotationStrategy<T, ?>, R extends S> Map<Class<? extends Annotation>, R> getStrategies(Collection<Class<? extends Annotation>> annotationClasses);
 
     <T, S extends AnnotationStrategy<T, ?>, R extends S> Map<Class<? extends Annotation>, R> getStrategies(Class<? extends Annotation> annotationClass, Class<? extends Annotation>... annotationClasses);
@@ -27,9 +27,9 @@ public interface StrategyPool {
 
     <A extends Annotation> void removeStrategy(Class<? extends A> annotationClass);
 
-    boolean exists(String name);
+    boolean contains(String name);
 
-    boolean exists(StrategyScope scope);
+    boolean contains(StrategyScope scope);
 
-    <A extends Annotation> boolean exists(Class<? extends A> annotationClass);
+    <A extends Annotation> boolean contains(Class<? extends A> annotationClass);
 }

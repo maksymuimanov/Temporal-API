@@ -68,7 +68,7 @@ public class StrategyPoolInitializer implements ObjectPoolInitializer {
                     StrategyScope scope = new StrategyScope(annotation.value());
                     strategyPool.putStrategy(scope, (Class<? extends AnnotationStrategy<?, ?>>) clazz);
                 });
-        objectPool.putObject(strategyPool);
+        objectPool.put(strategyPool);
     }
 
     private <T extends AnnotationStrategy<?, ?>> void putStrategies(String packageName, Class<T> clazz, StrategyPool strategyPool, String scopeName) {

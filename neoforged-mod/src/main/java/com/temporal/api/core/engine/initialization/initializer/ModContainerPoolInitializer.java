@@ -12,6 +12,6 @@ public class ModContainerPoolInitializer implements ObjectPoolInitializer {
         externalObjects.stream()
                 .filter(o -> o instanceof ModContainer)
                 .map(o -> (ModContainer)o)
-                .forEach(objectPool::putObject);
+                .forEach(objectPool::put);
     }
 }

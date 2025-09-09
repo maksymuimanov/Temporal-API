@@ -15,7 +15,7 @@ public class RegistryLayer implements EngineLayer {
     @Override
     public void processAllTasks() {
         ObjectPool objectPool = InjectionPool.getInstance();
-        IEventBus eventBus = objectPool.getObject(IEventBus.class);
+        IEventBus eventBus = objectPool.get(IEventBus.class);
         factoryRegistrars.forEach(factoryRegistrar -> {
             ApiMod.LOGGER.debug("Registering factories with {}", factoryRegistrar.getClass().getName());
             factoryRegistrar.registerFactories(eventBus);

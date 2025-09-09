@@ -3,14 +3,12 @@ package com.temporal.api.core.engine.metadata.pool;
 import com.temporal.api.core.engine.context.InjectionPool;
 import com.temporal.api.core.engine.metadata.strategy.AnnotationStrategy;
 import com.temporal.api.core.util.MapUtils;
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class SimpleStrategyPool implements StrategyPool {
@@ -116,23 +114,29 @@ public class SimpleStrategyPool implements StrategyPool {
     }
 
     @Override
-    public boolean exists(String name) {
+    public boolean contains(String name) {
         return this.strategies.keySet()
                 .stream()
                 .anyMatch(s -> s.name().equals(name));
     }
 
     @Override
-    public boolean exists(StrategyScope scope) {
+    public boolean contains(StrategyScope scope) {
         return this.strategies.containsKey(scope);
     }
 
     @Override
-    public <A extends Annotation> boolean exists(Class<? extends A> annotationClass) {
+    public <A extends Annotation> boolean contains(Class<? extends A> annotationClass) {
         return this.annotationStrategyMap.containsKey(annotationClass);
     }
 
     public static SimpleStrategyPool getInstance() {
         return InjectionPool.getFromInstance(SimpleStrategyPool.class);
+    }
+
+    @Override
+    @NotNull
+    public Iterator<AnnotationStrategy<?, ?>> iterator() {
+        return this.annotationStrategyMap.values().iterator();
     }
 }

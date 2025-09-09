@@ -18,9 +18,9 @@ public class InjectedObjectPoolInitializer implements ObjectPoolInitializer {
                     if (annotation.isContextObject() && (modCondition.isBlank() || ModList.get().isLoaded(modCondition))) {
                         String beanName = annotation.value();
                         if (beanName.isBlank()) {
-                            objectPool.putObject(clazz);
+                            objectPool.put(clazz);
                         } else {
-                            objectPool.putObject(beanName, clazz);
+                            objectPool.put(beanName, clazz);
                         }
                     }
                 });

@@ -17,7 +17,7 @@ public class FinalizationLayer implements EngineLayer {
         objectPoolCleaners.forEach(ObjectPoolCleaner::clear);
         ApiMod.LOGGER.debug("Running dynamic ObjectPoolCleaners from pool");
         ObjectPool objectPool = InjectionPool.getInstance();
-        objectPool.getObjects(ObjectPoolCleaner.class)
+        objectPool.getAll(ObjectPoolCleaner.class)
                 .forEach(ObjectPoolCleaner::clear);
     }
 

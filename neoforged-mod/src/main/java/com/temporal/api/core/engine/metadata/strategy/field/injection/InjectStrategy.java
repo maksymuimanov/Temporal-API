@@ -13,16 +13,16 @@ public class InjectStrategy implements FieldAnnotationStrategy<Inject> {
     public void execute(Field field, Object object, Inject annotation) throws Exception {
         ObjectPool objectPool = InjectionPool.getInstance();
         String beanName = annotation.value();
-        Object poolObject = beanName.isBlank() ? objectPool.getObject(field.getType()) : objectPool.getObject(beanName);
+        Object poolObject = beanName.isBlank() ? objectPool.get(field.getType()) : objectPool.get(beanName);
         field.set(object, poolObject);
         Class<?> objectClass = object.getClass();
         Injected injected = objectClass.getDeclaredAnnotation(Injected.class);
         if (!injected.isContextObject()) throw new IllegalStateException("@Inject annotation can be applied if class is annotated with @Injected(isContextObject=true)");
         String rootBeanName = injected.value();
         if (rootBeanName.isBlank()) {
-            objectPool.putObject(objectClass);
+            objectPool.put(objectClass);
         } else {
-            objectPool.putObject(rootBeanName, objectClass);
+            objectPool.put(rootBeanName, objectClass);
         }
     }
 

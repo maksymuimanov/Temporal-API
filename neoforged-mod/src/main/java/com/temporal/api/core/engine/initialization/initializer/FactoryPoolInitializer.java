@@ -8,31 +8,31 @@ import java.util.List;
 public class FactoryPoolInitializer implements ObjectPoolInitializer {
     @Override
     public void initialize(ObjectPool objectPool, List<?> externalObjects) {
-        objectPool.putObject(new ItemFactory());
-        objectPool.putObject(new BlockFactory());
-        objectPool.putObject(new CreativeModeTabFactory());
-        objectPool.putObject(new EffectFactory());
-        objectPool.putObject(new EntityTypeFactory());
-        objectPool.putObject(new BlockEntityTypeFactory());
-        objectPool.putObject(new ParticleFactory());
-        objectPool.putObject(new PoiTypeFactory());
-        objectPool.putObject(new PotionFactory());
-        objectPool.putObject(new RecipeSerializerFactory());
-        objectPool.putObject(new RecipeTypeFactory());
-        objectPool.putObject(new SoundEventFactory());
-        objectPool.putObject(new VillagerProfessionFactory());
-        objectPool.putObject(new LootModifierSerializerFactory());
-        objectPool.putObject(new MenuTypeFactory());
-        objectPool.putObject(new TriggerFactory());
-        objectPool.putObject(new ArmorMaterialFactory());
-        objectPool.putObject(new AttachmentTypeFactory());
-        objectPool.putObject(new FeatureFactory());
-        objectPool.putObject(new CarverFactory());
-        objectPool.putObject(new DataComponentTypeFactory());
-        objectPool.putObject(new FluidFactory());
-        objectPool.putObject(new FluidTypeFactory());
-        objectPool.putObject(new FoliagePlacerTypeFactory());
-        objectPool.putObject(new TreeDecoratorTypeFactory());
-        objectPool.putObject(new TrunkPlacerTypeFactory());
+        objectPool.put(new ItemFactory());
+        objectPool.put(new BlockFactory());
+        objectPool.put(new CreativeModeTabFactory());
+        objectPool.put(new EffectFactory());
+        objectPool.put(new EntityTypeFactory());
+        objectPool.put(new BlockEntityTypeFactory());
+        objectPool.put(new ParticleFactory());
+        objectPool.put(new PoiTypeFactory());
+        objectPool.put(new PotionFactory());
+        objectPool.put(new RecipeSerializerFactory());
+        objectPool.put(new RecipeTypeFactory());
+        objectPool.put(new SoundEventFactory());
+        objectPool.put(new VillagerProfessionFactory());
+        objectPool.put(new LootModifierSerializerFactory());
+        objectPool.put(new MenuTypeFactory());
+        objectPool.put(new TriggerFactory());
+        objectPool.put(new ArmorMaterialFactory());
+        objectPool.put(new AttachmentTypeFactory());
+        objectPool.put(new FeatureFactory());
+        objectPool.put(new CarverFactory());
+        objectPool.put(new DataComponentTypeFactory());
+        objectPool.put(new FluidFactory());
+        objectPool.put(new FluidTypeFactory());
+        objectPool.put(new FoliagePlacerTypeFactory());
+        objectPool.put(new TreeDecoratorTypeFactory());
+        objectPool.put(new TrunkPlacerTypeFactory());
     }
 }

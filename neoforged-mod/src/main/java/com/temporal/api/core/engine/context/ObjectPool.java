@@ -1,35 +1,46 @@
 package com.temporal.api.core.engine.context;
 
 import java.util.List;
+import java.util.function.Predicate;
 
-public interface ObjectPool {
-    <T> T getObject(String key);
+public interface ObjectPool extends Iterable<Object> {
+    <T> T get(String name);
 
-    <T> T getObject(Class<? extends T> key);
+    <T> T get(Class<? extends T> key);
 
-    InjectionKey getContextKey(String name);
+    <T> T get(InjectionKey key);
 
-    InjectionKey getContextKey(Class<?> clazz);
+    InjectionKey getKey(String name);
 
-    <T> List<? extends T> getObjects(Class<T> commonInterface);
+    InjectionKey getKey(Class<?> clazz);
 
-    List<?> getAllObjects();
+    InjectionKey getKey(Predicate<? super InjectionKey> predicate);
 
-    <T> void putObject(String keyName, Class<? extends T> keyClass);
+    <T> List<? extends T> getAll(Class<T> commonInterface);
 
-    <T> void putObject(Class<? extends T> key);
+    List<?> getAll();
 
-    <T> void putObject(T value);
+    <T> void put(String name, Class<? extends T> clazz);
 
-    <T> void putObject(String key, T value);
+    <T> void put(Class<? extends T> clazz);
 
-    <T> void putObject(Class<? extends T> key, T value);
+    <T> void put(T value);
 
-    <T> void putObject(InjectionKey key, T value);
+    <T> void put(String key, T value);
 
-    <T> void removeObject(Class<? extends T> key);
+    <T> void put(Class<? extends T> key, T value);
 
-    <T> void removeObject(T value);
+    <T> void put(InjectionKey key, T value);
 
-    void removeAllObjects();
+    <T> void remove(Class<? extends T> key);
+
+    <T> void remove(T value);
+
+    void clear();
+
+    boolean contains(String name);
+
+    boolean contains(Class<?> clazz);
+
+    boolean contains(InjectionKey key);
 }

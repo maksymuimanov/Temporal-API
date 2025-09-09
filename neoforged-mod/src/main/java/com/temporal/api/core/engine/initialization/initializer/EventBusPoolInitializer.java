@@ -13,6 +13,6 @@ public class EventBusPoolInitializer implements ObjectPoolInitializer {
         externalObjects.stream()
                 .filter(o -> o instanceof IEventBus)
                 .map(o -> (EventBus)o)
-                .forEach(objectPool::putObject);
+                .forEach(objectPool::put);
     }
 }

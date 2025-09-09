@@ -32,7 +32,7 @@ public class InitializationLayer implements EngineLayer {
             ApiMod.LOGGER.debug("Running defaulted ObjectPoolInitializer - {}", initializer.getClass().getName());
             initializer.initialize(objectPool, this.externalSource);
         });
-        objectPool.getObjects(ObjectPoolInitializer.class).forEach(initializer -> {
+        objectPool.getAll(ObjectPoolInitializer.class).forEach(initializer -> {
             ApiMod.LOGGER.debug("Running dynamic ObjectPoolInitializer - {}", initializer.getClass().getName());
             initializer.initialize(objectPool, this.externalSource);
         });

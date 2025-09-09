@@ -13,7 +13,7 @@ public class DependencyStrategy implements FieldAnnotationStrategy<Dependency> {
     public void execute(Field field, Object object, Dependency annotation) throws Exception {
         field.setBoolean(object, ModList.get().isLoaded(annotation.value()));
         ObjectPool objectPool = InjectionPool.getInstance();
-        objectPool.putObject(object);
+        objectPool.put(object);
     }
 
     @Override
