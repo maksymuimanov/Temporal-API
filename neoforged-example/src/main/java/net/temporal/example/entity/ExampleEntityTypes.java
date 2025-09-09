@@ -1,4 +1,4 @@
-package net.temporal.example.registry;
+package net.temporal.example.entity;
 
 import com.temporal.api.core.engine.context.InjectionPool;
 import com.temporal.api.core.engine.metadata.annotation.event.renderer.RegisterEntityRenderer;
@@ -6,7 +6,6 @@ import com.temporal.api.core.engine.registry.factory.EntityTypeFactory;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.neoforged.neoforge.registries.DeferredHolder;
-import net.temporal.example.entity.ExampleEntity;
 import net.temporal.example.entity.renderer.ExampleRenderer;
 
 public final class ExampleEntityTypes {

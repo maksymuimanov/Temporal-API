@@ -1,4 +1,4 @@
-package net.temporal.example.registry;
+package net.temporal.example.sound;
 
 import com.temporal.api.core.engine.context.InjectionPool;
 import com.temporal.api.core.engine.metadata.annotation.data.GenerateSound;

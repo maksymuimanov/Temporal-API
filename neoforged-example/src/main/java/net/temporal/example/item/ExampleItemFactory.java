@@ -1,4 +1,4 @@
-package net.temporal.example.registry;
+package net.temporal.example.item;
 
 import com.temporal.api.core.engine.metadata.annotation.injection.Injected;
 import com.temporal.api.core.engine.registry.extension.item.*;

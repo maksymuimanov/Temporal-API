@@ -5,7 +5,7 @@ import com.temporal.api.core.engine.metadata.annotation.data.RegisterRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
-import net.temporal.example.registry.ExampleItems;
+import net.temporal.example.item.ExampleItems;
 
 import java.util.Map;
 

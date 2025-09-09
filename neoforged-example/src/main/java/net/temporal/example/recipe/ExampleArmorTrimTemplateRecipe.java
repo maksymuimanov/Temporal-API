@@ -3,7 +3,7 @@ package net.temporal.example.recipe;
 import com.temporal.api.core.engine.event.data.recipe.description.TemplateSmithingTrimRecipeDescription;
 import com.temporal.api.core.engine.metadata.annotation.data.RegisterRecipe;
 import net.minecraft.world.level.ItemLike;
-import net.temporal.example.registry.ExampleItems;
+import net.temporal.example.item.ExampleItems;
 
 @RegisterRecipe
 public class ExampleArmorTrimTemplateRecipe implements TemplateSmithingTrimRecipeDescription {

@@ -1,4 +1,4 @@
-package net.temporal.example.registry;
+package net.temporal.example.block;
 
 import com.temporal.api.core.engine.metadata.annotation.event.fml.SetupWoodType;
 import com.temporal.api.core.engine.registry.factory.WoodTypeFactory;

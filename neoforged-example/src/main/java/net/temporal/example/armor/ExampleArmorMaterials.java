@@ -1,4 +1,4 @@
-package net.temporal.example.registry;
+package net.temporal.example.armor;
 
 import com.temporal.api.core.engine.context.InjectionPool;
 import com.temporal.api.core.engine.registry.factory.ArmorMaterialFactory;
@@ -6,6 +6,7 @@ import net.minecraft.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
+import net.temporal.example.sound.ExampleSounds;
 import net.temporal.example.tag.ExampleItemTags;
 
 import java.util.EnumMap;

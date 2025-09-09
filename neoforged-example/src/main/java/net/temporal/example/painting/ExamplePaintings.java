@@ -1,4 +1,4 @@
-package net.temporal.example.registry;
+package net.temporal.example.painting;
 
 import com.temporal.api.core.engine.metadata.annotation.data.language.TranslateAmericanEnglish;
 import com.temporal.api.core.engine.metadata.annotation.data.model.GeneratePainting;

@@ -8,7 +8,7 @@ import net.minecraft.advancements.AdvancementType;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.world.level.ItemLike;
-import net.temporal.example.registry.ExampleItems;
+import net.temporal.example.item.ExampleItems;
 
 import java.util.Map;
 import java.util.Set;

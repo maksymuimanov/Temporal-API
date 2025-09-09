@@ -1,4 +1,4 @@
-package net.temporal.example.registry;
+package net.temporal.example.item;
 
 import com.temporal.api.core.engine.context.InjectionPool;
 import com.temporal.api.core.engine.metadata.annotation.data.language.TranslateAmericanEnglish;
@@ -15,6 +15,9 @@ import com.temporal.api.core.engine.metadata.constant.ItemModelType;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Tiers;
 import net.neoforged.neoforge.registries.DeferredItem;
+import net.temporal.example.armor.ExampleArmorMaterials;
+import net.temporal.example.block.ExampleBlocks;
+import net.temporal.example.entity.ExampleEntityTypes;
 import net.temporal.example.jukebox.ExampleJukeboxSongs;
 import net.temporal.example.tag.ExampleBannerPatternTags;
 

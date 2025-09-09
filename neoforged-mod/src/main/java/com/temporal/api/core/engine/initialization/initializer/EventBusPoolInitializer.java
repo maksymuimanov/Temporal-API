@@ -13,7 +13,7 @@ public class EventBusPoolInitializer implements ObjectPoolInitializer {
         if (externalObjects == null || externalObjects.isEmpty()) return;
         externalObjects.stream()
                 .filter(o -> o instanceof IEventBus)
-                .map(o -> (EventBus)o)
+                .map(o -> (EventBus) o)
                 .forEach(objectPool::put);
     }
 }
