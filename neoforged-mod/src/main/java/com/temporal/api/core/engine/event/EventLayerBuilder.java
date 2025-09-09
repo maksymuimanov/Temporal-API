@@ -10,7 +10,7 @@ public class EventLayerBuilder {
     private static final List<EventHandler> DEFAULT_EVENT_HANDLERS = List.of(new FMLClientSetupEventHandler(), new EntityAttributeEventHandler(), new EntityRendererRegisterRendererEventHandler(), new EntityRendererRegisterLayerDefinitionEventHandler(), new DataEventHandler(), new FovModifierEventHandler(), new CreativeModeTabEventHandler(), new BlockEntityTypeEventHandler());
     private final EngineBuilder engineBuilder;
     private final EventLayer eventLayer;
-    private List<EventHandler> handlers = DEFAULT_EVENT_HANDLERS;
+    private List<EventHandler> eventHandlers = DEFAULT_EVENT_HANDLERS;
 
     public EventLayerBuilder(EngineBuilder engineBuilder) {
         this.engineBuilder = engineBuilder;
@@ -18,14 +18,14 @@ public class EventLayerBuilder {
         this.engineBuilder.addLayer(this.eventLayer);
     }
 
-    public EventLayerBuilder handlers(List<EventHandler> handlers) {
-        this.handlers = handlers;
+    public EventLayerBuilder eventHandlers(List<EventHandler> eventHandlers) {
+        this.eventHandlers = eventHandlers;
         return this;
     }
 
     public EngineBuilder and() {
         EngineTask eventSetupTask = () -> {
-            this.eventLayer.setAdditionalEventHandlers(handlers);
+            this.eventLayer.setEventHandlers(eventHandlers);
             this.engineBuilder.processLayer(eventLayer);
         };
 

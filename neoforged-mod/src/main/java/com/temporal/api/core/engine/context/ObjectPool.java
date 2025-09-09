@@ -4,6 +4,10 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public interface ObjectPool extends Iterable<Object> {
+    <T> List<? extends T> getAll(Class<T> commonInterface);
+
+    List<?> getAll();
+
     <T> T get(String name);
 
     <T> T get(Class<? extends T> key);
@@ -15,10 +19,6 @@ public interface ObjectPool extends Iterable<Object> {
     InjectionKey getKey(Class<?> clazz);
 
     InjectionKey getKey(Predicate<? super InjectionKey> predicate);
-
-    <T> List<? extends T> getAll(Class<T> commonInterface);
-
-    List<?> getAll();
 
     <T> void put(String name, Class<? extends T> clazz);
 

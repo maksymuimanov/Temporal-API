@@ -130,13 +130,13 @@ public class SimpleStrategyPool implements StrategyPool {
         return this.annotationStrategyMap.containsKey(annotationClass);
     }
 
-    public static SimpleStrategyPool getInstance() {
-        return InjectionPool.getFromInstance(SimpleStrategyPool.class);
-    }
-
     @Override
     @NotNull
     public Iterator<AnnotationStrategy<?, ?>> iterator() {
         return this.annotationStrategyMap.values().iterator();
+    }
+
+    public static SimpleStrategyPool getInstance() {
+        return InjectionPool.getFromInstance(SimpleStrategyPool.class);
     }
 }

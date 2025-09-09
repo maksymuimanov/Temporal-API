@@ -22,6 +22,22 @@ public class InjectionPool implements ObjectPool {
     }
 
     @Override
+    public <T> List<? extends T> getAll(Class<T> commonInterface) {
+        return this.objects.values()
+                .stream()
+                .filter(commonInterface::isInstance)
+                .map(commonInterface::cast)
+                .toList();
+    }
+
+    @Override
+    public List<?> getAll() {
+        return this.objects.values()
+                .stream()
+                .toList();
+    }
+
+    @Override
     @SuppressWarnings("unchecked")
     public <T> T get(String name) {
         InjectionKey key = this.getKey(name);
@@ -65,22 +81,6 @@ public class InjectionPool implements ObjectPool {
                 .filter(predicate)
                 .findAny()
                 .orElse(null);
-    }
-
-    @Override
-    public <T> List<? extends T> getAll(Class<T> commonInterface) {
-        return this.objects.values()
-                .stream()
-                .filter(commonInterface::isInstance)
-                .map(commonInterface::cast)
-                .toList();
-    }
-
-    @Override
-    public List<?> getAll() {
-        return this.objects.values()
-                .stream()
-                .toList();
     }
 
     @Override

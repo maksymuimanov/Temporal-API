@@ -10,7 +10,7 @@ import java.util.List;
 
 public class InitializationLayerBuilder {
     private static final List<ModClassScanner> DEFAULT_CLASS_SCANNERS = List.of(new ClasspathModClassScanner());
-    private static final List<ObjectPoolInitializer> DEFAULT_INITIALIZERS = List.of(new TemporalRegisterPoolInitializer(), new FactoryPoolInitializer(), new EventBusPoolInitializer(), new ModContainerPoolInitializer(), new InjectedObjectPoolInitializer(), new StrategyPoolInitializer());
+    private static final List<ObjectPoolInitializer> DEFAULT_INITIALIZERS = List.of(new TemporalRegisterPoolInitializer(), new FactoryPoolInitializer(), new EventBusPoolInitializer(), new ModContainerPoolInitializer(), new InjectedObjectPoolInitializer(), new StrategyPoolInitializer(), new EventHandlerPoolInitializer());
     private final EngineBuilder engineBuilder;
     private final InitializationLayer initializationLayer;
     private Class<?> modClass;
