@@ -28,6 +28,7 @@ public class TemporalRegisterPoolInitializer implements ObjectPoolInitializer {
         objectPool.putObject("$TriggerTypes", TemporalRegister.create(Registries.TRIGGER_TYPE));
         objectPool.putObject("$ArmorMaterials", TemporalRegister.create(Registries.ARMOR_MATERIAL));
         objectPool.putObject("$AttachmentTypes", TemporalRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES));
+        objectPool.putObject("$Features", TemporalRegister.create(Registries.FEATURE));
         objectPool.putObject("$Carvers", TemporalRegister.create(Registries.CARVER));
         objectPool.putObject("$DataComponentTypes", TemporalRegister.create(Registries.DATA_COMPONENT_TYPE));
         objectPool.putObject("$Fluids", TemporalRegister.create(Registries.FLUID));

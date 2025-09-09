@@ -26,6 +26,7 @@ public class FactoryPoolInitializer implements ObjectPoolInitializer {
         objectPool.putObject(new TriggerFactory());
         objectPool.putObject(new ArmorMaterialFactory());
         objectPool.putObject(new AttachmentTypeFactory());
+        objectPool.putObject(new FeatureFactory());
         objectPool.putObject(new CarverFactory());
         objectPool.putObject(new DataComponentTypeFactory());
         objectPool.putObject(new FluidFactory());
