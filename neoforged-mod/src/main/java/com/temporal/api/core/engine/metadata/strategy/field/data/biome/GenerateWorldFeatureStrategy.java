@@ -4,11 +4,14 @@ import com.temporal.api.core.engine.event.data.biome.GenerationDescriptionContai
 import com.temporal.api.core.engine.event.data.biome.configuration.ConfiguredFeatureDefinition;
 import com.temporal.api.core.engine.event.data.biome.modifier.BiomeModifierDefinition;
 import com.temporal.api.core.engine.event.data.biome.placement.PlacedFeatureDefinition;
+import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
 import com.temporal.api.core.engine.metadata.annotation.data.biome.GenerateWorldFeature;
+import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 
 import java.lang.reflect.Field;
 
+@Strategy(StrategyPoolInitializer.DEFAULT_FIELD_DATA)
 public class GenerateWorldFeatureStrategy implements FieldAnnotationStrategy<GenerateWorldFeature> {
     @Override
     public void execute(Field field, Object object, GenerateWorldFeature annotation) throws Exception {

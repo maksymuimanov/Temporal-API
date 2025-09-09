@@ -2,11 +2,14 @@ package com.temporal.api.core.engine.metadata.strategy.type.data;
 
 import com.temporal.api.core.engine.event.data.modifier.ApiGlobalLootModifierProvider;
 import com.temporal.api.core.engine.event.data.modifier.ChestModifierDescription;
+import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
 import com.temporal.api.core.engine.metadata.annotation.data.RegisterGlobalLootModifier;
+import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
 import com.temporal.api.core.engine.metadata.strategy.type.ClassAnnotationStrategy;
 
 import java.lang.reflect.Constructor;
 
+@Strategy(StrategyPoolInitializer.DEFAULT_CLASS_DATA)
 public class RegisterGlobalLootModifierStrategy implements ClassAnnotationStrategy<RegisterGlobalLootModifier> {
     @Override
     public void execute(Class<?> clazz, Object object, RegisterGlobalLootModifier annotation) throws Exception {

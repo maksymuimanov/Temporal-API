@@ -9,7 +9,7 @@ import java.util.List;
 
 public class TemporalRegisterPoolInitializer implements ObjectPoolInitializer {
     @Override
-    public void initialize(ObjectPool objectPool, List<?> externalObjects) {
+    public void initialize(Iterable<Class<?>> classes, List<?> externalObjects, ObjectPool objectPool) {
         objectPool.put("$Items", TemporalRegister.createItems());
         objectPool.put("$Blocks", TemporalRegister.createBlocks());
         objectPool.put("$CreativeModeTabs", TemporalRegister.create(Registries.CREATIVE_MODE_TAB));

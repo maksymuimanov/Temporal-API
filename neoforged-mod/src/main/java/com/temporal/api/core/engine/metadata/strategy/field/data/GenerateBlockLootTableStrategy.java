@@ -2,7 +2,9 @@ package com.temporal.api.core.engine.metadata.strategy.field.data;
 
 import com.temporal.api.core.engine.event.data.loot.BlockLootTableProvider;
 import com.temporal.api.core.engine.event.data.loot.LootProviderStrategy;
+import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
 import com.temporal.api.core.engine.metadata.annotation.data.GenerateBlockLootTable;
+import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import net.minecraft.core.Holder;
 import net.minecraft.util.Tuple;
@@ -10,6 +12,7 @@ import net.minecraft.world.level.block.Block;
 
 import java.lang.reflect.Field;
 
+@Strategy(StrategyPoolInitializer.DEFAULT_FIELD_DATA)
 public class GenerateBlockLootTableStrategy implements FieldAnnotationStrategy<GenerateBlockLootTable> {
     @Override
     public void execute(Field field, Object object, GenerateBlockLootTable annotation) throws Exception {

@@ -2,13 +2,16 @@ package com.temporal.api.core.engine.metadata.strategy.field.data.properties;
 
 import com.temporal.api.core.engine.event.data.map.ApiDataMapProvider;
 import com.temporal.api.core.engine.event.data.map.RaidHeroGiftDto;
+import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
 import com.temporal.api.core.engine.metadata.annotation.data.properties.RaidHeroGift;
+import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import net.minecraft.core.Holder;
 import net.minecraft.world.entity.npc.VillagerProfession;
 
 import java.lang.reflect.Field;
 
+@Strategy(StrategyPoolInitializer.DEFAULT_FIELD_DATA)
 public class RaidHeroGiftStrategy implements FieldAnnotationStrategy<RaidHeroGift> {
     @Override
     public void execute(Field field, Object object, RaidHeroGift annotation) throws Exception {

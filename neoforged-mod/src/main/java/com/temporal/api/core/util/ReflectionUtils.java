@@ -1,5 +1,6 @@
 package com.temporal.api.core.util;
 
+import com.temporal.api.ApiMod;
 import com.temporal.api.core.engine.registry.factory.ObjectFactory;
 import net.minecraft.core.Holder;
 import net.minecraft.world.item.Item;
@@ -110,6 +111,23 @@ public final class ReflectionUtils {
                 .map(ModFileScanData.ClassData::clazz)
                 .map(clazz -> forType(clazz, rootClass))
                 .filter(clazz -> clazz.getName().startsWith(packageName))
+                .collect(Collectors.toSet());
+    }
+
+    public static Set<Class<?>> getApiClasses() {
+        return getApiClasses(clazz -> true);
+    }
+
+    public static Set<Class<?>> getApiClasses(Predicate<Class<?>> predicate) {
+        return ModList.get()
+                .getModFileById(ApiMod.MOD_ID)
+                .getFile()
+                .getScanResult()
+                .getClasses()
+                .stream()
+                .map(ModFileScanData.ClassData::clazz)
+                .map(clazz -> forType(clazz, ApiMod.class))
+                .filter(predicate)
                 .collect(Collectors.toSet());
     }
 }

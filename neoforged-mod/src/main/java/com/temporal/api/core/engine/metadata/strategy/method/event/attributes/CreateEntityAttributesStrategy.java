@@ -1,7 +1,9 @@
 package com.temporal.api.core.engine.metadata.strategy.method.event.attributes;
 
 import com.temporal.api.core.engine.event.handler.EntityAttributeEventHandler;
+import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
 import com.temporal.api.core.engine.metadata.annotation.event.attributes.CreateEntityAttributes;
+import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
 import com.temporal.api.core.engine.metadata.strategy.method.MethodAnnotationStrategy;
 import com.temporal.api.core.util.RegistryUtils;
 import net.minecraft.core.Holder;
@@ -10,6 +12,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 
 import java.lang.reflect.Method;
 
+@Strategy(StrategyPoolInitializer.DEFAULT_METHOD_EVENT_ATTRIBUTES)
 public class CreateEntityAttributesStrategy implements MethodAnnotationStrategy<CreateEntityAttributes> {
     @SuppressWarnings("deprecation")
     @Override

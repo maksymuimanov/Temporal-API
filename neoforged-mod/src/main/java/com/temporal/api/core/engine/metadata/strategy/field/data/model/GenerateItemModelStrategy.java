@@ -2,7 +2,9 @@ package com.temporal.api.core.engine.metadata.strategy.field.data.model;
 
 import com.temporal.api.core.engine.event.data.model.item.ItemModelDescriptionContainer;
 import com.temporal.api.core.engine.event.data.model.item.ItemModelProviderStrategy;
+import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
 import com.temporal.api.core.engine.metadata.annotation.data.model.GenerateItemModel;
+import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.util.ReflectionUtils;
 import net.minecraft.core.Holder;
@@ -11,6 +13,7 @@ import net.minecraft.world.item.Item;
 
 import java.lang.reflect.Field;
 
+@Strategy(StrategyPoolInitializer.DEFAULT_FIELD_DATA)
 public class GenerateItemModelStrategy implements FieldAnnotationStrategy<GenerateItemModel> {
     @Override
     public void execute(Field field, Object object, GenerateItemModel annotation) throws Exception {

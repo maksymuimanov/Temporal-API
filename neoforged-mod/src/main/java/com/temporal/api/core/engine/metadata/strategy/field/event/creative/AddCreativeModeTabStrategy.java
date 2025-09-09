@@ -1,7 +1,9 @@
 package com.temporal.api.core.engine.metadata.strategy.field.event.creative;
 
 import com.temporal.api.core.engine.event.handler.CreativeModeTabEventHandler;
+import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
 import com.temporal.api.core.engine.metadata.annotation.event.creative.AddCreativeModeTab;
+import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
 import com.temporal.api.core.engine.metadata.constant.CreativeModeTabType;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.util.MapUtils;
@@ -13,6 +15,7 @@ import net.minecraft.world.item.Item;
 
 import java.lang.reflect.Field;
 
+@Strategy(StrategyPoolInitializer.DEFAULT_FIELD_EVENT_CREATIVE)
 public class AddCreativeModeTabStrategy implements FieldAnnotationStrategy<AddCreativeModeTab> {
     @Override
     public void execute(Field field, Object object, AddCreativeModeTab annotation) throws Exception {

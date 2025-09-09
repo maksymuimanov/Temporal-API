@@ -6,5 +6,5 @@ import java.util.List;
 
 @FunctionalInterface
 public interface ObjectPoolInitializer {
-    void initialize(ObjectPool objectPool, List<?> externalObjects);
+    void initialize(Iterable<Class<?>> classes, List<?> externalObjects, ObjectPool objectPool);
 }

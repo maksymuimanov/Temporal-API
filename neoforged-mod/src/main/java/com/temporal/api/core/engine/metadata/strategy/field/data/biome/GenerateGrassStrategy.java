@@ -3,7 +3,9 @@ package com.temporal.api.core.engine.metadata.strategy.field.data.biome;
 import com.temporal.api.core.engine.event.data.biome.GenerationDescriptionContainer;
 import com.temporal.api.core.engine.event.data.biome.dto.Grass;
 import com.temporal.api.core.engine.event.data.preparer.tag.BiomeTagDynamicPreparer;
+import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
 import com.temporal.api.core.engine.metadata.annotation.data.biome.GenerateGrass;
+import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.util.ResourceUtils;
 import com.temporal.api.core.util.TagUtils;
@@ -12,6 +14,7 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 
 import java.lang.reflect.Field;
 
+@Strategy(StrategyPoolInitializer.DEFAULT_FIELD_DATA)
 public class GenerateGrassStrategy implements FieldAnnotationStrategy<GenerateGrass> {
     @Override
     public void execute(Field field, Object object, GenerateGrass annotation) throws Exception {

@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ModContainerPoolInitializer implements ObjectPoolInitializer {
     @Override
-    public void initialize(ObjectPool objectPool, List<?> externalObjects) {
+    public void initialize(Iterable<Class<?>> classes, List<?> externalObjects, ObjectPool objectPool) {
         if (externalObjects == null || externalObjects.isEmpty()) return;
         externalObjects.stream()
                 .filter(o -> o instanceof ModContainer)

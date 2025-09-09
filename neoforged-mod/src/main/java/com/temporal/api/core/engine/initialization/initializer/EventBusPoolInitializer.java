@@ -8,7 +8,8 @@ import java.util.List;
 
 public class EventBusPoolInitializer implements ObjectPoolInitializer {
     @Override
-    public void initialize(ObjectPool objectPool, List<?> externalObjects) {
+    @SuppressWarnings("UnstableApiUsage")
+    public void initialize(Iterable<Class<?>> classes, List<?> externalObjects, ObjectPool objectPool) {
         if (externalObjects == null || externalObjects.isEmpty()) return;
         externalObjects.stream()
                 .filter(o -> o instanceof IEventBus)

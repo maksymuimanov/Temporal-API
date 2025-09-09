@@ -4,13 +4,16 @@ import com.temporal.api.core.engine.event.data.enchantment.ApiEnchantmentProvide
 import com.temporal.api.core.engine.event.data.enchantment.EnchantmentCompatibility;
 import com.temporal.api.core.engine.event.data.enchantment.EnchantmentCost;
 import com.temporal.api.core.engine.event.data.enchantment.EnchantmentDescription;
+import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
 import com.temporal.api.core.engine.metadata.annotation.data.GenerateEnchantment;
+import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.enchantment.Enchantment;
 
 import java.lang.reflect.Field;
 
+@Strategy(StrategyPoolInitializer.DEFAULT_FIELD_DATA)
 public class GenerateEnchantmentStrategy implements FieldAnnotationStrategy<GenerateEnchantment> {
     @Override
     public void execute(Field field, Object object, GenerateEnchantment annotation) throws Exception {

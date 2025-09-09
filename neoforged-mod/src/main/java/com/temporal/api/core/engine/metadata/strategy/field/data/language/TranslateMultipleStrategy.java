@@ -1,6 +1,8 @@
 package com.temporal.api.core.engine.metadata.strategy.field.data.language;
 
+import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
 import com.temporal.api.core.engine.metadata.annotation.data.language.TranslateMultiple;
+import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
 import com.temporal.api.core.engine.metadata.pool.SimpleStrategyPool;
 import com.temporal.api.core.engine.metadata.pool.StrategyPool;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
@@ -9,6 +11,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
+@Strategy(StrategyPoolInitializer.DEFAULT_FIELD_DATA)
 public class TranslateMultipleStrategy implements FieldAnnotationStrategy<TranslateMultiple> {
     @Override
     @SuppressWarnings({"rawtypes", "unchecked"})

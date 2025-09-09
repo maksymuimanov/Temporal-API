@@ -1,7 +1,9 @@
 package com.temporal.api.core.engine.metadata.strategy.field.event.renderer;
 
 import com.temporal.api.core.engine.event.handler.EntityRendererRegisterRendererEventHandler;
+import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
 import com.temporal.api.core.engine.metadata.annotation.event.renderer.RegisterEntityRenderer;
+import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -12,6 +14,7 @@ import net.minecraft.world.entity.EntityType;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 
+@Strategy(StrategyPoolInitializer.DEFAULT_FIELD_EVENT_RENDERER)
 public class RegisterEntityRendererStrategy implements FieldAnnotationStrategy<RegisterEntityRenderer> {
     @Override
     public void execute(Field field, Object object, RegisterEntityRenderer annotation) throws Exception {
