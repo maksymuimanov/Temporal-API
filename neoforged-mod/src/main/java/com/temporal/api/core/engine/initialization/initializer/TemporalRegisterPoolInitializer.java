@@ -36,5 +36,11 @@ public class TemporalRegisterPoolInitializer implements ObjectPoolInitializer {
         objectPool.put("$FoliagePlacerTypes", TemporalRegister.create(Registries.FOLIAGE_PLACER_TYPE));
         objectPool.put("$TreeDecoratorTypes", TemporalRegister.create(Registries.TREE_DECORATOR_TYPE));
         objectPool.put("$TrunkPlacerTypes", TemporalRegister.create(Registries.TRUNK_PLACER_TYPE));
+        objectPool.put("$EnchantmentEffectComponentTypes", TemporalRegister.create(Registries.ENCHANTMENT_EFFECT_COMPONENT_TYPE));
+        objectPool.put("$EnchantmentEntityEffectTypes", TemporalRegister.create(Registries.ENCHANTMENT_ENTITY_EFFECT_TYPE));
+        objectPool.put("$EnchantmentProviderTypes", TemporalRegister.create(Registries.ENCHANTMENT_PROVIDER_TYPE));
+        objectPool.put("$EnchantmentLevelBasedValueTypes", TemporalRegister.create(Registries.ENCHANTMENT_LEVEL_BASED_VALUE_TYPE));
+        objectPool.put("$EnchantmentLocationBasedEffectTypes", TemporalRegister.create(Registries.ENCHANTMENT_LOCATION_BASED_EFFECT_TYPE));
+        objectPool.put("$EnchantmentValueEffectTypes", TemporalRegister.create(Registries.ENCHANTMENT_VALUE_EFFECT_TYPE));
     }
 }

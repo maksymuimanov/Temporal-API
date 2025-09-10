@@ -34,5 +34,11 @@ public class FactoryPoolInitializer implements ObjectPoolInitializer {
         objectPool.put(new FoliagePlacerTypeFactory());
         objectPool.put(new TreeDecoratorTypeFactory());
         objectPool.put(new TrunkPlacerTypeFactory());
+        objectPool.put(new EnchantmentEffectComponentTypeFactory());
+        objectPool.put(new EnchantmentEntityEffectTypeFactory());
+        objectPool.put(new EnchantmentProviderTypeFactory());
+        objectPool.put(new EnchantmentLevelBasedValueTypeFactory());
+        objectPool.put(new EnchantmentLocationBasedEffectTypeFactory());
+        objectPool.put(new EnchantmentValueEffectTypeFactory());
     }
 }
