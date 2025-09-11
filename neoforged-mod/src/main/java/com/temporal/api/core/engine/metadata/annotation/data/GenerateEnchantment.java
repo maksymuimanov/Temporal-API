@@ -1,6 +1,6 @@
 package com.temporal.api.core.engine.metadata.annotation.data;
 
-import net.minecraft.world.entity.EquipmentSlotGroup;
+import com.temporal.api.core.engine.event.data.enchantment.EnchantmentDescription;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -10,22 +10,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface GenerateEnchantment {
-    int weight();
-    int maxLevel();
-    Compatibility compatibility();
-    Cost minCost();
-    Cost maxCost();
-    int anvilCost();
-    EquipmentSlotGroup[] equipmentSlots();
-
-    @interface Compatibility {
-        String compatibleItemsTag();
-        String primaryItemsTag();
-        String incompatibleEnchantmentId();
-    }
-
-    @interface Cost {
-        int base();
-        int perLevelAboveFirst();
-    }
+    Class<? extends EnchantmentDescription> value();
 }

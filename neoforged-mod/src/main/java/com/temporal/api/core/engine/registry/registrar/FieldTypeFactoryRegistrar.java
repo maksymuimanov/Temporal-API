@@ -14,8 +14,8 @@ public class FieldTypeFactoryRegistrar implements FactoryRegistrar {
                 .filter(ReflectionUtils::isFactoryPresent)
                 .forEach(clazz -> {
                     ReflectionUtils.getStaticFieldTypeStream(clazz,
-                            field -> ObjectFactory.class.isAssignableFrom(field.getType()),
-                            type -> (ObjectFactory<?>) InjectionPool.getFromInstance(type))
+                                    field -> ObjectFactory.class.isAssignableFrom(field.getType()),
+                                    type -> (ObjectFactory<?>) InjectionPool.getFromInstance(type))
                             .forEach(factory -> factory.register(eventBus, clazz));
                 });
     }

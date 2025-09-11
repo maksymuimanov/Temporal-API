@@ -1,6 +1,5 @@
 package com.temporal.api.core.engine.event.data.recipe;
 
-import com.temporal.api.core.collection.TemporalQueue;
 import com.temporal.api.core.engine.event.data.recipe.description.*;
 import com.temporal.api.core.engine.event.data.recipe.strategy.*;
 import net.minecraft.advancements.Criterion;
@@ -19,9 +18,10 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Objects;
 import java.util.Queue;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class ApiRecipeProvider extends RecipeProvider {
-    public static final Queue<RecipeDescription> RECIPES = new TemporalQueue<>();
+    public static final Queue<RecipeDescription> RECIPES = new ConcurrentLinkedQueue<>();
     private static final RecipeStrategy<ShapelessRecipeDescription> SHAPELESS_RECIPE_STRATEGY = new ShapelessRecipeStrategy();
     private static final RecipeStrategy<ShapedRecipeDescription> SHAPED_RECIPE_STRATEGY = new ShapedRecipeStrategy();
     private static final RecipeStrategy<BlastingRecipeDescription> BLASTING_RECIPE_STRATEGY = new BlastingRecipeStrategy();
@@ -52,6 +52,7 @@ public class ApiRecipeProvider extends RecipeProvider {
                 case null, default -> {}
             }
         });
+        RECIPES.clear();
     }
 
     @NotNull

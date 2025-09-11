@@ -12,8 +12,8 @@ import net.minecraft.world.phys.Vec3;
 import net.temporal.example.damage.ExampleDamageTypes;
 import org.jetbrains.annotations.NotNull;
 
-public class ExampleEnchantment implements EnchantmentEntityEffect {
-    public static final MapCodec<ExampleEnchantment> CODEC = MapCodec.unit(ExampleEnchantment::new);
+public class ExampleEnchantmentEntityEffect implements EnchantmentEntityEffect {
+    public static final MapCodec<ExampleEnchantmentEntityEffect> CODEC = MapCodec.unit(ExampleEnchantmentEntityEffect::new);
     public static final float EXPLOSION_RADIUS = 2f;
 
     @Override
