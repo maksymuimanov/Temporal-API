@@ -33,6 +33,5 @@ public class ExampleMod {
                 .addProcess((DependencyFunction) () -> ApiMod.LOGGER.info("I am async: 9"))
                 .addProcess((DependencyFunction) () -> ApiMod.LOGGER.info("I am async: 10"))
                 .build();
-        ConfigUtils.showModConfigs();
     }
 }

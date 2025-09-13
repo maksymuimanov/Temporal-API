@@ -1,7 +1,6 @@
 package com.temporal.api.core.engine.initialization;
 
 import com.temporal.api.core.engine.EngineBuilder;
-import com.temporal.api.core.engine.EngineTask;
 import com.temporal.api.core.engine.initialization.initializer.*;
 import com.temporal.api.core.engine.initialization.scanner.ClasspathModClassScanner;
 import com.temporal.api.core.engine.initialization.scanner.ModClassScanner;
@@ -10,7 +9,7 @@ import java.util.List;
 
 public class InitializationLayerBuilder {
     private static final List<ModClassScanner> DEFAULT_CLASS_SCANNERS = List.of(new ClasspathModClassScanner());
-    private static final List<ObjectPoolInitializer> DEFAULT_INITIALIZERS = List.of(new TemporalRegisterPoolInitializer(), new FactoryPoolInitializer(), new EventBusPoolInitializer(), new ModContainerPoolInitializer(), new InjectedObjectPoolInitializer(), new StrategyPoolInitializer(), new EventHandlerPoolInitializer());
+    private static final List<ObjectPoolInitializer> DEFAULT_INITIALIZERS = List.of(new TemporalRegisterPoolInitializer(), new FactoryPoolInitializer(), new EventBusPoolInitializer(), new ModContainerPoolInitializer(), new InjectedObjectPoolInitializer(), new StrategyPoolInitializer(), new HandlerPoolInitializer());
     private final EngineBuilder engineBuilder;
     private final InitializationLayer initializationLayer;
     private Class<?> modClass;
@@ -45,14 +44,11 @@ public class InitializationLayerBuilder {
     }
 
     public EngineBuilder and() {
-        EngineTask task = () -> {
-            this.initializationLayer.setModClass(this.modClass);
-            this.initializationLayer.setClassScanners(this.classScanners);
-            this.initializationLayer.setContextInitializers(this.initializers);
-            this.initializationLayer.setExternalSource(this.externalSource);
-            this.engineBuilder.processLayer(this.initializationLayer);
-        };
-        this.engineBuilder.addTask(task);
+        this.initializationLayer.setModClass(this.modClass);
+        this.initializationLayer.setClassScanners(this.classScanners);
+        this.initializationLayer.setContextInitializers(this.initializers);
+        this.initializationLayer.setExternalSource(this.externalSource);
+        this.engineBuilder.processLayer(this.initializationLayer);
         return this.engineBuilder;
     }
 }

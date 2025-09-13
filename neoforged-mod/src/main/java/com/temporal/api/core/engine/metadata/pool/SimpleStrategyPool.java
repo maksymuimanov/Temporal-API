@@ -53,6 +53,7 @@ public class SimpleStrategyPool implements StrategyPool {
         Set<Class<? extends Annotation>> annotationClasses = this.strategies.get(scope);
         return annotationClasses.stream()
                 .map(this.annotationStrategyMap::get)
+                .flatMap(Collection::stream)
                 .map(strategy -> (R) strategy)
                 .collect(Collectors.toMap(strategy -> strategy.getAnnotationClass(), strategy -> strategy));
     }
@@ -77,20 +78,25 @@ public class SimpleStrategyPool implements StrategyPool {
     }
 
     @Override
-    public <T, A extends Annotation> void override(StrategyScope scope, Class<? extends AnnotationStrategy<T, A>> from, Class<? extends AnnotationStrategy<T, A>> to) {
-        AnnotationStrategy<T, A> fromAnnotationStrategy = ReflectionUtils.createObject(from);
-        AnnotationStrategy<T, A> toAnnotationStrategy = ReflectionUtils.createObject(to);
+    public void override(StrategyScope scope, Class<? extends AnnotationStrategy<?, ?>> from, Class<? extends AnnotationStrategy<?, ?>> to) {
+        AnnotationStrategy<?, ?> fromAnnotationStrategy = ReflectionUtils.createObject(from);
+        AnnotationStrategy<?, ?> toAnnotationStrategy = ReflectionUtils.createObject(to);
         this.override(scope, fromAnnotationStrategy, toAnnotationStrategy);
     }
 
     @Override
-    public <T, A extends Annotation, FS extends AnnotationStrategy<T, A>, TS extends AnnotationStrategy<T, A>> void override(StrategyScope scope, FS from, TS to) {
+    public void override(StrategyScope scope, AnnotationStrategy<?, ?> from, AnnotationStrategy<?, ?> to) {
         List<AnnotationStrategy<?, ?>> annotationStrategies = this.annotationStrategyMap.get(from.getAnnotationClass());
-        annotationStrategies.remove(from);
-        annotationStrategies.add(to);
-        Set<Class<? extends Annotation>> classes = this.strategies.get(scope);
-        classes.remove(from.getAnnotationClass());
-        classes.remove(to.getAnnotationClass());
+        annotationStrategies.parallelStream()
+                .filter(annotationStrategy -> annotationStrategy.getClass().equals(from.getClass()))
+                .findAny()
+                .ifPresent(annotationStrategy -> {
+                    annotationStrategies.remove(annotationStrategy);
+                    annotationStrategies.add(to);
+                    Set<Class<? extends Annotation>> classes = this.strategies.get(scope);
+                    classes.remove(annotationStrategy.getAnnotationClass());
+                    classes.add(to.getAnnotationClass());
+                });
     }
 
     @Override

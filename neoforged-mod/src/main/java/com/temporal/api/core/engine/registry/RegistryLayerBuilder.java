@@ -1,7 +1,6 @@
 package com.temporal.api.core.engine.registry;
 
 import com.temporal.api.core.engine.EngineBuilder;
-import com.temporal.api.core.engine.EngineTask;
 import com.temporal.api.core.engine.registry.registrar.FactoryRegistrar;
 import com.temporal.api.core.engine.registry.registrar.FieldTypeFactoryRegistrar;
 
@@ -25,11 +24,8 @@ public class RegistryLayerBuilder {
     }
 
     public EngineBuilder and() {
-        EngineTask task = () -> {
-            this.registryLayer.setFactoryRegistrars(this.factoryRegistrars);
-            this.engineBuilder.processLayer(this.registryLayer);
-        };
-        this.engineBuilder.addTask(task);
+        this.registryLayer.setFactoryRegistrars(this.factoryRegistrars);
+        this.engineBuilder.processLayer(this.registryLayer);
         return this.engineBuilder;
     }
 }

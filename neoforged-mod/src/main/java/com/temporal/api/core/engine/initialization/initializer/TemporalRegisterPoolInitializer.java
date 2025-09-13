@@ -5,11 +5,12 @@ import com.temporal.api.core.engine.registry.TemporalRegister;
 import net.minecraft.core.registries.Registries;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
+import java.util.Collection;
 import java.util.List;
 
 public class TemporalRegisterPoolInitializer implements ObjectPoolInitializer {
     @Override
-    public void initialize(Iterable<Class<?>> classes, List<?> externalObjects, ObjectPool objectPool) {
+    public void initialize(Collection<Class<?>> classes, List<?> externalObjects, ObjectPool objectPool) {
         objectPool.put("$Items", TemporalRegister.createItems());
         objectPool.put("$Blocks", TemporalRegister.createBlocks());
         objectPool.put("$CreativeModeTabs", TemporalRegister.create(Registries.CREATIVE_MODE_TAB));

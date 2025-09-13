@@ -40,6 +40,7 @@
   "block.minecraft.banner.example.example.red": "Red Example Banner Pattern",
   "block.minecraft.banner.example.example.white": "White Example Banner Pattern",
   "block.minecraft.banner.example.example.yellow": "Yellow Example Banner Pattern",
+  "config.example.hello_world": "Hello World Config",
   "damage.example.example": "Example Damage",
   "death.attack.damage.example.example": "Killed by Example Damage",
   "enchantment.example.example_enchantment_entity_effect": "Example Enchantment",

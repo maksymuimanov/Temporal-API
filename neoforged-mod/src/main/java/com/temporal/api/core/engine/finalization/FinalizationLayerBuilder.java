@@ -1,7 +1,6 @@
 package com.temporal.api.core.engine.finalization;
 
 import com.temporal.api.core.engine.EngineBuilder;
-import com.temporal.api.core.engine.EngineTask;
 import com.temporal.api.core.engine.finalization.cleaner.ObjectPoolCleaner;
 
 import java.util.List;
@@ -24,11 +23,8 @@ public class FinalizationLayerBuilder {
     }
 
     public EngineBuilder and() {
-        EngineTask task = () -> {
-            this.finalizationLayer.setContextCleaners(this.cleaners);
-            this.engineBuilder.processLayer(this.finalizationLayer);
-        };
-        this.engineBuilder.addTask(task);
+        this.finalizationLayer.setContextCleaners(this.cleaners);
+        this.engineBuilder.processLayer(this.finalizationLayer);
         return this.engineBuilder;
     }
 }

@@ -10,12 +10,12 @@ import org.jetbrains.annotations.NotNull;
 import java.util.function.Consumer;
 
 public interface EventHandler extends Comparable<EventHandler> {
-    int TOP_PRIORITY = 0;
+    int DEFAULT_PRIORITY = 0;
 
     void handle();
 
     default int getPriority() {
-        return TOP_PRIORITY;
+        return DEFAULT_PRIORITY;
     }
 
     default IEventBus getEventBus() {
@@ -44,6 +44,6 @@ public interface EventHandler extends Comparable<EventHandler> {
 
     @Override
     default int compareTo(@NotNull EventHandler o) {
-        return this.getPriority() - o.getPriority();
+        return o.getPriority() - this.getPriority();
     }
 }

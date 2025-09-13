@@ -7,6 +7,7 @@ import com.temporal.api.core.engine.metadata.pool.StrategyPool;
 import com.temporal.api.core.engine.metadata.pool.StrategyScope;
 import com.temporal.api.core.engine.metadata.strategy.AnnotationStrategy;
 
+import java.util.Collection;
 import java.util.List;
 
 public class StrategyPoolInitializer implements ObjectPoolInitializer {
@@ -27,17 +28,35 @@ public class StrategyPoolInitializer implements ObjectPoolInitializer {
 
     @Override
     @SuppressWarnings("unchecked")
-    public void initialize(Iterable<Class<?>> classes, List<?> externalObjects, ObjectPool objectPool) {
+    public void initialize(Collection<Class<?>> classes, List<?> externalObjects, ObjectPool objectPool) {
         StrategyPool strategyPool = new SimpleStrategyPool();
-        classes.forEach(clazz -> {
-            if (!clazz.isAnnotationPresent(Strategy.class)) return;
-            Strategy annotation = clazz.getDeclaredAnnotation(Strategy.class);
-            StrategyScope scope = new StrategyScope(annotation.value());
-            if (!AnnotationStrategy.class.equals(annotation.override())) {
-                strategyPool.override(annotation.override());
-            }
-            strategyPool.put(scope, (Class<? extends AnnotationStrategy<?, ?>>) clazz);
-        });
+        classes.stream()
+                .filter(clazz -> clazz.isAnnotationPresent(Strategy.class))
+                .sorted((c1, c2) -> {
+                    Strategy a1 = c1.getDeclaredAnnotation(Strategy.class);
+                    Strategy a2 = c2.getDeclaredAnnotation(Strategy.class);
+                    boolean isA1Override = !AnnotationStrategy.class.equals(a1.override());
+                    boolean isA2Override = !AnnotationStrategy.class.equals(a2.override());
+                    if (isA1Override && isA2Override) {
+                        return 0;
+                    } else if (isA1Override) {
+                        return 1;
+                    } else if (isA2Override) {
+                        return -1;
+                    } else {
+                        return 0;
+                    }
+                })
+                .forEach(clazz -> {
+                    Strategy annotation = clazz.getDeclaredAnnotation(Strategy.class);
+                    StrategyScope scope = new StrategyScope(annotation.value());
+                    Class<? extends AnnotationStrategy<?, ?>> strategyClass = (Class<? extends AnnotationStrategy<?, ?>>) clazz;
+                    if (!AnnotationStrategy.class.equals(annotation.override())) {
+                        strategyPool.override(scope, strategyClass, (Class<? extends AnnotationStrategy<?, ?>>) annotation.override());
+                    } else {
+                        strategyPool.put(scope, strategyClass);
+                    }
+                });
         objectPool.put(strategyPool);
     }
 }

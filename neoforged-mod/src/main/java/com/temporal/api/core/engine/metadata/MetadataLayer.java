@@ -2,6 +2,7 @@ package com.temporal.api.core.engine.metadata;
 
 import com.temporal.api.ApiMod;
 import com.temporal.api.core.engine.EngineLayer;
+import com.temporal.api.core.engine.context.InjectionPool;
 import com.temporal.api.core.engine.context.ModContext;
 import com.temporal.api.core.engine.metadata.consumer.AnnotationStrategyConsumer;
 import com.temporal.api.core.engine.metadata.consumer.AsyncStrategyConsumer;
@@ -27,10 +28,16 @@ public class MetadataLayer implements EngineLayer {
 
     @Override
     public void processAllTasks() {
-        ApiMod.LOGGER.debug("Processing {} annotation processors", annotationProcessors.size());
+        ApiMod.LOGGER.debug("Processing defaulted {} annotation processors", annotationProcessors.size());
         Set<Class<?>> classes = ModContext.NEO_MOD.getClasses();
-        annotationProcessors.forEach(annotationProcessor ->
-                annotationProcessor.process(classes));
+        annotationProcessors.forEach(annotationProcessor -> {
+            annotationProcessor.process(classes);
+        });
+        List<? extends AnnotationProcessor> dynamicAnnotationProcessors = InjectionPool.getInstance().getAll(AnnotationProcessor.class);
+        ApiMod.LOGGER.debug("Processing dynamic {} annotation processors", dynamicAnnotationProcessors.size());
+        dynamicAnnotationProcessors.forEach(annotationProcessor -> {
+            annotationProcessor.process(classes);
+        });
     }
 
     public void setAnnotationProcessors(List<AnnotationProcessor> annotationProcessors) {

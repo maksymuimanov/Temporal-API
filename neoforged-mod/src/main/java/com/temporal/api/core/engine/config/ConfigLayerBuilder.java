@@ -1,7 +1,6 @@
 package com.temporal.api.core.engine.config;
 
 import com.temporal.api.core.engine.EngineBuilder;
-import com.temporal.api.core.engine.EngineTask;
 import com.temporal.api.core.engine.config.screen.ConfigShowcaser;
 import com.temporal.api.core.engine.config.screen.SimpleConfigShowcaser;
 
@@ -25,11 +24,8 @@ public class ConfigLayerBuilder {
     }
 
     public EngineBuilder and() {
-        EngineTask task = () -> {
-            this.configLayer.setConfigShowcasers(this.configShowcasers);
-            this.engineBuilder.processLayer(this.configLayer);
-        };
-        this.engineBuilder.addTask(task);
+        this.configLayer.setConfigShowcasers(this.configShowcasers);
+        this.engineBuilder.processLayer(this.configLayer);
         return this.engineBuilder;
     }
 }

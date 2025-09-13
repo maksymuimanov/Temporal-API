@@ -3,11 +3,12 @@ package com.temporal.api.core.engine.initialization.initializer;
 import com.temporal.api.core.engine.context.ObjectPool;
 import com.temporal.api.core.engine.registry.factory.*;
 
+import java.util.Collection;
 import java.util.List;
 
 public class FactoryPoolInitializer implements ObjectPoolInitializer {
     @Override
-    public void initialize(Iterable<Class<?>> classes, List<?> externalObjects, ObjectPool objectPool) {
+    public void initialize(Collection<Class<?>> classes, List<?> externalObjects, ObjectPool objectPool) {
         objectPool.put(new ItemFactory());
         objectPool.put(new BlockFactory());
         objectPool.put(new CreativeModeTabFactory());

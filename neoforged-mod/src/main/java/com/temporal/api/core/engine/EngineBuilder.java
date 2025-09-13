@@ -9,34 +9,19 @@ import com.temporal.api.core.engine.initialization.InitializationLayerBuilder;
 import com.temporal.api.core.engine.metadata.MetadataLayerBuilder;
 import com.temporal.api.core.engine.registry.RegistryLayerBuilder;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class EngineBuilder {
-    protected static final String BANNER = """
-                       .__________. ._______. .__     __. ._______. ._______. ._______. ._______. .__.
-                       |----  ----| |   ----| |  \\   /  | |  ___  | |  ___  | |  ___  | |  ___  | |  |
-                           |  |     |  |      | | \\ / | | |  | |  | |  | |  | |  | |  | |  | |  | |  |
-                           |  |     |   --|   | |     | | |  | |  | |  | |  | |  |-|  | |  | |  | |  |
-                           |  |     |   --|   | |     | | |  -----| |  | |  | |   .--|  |  |-|  | |  |
-                           |  |     |  |      | |     | | | |       |  | |  | |  | |--| |  |-|  | |  |
-                           |  |     |  -----| | |     | | | |       |  ---  | |  | |  | |  | |  | |  -----|
-                           |--|     |-------| |-|     |-| |-|       |-------| |--| |--| |--| |--| |-------| v1.9.0 by w4t3rcs :D
-                    """;
-    private static final int DEFAULT_LAYER_COUNT = 6;
     private final LayerContainer layerContainer = LayerContainer.getInstance();
-    private final List<EngineTask> tasks = new ArrayList<>(DEFAULT_LAYER_COUNT);
 
     protected EngineBuilder() {
     }
 
     public EngineBuilder addLayer(EngineLayer engineLayer) {
-        this.tasks.add(() -> this.layerContainer.add(engineLayer));
+        this.layerContainer.add(engineLayer);
         return this;
     }
 
     public EngineBuilder disableLayer(Class<? extends EngineLayer> engineLayerClass) {
-        this.tasks.add(() -> this.layerContainer.delete(engineLayerClass));
+        this.layerContainer.delete(engineLayerClass);
         return this;
     }
     
@@ -65,14 +50,8 @@ public class EngineBuilder {
     }
 
     public LayerContainer build() {
-        System.out.println(BANNER);
-        this.tasks.forEach(EngineTask::execute);
         ApiMod.LOGGER.info("Mod: {} has been registered as a TemporalEngine component!", ModContext.NEO_MOD.getModId());
         return this.layerContainer;
-    }
-
-    public void addTask(EngineTask task) {
-        this.tasks.add(task);
     }
     
     public void processLayer(EngineLayer engineLayer) {

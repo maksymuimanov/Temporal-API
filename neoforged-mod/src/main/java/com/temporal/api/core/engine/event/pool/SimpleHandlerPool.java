@@ -92,9 +92,14 @@ public class SimpleHandlerPool implements HandlerPool {
     @Override
     public void override(HandlerScope handlerScope, EventHandler from, EventHandler to) {
         List<EventHandler> eventHandlers = this.get(handlerScope);
-        eventHandlers.remove(from);
-        eventHandlers.add(to);
-        eventHandlers.sort(EventHandler::compareTo);
+        eventHandlers.parallelStream()
+                .filter(eventHandler -> eventHandler.getClass().equals(from.getClass()))
+                .findAny()
+                .ifPresent(eventHandler -> {
+                    eventHandlers.remove(eventHandler);
+                    eventHandlers.add(to);
+                    eventHandlers.sort(EventHandler::compareTo);
+                });
     }
 
     @Override

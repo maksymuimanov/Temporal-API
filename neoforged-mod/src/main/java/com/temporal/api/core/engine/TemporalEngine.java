@@ -7,8 +7,20 @@ import net.neoforged.fml.ModContainer;
 import java.util.List;
 
 public class TemporalEngine {
+    protected static final String BANNER = """
+                       .__________. ._______. .__     __. ._______. ._______. ._______. ._______. .__.
+                       |----  ----| |   ----| |  \\   /  | |  ___  | |  ___  | |  ___  | |  ___  | |  |
+                           |  |     |  |      | | \\ / | | |  | |  | |  | |  | |  | |  | |  | |  | |  |
+                           |  |     |   --|   | |     | | |  | |  | |  | |  | |  |-|  | |  | |  | |  |
+                           |  |     |   --|   | |     | | |  -----| |  | |  | |   .--|  |  |-|  | |  |
+                           |  |     |  |      | |     | | | |       |  | |  | |  | |--| |  |-|  | |  |
+                           |  |     |  -----| | |     | | | |       |  ---  | |  | |  | |  | |  | |  -----|
+                           |--|     |-------| |-|     |-| |-|       |-------| |--| |--| |--| |--| |-------| v1.9.0 by w4t3rcs :D
+                    """;
+
     public static LayerContainer run(Class<?> modClass, IEventBus eventBus, ModContainer modContainer) {
         synchronized (TemporalEngine.class) {
+            System.out.println(BANNER);
             ApiMod.LOGGER.info("Running TemporalEngine for : {}", modClass.getName());
             return defaultBuilder(modClass, eventBus, modContainer).build();
         }
@@ -24,9 +36,9 @@ public class TemporalEngine {
                 .and()
                 .configureMetadataLayer()
                 .and()
-                .configureEventLayer()
-                .and()
                 .configureConfigLayer()
+                .and()
+                .configureEventLayer()
                 .and()
                 .configureFinalizationLayer()
                 .and();

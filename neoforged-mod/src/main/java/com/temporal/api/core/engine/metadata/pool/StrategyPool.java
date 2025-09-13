@@ -21,9 +21,9 @@ public interface StrategyPool extends Iterable<AnnotationStrategy<?, ?>> {
 
     <T, A extends Annotation, S extends AnnotationStrategy<T, A>> void put(StrategyScope scope, S strategy);
 
-    <T, A extends Annotation> void override(StrategyScope scope, Class<? extends AnnotationStrategy<T, A>> from, Class<? extends AnnotationStrategy<T, A>> to);
+    void override(StrategyScope scope, AnnotationStrategy<?, ?> from, AnnotationStrategy<?, ?> to);
 
-    <T, A extends Annotation, FS extends AnnotationStrategy<T, A>, TS extends AnnotationStrategy<T, A>> void override(StrategyScope scope, FS from, TS to);
+    void override(StrategyScope scope, Class<? extends AnnotationStrategy<?, ?>> from, Class<? extends AnnotationStrategy<?, ?>> to);
 
     <A extends Annotation> void remove(Class<? extends A> annotationClass);
 

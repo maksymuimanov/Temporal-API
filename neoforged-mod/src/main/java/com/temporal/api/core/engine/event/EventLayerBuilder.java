@@ -1,7 +1,6 @@
 package com.temporal.api.core.engine.event;
 
 import com.temporal.api.core.engine.EngineBuilder;
-import com.temporal.api.core.engine.EngineTask;
 
 public class EventLayerBuilder {
     private final EngineBuilder engineBuilder;
@@ -14,10 +13,7 @@ public class EventLayerBuilder {
     }
 
     public EngineBuilder and() {
-        EngineTask eventSetupTask = () -> {
-            this.engineBuilder.processLayer(eventLayer);
-        };
-        this.engineBuilder.addTask(eventSetupTask);
+        this.engineBuilder.processLayer(eventLayer);
         return this.engineBuilder;
     }
 }
