@@ -3,8 +3,11 @@ package com.temporal.api.core.engine.metadata.strategy.field.injection;
 import com.temporal.api.core.engine.context.InjectionPool;
 import com.temporal.api.core.engine.context.ObjectPool;
 import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
+import com.temporal.api.core.engine.metadata.MetadataLayer;
 import com.temporal.api.core.engine.metadata.annotation.injection.Dependency;
 import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
+import com.temporal.api.core.engine.metadata.executor.AnnotationExecutor;
+import com.temporal.api.core.engine.metadata.strategy.AnnotationStrategy;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import net.neoforged.fml.ModList;
 
@@ -22,5 +25,10 @@ public class DependencyStrategy implements FieldAnnotationStrategy<Dependency> {
     @Override
     public Class<? extends Dependency> getAnnotationClass() {
         return Dependency.class;
+    }
+
+    @Override
+    public AnnotationExecutor<? extends AnnotationStrategy<Field, ?>> getExecutor() {
+        return MetadataLayer.FIELD_EXECUTOR;
     }
 }

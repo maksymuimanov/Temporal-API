@@ -4,14 +4,20 @@ import com.temporal.api.core.engine.metadata.executor.AnnotationExecutor;
 import com.temporal.api.core.engine.metadata.strategy.AnnotationStrategy;
 
 import java.lang.annotation.Annotation;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 public class SimpleStrategyConsumer implements AnnotationStrategyConsumer {
     @Override
-    public <T extends AnnotationStrategy<?, ?>> void execute(AnnotationExecutor<T> executor, Map<Class<? extends Annotation>, T> strategies, Set<Class<?>> source) {
+    public void execute(Map<Class<? extends Annotation>, List<AnnotationStrategy<?, ?>>> strategies, Set<Class<?>> source) {
         source.forEach(clazz -> {
-            executor.tryExecute(strategies, clazz);
+            strategies.forEach((annotation, list) -> {
+                list.forEach(strategy -> {
+                    AnnotationExecutor<AnnotationStrategy<?, ?>> executor = (AnnotationExecutor<AnnotationStrategy<?, ?>>) strategy.getExecutor();
+                    executor.tryExecute(strategy, clazz);
+                });
+            });
         });
     }
 }

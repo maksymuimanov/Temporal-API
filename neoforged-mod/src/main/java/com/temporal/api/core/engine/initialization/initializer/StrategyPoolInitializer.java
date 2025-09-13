@@ -6,6 +6,7 @@ import com.temporal.api.core.engine.metadata.pool.SimpleStrategyPool;
 import com.temporal.api.core.engine.metadata.pool.StrategyPool;
 import com.temporal.api.core.engine.metadata.pool.StrategyScope;
 import com.temporal.api.core.engine.metadata.strategy.AnnotationStrategy;
+import com.temporal.api.core.util.ReflectionUtils;
 
 import java.util.Collection;
 import java.util.List;
@@ -32,21 +33,7 @@ public class StrategyPoolInitializer implements ObjectPoolInitializer {
         StrategyPool strategyPool = new SimpleStrategyPool();
         classes.stream()
                 .filter(clazz -> clazz.isAnnotationPresent(Strategy.class))
-                .sorted((c1, c2) -> {
-                    Strategy a1 = c1.getDeclaredAnnotation(Strategy.class);
-                    Strategy a2 = c2.getDeclaredAnnotation(Strategy.class);
-                    boolean isA1Override = !AnnotationStrategy.class.equals(a1.override());
-                    boolean isA2Override = !AnnotationStrategy.class.equals(a2.override());
-                    if (isA1Override && isA2Override) {
-                        return 0;
-                    } else if (isA1Override) {
-                        return 1;
-                    } else if (isA2Override) {
-                        return -1;
-                    } else {
-                        return 0;
-                    }
-                })
+                .sorted(ReflectionUtils.compareByAnnotationOverrideMethodPresence(Strategy.class))
                 .forEach(clazz -> {
                     Strategy annotation = clazz.getDeclaredAnnotation(Strategy.class);
                     StrategyScope scope = new StrategyScope(annotation.value());

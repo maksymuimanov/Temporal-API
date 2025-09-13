@@ -3,9 +3,12 @@ package com.temporal.api.core.engine.metadata.strategy.field.injection;
 import com.temporal.api.core.engine.context.InjectionPool;
 import com.temporal.api.core.engine.context.ObjectPool;
 import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
+import com.temporal.api.core.engine.metadata.MetadataLayer;
 import com.temporal.api.core.engine.metadata.annotation.injection.Inject;
 import com.temporal.api.core.engine.metadata.annotation.injection.Injected;
 import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
+import com.temporal.api.core.engine.metadata.executor.AnnotationExecutor;
+import com.temporal.api.core.engine.metadata.strategy.AnnotationStrategy;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 
 import java.lang.reflect.Field;
@@ -32,5 +35,10 @@ public class InjectStrategy implements FieldAnnotationStrategy<Inject> {
     @Override
     public Class<? extends Inject> getAnnotationClass() {
         return Inject.class;
+    }
+
+    @Override
+    public AnnotationExecutor<? extends AnnotationStrategy<Field, ?>> getExecutor() {
+        return MetadataLayer.FIELD_EXECUTOR;
     }
 }

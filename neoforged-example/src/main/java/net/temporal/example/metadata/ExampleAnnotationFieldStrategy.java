@@ -1,6 +1,9 @@
 package net.temporal.example.metadata;
 
+import com.temporal.api.core.engine.metadata.MetadataLayer;
 import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
+import com.temporal.api.core.engine.metadata.executor.AnnotationExecutor;
+import com.temporal.api.core.engine.metadata.strategy.AnnotationStrategy;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 
 import java.lang.reflect.Field;
@@ -15,5 +18,10 @@ public class ExampleAnnotationFieldStrategy implements FieldAnnotationStrategy<E
     @Override
     public Class<? extends ExampleAnnotation> getAnnotationClass() {
         return ExampleAnnotation.class;
+    }
+
+    @Override
+    public AnnotationExecutor<? extends AnnotationStrategy<Field, ?>> getExecutor() {
+        return MetadataLayer.FIELD_EXECUTOR;
     }
 }

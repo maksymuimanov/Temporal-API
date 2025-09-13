@@ -1,8 +1,11 @@
 package com.temporal.api.core.engine.metadata.strategy.method.injection;
 
 import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
+import com.temporal.api.core.engine.metadata.MetadataLayer;
 import com.temporal.api.core.engine.metadata.annotation.injection.Execute;
 import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
+import com.temporal.api.core.engine.metadata.executor.AnnotationExecutor;
+import com.temporal.api.core.engine.metadata.strategy.AnnotationStrategy;
 import com.temporal.api.core.engine.metadata.strategy.method.MethodAnnotationStrategy;
 import net.neoforged.fml.ModList;
 
@@ -19,5 +22,10 @@ public class ExecuteStrategy implements MethodAnnotationStrategy<Execute> {
     @Override
     public Class<? extends Execute> getAnnotationClass() {
         return Execute.class;
+    }
+
+    @Override
+    public AnnotationExecutor<? extends AnnotationStrategy<Method, ?>> getExecutor() {
+        return MetadataLayer.METHOD_EXECUTOR;
     }
 }

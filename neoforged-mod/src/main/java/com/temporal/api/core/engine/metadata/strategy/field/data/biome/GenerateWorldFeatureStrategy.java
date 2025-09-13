@@ -5,8 +5,11 @@ import com.temporal.api.core.engine.event.data.biome.configuration.ConfiguredFea
 import com.temporal.api.core.engine.event.data.biome.modifier.BiomeModifierDefinition;
 import com.temporal.api.core.engine.event.data.biome.placement.PlacedFeatureDefinition;
 import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
+import com.temporal.api.core.engine.metadata.MetadataLayer;
 import com.temporal.api.core.engine.metadata.annotation.data.biome.GenerateWorldFeature;
 import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
+import com.temporal.api.core.engine.metadata.executor.AnnotationExecutor;
+import com.temporal.api.core.engine.metadata.strategy.AnnotationStrategy;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 
 import java.lang.reflect.Field;
@@ -32,5 +35,10 @@ public class GenerateWorldFeatureStrategy implements FieldAnnotationStrategy<Gen
     @Override
     public Class<? extends GenerateWorldFeature> getAnnotationClass() {
         return GenerateWorldFeature.class;
+    }
+
+    @Override
+    public AnnotationExecutor<? extends AnnotationStrategy<Field, ?>> getExecutor() {
+        return MetadataLayer.STATIC_FIELD_EXECUTOR;
     }
 }

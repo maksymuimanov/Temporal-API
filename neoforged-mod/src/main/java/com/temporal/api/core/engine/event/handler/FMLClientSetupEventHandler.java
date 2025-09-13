@@ -6,16 +6,14 @@ import com.temporal.api.core.engine.initialization.initializer.StrategyPoolIniti
 import com.temporal.api.core.engine.metadata.MetadataLayer;
 import com.temporal.api.core.engine.metadata.annotation.injection.Handler;
 import com.temporal.api.core.engine.metadata.pool.SimpleStrategyPool;
-import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
+import com.temporal.api.core.engine.metadata.pool.StrategyPool;
 import net.minecraft.core.Holder;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 
-import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Handler(FMLClientSetupEvent.class)
 public class FMLClientSetupEventHandler implements EventHandler {
@@ -31,8 +29,8 @@ public class FMLClientSetupEventHandler implements EventHandler {
     @Override
     public void handle() {
         this.subscribeModEvent(FMLClientSetupEvent.class, event -> {
-            Map<Class<? extends Annotation>, FieldAnnotationStrategy<?>> strategies = SimpleStrategyPool.getInstance().getAll(StrategyPoolInitializer.DEFAULT_FIELD_EVENT_FML);
-            MetadataLayer.ASYNC_STRATEGY_CONSUMER.execute(MetadataLayer.STATIC_FIELD_EXECUTOR, strategies, ModContext.ALL_CLASSES);
+            StrategyPool strategyPool = SimpleStrategyPool.getInstance();
+            MetadataLayer.ASYNC_STRATEGY_CONSUMER.execute(strategyPool.getAll(StrategyPoolInitializer.DEFAULT_FIELD_EVENT_FML), ModContext.ALL_CLASSES);
             WOOD_TYPE_STRATEGY.execute(WOOD_TYPES);
             event.enqueueWork(() -> {
                 BOW_STRATEGY.execute(BOWS);

@@ -7,13 +7,13 @@ import java.util.List;
 import java.util.Map;
 
 public interface StrategyPool extends Iterable<AnnotationStrategy<?, ?>> {
-    <T, S extends AnnotationStrategy<T, ?>, R extends S> Map<Class<? extends Annotation>, R> getAll(String name, String... names);
+    Map<Class<? extends Annotation>, List<AnnotationStrategy<?, ?>>> getAll(String name, String... names);
 
-    <T, S extends AnnotationStrategy<T, ?>, R extends S> Map<Class<? extends Annotation>, R> getAll(String name);
+    Map<Class<? extends Annotation>, List<AnnotationStrategy<?, ?>>> getAll(String name);
 
-    <T, S extends AnnotationStrategy<T, ?>, R extends S> Map<Class<? extends Annotation>, R> getAll(StrategyScope scope, StrategyScope... scopes);
+    Map<Class<? extends Annotation>, List<AnnotationStrategy<?, ?>>> getAll(StrategyScope scope, StrategyScope... scopes);
 
-    <T, S extends AnnotationStrategy<T, ?>, R extends S> Map<Class<? extends Annotation>, R> getAll(StrategyScope scope);
+    Map<Class<? extends Annotation>, List<AnnotationStrategy<?, ?>>> getAll(StrategyScope scope);
 
     <T, A extends Annotation, S extends AnnotationStrategy<T, A>> List<S> get(Class<? extends A> annotationClass);
 

@@ -10,11 +10,13 @@ import net.neoforged.neoforgespi.language.ModFileScanData;
 import org.jetbrains.annotations.NotNull;
 import org.objectweb.asm.Type;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Modifier;
+import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -97,48 +99,31 @@ public final class ReflectionUtils {
         }
     }
 
-    @SuppressWarnings("unchecked")
-    public static <P, T extends P> Set<T> getSubclassFamily(String modId, Class<?> rootClass, String packageName, Class<? extends P> parent) {
-        return getPackageClasses(modId, rootClass, packageName)
-                .stream()
-                .filter(parent::isAssignableFrom)
-                .filter(clazz -> !(clazz.isAnnotation() || clazz.isInterface() || clazz.isEnum() || Modifier.isAbstract(clazz.getModifiers())))
-                .map(clazz -> {
-                    try {
-                        return clazz.getConstructor();
-                    } catch (NoSuchMethodException e) {
-                        throw new RuntimeException(e);
-                    }
-                })
-                .map(constructor -> {
-                    try {
-                        constructor.setAccessible(true);
-                        return (T) constructor.newInstance();
-                    } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
-                        throw new RuntimeException(e);
-                    }
-                })
-                .collect(Collectors.toSet());
-    }
-
-    public static Set<Class<?>> getPackageClasses(String modId, Class<?> rootClass, String packageName) {
-        return ModList.get()
-                .getModFileById(modId)
-                .getFile()
-                .getScanResult()
-                .getClasses()
-                .stream()
-                .map(ModFileScanData.ClassData::clazz)
-                .map(clazz -> forType(clazz, rootClass))
-                .filter(clazz -> clazz.getName().startsWith(packageName))
-                .collect(Collectors.toSet());
+    public static <T extends Annotation> Comparator<Class<?>> compareByAnnotationOverrideMethodPresence(Class<? extends T> annotation) {
+        return (c1, c2) -> {
+            try {
+                T a1 = c1.getDeclaredAnnotation(annotation);
+                T a2 = c2.getDeclaredAnnotation(annotation);
+                String overrideMethodName = "override";
+                Method method = annotation.getDeclaredMethod(overrideMethodName);
+                boolean isA1Override = !method.getDefaultValue().equals(method.invoke(a1));
+                boolean isA2Override = !method.getDefaultValue().equals(method.invoke(a2));
+                if (isA1Override && isA2Override) {
+                    return 0;
+                } else if (isA1Override) {
+                    return 1;
+                } else if (isA2Override) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        };
     }
 
     public static Set<Class<?>> getApiClasses() {
-        return getApiClasses(clazz -> true);
-    }
-
-    public static Set<Class<?>> getApiClasses(Predicate<Class<?>> predicate) {
         return ModList.get()
                 .getModFileById(ApiMod.MOD_ID)
                 .getFile()
@@ -147,7 +132,6 @@ public final class ReflectionUtils {
                 .stream()
                 .map(ModFileScanData.ClassData::clazz)
                 .map(clazz -> forType(clazz, ApiMod.class))
-                .filter(predicate)
                 .collect(Collectors.toSet());
     }
 }

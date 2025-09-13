@@ -3,8 +3,11 @@ package com.temporal.api.core.engine.metadata.strategy.field.data.properties;
 import com.temporal.api.core.engine.event.data.map.ApiDataMapProvider;
 import com.temporal.api.core.engine.event.data.map.WaxableDto;
 import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
+import com.temporal.api.core.engine.metadata.MetadataLayer;
 import com.temporal.api.core.engine.metadata.annotation.data.properties.Waxable;
 import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
+import com.temporal.api.core.engine.metadata.executor.AnnotationExecutor;
+import com.temporal.api.core.engine.metadata.strategy.AnnotationStrategy;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import net.minecraft.core.Holder;
 import net.minecraft.world.level.block.Block;
@@ -23,5 +26,10 @@ public class WaxableStrategy implements FieldAnnotationStrategy<Waxable> {
     @Override
     public Class<? extends Waxable> getAnnotationClass() {
         return Waxable.class;
+    }
+
+    @Override
+    public AnnotationExecutor<? extends AnnotationStrategy<Field, ?>> getExecutor() {
+        return MetadataLayer.STATIC_FIELD_EXECUTOR;
     }
 }

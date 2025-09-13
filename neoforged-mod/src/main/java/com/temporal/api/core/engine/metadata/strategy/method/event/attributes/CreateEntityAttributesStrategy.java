@@ -2,8 +2,11 @@ package com.temporal.api.core.engine.metadata.strategy.method.event.attributes;
 
 import com.temporal.api.core.engine.event.handler.EntityAttributeEventHandler;
 import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
+import com.temporal.api.core.engine.metadata.MetadataLayer;
 import com.temporal.api.core.engine.metadata.annotation.event.attributes.CreateEntityAttributes;
 import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
+import com.temporal.api.core.engine.metadata.executor.AnnotationExecutor;
+import com.temporal.api.core.engine.metadata.strategy.AnnotationStrategy;
 import com.temporal.api.core.engine.metadata.strategy.method.MethodAnnotationStrategy;
 import com.temporal.api.core.util.RegistryUtils;
 import net.minecraft.core.Holder;
@@ -28,5 +31,10 @@ public class CreateEntityAttributesStrategy implements MethodAnnotationStrategy<
     @Override
     public Class<? extends CreateEntityAttributes> getAnnotationClass() {
         return CreateEntityAttributes.class;
+    }
+
+    @Override
+    public AnnotationExecutor<? extends AnnotationStrategy<Method, ?>> getExecutor() {
+        return MetadataLayer.STATIC_METHOD_EXECUTOR;
     }
 }

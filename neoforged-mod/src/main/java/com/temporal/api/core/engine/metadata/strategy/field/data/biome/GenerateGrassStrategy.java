@@ -4,8 +4,11 @@ import com.temporal.api.core.engine.event.data.biome.GenerationDescriptionContai
 import com.temporal.api.core.engine.event.data.biome.dto.Grass;
 import com.temporal.api.core.engine.event.data.preparer.tag.BiomeTagDynamicPreparer;
 import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
+import com.temporal.api.core.engine.metadata.MetadataLayer;
 import com.temporal.api.core.engine.metadata.annotation.data.biome.GenerateGrass;
 import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
+import com.temporal.api.core.engine.metadata.executor.AnnotationExecutor;
+import com.temporal.api.core.engine.metadata.strategy.AnnotationStrategy;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.util.ResourceUtils;
 import com.temporal.api.core.util.TagUtils;
@@ -33,5 +36,10 @@ public class GenerateGrassStrategy implements FieldAnnotationStrategy<GenerateGr
     @Override
     public Class<? extends GenerateGrass> getAnnotationClass() {
         return GenerateGrass.class;
+    }
+
+    @Override
+    public AnnotationExecutor<? extends AnnotationStrategy<Field, ?>> getExecutor() {
+        return MetadataLayer.STATIC_FIELD_EXECUTOR;
     }
 }

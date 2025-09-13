@@ -2,8 +2,11 @@ package com.temporal.api.core.engine.metadata.strategy.field.event.renderer;
 
 import com.temporal.api.core.engine.event.handler.EntityRendererRegisterRendererEventHandler;
 import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
+import com.temporal.api.core.engine.metadata.MetadataLayer;
 import com.temporal.api.core.engine.metadata.annotation.event.renderer.RegisterEntityRenderer;
 import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
+import com.temporal.api.core.engine.metadata.executor.AnnotationExecutor;
+import com.temporal.api.core.engine.metadata.strategy.AnnotationStrategy;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -35,5 +38,10 @@ public class RegisterEntityRendererStrategy implements FieldAnnotationStrategy<R
     @Override
     public Class<? extends RegisterEntityRenderer> getAnnotationClass() {
         return RegisterEntityRenderer.class;
+    }
+
+    @Override
+    public AnnotationExecutor<? extends AnnotationStrategy<Field, ?>> getExecutor() {
+        return MetadataLayer.STATIC_FIELD_EXECUTOR;
     }
 }

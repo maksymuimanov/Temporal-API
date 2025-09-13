@@ -1,8 +1,8 @@
 package com.temporal.api.core.engine.context;
 
+import com.temporal.api.core.util.ReflectionUtils;
 import org.jetbrains.annotations.NotNull;
 
-import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -71,7 +71,6 @@ public class InjectionPool implements ObjectPool {
     public InjectionKey getKey(Class<?> clazz) {
         return cachedClasses.computeIfAbsent(clazz, (id) ->
                 this.getKey(key -> id.equals(key.getClazz())));
-
     }
 
     @Override
@@ -85,24 +84,14 @@ public class InjectionPool implements ObjectPool {
 
     @Override
     public <T> void put(String name, Class<? extends T> clazz) {
-        try {
-            Constructor<? extends T> constructor = clazz.getDeclaredConstructor();
-            T value = constructor.newInstance();
-            this.put(name, value);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        T value = ReflectionUtils.createObject(clazz);
+        this.put(name, value);
     }
 
     @Override
     public <T> void put(Class<? extends T> clazz) {
-        try {
-            Constructor<? extends T> constructor = clazz.getDeclaredConstructor();
-            T value = constructor.newInstance();
-            this.put(clazz, value);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        T value = ReflectionUtils.createObject(clazz);
+        this.put(clazz, value);
     }
 
     @Override

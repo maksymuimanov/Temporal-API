@@ -3,17 +3,15 @@ package com.temporal.api.core.engine.metadata.executor;
 import com.temporal.api.core.engine.metadata.strategy.type.ClassAnnotationStrategy;
 
 import java.lang.annotation.Annotation;
-import java.util.Map;
 
 public class ClassExecutor implements AnnotationExecutor<ClassAnnotationStrategy<?>> {
     @Override
-    public void execute(Map<Class<? extends Annotation>, ClassAnnotationStrategy<?>> strategies, Class<?> clazz) throws Exception {
+    public void execute(ClassAnnotationStrategy<?> strategy, Class<?> clazz) throws Exception {
         try {
             Annotation[] annotations = clazz.getDeclaredAnnotations();
             for (Annotation annotation : annotations) {
                 Class<? extends Annotation> annotationType = annotation.annotationType();
-                ClassAnnotationStrategy<?> strategy = strategies.get(annotationType);
-                if (strategy != null) {
+                if (annotationType.equals(strategy.getAnnotationClass())) {
                     strategy.execute(clazz, null);
                 }
             }

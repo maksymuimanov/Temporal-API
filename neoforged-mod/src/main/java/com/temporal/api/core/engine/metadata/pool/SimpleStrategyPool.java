@@ -20,8 +20,8 @@ public class SimpleStrategyPool implements StrategyPool {
     }
 
     @Override
-    public <T, S extends AnnotationStrategy<T, ?>, R extends S> Map<Class<? extends Annotation>, R> getAll(String name, String... names) {
-        Map<Class<? extends Annotation>, R> strategyMap = this.getAll(name);
+    public Map<Class<? extends Annotation>, List<AnnotationStrategy<?, ?>>> getAll(String name, String... names) {
+        Map<Class<? extends Annotation>, List<AnnotationStrategy<?, ?>>> strategyMap = this.getAll(name);
         for (String anotherName : names) {
             strategyMap.putAll(this.getAll(anotherName));
         }
@@ -29,7 +29,7 @@ public class SimpleStrategyPool implements StrategyPool {
     }
 
     @Override
-    public <T, S extends AnnotationStrategy<T, ?>, R extends S> Map<Class<? extends Annotation>, R> getAll(String name) {
+    public Map<Class<? extends Annotation>, List<AnnotationStrategy<?, ?>>> getAll(String name) {
         StrategyScope scope = this.strategies.keySet()
                 .stream()
                 .filter(s -> s.name().equals(name))
@@ -39,8 +39,8 @@ public class SimpleStrategyPool implements StrategyPool {
     }
 
     @Override
-    public <T, S extends AnnotationStrategy<T, ?>, R extends S> Map<Class<? extends Annotation>, R> getAll(StrategyScope scope, StrategyScope... scopes) {
-        Map<Class<? extends Annotation>, R> strategyMap = this.getAll(scope);
+    public Map<Class<? extends Annotation>, List<AnnotationStrategy<?, ?>>> getAll(StrategyScope scope, StrategyScope... scopes) {
+        Map<Class<? extends Annotation>, List<AnnotationStrategy<?, ?>>> strategyMap = this.getAll(scope);
         for (StrategyScope anotherScope : scopes) {
             strategyMap.putAll(this.getAll(anotherScope));
         }
@@ -48,14 +48,11 @@ public class SimpleStrategyPool implements StrategyPool {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    public <T, S extends AnnotationStrategy<T, ?>, R extends S> Map<Class<? extends Annotation>, R> getAll(StrategyScope scope) {
+    public Map<Class<? extends Annotation>, List<AnnotationStrategy<?, ?>>> getAll(StrategyScope scope) {
         Set<Class<? extends Annotation>> annotationClasses = this.strategies.get(scope);
         return annotationClasses.stream()
                 .map(this.annotationStrategyMap::get)
-                .flatMap(Collection::stream)
-                .map(strategy -> (R) strategy)
-                .collect(Collectors.toMap(strategy -> strategy.getAnnotationClass(), strategy -> strategy));
+                .collect(Collectors.toMap(strategyList -> strategyList.getFirst().getAnnotationClass(), strategyList -> strategyList));
     }
 
     @Override

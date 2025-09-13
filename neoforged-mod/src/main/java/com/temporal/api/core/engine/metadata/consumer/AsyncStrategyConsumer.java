@@ -14,13 +14,18 @@ import java.util.concurrent.Executors;
 
 public class AsyncStrategyConsumer implements AnnotationStrategyConsumer {
     @Override
-    public <T extends AnnotationStrategy<?, ?>> void execute(AnnotationExecutor<T> executor, Map<Class<? extends Annotation>, T> strategies, Set<Class<?>> source) {
+    public void execute(Map<Class<? extends Annotation>, List<AnnotationStrategy<?, ?>>> strategies, Set<Class<?>> source) {
         ExecutorService pool = Executors.newWorkStealingPool();
         try {
             List<CompletableFuture<Void>> futures = new ArrayList<>();
             for (Class<?> clazz : source) {
                 futures.add(CompletableFuture.runAsync(() -> {
-                    executor.tryExecute(strategies, clazz);
+                    strategies.forEach((annotation, list) -> {
+                        list.forEach(strategy -> {
+                            AnnotationExecutor<AnnotationStrategy<?, ?>> executor = (AnnotationExecutor<AnnotationStrategy<?, ?>>) strategy.getExecutor();
+                            executor.tryExecute(strategy, clazz);
+                        });
+                    });
                 }, pool));
             }
 

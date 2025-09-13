@@ -4,19 +4,17 @@ import com.temporal.api.core.engine.metadata.strategy.method.MethodAnnotationStr
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-import java.util.Map;
 
 public class StaticMethodExecutor implements AnnotationExecutor<MethodAnnotationStrategy<?>> {
     @Override
-    public void execute(Map<Class<? extends Annotation>, MethodAnnotationStrategy<?>> strategies, Class<?> clazz) throws Exception {
+    public void execute(MethodAnnotationStrategy<?> strategy, Class<?> clazz) throws Exception {
         Method[] methods = clazz.getDeclaredMethods();
         for (Method method : methods) {
             try {
                 Annotation[] annotations = method.getDeclaredAnnotations();
                 for (Annotation annotation : annotations) {
                     Class<? extends Annotation> annotationType = annotation.annotationType();
-                    MethodAnnotationStrategy strategy = strategies.get(annotationType);
-                    if (strategy != null) {
+                    if (annotationType.equals(strategy.getAnnotationClass())) {
                         strategy.execute(method, null);
                     }
                 }

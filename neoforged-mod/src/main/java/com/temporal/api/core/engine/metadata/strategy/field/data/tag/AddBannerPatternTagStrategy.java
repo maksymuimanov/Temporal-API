@@ -2,8 +2,11 @@ package com.temporal.api.core.engine.metadata.strategy.field.data.tag;
 
 import com.temporal.api.core.engine.event.data.tag.BannerPatternTagsProvider;
 import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
+import com.temporal.api.core.engine.metadata.MetadataLayer;
 import com.temporal.api.core.engine.metadata.annotation.data.tag.AddBannerPatternTag;
 import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
+import com.temporal.api.core.engine.metadata.executor.AnnotationExecutor;
+import com.temporal.api.core.engine.metadata.strategy.AnnotationStrategy;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.util.MapUtils;
 import net.minecraft.resources.ResourceKey;
@@ -24,5 +27,10 @@ public class AddBannerPatternTagStrategy implements FieldAnnotationStrategy<AddB
     @Override
     public Class<? extends AddBannerPatternTag> getAnnotationClass() {
         return AddBannerPatternTag.class;
+    }
+
+    @Override
+    public AnnotationExecutor<? extends AnnotationStrategy<Field, ?>> getExecutor() {
+        return MetadataLayer.STATIC_FIELD_EXECUTOR;
     }
 }

@@ -6,11 +6,9 @@ import com.temporal.api.core.engine.initialization.initializer.StrategyPoolIniti
 import com.temporal.api.core.engine.metadata.MetadataLayer;
 import com.temporal.api.core.engine.metadata.annotation.injection.Handler;
 import com.temporal.api.core.engine.metadata.pool.SimpleStrategyPool;
-import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
+import com.temporal.api.core.engine.metadata.pool.StrategyPool;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 
-import java.lang.annotation.Annotation;
-import java.util.Map;
 import java.util.Queue;
 import java.util.function.Consumer;
 
@@ -21,8 +19,8 @@ public class EntityRendererRegisterRendererEventHandler implements EventHandler 
     @Override
     public void handle() {
         this.subscribeModEvent(EntityRenderersEvent.RegisterRenderers.class, event -> {
-            Map<Class<? extends Annotation>, FieldAnnotationStrategy<?>> strategies = SimpleStrategyPool.getInstance().getAll(StrategyPoolInitializer.DEFAULT_FIELD_EVENT_RENDERER);
-            MetadataLayer.ASYNC_STRATEGY_CONSUMER.execute(MetadataLayer.STATIC_FIELD_EXECUTOR, strategies, ModContext.ALL_CLASSES);
+            StrategyPool strategyPool = SimpleStrategyPool.getInstance();
+            MetadataLayer.ASYNC_STRATEGY_CONSUMER.execute(strategyPool.getAll(StrategyPoolInitializer.DEFAULT_FIELD_EVENT_RENDERER), ModContext.ALL_CLASSES);
             RENDERING_REGISTRIES.forEach(consumer -> consumer.accept(event));
         });
     }

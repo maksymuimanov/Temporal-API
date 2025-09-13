@@ -3,8 +3,11 @@ package com.temporal.api.core.engine.metadata.strategy.field.data;
 import com.temporal.api.core.engine.event.data.trim.material.ApiTrimMaterialProvider;
 import com.temporal.api.core.engine.event.data.trim.material.TrimMaterialDescription;
 import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
+import com.temporal.api.core.engine.metadata.MetadataLayer;
 import com.temporal.api.core.engine.metadata.annotation.data.GenerateTrimMaterial;
 import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
+import com.temporal.api.core.engine.metadata.executor.AnnotationExecutor;
+import com.temporal.api.core.engine.metadata.strategy.AnnotationStrategy;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.armortrim.TrimMaterial;
@@ -23,5 +26,10 @@ public class GenerateTrimMaterialStrategy implements FieldAnnotationStrategy<Gen
     @Override
     public Class<? extends GenerateTrimMaterial> getAnnotationClass() {
         return GenerateTrimMaterial.class;
+    }
+
+    @Override
+    public AnnotationExecutor<? extends AnnotationStrategy<Field, ?>> getExecutor() {
+        return MetadataLayer.STATIC_FIELD_EXECUTOR;
     }
 }
