@@ -10,6 +10,7 @@ import net.neoforged.neoforgespi.language.ModFileScanData;
 import org.jetbrains.annotations.NotNull;
 import org.objectweb.asm.Type;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
@@ -22,6 +23,25 @@ import java.util.stream.Stream;
 
 public final class ReflectionUtils {
     private ReflectionUtils() {
+    }
+
+    public static <T> T createObject(Class<? extends T> clazz) {
+        try {
+            Constructor<? extends T> constructor = clazz.getDeclaredConstructor();
+            constructor.setAccessible(true);
+            return constructor.newInstance();
+        } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T> T getFieldObject(Field field, Object object) {
+        try {
+            return (T) field.get(object);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static boolean isFactoryPresent(Class<?> clazz) {

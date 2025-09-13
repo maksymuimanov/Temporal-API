@@ -23,8 +23,13 @@ public class TranslateMultipleStrategy implements FieldAnnotationStrategy<Transl
             if (!method.getReturnType().isArray()) continue;
             Annotation[] languageAnnotations = (Annotation[]) method.invoke(annotation);
             for (Annotation languageAnnotation : languageAnnotations) {
-                FieldAnnotationStrategy strategy = strategyPool.get(languageAnnotation.annotationType());
-                strategy.execute(field, object, languageAnnotation);
+                strategyPool.get(languageAnnotation.annotationType()).forEach(strategy -> {
+                    try {
+                        ((FieldAnnotationStrategy) strategy).execute(field, object, languageAnnotation);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                });
             }
         }
     }

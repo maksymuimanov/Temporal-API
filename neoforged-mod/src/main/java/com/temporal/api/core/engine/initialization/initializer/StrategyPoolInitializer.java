@@ -7,13 +7,13 @@ import com.temporal.api.core.engine.metadata.pool.StrategyPool;
 import com.temporal.api.core.engine.metadata.pool.StrategyScope;
 import com.temporal.api.core.engine.metadata.strategy.AnnotationStrategy;
 
-import java.lang.annotation.Annotation;
 import java.util.List;
 
 public class StrategyPoolInitializer implements ObjectPoolInitializer {
     public static final String DEFAULT_CLASS_INJECTION = "default_class_injection";
     public static final String DEFAULT_CLASS_EVENT_LAYER = "default_class_event_layer";
     public static final String DEFAULT_CLASS_DATA = "default_class_data";
+    public static final String DEFAULT_CLASS_CONFIG = "default_class_config";
     public static final String DEFAULT_FIELD_INJECTION = "default_field_injection";
     public static final String DEFAULT_FIELD_EVENT_BLOCK = "default_field_event_block";
     public static final String DEFAULT_FIELD_EVENT_CREATIVE = "default_field_event_creative";
@@ -30,14 +30,14 @@ public class StrategyPoolInitializer implements ObjectPoolInitializer {
     public void initialize(Iterable<Class<?>> classes, List<?> externalObjects, ObjectPool objectPool) {
         StrategyPool strategyPool = new SimpleStrategyPool();
         classes.forEach(clazz -> {
-                    if (!clazz.isAnnotationPresent(Strategy.class)) return;
-                    Strategy annotation = clazz.getDeclaredAnnotation(Strategy.class);
-                    StrategyScope scope = new StrategyScope(annotation.value());
-                    if (!Annotation.class.equals(annotation.override())) {
-                        strategyPool.remove(annotation.override());
-                    }
-                    strategyPool.put(scope, (Class<? extends AnnotationStrategy<?, ?>>) clazz);
-                });
+            if (!clazz.isAnnotationPresent(Strategy.class)) return;
+            Strategy annotation = clazz.getDeclaredAnnotation(Strategy.class);
+            StrategyScope scope = new StrategyScope(annotation.value());
+            if (!AnnotationStrategy.class.equals(annotation.override())) {
+                strategyPool.override(annotation.override());
+            }
+            strategyPool.put(scope, (Class<? extends AnnotationStrategy<?, ?>>) clazz);
+        });
         objectPool.put(strategyPool);
     }
 }

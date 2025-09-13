@@ -3,17 +3,15 @@ package com.temporal.api.core.engine.metadata;
 import com.temporal.api.core.engine.EngineBuilder;
 import com.temporal.api.core.engine.EngineTask;
 import com.temporal.api.core.engine.metadata.processor.AnnotationProcessor;
-import com.temporal.api.core.engine.metadata.processor.InjectionAnnotationProcessor;
+import com.temporal.api.core.engine.metadata.processor.ConfigAnnotationProcessor;
 
 import java.util.List;
 
 public class MetadataLayerBuilder {
-    private static final List<AnnotationProcessor> DEFAULT_SIMPLE_PROCESSORS = List.of(new InjectionAnnotationProcessor());
-    private static final List<AnnotationProcessor> DEFAULT_ASYNC_PROCESSORS = List.of();
+    private static final List<AnnotationProcessor> DEFAULT_ANNOTATION_PROCESSORS = List.of(new ConfigAnnotationProcessor());
     private final EngineBuilder engineBuilder;
     private final MetadataLayer metadataLayer;
-    private List<AnnotationProcessor> simpleProcessors = DEFAULT_SIMPLE_PROCESSORS;
-    private List<AnnotationProcessor> asyncProcessors = DEFAULT_ASYNC_PROCESSORS;
+    private List<AnnotationProcessor> annotationProcessors = DEFAULT_ANNOTATION_PROCESSORS;
 
     public MetadataLayerBuilder(EngineBuilder engineBuilder) {
         this.engineBuilder = engineBuilder;
@@ -21,20 +19,14 @@ public class MetadataLayerBuilder {
         this.engineBuilder.addLayer(this.metadataLayer);
     }
 
-    public MetadataLayerBuilder simpleProcessors(List<AnnotationProcessor> simpleProcessors) {
-        this.simpleProcessors = simpleProcessors;
-        return this;
-    }
-
-    public MetadataLayerBuilder asyncProcessors(List<AnnotationProcessor> asyncProcessors) {
-        this.asyncProcessors = asyncProcessors;
+    public MetadataLayerBuilder annotationProcessors(List<AnnotationProcessor> simpleProcessors) {
+        this.annotationProcessors = simpleProcessors;
         return this;
     }
 
     public EngineBuilder and() {
         EngineTask task = () -> {
-            this.metadataLayer.setSimpleProcessors(this.simpleProcessors);
-            this.metadataLayer.setAsyncProcessors(this.asyncProcessors);
+            this.metadataLayer.setAnnotationProcessors(this.annotationProcessors);
             this.engineBuilder.processLayer(this.metadataLayer);
         };
         this.engineBuilder.addTask(task);

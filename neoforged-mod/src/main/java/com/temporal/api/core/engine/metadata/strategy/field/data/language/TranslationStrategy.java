@@ -7,6 +7,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -48,6 +49,7 @@ public abstract class TranslationStrategy<A extends Annotation> implements Field
             switch (o) {
                 case String stringField -> this.putTranslation(stringField, value, prefix, suffix, ApiLanguageProvider.STRING_TRANSFORMER);
                 case Component component -> this.putTranslation(component, value, prefix, suffix, ApiLanguageProvider.COMPONENT_TRANSFORMER);
+                case ModConfigSpec.ConfigValue<?> configValue -> this.putTranslation(configValue, value, prefix, suffix, ApiLanguageProvider.CONFIG_TRANSFORMER);
                 case Holder<?> holder -> this.putTranslation(Objects.requireNonNull(holder.getKey()), value, prefix, suffix);
                 case ResourceKey<?> key -> this.putTranslation(key, value, prefix, suffix);
                 default -> throw new IllegalStateException("Unexpected value: " + o);

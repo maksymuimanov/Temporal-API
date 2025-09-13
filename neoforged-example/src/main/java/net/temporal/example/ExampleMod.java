@@ -6,11 +6,8 @@ import com.temporal.api.core.compat.DependencyFunction;
 import com.temporal.api.core.compat.SimpleDependencyProcessBuilder;
 import com.temporal.api.core.engine.TemporalEngine;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.server.ServerStartingEvent;
 
 @Mod(ExampleMod.MOD_ID)
 public class ExampleMod {
@@ -36,10 +33,6 @@ public class ExampleMod {
                 .addProcess((DependencyFunction) () -> ApiMod.LOGGER.info("I am async: 9"))
                 .addProcess((DependencyFunction) () -> ApiMod.LOGGER.info("I am async: 10"))
                 .build();
-        NeoForge.EVENT_BUS.register(this);
-    }
-
-    @SubscribeEvent
-    public void onServerStarting(ServerStartingEvent event) {
+        ConfigUtils.showModConfigs();
     }
 }

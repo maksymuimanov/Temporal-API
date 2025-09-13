@@ -18,6 +18,19 @@ public final class MapUtils {
         }
     }
 
+    public static <K, V> void putToSortedListMap(Map<K, List<V>> map, K key, V value, Comparator<V> comparator) {
+        boolean exists = map.containsKey(key);
+        if (exists) {
+            List<V> list = map.get(key);
+            list.add(value);
+            list.sort(comparator);
+        } else {
+            List<V> list = new ArrayList<>();
+            list.add(value);
+            map.put(key, list);
+        }
+    }
+
     public static <K, V> void putToListMap(Map<K, List<V>> map, K key, V value) {
         boolean exists = map.containsKey(key);
         if (exists) {

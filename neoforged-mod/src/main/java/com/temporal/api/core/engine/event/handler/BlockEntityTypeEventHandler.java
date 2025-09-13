@@ -3,6 +3,7 @@ package com.temporal.api.core.engine.event.handler;
 import com.temporal.api.core.engine.context.ModContext;
 import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
 import com.temporal.api.core.engine.metadata.MetadataLayer;
+import com.temporal.api.core.engine.metadata.annotation.injection.Handler;
 import com.temporal.api.core.engine.metadata.pool.SimpleStrategyPool;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import net.minecraft.core.Holder;
@@ -15,6 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Handler(BlockEntityTypeAddBlocksEvent.class)
 public class BlockEntityTypeEventHandler implements EventHandler {
     public static final Map<BlockEntityType<?>, List<Holder<Block>>> BLOCKS = new HashMap<>();
 

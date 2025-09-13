@@ -21,6 +21,7 @@ import net.minecraft.world.item.armortrim.TrimPattern;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BannerPattern;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 
 import java.lang.reflect.Field;
@@ -45,6 +46,7 @@ public abstract class ApiLanguageProvider extends LanguageProvider {
     public static final KeyTransformer<ResourceKey<JukeboxSong>> JUKEBOX_SONG_TRANSFORMER = new JukeboxSongTransformer();
     public static final KeyTransformer<ResourceKey<DamageType>> DAMAGE_TYPE_TRANSFORMER = new DamageTypeTransformer();
     public static final KeyTransformer<ResourceKey<PaintingVariant>> PAINTING_VARIANT_TRANSFORMER = new PaintingVariantTransformer();
+    public static final KeyTransformer<ModConfigSpec.ConfigValue<?>> CONFIG_TRANSFORMER = new ConfigTransformer();
     public static final KeyTransformer<Component> COMPONENT_TRANSFORMER = new ComponentTransformer();
     public static final KeyTransformer<String> STRING_TRANSFORMER = new StringTransformer();
     public static final TranslationValueResolver SIMPLE_TRANSLATION_VALUE_RESOLVER = new SimpleTranslationValueResolver();

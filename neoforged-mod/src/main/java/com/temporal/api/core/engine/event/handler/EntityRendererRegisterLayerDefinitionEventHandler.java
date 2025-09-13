@@ -4,6 +4,7 @@ import com.temporal.api.core.collection.TemporalMap;
 import com.temporal.api.core.engine.context.ModContext;
 import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
 import com.temporal.api.core.engine.metadata.MetadataLayer;
+import com.temporal.api.core.engine.metadata.annotation.injection.Handler;
 import com.temporal.api.core.engine.metadata.pool.SimpleStrategyPool;
 import com.temporal.api.core.engine.metadata.strategy.type.ClassAnnotationStrategy;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -13,6 +14,7 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import java.lang.annotation.Annotation;
 import java.util.Map;
 
+@Handler(EntityRenderersEvent.RegisterLayerDefinitions.class)
 public class EntityRendererRegisterLayerDefinitionEventHandler implements EventHandler {
     public static final Map<ModelLayerLocation, LayerDefinition> LAYERS = new TemporalMap<>();
 

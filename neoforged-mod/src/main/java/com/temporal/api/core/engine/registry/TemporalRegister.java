@@ -83,7 +83,7 @@ public class TemporalRegister<T> extends DeferredRegister<T> {
         ApiMod.LOGGER.info("Registering DeferredRegister {} to EventBus with containers: [{}]", registryKey, Arrays.toString(containers));
         if (this.isRegisteredEventBus()) {
             ApiMod.LOGGER.error("DeferredRegister {} is already registered to an EventBus", registryKey);
-            throw new IllegalStateException("Cannot register DeferredRegister to more than one event bus.");
+            throw new IllegalStateException("Cannot register DeferredRegister to more than one eventClass bus.");
         } else {
             eventBus.addListener((RegisterEvent event) -> addEntries(event, containers));
             eventBus.addListener(this::addRegistry);

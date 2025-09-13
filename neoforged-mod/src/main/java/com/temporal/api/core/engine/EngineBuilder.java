@@ -1,6 +1,7 @@
 package com.temporal.api.core.engine;
 
 import com.temporal.api.ApiMod;
+import com.temporal.api.core.engine.config.ConfigLayerBuilder;
 import com.temporal.api.core.engine.context.ModContext;
 import com.temporal.api.core.engine.event.EventLayerBuilder;
 import com.temporal.api.core.engine.finalization.FinalizationLayerBuilder;
@@ -22,7 +23,7 @@ public class EngineBuilder {
                            |  |     |  -----| | |     | | | |       |  ---  | |  | |  | |  | |  | |  -----|
                            |--|     |-------| |-|     |-| |-|       |-------| |--| |--| |--| |--| |-------| v1.9.0 by w4t3rcs :D
                     """;
-    private static final int DEFAULT_LAYER_COUNT = 5;
+    private static final int DEFAULT_LAYER_COUNT = 6;
     private final LayerContainer layerContainer = LayerContainer.getInstance();
     private final List<EngineTask> tasks = new ArrayList<>(DEFAULT_LAYER_COUNT);
 
@@ -53,6 +54,10 @@ public class EngineBuilder {
 
     public EventLayerBuilder configureEventLayer() {
         return new EventLayerBuilder(this);
+    }
+
+    public ConfigLayerBuilder configureConfigLayer() {
+        return new ConfigLayerBuilder(this);
     }
 
     public FinalizationLayerBuilder configureFinalizationLayer() {

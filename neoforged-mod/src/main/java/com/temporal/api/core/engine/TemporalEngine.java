@@ -26,6 +26,8 @@ public class TemporalEngine {
                 .and()
                 .configureEventLayer()
                 .and()
+                .configureConfigLayer()
+                .and()
                 .configureFinalizationLayer()
                 .and();
     }

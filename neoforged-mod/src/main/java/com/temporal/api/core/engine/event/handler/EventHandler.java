@@ -5,11 +5,18 @@ import com.temporal.api.core.engine.event.adapter.EventAdapter;
 import net.neoforged.bus.api.Event;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.NeoForge;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
-public interface EventHandler {
+public interface EventHandler extends Comparable<EventHandler> {
+    int TOP_PRIORITY = 0;
+
     void handle();
+
+    default int getPriority() {
+        return TOP_PRIORITY;
+    }
 
     default IEventBus getEventBus() {
         return NeoForge.EVENT_BUS;
@@ -33,5 +40,10 @@ public interface EventHandler {
 
     default <T extends Event> void subscribeModEvent(Class<T> event, Consumer<T> consumer) {
         getModEventBus().addListener(event, consumer);
+    }
+
+    @Override
+    default int compareTo(@NotNull EventHandler o) {
+        return this.getPriority() - o.getPriority();
     }
 }

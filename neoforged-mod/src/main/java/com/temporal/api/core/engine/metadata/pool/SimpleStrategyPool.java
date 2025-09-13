@@ -3,45 +3,20 @@ package com.temporal.api.core.engine.metadata.pool;
 import com.temporal.api.core.engine.context.InjectionPool;
 import com.temporal.api.core.engine.metadata.strategy.AnnotationStrategy;
 import com.temporal.api.core.util.MapUtils;
+import com.temporal.api.core.util.ReflectionUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class SimpleStrategyPool implements StrategyPool {
-    private final Map<Class<? extends Annotation>, AnnotationStrategy<?, ?>> annotationStrategyMap;
+    private final Map<Class<? extends Annotation>, List<AnnotationStrategy<?, ?>>> annotationStrategyMap;
     private final Map<StrategyScope, Set<Class<? extends Annotation>>> strategies;
 
     public SimpleStrategyPool() {
-        this.annotationStrategyMap = new  HashMap<>();
+        this.annotationStrategyMap = new HashMap<>();
         this.strategies = new HashMap<>();
-    }
-
-    @Override
-    @SuppressWarnings("unchecked")
-    public <T, S extends AnnotationStrategy<T, ?>, R extends S> Map<Class<? extends Annotation>, R> getAll(Collection<Class<? extends Annotation>> annotationClasses) {
-        Map<Class<? extends Annotation>, R> strategies = new HashMap<>();
-        for (Class<? extends Annotation> anotherAnnotationClass : annotationClasses) {
-            R anotherAnnotationStrategy = (R) this.get(anotherAnnotationClass);
-            strategies.put(anotherAnnotationClass, anotherAnnotationStrategy);
-        }
-        return strategies;
-    }
-
-    @Override
-    @SuppressWarnings("unchecked")
-    public <T, S extends AnnotationStrategy<T, ?>, R extends S> Map<Class<? extends Annotation>, R> getAll(Class<? extends Annotation> annotationClass, Class<? extends Annotation>... annotationClasses) {
-        Map<Class<? extends Annotation>, R> strategies = new HashMap<>();
-        R annotationStrategy = (R) this.get(annotationClass);
-        strategies.put(annotationClass, annotationStrategy);
-        for (Class<? extends Annotation> anotherAnnotationClass : annotationClasses) {
-            R anotherAnnotationStrategy = (R) this.get(anotherAnnotationClass);
-            strategies.put(anotherAnnotationClass, anotherAnnotationStrategy);
-        }
-        return strategies;
     }
 
     @Override
@@ -84,27 +59,38 @@ public class SimpleStrategyPool implements StrategyPool {
 
     @Override
     @SuppressWarnings("unchecked")
-    public <A extends Annotation, S extends AnnotationStrategy<?, A>> S get(Class<? extends A> annotationClass) {
-        return (S) annotationStrategyMap.get(annotationClass);
+    public <T, A extends Annotation, S extends AnnotationStrategy<T, A>> List<S> get(Class<? extends A> annotationClass) {
+        return (List<S>) annotationStrategyMap.get(annotationClass);
     }
 
     @Override
-    public void put(StrategyScope scope, Class<? extends AnnotationStrategy<?, ?>> strategy) {
-        try {
-            Constructor<? extends AnnotationStrategy<?, ?>> constructor = strategy.getDeclaredConstructor();
-            constructor.setAccessible(true);
-            AnnotationStrategy<?, ?> t = constructor.newInstance();
-            this.put(scope, t);
-        } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
-            throw new RuntimeException(e);
-        }
+    public void put(StrategyScope scope, Class<? extends AnnotationStrategy<?, ?>> strategyClass) {
+        AnnotationStrategy<?, ?> strategy = ReflectionUtils.createObject(strategyClass);
+        this.put(scope, strategy);
     }
 
     @Override
-    public <A extends Annotation, S extends AnnotationStrategy<?, A>> void put(StrategyScope scope, S strategy) {
+    public <T, A extends Annotation, S extends AnnotationStrategy<T, A>> void put(StrategyScope scope, S strategy) {
         Class<? extends A> annotationClass = strategy.getAnnotationClass();
-        this.annotationStrategyMap.put(annotationClass, strategy);
+        MapUtils.putToListMap(this.annotationStrategyMap, annotationClass, strategy);
         MapUtils.putToSetMap(this.strategies, scope, annotationClass);
+    }
+
+    @Override
+    public <T, A extends Annotation> void override(StrategyScope scope, Class<? extends AnnotationStrategy<T, A>> from, Class<? extends AnnotationStrategy<T, A>> to) {
+        AnnotationStrategy<T, A> fromAnnotationStrategy = ReflectionUtils.createObject(from);
+        AnnotationStrategy<T, A> toAnnotationStrategy = ReflectionUtils.createObject(to);
+        this.override(scope, fromAnnotationStrategy, toAnnotationStrategy);
+    }
+
+    @Override
+    public <T, A extends Annotation, FS extends AnnotationStrategy<T, A>, TS extends AnnotationStrategy<T, A>> void override(StrategyScope scope, FS from, TS to) {
+        List<AnnotationStrategy<?, ?>> annotationStrategies = this.annotationStrategyMap.get(from.getAnnotationClass());
+        annotationStrategies.remove(from);
+        annotationStrategies.add(to);
+        Set<Class<? extends Annotation>> classes = this.strategies.get(scope);
+        classes.remove(from.getAnnotationClass());
+        classes.remove(to.getAnnotationClass());
     }
 
     @Override
@@ -133,7 +119,7 @@ public class SimpleStrategyPool implements StrategyPool {
     @Override
     @NotNull
     public Iterator<AnnotationStrategy<?, ?>> iterator() {
-        return this.annotationStrategyMap.values().iterator();
+        return this.annotationStrategyMap.values().stream().flatMap(List::stream).iterator();
     }
 
     public static SimpleStrategyPool getInstance() {
