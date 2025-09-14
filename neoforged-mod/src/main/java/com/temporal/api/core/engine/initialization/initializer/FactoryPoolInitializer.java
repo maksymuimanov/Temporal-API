@@ -8,22 +8,22 @@ import java.util.List;
 
 public class FactoryPoolInitializer implements ObjectPoolInitializer {
     @Override
-    public void initialize(Collection<Class<?>> classes, List<?> externalObjects, ObjectPool objectPool) {
+    public void initialize(final Collection<Class<?>> classes, final List<?> externalObjects, final ObjectPool objectPool) {
         objectPool.put(new ItemFactory());
         objectPool.put(new BlockFactory());
         objectPool.put(new CreativeModeTabFactory());
-        objectPool.put(new EffectFactory());
+        objectPool.put(new MobEffectFactory());
         objectPool.put(new EntityTypeFactory());
         objectPool.put(new BlockEntityTypeFactory());
         objectPool.put(new ParticleTypeFactory());
-        objectPool.put(new PoiTypeFactory());
+        objectPool.put(new PointOfInterestTypeFactory());
         objectPool.put(new PotionFactory());
         objectPool.put(new RecipeSerializerFactory());
         objectPool.put(new RecipeTypeFactory());
         objectPool.put(new SoundEventFactory());
         objectPool.put(new VillagerProfessionFactory());
         objectPool.put(new LootModifierSerializerFactory());
-        objectPool.put(new MenuTypeFactory());
+        objectPool.put(new MenuFactory());
         objectPool.put(new TriggerFactory());
         objectPool.put(new ArmorMaterialFactory());
         objectPool.put(new AttachmentTypeFactory());

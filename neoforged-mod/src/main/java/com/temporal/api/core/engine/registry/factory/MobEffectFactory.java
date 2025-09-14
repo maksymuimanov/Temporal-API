@@ -4,12 +4,12 @@ import com.temporal.api.core.engine.context.InjectionPool;
 import com.temporal.api.core.engine.registry.TemporalRegister;
 import net.minecraft.world.effect.MobEffect;
 
-public class EffectFactory extends AbstractObjectFactory<MobEffect> {
-    public EffectFactory() {
+public class MobEffectFactory extends AbstractObjectFactory<MobEffect> {
+    public MobEffectFactory() {
         this(InjectionPool.getFromInstance("$MobEffects"));
     }
 
-    public EffectFactory(TemporalRegister<MobEffect> mobEffects) {
+    public MobEffectFactory(final TemporalRegister<MobEffect> mobEffects) {
         super(mobEffects);
     }
 }

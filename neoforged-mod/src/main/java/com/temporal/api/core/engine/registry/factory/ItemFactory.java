@@ -12,19 +12,19 @@ public class ItemFactory extends AbstractObjectFactory<Item> {
         this(InjectionPool.getFromInstance("$Items"));
     }
 
-    public ItemFactory(TemporalRegister.TemporalItems items) {
+    public ItemFactory(final TemporalRegister<Item> items) {
         super(items);
     }
 
-    public DeferredItem<Item> create(String name) {
-        return this.create(name, new Item.Properties());
+    public DeferredItem<Item> create(final String name) {
+        return create(name, new Item.Properties());
     }
 
-    public DeferredItem<Item> create(String name, Item.Properties properties) {
-        return this.create(name, properties, Item::new);
+    public DeferredItem<Item> create(final String name, final Item.Properties properties) {
+        return create(name, properties, Item::new);
     }
 
-    public <T extends Item> DeferredItem<T> create(String name, Item.Properties properties, Function<Item.Properties, T> function) {
-        return ((TemporalRegister.TemporalItems) this.getRegistry()).registerItem(name, properties, function);
+    public <T extends Item> DeferredItem<T> create(final String name, final Item.Properties properties, final Function<Item.Properties, T> function) {
+        return (DeferredItem<T>) create(name, () -> function.apply(properties));
     }
 }
