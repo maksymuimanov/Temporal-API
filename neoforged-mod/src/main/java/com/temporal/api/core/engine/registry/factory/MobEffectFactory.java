@@ -9,7 +9,7 @@ public class MobEffectFactory extends AbstractObjectFactory<MobEffect> {
         this(InjectionPool.getFromInstance("$MobEffects"));
     }
 
-    public MobEffectFactory(final TemporalRegister<MobEffect> mobEffects) {
-        super(mobEffects);
+    public MobEffectFactory(final TemporalRegister<MobEffect> register) {
+        super(register);
     }
 }

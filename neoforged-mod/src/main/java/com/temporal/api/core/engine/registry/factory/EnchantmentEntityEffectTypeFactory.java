@@ -10,7 +10,7 @@ public class EnchantmentEntityEffectTypeFactory extends AbstractObjectFactory<Ma
         this(InjectionPool.getFromInstance("$EnchantmentEntityEffectTypes"));
     }
 
-    public EnchantmentEntityEffectTypeFactory(TemporalRegister<MapCodec<? extends EnchantmentEntityEffect>> enchantmentEntityEffectTypes) {
-        super(enchantmentEntityEffectTypes);
+    public EnchantmentEntityEffectTypeFactory(TemporalRegister<MapCodec<? extends EnchantmentEntityEffect>> register) {
+        super(register);
     }
 }

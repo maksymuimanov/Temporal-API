@@ -13,8 +13,8 @@ public class BlockEntityTypeFactory extends AbstractObjectFactory<BlockEntityTyp
         this(InjectionPool.getFromInstance("$BlockEntityTypes"));
     }
 
-    public BlockEntityTypeFactory(TemporalRegister<BlockEntityType<?>> blockEntityTypes) {
-        super(blockEntityTypes);
+    public BlockEntityTypeFactory(TemporalRegister<BlockEntityType<?>> register) {
+        super(register);
     }
 
     public <T extends BlockEntity> DeferredHolder<BlockEntityType<?>, BlockEntityType<T>> create(String name, BlockEntityType.BlockEntitySupplier<T> factory, Block... blocks) {

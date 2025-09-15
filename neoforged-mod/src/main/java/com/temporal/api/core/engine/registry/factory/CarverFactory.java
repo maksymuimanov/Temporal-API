@@ -9,7 +9,7 @@ public class CarverFactory extends AbstractObjectFactory<WorldCarver<?>> {
         this(InjectionPool.getFromInstance("$Carvers"));
     }
 
-    public CarverFactory(TemporalRegister<WorldCarver<?>> carvers) {
-        super(carvers);
+    public CarverFactory(TemporalRegister<WorldCarver<?>> register) {
+        super(register);
     }
 }

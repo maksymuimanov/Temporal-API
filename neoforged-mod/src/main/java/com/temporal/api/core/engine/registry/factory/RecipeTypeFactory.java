@@ -12,8 +12,8 @@ public class RecipeTypeFactory extends AbstractObjectFactory<RecipeType<?>> {
         this(InjectionPool.getFromInstance("$RecipeTypes"));
     }
 
-    public RecipeTypeFactory(TemporalRegister<RecipeType<?>> recipeTypes) {
-        super(recipeTypes);
+    public RecipeTypeFactory(TemporalRegister<RecipeType<?>> register) {
+        super(register);
     }
 
     public <T extends Recipe<?>> DeferredHolder<RecipeType<?>, RecipeType<T>> create(String name) {

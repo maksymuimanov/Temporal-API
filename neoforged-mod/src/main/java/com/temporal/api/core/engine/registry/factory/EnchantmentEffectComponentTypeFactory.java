@@ -9,7 +9,7 @@ public class EnchantmentEffectComponentTypeFactory extends AbstractObjectFactory
         this(InjectionPool.getFromInstance("$EnchantmentEffectComponentTypes"));
     }
 
-    public EnchantmentEffectComponentTypeFactory(TemporalRegister<DataComponentType<?>> enchantmentEffectComponentTypes) {
-        super(enchantmentEffectComponentTypes);
+    public EnchantmentEffectComponentTypeFactory(TemporalRegister<DataComponentType<?>> register) {
+        super(register);
     }
 }

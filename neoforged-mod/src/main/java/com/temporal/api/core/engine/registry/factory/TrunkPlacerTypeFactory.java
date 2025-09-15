@@ -12,8 +12,8 @@ public class TrunkPlacerTypeFactory extends AbstractObjectFactory<TrunkPlacerTyp
         this(InjectionPool.getFromInstance("$TrunkPlacerTypes"));
     }
 
-    public TrunkPlacerTypeFactory(TemporalRegister<TrunkPlacerType<?>> trunkPlacerTypes) {
-        super(trunkPlacerTypes);
+    public TrunkPlacerTypeFactory(TemporalRegister<TrunkPlacerType<?>> register) {
+        super(register);
     }
 
     public <T extends TrunkPlacer> DeferredHolder<TrunkPlacerType<?>, TrunkPlacerType<T>> create(String name, MapCodec<T> codec) {

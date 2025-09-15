@@ -14,8 +14,8 @@ public class MenuFactory extends AbstractObjectFactory<MenuType<?>> {
         this(InjectionPool.getFromInstance("$Menus"));
     }
 
-    public MenuFactory(final TemporalRegister<MenuType<?>> menuTypes) {
-        super(menuTypes);
+    public MenuFactory(final TemporalRegister<MenuType<?>> register) {
+        super(register);
     }
 
     public <T extends AbstractContainerMenu> DeferredHolder<MenuType<?>, MenuType<T>> create(final String name, final IContainerFactory<T> containerFactory) {

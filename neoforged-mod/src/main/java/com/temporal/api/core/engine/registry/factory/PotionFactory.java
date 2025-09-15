@@ -13,8 +13,8 @@ public class PotionFactory extends AbstractObjectFactory<Potion> {
         this(InjectionPool.getFromInstance("$Potions"));
     }
 
-    public PotionFactory(TemporalRegister<Potion> potions) {
-        super(potions);
+    public PotionFactory(TemporalRegister<Potion> register) {
+        super(register);
     }
 
     public DeferredHolder<Potion, Potion> create(String name, Holder<MobEffect> effect, int duration) {

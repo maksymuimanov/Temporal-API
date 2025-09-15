@@ -24,8 +24,8 @@ public class ArmorMaterialFactory extends AbstractObjectFactory<ArmorMaterial> {
         this(InjectionPool.getFromInstance("$ArmorMaterials"));
     }
 
-    public ArmorMaterialFactory(TemporalRegister<ArmorMaterial> armorMaterials) {
-        super(armorMaterials);
+    public ArmorMaterialFactory(TemporalRegister<ArmorMaterial> register) {
+        super(register);
     }
 
     public DeferredHolder<ArmorMaterial, ArmorMaterial> create(String name, EnumMap<ArmorItem.Type, Integer> defenses,

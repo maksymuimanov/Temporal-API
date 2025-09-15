@@ -11,8 +11,8 @@ public class ParticleTypeFactory extends AbstractObjectFactory<ParticleType<?>> 
         this(InjectionPool.getFromInstance("$ParticleTypes"));
     }
 
-    public ParticleTypeFactory(TemporalRegister<ParticleType<?>> particleTypes) {
-        super(particleTypes);
+    public ParticleTypeFactory(TemporalRegister<ParticleType<?>> register) {
+        super(register);
     }
 
     public DeferredHolder<ParticleType<?>, ParticleType<SimpleParticleType>> create(String name, boolean overrideLimiter) {

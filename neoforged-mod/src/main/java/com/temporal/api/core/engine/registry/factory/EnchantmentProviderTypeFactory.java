@@ -10,7 +10,7 @@ public class EnchantmentProviderTypeFactory extends AbstractObjectFactory<MapCod
         this(InjectionPool.getFromInstance("$EnchantmentProviderTypes"));
     }
 
-    public EnchantmentProviderTypeFactory(TemporalRegister<MapCodec<? extends EnchantmentProvider>> enchantmentProviderTypes) {
-        super(enchantmentProviderTypes);
+    public EnchantmentProviderTypeFactory(TemporalRegister<MapCodec<? extends EnchantmentProvider>> register) {
+        super(register);
     }
 }

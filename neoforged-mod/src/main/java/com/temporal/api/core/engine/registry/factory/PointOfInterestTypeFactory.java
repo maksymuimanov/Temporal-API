@@ -15,15 +15,15 @@ public class PointOfInterestTypeFactory extends AbstractObjectFactory<PoiType> {
         this(InjectionPool.getFromInstance("$PointOfInterestTypes"));
     }
 
-    public PointOfInterestTypeFactory(final TemporalRegister<PoiType> poiTypes) {
-        super(poiTypes);
+    public PointOfInterestTypeFactory(TemporalRegister<PoiType> register) {
+        super(register);
     }
 
-    public DeferredHolder<PoiType, PoiType> create(final String name, final Block block, final int maxTickets, final int validRange) {
+    public DeferredHolder<PoiType, PoiType> create(String name, Block block, int maxTickets, int validRange) {
         return create(name, ImmutableSet.copyOf(block.getStateDefinition().getPossibleStates()), maxTickets, validRange);
     }
 
-    public DeferredHolder<PoiType, PoiType> create(final String name, final Set<BlockState> matchingStates, final int maxTickets, final int validRange) {
+    public DeferredHolder<PoiType, PoiType> create(String name, Set<BlockState> matchingStates, int maxTickets, int validRange) {
         return create(name, () -> new PoiType(matchingStates, maxTickets, validRange));
     }
 }

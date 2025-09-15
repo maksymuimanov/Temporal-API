@@ -4,8 +4,11 @@ import com.temporal.api.ApiMod;
 import com.temporal.api.core.engine.context.ModContext;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.*;
 import org.jetbrains.annotations.NotNull;
@@ -29,68 +32,76 @@ public class TemporalRegister<T> extends DeferredRegister<T> {
     @Nullable
     private RegistryHolder<T> registryHolder;
 
-    protected TemporalRegister(final ResourceKey<? extends Registry<T>> registryKey, final String namespace) {
+    protected TemporalRegister(ResourceKey<? extends Registry<T>> registryKey, String namespace) {
         super(registryKey, namespace);
-        entries = new LinkedHashMap<>();
-        entriesView = Collections.unmodifiableSet(entries.keySet());
-        aliases = new HashMap<>();
-        seenRegisterEvent = false;
-        seenNewRegistryEvent = false;
-        registeredEventBus = false;
+        this.entries = new LinkedHashMap<>();
+        this.entriesView = Collections.unmodifiableSet(this.entries.keySet());
+        this.aliases = new HashMap<>();
+        this.seenRegisterEvent = false;
+        this.seenNewRegistryEvent = false;
+        this.registeredEventBus = false;
     }
 
-    public static <T> TemporalRegister<T> create(final Registry<T> registry) {
-        return TemporalRegister.create(registry, ModContext.NEO_MOD.getModId());
+    public static TemporalItems createItems() {
+        return new TemporalItems(ModContext.NEO_MOD.getModId());
     }
 
-    public static <T> TemporalRegister<T> create(final Registry<T> registry, final String namespace) {
+    public static TemporalBlocks createBlocks() {
+        return new TemporalBlocks(ModContext.NEO_MOD.getModId());
+    }
+
+    public static <T> TemporalRegister<T> create(Registry<T> registry) {
+        return create(registry, ModContext.NEO_MOD.getModId());
+    }
+
+    public static <T> TemporalRegister<T> create(Registry<T> registry, String namespace) {
         return new TemporalRegister<>(registry.key(), namespace);
     }
 
-    public static <T> TemporalRegister<T> create(final ResourceKey<? extends Registry<T>> key) {
-        return TemporalRegister.create(key, ModContext.NEO_MOD.getModId());
+    public static <T> TemporalRegister<T> create(ResourceKey<? extends Registry<T>> key) {
+        return create(key, ModContext.NEO_MOD.getModId());
     }
 
-    public static <T> TemporalRegister<T> create(final ResourceKey<? extends Registry<T>> key, final String namespace) {
+    public static <T> TemporalRegister<T> create(ResourceKey<? extends Registry<T>> key, String namespace) {
         return new TemporalRegister<>(key, namespace);
     }
 
-    public static <T> TemporalRegister<T> create(@NotNull final ResourceLocation registryName) {
-        return TemporalRegister.create(registryName, ModContext.NEO_MOD.getModId());
+    public static <T> TemporalRegister<T> create(@NotNull ResourceLocation registryName) {
+        return create(registryName, ModContext.NEO_MOD.getModId());
     }
 
-    public static <T> TemporalRegister<T> create(@NotNull final ResourceLocation registryName, final String namespace) {
+    public static <T> TemporalRegister<T> create(@NotNull ResourceLocation registryName, String namespace) {
         return new TemporalRegister<>(ResourceKey.createRegistryKey(registryName), namespace);
     }
 
-    public void register(@NotNull final IEventBus eventBus, @NotNull final Class<?>... containers) {
-        final ResourceKey<? extends Registry<T>> registryKey = getRegistryKey();
+    public void register(@NotNull IEventBus eventBus, @NotNull Class<?>... containers) {
+        ResourceKey<? extends Registry<T>> registryKey = this.getRegistryKey();
         ApiMod.LOGGER.info("Registering DeferredRegister {} to EventBus with containers: [{}]", registryKey, Arrays.toString(containers));
-        if (registeredEventBus) {
+        if (this.isRegisteredEventBus()) {
             ApiMod.LOGGER.error("DeferredRegister {} is already registered to an EventBus", registryKey);
             throw new IllegalStateException("Cannot register DeferredRegister to more than one eventClass bus.");
         } else {
-            eventBus.addListener((RegisterEvent event) -> this.addEntries(event, containers));
+            eventBus.addListener((RegisterEvent event) -> addEntries(event, containers));
             eventBus.addListener(this::addRegistry);
-            registeredEventBus = true;
+            this.setRegisteredEventBus(true);
             ApiMod.LOGGER.debug("DeferredRegister {} successfully bound to EventBus", registryKey);
         }
     }
 
     @Override
     @NotNull
-    public <I extends T> DeferredHolder<T, I> register(@NotNull final String name, @NotNull final Function<ResourceLocation, ? extends I> function) {
-        final ResourceKey<? extends Registry<T>> registryKey = getRegistryKey();
+    public <I extends T> DeferredHolder<T, I> register(@NotNull String name, @NotNull Function<ResourceLocation, ? extends I> function) {
+        ResourceKey<? extends Registry<T>> registryKey = this.getRegistryKey();
         ApiMod.LOGGER.debug("Attempting to register entry '{}' in registry {}", name, registryKey);
-        if (seenRegisterEvent) {
+        if (this.isSeenRegisterEvent()) {
             ApiMod.LOGGER.error("RegisterEvent already fired! Cannot register '{}'", name);
             throw new IllegalStateException("Cannot register new entries to DeferredRegister after RegisterEvent has been fired.");
         } else {
             Objects.requireNonNull(name);
             Objects.requireNonNull(function);
-            final ResourceLocation key = ResourceLocation.fromNamespaceAndPath(getNamespace(), name);
-            final DeferredHolder<T, I> holder = createHolder(registryKey, key);
-            if (null != this.getEntriesMap().putIfAbsent(holder, () -> function.apply(key))) {
+            ResourceLocation key = ResourceLocation.fromNamespaceAndPath(this.getNamespace(), name);
+            DeferredHolder<T, I> holder = this.createHolder(registryKey, key);
+            if (this.getEntriesMap().putIfAbsent(holder, () -> function.apply(key)) != null) {
                 ApiMod.LOGGER.error("Duplicate registration attempted for '{}'", name);
                 throw new IllegalArgumentException("Duplicate registration " + name);
             } else {
@@ -100,22 +111,22 @@ public class TemporalRegister<T> extends DeferredRegister<T> {
         }
     }
 
-    protected void addEntries(final RegisterEvent event, final Class<?>... containers) {
-        final ResourceKey<? extends Registry<T>> registryKey = getRegistryKey();
+    protected void addEntries(RegisterEvent event, Class<?>... containers) {
+        ResourceKey<? extends Registry<T>> registryKey = this.getRegistryKey();
         if (event.getRegistryKey().equals(registryKey)) {
             ApiMod.LOGGER.info("Processing RegisterEvent for registry {} with containers: [{}]", registryKey, Arrays.toString(containers));
-            loadFields(containers);
-            seenRegisterEvent = true;
-            final Registry<T> registry = event.getRegistry(registryKey);
-            final Map<ResourceLocation, ResourceLocation> aliases = aliases;
+            this.loadFields(containers);
+            this.setSeenRegisterEvent(true);
+            Registry<T> registry = event.getRegistry(registryKey);
+            Map<ResourceLocation, ResourceLocation> aliases = this.getAliases();
             Objects.requireNonNull(registry);
             ApiMod.LOGGER.debug("Applying {} aliases for registry {}", aliases.size(), registryKey);
             aliases.forEach((from, to) -> {
                 ApiMod.LOGGER.debug("Adding alias {} -> {}", from, to);
                 registry.addAlias(from, to);
             });
-            for (final Map.Entry<DeferredHolder<T, ? extends T>, Supplier<? extends T>> entry : entries.entrySet()) {
-                final DeferredHolder<T, ? extends T> holder = entry.getKey();
+            for (Map.Entry<DeferredHolder<T, ? extends T>, Supplier<? extends T>> entry : this.entries.entrySet()) {
+                DeferredHolder<T, ? extends T> holder = entry.getKey();
                 ApiMod.LOGGER.debug("Registering holder {} with id: {}", holder, holder.getId());
                 event.register(registryKey, holder.getId(), () -> entry.getValue().get());
                 holder.isBound();
@@ -124,14 +135,14 @@ public class TemporalRegister<T> extends DeferredRegister<T> {
         }
     }
 
-    protected void loadFields(final Class<?>... containers) {
-        for (final Class<?> container : containers) {
-            for (final Field field : container.getDeclaredFields()) {
+    protected void loadFields(Class<?>... containers) {
+        for (Class<?> container : containers) {
+            for (Field field : container.getDeclaredFields()) {
                 try {
                     ApiMod.LOGGER.debug("Loading field {}.{}", container.getName(), field.getName());
                     field.setAccessible(true);
                     field.get(null);
-                } catch (final IllegalAccessException e) {
+                } catch (IllegalAccessException e) {
                     ApiMod.LOGGER.error("Failed to load field {}.{}: {}", container.getName(), field.getName(), e.getMessage());
                     throw new RuntimeException(e);
                 }
@@ -139,12 +150,12 @@ public class TemporalRegister<T> extends DeferredRegister<T> {
         }
     }
 
-    protected void addRegistry(final NewRegistryEvent event) {
-        seenNewRegistryEvent = true;
-        final ResourceKey<? extends Registry<T>> registryKey = getRegistryKey();
+    protected void addRegistry(NewRegistryEvent event) {
+        this.setSeenNewRegistryEvent(true);
+        ResourceKey<? extends Registry<T>> registryKey = this.getRegistryKey();
         ApiMod.LOGGER.info("Handling NewRegistryEvent for {}", registryKey);
-        final Registry<T> customRegistry = customRegistry;
-        if (null != customRegistry) {
+        Registry<T> customRegistry = this.getCustomRegistry();
+        if (customRegistry != null) {
             ApiMod.LOGGER.debug("Registering custom registry {}", customRegistry);
             event.register(Objects.requireNonNull(customRegistry));
         } else {
@@ -154,27 +165,27 @@ public class TemporalRegister<T> extends DeferredRegister<T> {
 
     @Override
     @NotNull
-    public Registry<T> makeRegistry(@NotNull final Consumer<RegistryBuilder<T>> consumer) {
-        return makeRegistry(getRegistryKey().location(), consumer);
+    public Registry<T> makeRegistry(@NotNull Consumer<RegistryBuilder<T>> consumer) {
+        return this.makeRegistry(this.getRegistryKey().location(), consumer);
     }
 
-    protected Registry<T> makeRegistry(final ResourceLocation registryName, final Consumer<RegistryBuilder<T>> consumer) {
+    protected Registry<T> makeRegistry(ResourceLocation registryName, Consumer<RegistryBuilder<T>> consumer) {
         ApiMod.LOGGER.debug("Creating registry with name - {}", registryName);
-        if (null == registryName) {
+        if (registryName == null) {
             ApiMod.LOGGER.error("Cannot create a registry without specifying a registry name");
             throw new IllegalStateException("Cannot create a registry without specifying a registry name");
-        } else if (!BuiltInRegistries.REGISTRY.containsKey(registryName) && null == this.getCustomRegistry()) {
-            if (seenNewRegistryEvent) {
+        } else if (!BuiltInRegistries.REGISTRY.containsKey(registryName) && this.getCustomRegistry() == null) {
+            if (this.isSeenNewRegistryEvent()) {
                 ApiMod.LOGGER.error("NewRegistryEvent already fired, cannot create new registry {}", registryName);
                 throw new IllegalStateException("Cannot create a registry after NewRegistryEvent was fired");
             } else {
-                final ResourceKey<? extends Registry<T>> registryKey = getRegistryKey();
-                final RegistryBuilder<T> registryBuilder = new RegistryBuilder<>(registryKey);
+                ResourceKey<? extends Registry<T>> registryKey = this.getRegistryKey();
+                RegistryBuilder<T> registryBuilder = new RegistryBuilder<>(registryKey);
                 consumer.accept(registryBuilder);
-                customRegistry = registryBuilder.create();
-                registryHolder = new RegistryHolder<>(registryKey);
-                final Registry<T> customRegistry = customRegistry;
-                Objects.requireNonNull(registryHolder).setRegistry(customRegistry);
+                this.setCustomRegistry(registryBuilder.create());
+                this.setRegistryHolder(new RegistryHolder<>(registryKey));
+                Registry<T> customRegistry = this.getCustomRegistry();
+                Objects.requireNonNull(this.getRegistryHolder()).setRegistry(customRegistry);
                 ApiMod.LOGGER.info("Successfully created custom registry - {}", registryName);
                 return customRegistry;
             }
@@ -184,86 +195,87 @@ public class TemporalRegister<T> extends DeferredRegister<T> {
         }
     }
 
-    public void addAlias(@NotNull final ResourceLocation from, @NotNull final ResourceLocation to) {
+    public void addAlias(@NotNull ResourceLocation from, @NotNull ResourceLocation to) {
         ApiMod.LOGGER.debug("Adding alias {} -> {}", from, to);
-        if (seenRegisterEvent) {
+        if (this.isSeenRegisterEvent()) {
             ApiMod.LOGGER.error("Cannot add alias {} -> {} after RegisterEvent fired", from, to);
             throw new IllegalStateException("Cannot add aliases to DeferredRegister after RegisterEvent has been fired.");
         } else {
-            aliases.put(from, to);
+            this.getAliases().put(from, to);
         }
     }
 
     @Override
     @NotNull
     public Supplier<Registry<T>> getRegistry() {
-        if (null == this.getRegistryHolder()) {
-            registryHolder = new RegistryHolder<>(getRegistryKey());
+        if (this.getRegistryHolder() == null) {
+            this.setRegistryHolder(new RegistryHolder<>(this.getRegistryKey()));
         }
-        return registryHolder;
+
+        return this.getRegistryHolder();
     }
 
     public Map<DeferredHolder<T, ? extends T>, Supplier<? extends T>> getEntriesMap() {
-        return this.entries;
+        return entries;
     }
 
     @Override
     @NotNull
     public Collection<DeferredHolder<T, ? extends T>> getEntries() {
-        return this.entriesView;
+        return entriesView;
     }
 
     public Set<DeferredHolder<T, ? extends T>> getEntriesView() {
-        return this.entriesView;
+        return entriesView;
     }
 
     public Map<ResourceLocation, ResourceLocation> getAliases() {
-        return this.aliases;
+        return aliases;
     }
 
-    public void setAliases(final Map<ResourceLocation, ResourceLocation> aliases) {
+    public void setAliases(Map<ResourceLocation, ResourceLocation> aliases) {
         this.aliases = aliases;
     }
 
     public boolean isSeenRegisterEvent() {
-        return this.seenRegisterEvent;
+        return seenRegisterEvent;
     }
 
-    public void setSeenRegisterEvent(final boolean seenRegisterEvent) {
+    public void setSeenRegisterEvent(boolean seenRegisterEvent) {
         this.seenRegisterEvent = seenRegisterEvent;
     }
 
     public boolean isSeenNewRegistryEvent() {
-        return this.seenNewRegistryEvent;
+        return seenNewRegistryEvent;
     }
 
-    public void setSeenNewRegistryEvent(final boolean seenNewRegistryEvent) {
+    public void setSeenNewRegistryEvent(boolean seenNewRegistryEvent) {
         this.seenNewRegistryEvent = seenNewRegistryEvent;
     }
 
     public boolean isRegisteredEventBus() {
-        return this.registeredEventBus;
+        return registeredEventBus;
     }
 
-    public void setRegisteredEventBus(final boolean registeredEventBus) {
+    public void setRegisteredEventBus(boolean registeredEventBus) {
         this.registeredEventBus = registeredEventBus;
     }
 
     @Nullable
     public Registry<T> getCustomRegistry() {
-        return this.customRegistry;
+        return customRegistry;
     }
 
-    public void setCustomRegistry(@Nullable final Registry<T> customRegistry) {
+    public void setCustomRegistry(@Nullable Registry<T> customRegistry) {
         this.customRegistry = customRegistry;
     }
 
     @Nullable
     public RegistryHolder<T> getRegistryHolder() {
-        return this.registryHolder;
+        return registryHolder;
     }
 
-    public void setRegistryHolder(@Nullable final RegistryHolder<T> registryHolder) {
+    public void setRegistryHolder(@Nullable RegistryHolder<T> registryHolder) {
         this.registryHolder = registryHolder;
     }
 
@@ -272,29 +284,51 @@ public class TemporalRegister<T> extends DeferredRegister<T> {
         private final ResourceKey<? extends Registry<V>> registryKey;
         private Registry<V> registry;
 
-        private RegistryHolder(final ResourceKey<? extends Registry<V>> registryKey) {
+        private RegistryHolder(ResourceKey<? extends Registry<V>> registryKey) {
             this.registryKey = registryKey;
         }
 
         @Nullable
         public Registry<V> get() {
-            if (null == this.registry) {
-                registry = (Registry<V>) BuiltInRegistries.REGISTRY.get(registryKey.location());
+            if (this.registry == null) {
+                this.registry = (Registry<V>) BuiltInRegistries.REGISTRY.get(this.registryKey.location());
             }
 
-            return registry;
-        }
-
-        public ResourceKey<? extends Registry<V>> getRegistryKey() {
-            return this.registryKey;
-        }
-
-        public Registry<V> getRegistry() {
             return this.registry;
         }
 
-        public void setRegistry(final Registry<V> registry) {
+        public ResourceKey<? extends Registry<V>> getRegistryKey() {
+            return registryKey;
+        }
+
+        public Registry<V> getRegistry() {
+            return registry;
+        }
+
+        public void setRegistry(Registry<V> registry) {
             this.registry = registry;
+        }
+    }
+
+    public static class TemporalItems extends TemporalRegister<Item> {
+        public TemporalItems(String namespace) {
+            super(Registries.ITEM, namespace);
+        }
+
+        @NotNull
+        protected <I extends Item> DeferredItem<I> createHolder(@NotNull ResourceKey<? extends Registry<Item>> registryKey, @NotNull ResourceLocation key) {
+            return DeferredItem.createItem(ResourceKey.create(registryKey, key));
+        }
+    }
+
+    public static class TemporalBlocks extends TemporalRegister<Block> {
+        public TemporalBlocks(String namespace) {
+            super(Registries.BLOCK, namespace);
+        }
+
+        @NotNull
+        protected <I extends Block> DeferredBlock<I> createHolder(@NotNull ResourceKey<? extends Registry<Block>> registryKey, @NotNull ResourceLocation key) {
+            return DeferredBlock.createBlock(ResourceKey.create(registryKey, key));
         }
     }
 }

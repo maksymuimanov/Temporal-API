@@ -15,8 +15,8 @@ public class CreativeModeTabFactory extends AbstractObjectFactory<CreativeModeTa
         this(InjectionPool.getFromInstance("$CreativeModeTabs"));
     }
 
-    public CreativeModeTabFactory(TemporalRegister<CreativeModeTab> creativeModeTabs) {
-        super(creativeModeTabs);
+    public CreativeModeTabFactory(TemporalRegister<CreativeModeTab> register) {
+        super(register);
     }
 
     public DeferredHolder<CreativeModeTab, CreativeModeTab> create(String name, Item icon, String translationId, Item... items) {

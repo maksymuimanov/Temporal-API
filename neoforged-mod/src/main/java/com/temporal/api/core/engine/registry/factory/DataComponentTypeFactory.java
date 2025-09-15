@@ -13,8 +13,8 @@ public class DataComponentTypeFactory extends AbstractObjectFactory<DataComponen
         this(InjectionPool.getFromInstance("$DataComponentTypes"));
     }
 
-    public DataComponentTypeFactory(TemporalRegister<DataComponentType<?>> dataComponentTypes) {
-        super(dataComponentTypes);
+    public DataComponentTypeFactory(TemporalRegister<DataComponentType<?>> register) {
+        super(register);
     }
 
     public <T> DeferredHolder<DataComponentType<?>, DataComponentType<T>> create(String name, Codec<T> codec, StreamCodec<? super RegistryFriendlyByteBuf, T> streamCodec) {

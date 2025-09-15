@@ -11,8 +11,8 @@ public class SoundEventFactory extends AbstractObjectFactory<SoundEvent> {
         this(InjectionPool.getFromInstance("$SoundEvents"));
     }
 
-    public SoundEventFactory(TemporalRegister<SoundEvent> soundEvents) {
-        super(soundEvents);
+    public SoundEventFactory(TemporalRegister<SoundEvent> register) {
+        super(register);
     }
 
     public DeferredHolder<SoundEvent, SoundEvent> create(String name) {

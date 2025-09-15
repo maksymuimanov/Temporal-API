@@ -13,8 +13,8 @@ public class AttachmentTypeFactory extends AbstractObjectFactory<AttachmentType<
         this(InjectionPool.getFromInstance("$AttachmentTypes"));
     }
 
-    public AttachmentTypeFactory(TemporalRegister<AttachmentType<?>> attachmentTypes) {
-        super(attachmentTypes);
+    public AttachmentTypeFactory(TemporalRegister<AttachmentType<?>> register) {
+        super(register);
     }
 
     public <T> DeferredHolder<AttachmentType<?>, AttachmentType<T>> create(String name, Supplier<T> defaultValueSupplier, Codec<T> codec) {

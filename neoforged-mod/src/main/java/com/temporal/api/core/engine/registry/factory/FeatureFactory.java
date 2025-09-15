@@ -9,7 +9,7 @@ public class FeatureFactory extends AbstractObjectFactory<Feature<?>> {
         this(InjectionPool.getFromInstance("$Features"));
     }
 
-    public FeatureFactory(TemporalRegister<Feature<?>> features) {
-        super(features);
+    public FeatureFactory(TemporalRegister<Feature<?>> register) {
+        super(register);
     }
 }

@@ -9,7 +9,7 @@ public class FluidFactory extends AbstractObjectFactory<Fluid> {
         this(InjectionPool.getFromInstance("$Fluids"));
     }
 
-    public FluidFactory(TemporalRegister<Fluid> fluids) {
-        super(fluids);
+    public FluidFactory(TemporalRegister<Fluid> register) {
+        super(register);
     }
 }

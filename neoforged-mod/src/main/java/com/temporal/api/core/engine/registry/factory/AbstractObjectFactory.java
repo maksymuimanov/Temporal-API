@@ -9,8 +9,8 @@ import java.util.function.Supplier;
 public abstract class AbstractObjectFactory<R> implements ObjectFactory<R> {
     private final TemporalRegister<R> registry;
 
-    public AbstractObjectFactory(TemporalRegister<R> registry) {
-        this.registry = registry;
+    public AbstractObjectFactory(TemporalRegister<R> register) {
+        this.registry = register;
     }
 
     @Override

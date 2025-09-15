@@ -10,7 +10,7 @@ public class EnchantmentLevelBasedValueTypeFactory extends AbstractObjectFactory
         this(InjectionPool.getFromInstance("$EnchantmentLevelBasedValueTypes"));
     }
 
-    public EnchantmentLevelBasedValueTypeFactory(TemporalRegister<MapCodec<? extends LevelBasedValue>> enchantmentLevelBasedValueTypes) {
-        super(enchantmentLevelBasedValueTypes);
+    public EnchantmentLevelBasedValueTypeFactory(TemporalRegister<MapCodec<? extends LevelBasedValue>> register) {
+        super(register);
     }
 }

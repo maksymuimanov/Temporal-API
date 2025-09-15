@@ -15,8 +15,8 @@ public class VillagerProfessionFactory extends AbstractObjectFactory<VillagerPro
         this(InjectionPool.getFromInstance("$VillagerProfessions"));
     }
 
-    public VillagerProfessionFactory(TemporalRegister<VillagerProfession> villagerProfessions) {
-        super(villagerProfessions);
+    public VillagerProfessionFactory(TemporalRegister<VillagerProfession> register) {
+        super(register);
     }
 
     public DeferredHolder<VillagerProfession, VillagerProfession> create(String name, String professionName, PoiType heldJobSite, SoundEvent workSound) {

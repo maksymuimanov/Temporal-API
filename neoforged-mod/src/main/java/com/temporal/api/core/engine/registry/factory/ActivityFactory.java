@@ -1,0 +1,15 @@
+package com.temporal.api.core.engine.registry.factory;
+
+import com.temporal.api.core.engine.context.InjectionPool;
+import com.temporal.api.core.engine.registry.TemporalRegister;
+import net.minecraft.world.entity.schedule.Activity;
+
+public class ActivityFactory extends AbstractObjectFactory<Activity> {
+    public ActivityFactory() {
+        this(InjectionPool.getFromInstance("$Activities"));
+    }
+
+    public ActivityFactory(TemporalRegister<Activity> register) {
+        super(register);
+    }
+}

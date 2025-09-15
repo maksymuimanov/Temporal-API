@@ -15,8 +15,8 @@ public class EntityTypeFactory extends AbstractObjectFactory<EntityType<?>> {
         this(InjectionPool.getFromInstance("$EntityTypes"));
     }
 
-    public EntityTypeFactory(TemporalRegister<EntityType<?>> entityTypes) {
-        super(entityTypes);
+    public EntityTypeFactory(TemporalRegister<EntityType<?>> register) {
+        super(register);
     }
 
     public <T extends Entity> DeferredHolder<EntityType<?>, EntityType<T>> create(String name, EntityType.EntityFactory<T> entityFactory, MobCategory category, float width, float height) {

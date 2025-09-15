@@ -12,8 +12,8 @@ public class TreeDecoratorTypeFactory extends AbstractObjectFactory<TreeDecorato
         this(InjectionPool.getFromInstance("$TreeDecoratorTypes"));
     }
 
-    public TreeDecoratorTypeFactory(TemporalRegister<TreeDecoratorType<?>> treeDecoratorTypes) {
-        super(treeDecoratorTypes);
+    public TreeDecoratorTypeFactory(TemporalRegister<TreeDecoratorType<?>> register) {
+        super(register);
     }
 
     public <T extends TreeDecorator> DeferredHolder<TreeDecoratorType<?>, TreeDecoratorType<T>> create(String name, MapCodec<T> codec) {

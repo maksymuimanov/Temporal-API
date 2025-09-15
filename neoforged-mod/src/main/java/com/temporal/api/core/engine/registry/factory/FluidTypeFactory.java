@@ -10,8 +10,8 @@ public class FluidTypeFactory extends AbstractObjectFactory<FluidType> {
         this(InjectionPool.getFromInstance("$FluidTypes"));
     }
 
-    public FluidTypeFactory(TemporalRegister<FluidType> fluidTypes) {
-        super(fluidTypes);
+    public FluidTypeFactory(TemporalRegister<FluidType> register) {
+        super(register);
     }
 
     public DeferredHolder<FluidType, FluidType> create(String name, FluidType.Properties properties) {

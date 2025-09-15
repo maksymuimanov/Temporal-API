@@ -11,8 +11,8 @@ public class RecipeSerializerFactory extends AbstractObjectFactory<RecipeSeriali
         this(InjectionPool.getFromInstance("$RecipeSerializers"));
     }
 
-    public RecipeSerializerFactory(TemporalRegister<RecipeSerializer<?>> recipeSerializers) {
-        super(recipeSerializers);
+    public RecipeSerializerFactory(TemporalRegister<RecipeSerializer<?>> register) {
+        super(register);
     }
 
     public <T extends Recipe<?>> DeferredHolder<RecipeSerializer<?>, RecipeSerializer<T>> create(String name, RecipeSerializer<T> recipeSerializer) {

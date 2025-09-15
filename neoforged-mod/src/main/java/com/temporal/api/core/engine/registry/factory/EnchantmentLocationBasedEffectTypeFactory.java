@@ -10,7 +10,7 @@ public class EnchantmentLocationBasedEffectTypeFactory extends AbstractObjectFac
         this(InjectionPool.getFromInstance("$EnchantmentLocationBasedEffectTypes"));
     }
 
-    public EnchantmentLocationBasedEffectTypeFactory(TemporalRegister<MapCodec<? extends EnchantmentLocationBasedEffect>> enchantmentLocationBasedEffectTypes) {
-        super(enchantmentLocationBasedEffectTypes);
+    public EnchantmentLocationBasedEffectTypeFactory(TemporalRegister<MapCodec<? extends EnchantmentLocationBasedEffect>> register) {
+        super(register);
     }
 }
