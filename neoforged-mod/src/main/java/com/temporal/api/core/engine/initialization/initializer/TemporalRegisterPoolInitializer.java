@@ -21,19 +21,16 @@ public class TemporalRegisterPoolInitializer implements ObjectPoolInitializer {
         this.putRegister(objectPool, "$BiomeSources", Registries.BIOME_SOURCE);
         this.putRegister(objectPool, "$BlockEntityTypes", Registries.BLOCK_ENTITY_TYPE);
         this.putRegister(objectPool, "$BlockPredicateTypes", Registries.BLOCK_PREDICATE_TYPE);
-        this.putRegister(objectPool, "$BlockstateProviderTypes", Registries.BLOCK_STATE_PROVIDER_TYPE);
+        this.putRegister(objectPool, "$BlockStateProviderTypes", Registries.BLOCK_STATE_PROVIDER_TYPE);
         objectPool.put("$Blocks", TemporalRegister.createBlocks());
         this.putRegister(objectPool, "$BlockTypes", Registries.BLOCK_TYPE);
         this.putRegister(objectPool, "$Carvers", Registries.CARVER);
-        this.putRegister(objectPool, "$CatVariants", Registries.CAT_VARIANT);
         this.putRegister(objectPool, "$ChunkGenerators", Registries.CHUNK_GENERATOR);
-        this.putRegister(objectPool, "$ChunkStatuses", Registries.CHUNK_STATUS);
         this.putRegister(objectPool, "$CommandArgumentTypes", Registries.COMMAND_ARGUMENT_TYPE);
         this.putRegister(objectPool, "$ConditionCodecs", NeoForgeRegistries.Keys.CONDITION_CODECS);
         this.putRegister(objectPool, "$CreativeModeTabs", Registries.CREATIVE_MODE_TAB);
         this.putRegister(objectPool, "$CustomStats", Registries.CUSTOM_STAT);
         this.putRegister(objectPool, "$DataComponentTypes", Registries.DATA_COMPONENT_TYPE);
-        this.putRegister(objectPool, "$DecoratedPotPatterns", Registries.DECORATED_POT_PATTERN);
         this.putRegister(objectPool, "$DensityFunctionTypes", Registries.DENSITY_FUNCTION_TYPE);
         this.putRegister(objectPool, "$EnchantmentEffectComponentTypes", Registries.ENCHANTMENT_EFFECT_COMPONENT_TYPE);
         this.putRegister(objectPool, "$EnchantmentEntityEffectTypes", Registries.ENCHANTMENT_ENTITY_EFFECT_TYPE);
@@ -51,7 +48,6 @@ public class TemporalRegisterPoolInitializer implements ObjectPoolInitializer {
         this.putRegister(objectPool, "$Fluids", Registries.FLUID);
         this.putRegister(objectPool, "$FluidTypes", NeoForgeRegistries.Keys.FLUID_TYPES);
         this.putRegister(objectPool, "$FoliagePlacerTypes", Registries.FOLIAGE_PLACER_TYPE);
-        this.putRegister(objectPool, "$FrogVariants", Registries.FROG_VARIANT);
         this.putRegister(objectPool, "$GameEvents", Registries.GAME_EVENT);
         this.putRegister(objectPool, "$GlobalLootModifierSerializers", NeoForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS);
         this.putRegister(objectPool, "$HeightProviderTypes", Registries.HEIGHT_PROVIDER_TYPE);
@@ -76,7 +72,6 @@ public class TemporalRegisterPoolInitializer implements ObjectPoolInitializer {
         this.putRegister(objectPool, "$ParticleTypes", Registries.PARTICLE_TYPE);
         this.putRegister(objectPool, "$PlacementModifierTypes", Registries.PLACEMENT_MODIFIER_TYPE);
         this.putRegister(objectPool, "$PointOfInterestTypes", Registries.POINT_OF_INTEREST_TYPE);
-        this.putRegister(objectPool, "$PoolAliasBindings", Registries.POOL_ALIAS_BINDING);
         this.putRegister(objectPool, "$PositionSourceTypes", Registries.POSITION_SOURCE_TYPE);
         this.putRegister(objectPool, "$PosRuleTests", Registries.POS_RULE_TEST);
         this.putRegister(objectPool, "$Potions", Registries.POTION);

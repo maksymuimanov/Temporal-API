@@ -9,6 +9,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.stats.StatType;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
@@ -46,6 +47,7 @@ public abstract class ApiLanguageProvider extends LanguageProvider {
     public static final KeyTransformer<ResourceKey<JukeboxSong>> JUKEBOX_SONG_TRANSFORMER = new JukeboxSongTransformer();
     public static final KeyTransformer<ResourceKey<DamageType>> DAMAGE_TYPE_TRANSFORMER = new DamageTypeTransformer();
     public static final KeyTransformer<ResourceKey<PaintingVariant>> PAINTING_VARIANT_TRANSFORMER = new PaintingVariantTransformer();
+    public static final KeyTransformer<ResourceKey<StatType<?>>> STAT_TYPE_TRANSFORMER = new StatTypeTransformer();
     public static final KeyTransformer<ModConfigSpec.ConfigValue<?>> CONFIG_TRANSFORMER = new ConfigTransformer();
     public static final KeyTransformer<Component> COMPONENT_TRANSFORMER = new ComponentTransformer();
     public static final KeyTransformer<String> STRING_TRANSFORMER = new StringTransformer();
@@ -70,6 +72,7 @@ public abstract class ApiLanguageProvider extends LanguageProvider {
         REGISTRY_KEY_TRANSFORMERS.put(JUKEBOX_SONG_TRANSFORMER, Registries.JUKEBOX_SONG);
         REGISTRY_KEY_TRANSFORMERS.put(DAMAGE_TYPE_TRANSFORMER, Registries.DAMAGE_TYPE);
         REGISTRY_KEY_TRANSFORMERS.put(PAINTING_VARIANT_TRANSFORMER, Registries.PAINTING_VARIANT);
+        REGISTRY_KEY_TRANSFORMERS.put(STAT_TYPE_TRANSFORMER, Registries.STAT_TYPE);
         TRANSLATION_PLACEHOLDER_RESOLVERS.add(KEY_TRANSLATION_PLACEHOLDER_RESOLVER);
         TRANSLATION_PLACEHOLDER_RESOLVERS.add(THIS_TRANSLATION_PLACEHOLDER_RESOLVER);
     }

@@ -20,10 +20,10 @@ public class PointOfInterestTypeFactory extends AbstractObjectFactory<PoiType> {
     }
 
     public DeferredHolder<PoiType, PoiType> create(String name, Block block, int maxTickets, int validRange) {
-        return create(name, ImmutableSet.copyOf(block.getStateDefinition().getPossibleStates()), maxTickets, validRange);
+        return this.create(name, ImmutableSet.copyOf(block.getStateDefinition().getPossibleStates()), maxTickets, validRange);
     }
 
     public DeferredHolder<PoiType, PoiType> create(String name, Set<BlockState> matchingStates, int maxTickets, int validRange) {
-        return create(name, () -> new PoiType(matchingStates, maxTickets, validRange));
+        return this.create(name, () -> new PoiType(matchingStates, maxTickets, validRange));
     }
 }

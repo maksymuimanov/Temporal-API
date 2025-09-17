@@ -19,18 +19,15 @@ public class FactoryPoolInitializer implements ObjectPoolInitializer {
         objectPool.put(new BiomeSourceFactory());
         objectPool.put(new BlockEntityTypeFactory());
         objectPool.put(new BlockPredicateTypeFactory());
-        objectPool.put(new BlockstateProviderTypeFactory());
+        objectPool.put(new BlockStateProviderTypeFactory());
         objectPool.put(new BlockTypeFactory());
         objectPool.put(new CarverFactory());
-        objectPool.put(new CatVariantFactory());
         objectPool.put(new ChunkGeneratorFactory());
-        objectPool.put(new ChunkStatusFactory());
         objectPool.put(new CommandArgumentTypeFactory());
         objectPool.put(new ConditionCodecFactory());
         objectPool.put(new CreativeModeTabFactory());
         objectPool.put(new CustomStatFactory());
         objectPool.put(new DataComponentTypeFactory());
-        objectPool.put(new DecoratedPotPatternFactory());
         objectPool.put(new DensityFunctionTypeFactory());
         objectPool.put(new EnchantmentEffectComponentTypeFactory());
         objectPool.put(new EnchantmentEntityEffectTypeFactory());
@@ -48,9 +45,9 @@ public class FactoryPoolInitializer implements ObjectPoolInitializer {
         objectPool.put(new FluidIngredientTypeFactory());
         objectPool.put(new FluidTypeFactory());
         objectPool.put(new FoliagePlacerTypeFactory());
-        objectPool.put(new FrogVariantFactory());
         objectPool.put(new GameEventFactory());
         objectPool.put(new GlobalLootModifierSerializerFactory());
+        objectPool.put(new HeightProviderTypeFactory());
         objectPool.put(new HolderSetTypeFactory());
         objectPool.put(new IngredientTypeFactory());
         objectPool.put(new IntProviderTypeFactory());
@@ -71,7 +68,6 @@ public class FactoryPoolInitializer implements ObjectPoolInitializer {
         objectPool.put(new ParticleTypeFactory());
         objectPool.put(new PlacementModifierTypeFactory());
         objectPool.put(new PointOfInterestTypeFactory());
-        objectPool.put(new PoolAliasBindingFactory());
         objectPool.put(new PositionSourceTypeFactory());
         objectPool.put(new PosRuleTestFactory());
         objectPool.put(new PotionFactory());
