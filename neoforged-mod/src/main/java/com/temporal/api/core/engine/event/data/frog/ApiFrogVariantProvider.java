@@ -11,13 +11,13 @@ import java.util.Queue;
 
 public class ApiFrogVariantProvider implements FrogVariantProvider {
     public static final Queue<FrogVariantDescription> VARIANTS = new TemporalQueue<>();
-    public static final String ENTITY_FROG_PATH = "textures/entity/frog";
+    public static final String ENTITY_FROG_PATH = "textures/entity/frog/%s.png";
 
     @Override
     public void addVariant(BootstrapContext<FrogVariant> context) {
         VARIANTS.forEach(description -> {
             ResourceKey<FrogVariant> variant = description.variant();
-            String id = ResourceUtils.mapId(ResourceUtils.getResourceId(variant), ENTITY_FROG_PATH::concat);
+            String id = ResourceUtils.mapId(ResourceUtils.getResourceId(variant), ENTITY_FROG_PATH::formatted);
             ResourceLocation texture = ResourceUtils.parse(id);
             context.register(variant, new FrogVariant(texture));
         });

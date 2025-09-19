@@ -9,6 +9,8 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.animal.CatVariant;
+import net.minecraft.world.item.Instrument;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
@@ -57,6 +59,14 @@ public final class TagUtils {
 
     public static TagKey<Structure> createStructure(String id) {
         return createTag(Registries.STRUCTURE, id);
+    }
+
+    public static TagKey<Instrument> createInstrument(String id) {
+        return createTag(Registries.INSTRUMENT, id);
+    }
+
+    public static TagKey<CatVariant> createCatVariant(String id) {
+        return createTag(Registries.CAT_VARIANT, id);
     }
 
     public static <T> TagKey<T> createTag(ResourceKey<? extends Registry<T>> registry, String id) {
