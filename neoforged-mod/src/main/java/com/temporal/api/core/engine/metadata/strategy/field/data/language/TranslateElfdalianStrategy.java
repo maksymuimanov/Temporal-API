@@ -12,7 +12,7 @@ public class TranslateElfdalianStrategy extends TranslationStrategy<TranslateElf
     }
 
     @Override
-    public Class<? extends TranslateElfdalian> getAnnotationClass() {
+    public Class<TranslateElfdalian> getAnnotationClass() {
         return TranslateElfdalian.class;
     }
 }

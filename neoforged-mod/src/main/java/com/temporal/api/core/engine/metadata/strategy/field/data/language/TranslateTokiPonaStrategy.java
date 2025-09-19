@@ -12,7 +12,7 @@ public class TranslateTokiPonaStrategy extends TranslationStrategy<TranslateToki
     }
 
     @Override
-    public Class<? extends TranslateTokiPona> getAnnotationClass() {
+    public Class<TranslateTokiPona> getAnnotationClass() {
         return TranslateTokiPona.class;
     }
 }

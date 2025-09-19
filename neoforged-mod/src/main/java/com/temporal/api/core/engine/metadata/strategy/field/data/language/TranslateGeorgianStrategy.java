@@ -12,7 +12,7 @@ public class TranslateGeorgianStrategy extends TranslationStrategy<TranslateGeor
     }
 
     @Override
-    public Class<? extends TranslateGeorgian> getAnnotationClass() {
+    public Class<TranslateGeorgian> getAnnotationClass() {
         return TranslateGeorgian.class;
     }
 }

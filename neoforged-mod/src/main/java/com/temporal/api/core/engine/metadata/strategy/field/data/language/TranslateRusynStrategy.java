@@ -12,7 +12,7 @@ public class TranslateRusynStrategy extends TranslationStrategy<TranslateRusyn> 
     }
 
     @Override
-    public Class<? extends TranslateRusyn> getAnnotationClass() {
+    public Class<TranslateRusyn> getAnnotationClass() {
         return TranslateRusyn.class;
     }
 }

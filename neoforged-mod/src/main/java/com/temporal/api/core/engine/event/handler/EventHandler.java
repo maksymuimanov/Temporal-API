@@ -10,7 +10,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.function.Consumer;
 
 public interface EventHandler extends Comparable<EventHandler> {
+    int MAX_PRIORITY = Integer.MAX_VALUE;
     int DEFAULT_PRIORITY = 0;
+    int MIN_PRIORITY = Integer.MIN_VALUE;
 
     void handle();
 

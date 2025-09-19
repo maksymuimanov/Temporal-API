@@ -12,7 +12,7 @@ public class TranslateLowGermanStrategy extends TranslationStrategy<TranslateLow
     }
 
     @Override
-    public Class<? extends TranslateLowGerman> getAnnotationClass() {
+    public Class<TranslateLowGerman> getAnnotationClass() {
         return TranslateLowGerman.class;
     }
 }

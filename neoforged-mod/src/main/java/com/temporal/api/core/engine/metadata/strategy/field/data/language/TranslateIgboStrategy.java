@@ -12,7 +12,7 @@ public class TranslateIgboStrategy extends TranslationStrategy<TranslateIgbo> {
     }
 
     @Override
-    public Class<? extends TranslateIgbo> getAnnotationClass() {
+    public Class<TranslateIgbo> getAnnotationClass() {
         return TranslateIgbo.class;
     }
 }

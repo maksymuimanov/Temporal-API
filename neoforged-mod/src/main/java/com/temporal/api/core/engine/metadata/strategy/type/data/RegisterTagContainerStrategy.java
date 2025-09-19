@@ -7,6 +7,8 @@ import com.temporal.api.core.engine.event.data.preparer.tag.ItemTagDynamicPrepar
 import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
 import com.temporal.api.core.engine.metadata.annotation.data.RegisterTagContainer;
 import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
+import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
+import com.temporal.api.core.engine.metadata.processor.DataEventAnnotationProcessor;
 import com.temporal.api.core.engine.metadata.strategy.type.ClassAnnotationStrategy;
 
 @Strategy(StrategyPoolInitializer.DEFAULT_CLASS_DATA)
@@ -22,7 +24,12 @@ public class RegisterTagContainerStrategy implements ClassAnnotationStrategy<Reg
     }
 
     @Override
-    public Class<? extends RegisterTagContainer> getAnnotationClass() {
+    public Class<RegisterTagContainer> getAnnotationClass() {
         return RegisterTagContainer.class;
+    }
+
+    @Override
+    public ProcessorScope getProcessorScope() {
+        return new ProcessorScope(DataEventAnnotationProcessor.NAME);
     }
 }

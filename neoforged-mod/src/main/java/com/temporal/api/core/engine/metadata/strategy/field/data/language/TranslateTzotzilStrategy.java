@@ -12,7 +12,7 @@ public class TranslateTzotzilStrategy extends TranslationStrategy<TranslateTzotz
     }
 
     @Override
-    public Class<? extends TranslateTzotzil> getAnnotationClass() {
+    public Class<TranslateTzotzil> getAnnotationClass() {
         return TranslateTzotzil.class;
     }
 }

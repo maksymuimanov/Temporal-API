@@ -12,7 +12,7 @@ public class TranslateBrabantianStrategy extends TranslationStrategy<TranslateBr
     }
 
     @Override
-    public Class<? extends TranslateBrabantian> getAnnotationClass() {
+    public Class<TranslateBrabantian> getAnnotationClass() {
         return TranslateBrabantian.class;
     }
 }

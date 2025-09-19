@@ -12,7 +12,7 @@ public class TranslateVenezuelanSpanishStrategy extends TranslationStrategy<Tran
     }
 
     @Override
-    public Class<? extends TranslateVenezuelanSpanish> getAnnotationClass() {
+    public Class<TranslateVenezuelanSpanish> getAnnotationClass() {
         return TranslateVenezuelanSpanish.class;
     }
 }

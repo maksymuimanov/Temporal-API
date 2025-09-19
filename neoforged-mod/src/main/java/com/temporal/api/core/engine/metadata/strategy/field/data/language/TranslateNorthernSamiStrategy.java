@@ -12,7 +12,7 @@ public class TranslateNorthernSamiStrategy extends TranslationStrategy<Translate
     }
 
     @Override
-    public Class<? extends TranslateNorthernSami> getAnnotationClass() {
+    public Class<TranslateNorthernSami> getAnnotationClass() {
         return TranslateNorthernSami.class;
     }
 }

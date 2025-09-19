@@ -4,11 +4,10 @@ import com.temporal.api.core.engine.event.data.sound.ApiSoundProvider;
 import com.temporal.api.core.engine.event.data.sound.SoundDescription;
 import com.temporal.api.core.engine.event.data.sound.SoundHolder;
 import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
-import com.temporal.api.core.engine.metadata.MetadataLayer;
 import com.temporal.api.core.engine.metadata.annotation.data.GenerateSound;
 import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
-import com.temporal.api.core.engine.metadata.executor.AnnotationExecutor;
-import com.temporal.api.core.engine.metadata.strategy.AnnotationStrategy;
+import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
+import com.temporal.api.core.engine.metadata.processor.DataEventAnnotationProcessor;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundEvent;
@@ -33,12 +32,12 @@ public class GenerateSoundStrategy implements FieldAnnotationStrategy<GenerateSo
     }
 
     @Override
-    public Class<? extends GenerateSound> getAnnotationClass() {
+    public Class<GenerateSound> getAnnotationClass() {
         return GenerateSound.class;
     }
 
     @Override
-    public AnnotationExecutor<? extends AnnotationStrategy<Field, ?>> getExecutor() {
-        return MetadataLayer.STATIC_FIELD_EXECUTOR;
+    public ProcessorScope getProcessorScope() {
+        return new ProcessorScope(DataEventAnnotationProcessor.NAME);
     }
 }

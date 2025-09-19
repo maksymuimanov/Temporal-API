@@ -12,7 +12,7 @@ public class TranslateYakutStrategy extends TranslationStrategy<TranslateYakut> 
     }
 
     @Override
-    public Class<? extends TranslateYakut> getAnnotationClass() {
+    public Class<TranslateYakut> getAnnotationClass() {
         return TranslateYakut.class;
     }
 }

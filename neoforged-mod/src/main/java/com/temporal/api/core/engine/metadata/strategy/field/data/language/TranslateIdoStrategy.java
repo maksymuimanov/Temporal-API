@@ -12,7 +12,7 @@ public class TranslateIdoStrategy extends TranslationStrategy<TranslateIdo> {
     }
 
     @Override
-    public Class<? extends TranslateIdo> getAnnotationClass() {
+    public Class<TranslateIdo> getAnnotationClass() {
         return TranslateIdo.class;
     }
 }

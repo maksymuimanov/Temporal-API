@@ -12,7 +12,7 @@ public class TranslateScottishGaelicStrategy extends TranslationStrategy<Transla
     }
 
     @Override
-    public Class<? extends TranslateScottishGaelic> getAnnotationClass() {
+    public Class<TranslateScottishGaelic> getAnnotationClass() {
         return TranslateScottishGaelic.class;
     }
 }

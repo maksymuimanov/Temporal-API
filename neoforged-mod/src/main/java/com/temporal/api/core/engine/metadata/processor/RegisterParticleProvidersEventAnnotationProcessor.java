@@ -1,0 +1,18 @@
+package com.temporal.api.core.engine.metadata.processor;
+
+import com.temporal.api.core.engine.context.ModContext;
+import com.temporal.api.core.engine.metadata.MetadataLayer;
+import com.temporal.api.core.engine.metadata.annotation.injection.Processor;
+import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
+
+@Processor(RegisterParticleProvidersEventAnnotationProcessor.NAME)
+public class RegisterParticleProvidersEventAnnotationProcessor extends AbstractEventAnnotationProcessor {
+    public static final String NAME = "default_register_particle_provider_event";
+
+    @Override
+    public void handle() {
+        this.subscribeModEvent(RegisterParticleProvidersEvent.class, event -> {
+            this.processAll(MetadataLayer.ASYNC_STRATEGY_CONSUMER, ModContext.ALL_CLASSES);
+        });
+    }
+}

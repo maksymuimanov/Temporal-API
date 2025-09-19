@@ -6,7 +6,10 @@ import net.minecraft.core.Holder;
 import net.minecraft.world.item.Item;
 import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.registries.DeferredBlock;
+import net.neoforged.neoforgespi.language.IModFileInfo;
+import net.neoforged.neoforgespi.language.IModInfo;
 import net.neoforged.neoforgespi.language.ModFileScanData;
+import net.neoforged.neoforgespi.locating.IModFile;
 import org.jetbrains.annotations.NotNull;
 import org.objectweb.asm.Type;
 
@@ -16,6 +19,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.Set;
 import java.util.function.Function;
@@ -121,6 +125,22 @@ public final class ReflectionUtils {
                 throw new RuntimeException(e);
             }
         };
+    }
+
+    public static Set<Class<?>> getApiDependentsClasses() {
+        return ModList.get().getMods()
+                .stream()
+                .filter(iModInfo -> iModInfo.getDependencies()
+                        .stream()
+                        .anyMatch(modVersion -> modVersion.getModId().equals(ApiMod.MOD_ID)))
+                .map(IModInfo::getOwningFile)
+                .map(IModFileInfo::getFile)
+                .map(IModFile::getScanResult)
+                .map(ModFileScanData::getClasses)
+                .flatMap(Collection::stream)
+                .map(ModFileScanData.ClassData::clazz)
+                .map(clazz -> forType(clazz, ApiMod.class))
+                .collect(Collectors.toSet());
     }
 
     public static Set<Class<?>> getApiClasses() {

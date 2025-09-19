@@ -12,7 +12,7 @@ public class TranslateTraditionalHongKongChineseStrategy extends TranslationStra
     }
 
     @Override
-    public Class<? extends TranslateTraditionalHongKongChinese> getAnnotationClass() {
+    public Class<TranslateTraditionalHongKongChinese> getAnnotationClass() {
         return TranslateTraditionalHongKongChinese.class;
     }
 }

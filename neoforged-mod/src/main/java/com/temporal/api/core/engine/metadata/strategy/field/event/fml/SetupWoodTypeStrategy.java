@@ -2,11 +2,10 @@ package com.temporal.api.core.engine.metadata.strategy.field.event.fml;
 
 import com.temporal.api.core.engine.event.handler.FMLClientSetupEventHandler;
 import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
-import com.temporal.api.core.engine.metadata.MetadataLayer;
 import com.temporal.api.core.engine.metadata.annotation.event.fml.SetupWoodType;
 import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
-import com.temporal.api.core.engine.metadata.executor.AnnotationExecutor;
-import com.temporal.api.core.engine.metadata.strategy.AnnotationStrategy;
+import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
+import com.temporal.api.core.engine.metadata.processor.FMLClientSetupEventAnnotationProcessor;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import net.minecraft.world.level.block.state.properties.WoodType;
 
@@ -21,12 +20,12 @@ public class SetupWoodTypeStrategy implements FieldAnnotationStrategy<SetupWoodT
     }
 
     @Override
-    public Class<? extends SetupWoodType> getAnnotationClass() {
+    public Class<SetupWoodType> getAnnotationClass() {
         return SetupWoodType.class;
     }
 
     @Override
-    public AnnotationExecutor<? extends AnnotationStrategy<Field, ?>> getExecutor() {
-        return MetadataLayer.STATIC_FIELD_EXECUTOR;
+    public ProcessorScope getProcessorScope() {
+        return new ProcessorScope(FMLClientSetupEventAnnotationProcessor.NAME);
     }
 }

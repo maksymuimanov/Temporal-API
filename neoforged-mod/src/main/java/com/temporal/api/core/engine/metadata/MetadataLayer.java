@@ -7,11 +7,9 @@ import com.temporal.api.core.engine.context.ModContext;
 import com.temporal.api.core.engine.metadata.consumer.AnnotationStrategyConsumer;
 import com.temporal.api.core.engine.metadata.consumer.AsyncStrategyConsumer;
 import com.temporal.api.core.engine.metadata.consumer.SimpleStrategyConsumer;
-import com.temporal.api.core.engine.metadata.executor.*;
-import com.temporal.api.core.engine.metadata.processor.AnnotationProcessor;
-import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
-import com.temporal.api.core.engine.metadata.strategy.method.MethodAnnotationStrategy;
-import com.temporal.api.core.engine.metadata.strategy.type.ClassAnnotationStrategy;
+import com.temporal.api.core.engine.metadata.director.AnnotationDirector;
+import com.temporal.api.core.engine.metadata.pool.ProcessorPool;
+import com.temporal.api.core.engine.metadata.pool.SimpleProcessorPool;
 
 import java.util.List;
 import java.util.Set;
@@ -19,28 +17,25 @@ import java.util.Set;
 public class MetadataLayer implements EngineLayer {
     public static final AnnotationStrategyConsumer SIMPLE_STRATEGY_CONSUMER = new SimpleStrategyConsumer();
     public static final AnnotationStrategyConsumer ASYNC_STRATEGY_CONSUMER = new AsyncStrategyConsumer();
-    public static final AnnotationExecutor<ClassAnnotationStrategy<?>> CLASS_EXECUTOR = new ClassExecutor();
-    public static final AnnotationExecutor<FieldAnnotationStrategy<?>> FIELD_EXECUTOR = new FieldExecutor();
-    public static final AnnotationExecutor<MethodAnnotationStrategy<?>> METHOD_EXECUTOR = new MethodExecutor();
-    public static final AnnotationExecutor<FieldAnnotationStrategy<?>> STATIC_FIELD_EXECUTOR = new StaticFieldExecutor();
-    public static final AnnotationExecutor<MethodAnnotationStrategy<?>> STATIC_METHOD_EXECUTOR = new StaticMethodExecutor();
-    private List<AnnotationProcessor> annotationProcessors;
+    private List<AnnotationDirector> annotationDirectors;
 
     @Override
     public void processAllTasks() {
-        ApiMod.LOGGER.debug("Processing defaulted {} annotation processors", annotationProcessors.size());
+        ApiMod.LOGGER.debug("Processing defaulted {} annotation directors", annotationDirectors.size());
         Set<Class<?>> classes = ModContext.NEO_MOD.getClasses();
-        annotationProcessors.forEach(annotationProcessor -> {
-            annotationProcessor.process(classes);
+        annotationDirectors.forEach(annotationDirector -> {
+            annotationDirector.directAll(classes);
         });
-        List<? extends AnnotationProcessor> dynamicAnnotationProcessors = InjectionPool.getInstance().getAll(AnnotationProcessor.class);
-        ApiMod.LOGGER.debug("Processing dynamic {} annotation processors", dynamicAnnotationProcessors.size());
-        dynamicAnnotationProcessors.forEach(annotationProcessor -> {
-            annotationProcessor.process(classes);
+        List<? extends AnnotationDirector> dynamicAnnotationDirectors = InjectionPool.getInstance().getAll(AnnotationDirector.class);
+        ApiMod.LOGGER.debug("Processing dynamic {} annotation directors", dynamicAnnotationDirectors.size());
+        dynamicAnnotationDirectors.forEach(annotationDirector -> {
+            annotationDirector.directAll(classes);
         });
+        ProcessorPool processorPool = SimpleProcessorPool.getInstance();
+        processorPool.processAll();
     }
 
-    public void setAnnotationProcessors(List<AnnotationProcessor> annotationProcessors) {
-        this.annotationProcessors = annotationProcessors;
+    public void setAnnotationDirectors(List<AnnotationDirector> annotationDirectors) {
+        this.annotationDirectors = annotationDirectors;
     }
 }

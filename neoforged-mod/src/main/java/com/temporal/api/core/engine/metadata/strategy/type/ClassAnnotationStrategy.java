@@ -1,7 +1,5 @@
 package com.temporal.api.core.engine.metadata.strategy.type;
 
-import com.temporal.api.core.engine.metadata.MetadataLayer;
-import com.temporal.api.core.engine.metadata.executor.AnnotationExecutor;
 import com.temporal.api.core.engine.metadata.strategy.AnnotationStrategy;
 
 import java.lang.annotation.Annotation;
@@ -17,7 +15,7 @@ public interface ClassAnnotationStrategy<A extends Annotation> extends Annotatio
     void execute(Class<?> clazz, Object object, A annotation) throws Exception;
 
     @Override
-    default AnnotationExecutor<? extends AnnotationStrategy<Class<?>, ?>> getExecutor() {
-        return MetadataLayer.CLASS_EXECUTOR;
+    default Class<? super Class<?>> getTypeClass() {
+        return Class.class;
     }
 }

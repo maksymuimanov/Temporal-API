@@ -1,12 +1,7 @@
 package com.temporal.api.core.engine.event.handler;
 
-import com.temporal.api.core.engine.context.ModContext;
 import com.temporal.api.core.engine.event.client.*;
-import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
-import com.temporal.api.core.engine.metadata.MetadataLayer;
 import com.temporal.api.core.engine.metadata.annotation.injection.Handler;
-import com.temporal.api.core.engine.metadata.pool.SimpleStrategyPool;
-import com.temporal.api.core.engine.metadata.pool.StrategyPool;
 import net.minecraft.core.Holder;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.state.properties.WoodType;
@@ -29,8 +24,6 @@ public class FMLClientSetupEventHandler implements EventHandler {
     @Override
     public void handle() {
         this.subscribeModEvent(FMLClientSetupEvent.class, event -> {
-            StrategyPool strategyPool = SimpleStrategyPool.getInstance();
-            MetadataLayer.ASYNC_STRATEGY_CONSUMER.execute(strategyPool.getAll(StrategyPoolInitializer.DEFAULT_FIELD_EVENT_FML), ModContext.ALL_CLASSES);
             WOOD_TYPE_STRATEGY.execute(WOOD_TYPES);
             event.enqueueWork(() -> {
                 BOW_STRATEGY.execute(BOWS);

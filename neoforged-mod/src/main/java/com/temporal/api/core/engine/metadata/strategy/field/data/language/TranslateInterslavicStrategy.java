@@ -12,7 +12,7 @@ public class TranslateInterslavicStrategy extends TranslationStrategy<TranslateI
     }
 
     @Override
-    public Class<? extends TranslateInterslavic> getAnnotationClass() {
+    public Class<TranslateInterslavic> getAnnotationClass() {
         return TranslateInterslavic.class;
     }
 }

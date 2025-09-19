@@ -1,11 +1,6 @@
 package com.temporal.api.core.engine.event.handler;
 
-import com.temporal.api.core.engine.context.ModContext;
-import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
-import com.temporal.api.core.engine.metadata.MetadataLayer;
 import com.temporal.api.core.engine.metadata.annotation.injection.Handler;
-import com.temporal.api.core.engine.metadata.pool.SimpleStrategyPool;
-import com.temporal.api.core.engine.metadata.pool.StrategyPool;
 import net.minecraft.core.Holder;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -22,8 +17,6 @@ public class BlockEntityTypeEventHandler implements EventHandler {
     @Override
     public void handle() {
         this.subscribeModEvent(BlockEntityTypeAddBlocksEvent.class, event -> {
-            StrategyPool strategyPool = SimpleStrategyPool.getInstance();
-            MetadataLayer.ASYNC_STRATEGY_CONSUMER.execute(strategyPool.getAll(StrategyPoolInitializer.DEFAULT_FIELD_EVENT_BLOCK), ModContext.ALL_CLASSES);
             BLOCKS.forEach((type, holders) -> {
                 event.modify(type, holders.stream()
                         .map(Holder::value)

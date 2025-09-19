@@ -4,11 +4,10 @@ import com.temporal.api.core.engine.event.data.biome.GenerationDescriptionContai
 import com.temporal.api.core.engine.event.data.biome.dto.Flower;
 import com.temporal.api.core.engine.event.data.preparer.tag.BiomeTagDynamicPreparer;
 import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
-import com.temporal.api.core.engine.metadata.MetadataLayer;
 import com.temporal.api.core.engine.metadata.annotation.data.biome.GenerateFlower;
 import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
-import com.temporal.api.core.engine.metadata.executor.AnnotationExecutor;
-import com.temporal.api.core.engine.metadata.strategy.AnnotationStrategy;
+import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
+import com.temporal.api.core.engine.metadata.processor.DataEventAnnotationProcessor;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.util.ResourceUtils;
 import com.temporal.api.core.util.TagUtils;
@@ -34,12 +33,12 @@ public class GenerateFlowerStrategy implements FieldAnnotationStrategy<GenerateF
     }
 
     @Override
-    public Class<? extends GenerateFlower> getAnnotationClass() {
+    public Class<GenerateFlower> getAnnotationClass() {
         return GenerateFlower.class;
     }
 
     @Override
-    public AnnotationExecutor<? extends AnnotationStrategy<Field, ?>> getExecutor() {
-        return MetadataLayer.STATIC_FIELD_EXECUTOR;
+    public ProcessorScope getProcessorScope() {
+        return new ProcessorScope(DataEventAnnotationProcessor.NAME);
     }
 }

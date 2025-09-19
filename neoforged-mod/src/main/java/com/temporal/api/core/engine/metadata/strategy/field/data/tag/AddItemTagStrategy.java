@@ -2,11 +2,10 @@ package com.temporal.api.core.engine.metadata.strategy.field.data.tag;
 
 import com.temporal.api.core.engine.event.data.tag.ItemTagsProvider;
 import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
-import com.temporal.api.core.engine.metadata.MetadataLayer;
 import com.temporal.api.core.engine.metadata.annotation.data.tag.AddItemTag;
 import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
-import com.temporal.api.core.engine.metadata.executor.AnnotationExecutor;
-import com.temporal.api.core.engine.metadata.strategy.AnnotationStrategy;
+import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
+import com.temporal.api.core.engine.metadata.processor.DataEventAnnotationProcessor;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.util.MapUtils;
 import com.temporal.api.core.util.ReflectionUtils;
@@ -26,12 +25,12 @@ public class AddItemTagStrategy implements FieldAnnotationStrategy<AddItemTag> {
     }
 
     @Override
-    public Class<? extends AddItemTag> getAnnotationClass() {
+    public Class<AddItemTag> getAnnotationClass() {
         return AddItemTag.class;
     }
 
     @Override
-    public AnnotationExecutor<? extends AnnotationStrategy<Field, ?>> getExecutor() {
-        return MetadataLayer.STATIC_FIELD_EXECUTOR;
+    public ProcessorScope getProcessorScope() {
+        return new ProcessorScope(DataEventAnnotationProcessor.NAME);
     }
 }

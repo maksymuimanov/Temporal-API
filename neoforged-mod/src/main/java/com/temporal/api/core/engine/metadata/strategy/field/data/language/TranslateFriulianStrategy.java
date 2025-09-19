@@ -12,7 +12,7 @@ public class TranslateFriulianStrategy extends TranslationStrategy<TranslateFriu
     }
 
     @Override
-    public Class<? extends TranslateFriulian> getAnnotationClass() {
+    public Class<TranslateFriulian> getAnnotationClass() {
         return TranslateFriulian.class;
     }
 }

@@ -15,21 +15,25 @@ public interface StrategyPool extends Iterable<AnnotationStrategy<?, ?>> {
 
     Map<Class<? extends Annotation>, List<AnnotationStrategy<?, ?>>> getAll(StrategyScope scope);
 
-    <T, A extends Annotation, S extends AnnotationStrategy<T, A>> List<S> get(Class<? extends A> annotationClass);
+    <T, A extends Annotation> AnnotationStrategy<T, A> get(Class<A> annotationClass, Class<? super T> typeClass);
+
+    List<AnnotationStrategy<?, ?>> get(Class<? extends Annotation> annotationClass);
 
     void put(StrategyScope scope, Class<? extends AnnotationStrategy<?, ?>> strategyClass);
 
     <T, A extends Annotation, S extends AnnotationStrategy<T, A>> void put(StrategyScope scope, S strategy);
 
-    void override(StrategyScope scope, AnnotationStrategy<?, ?> from, AnnotationStrategy<?, ?> to);
-
     void override(StrategyScope scope, Class<? extends AnnotationStrategy<?, ?>> from, Class<? extends AnnotationStrategy<?, ?>> to);
+
+    void override(StrategyScope scope, AnnotationStrategy<?, ?> from, AnnotationStrategy<?, ?> to);
 
     <A extends Annotation> void remove(Class<? extends A> annotationClass);
 
     boolean contains(String name);
 
     boolean contains(StrategyScope scope);
+
+    <T, A extends Annotation> boolean contains(Class<? extends A> annotationClass, Class<? super T> typeClass);
 
     <A extends Annotation> boolean contains(Class<? extends A> annotationClass);
 }

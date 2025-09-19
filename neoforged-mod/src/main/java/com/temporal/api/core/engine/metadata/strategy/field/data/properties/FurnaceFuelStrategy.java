@@ -3,11 +3,10 @@ package com.temporal.api.core.engine.metadata.strategy.field.data.properties;
 import com.temporal.api.core.engine.event.data.map.ApiDataMapProvider;
 import com.temporal.api.core.engine.event.data.map.FurnaceFuelDto;
 import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
-import com.temporal.api.core.engine.metadata.MetadataLayer;
 import com.temporal.api.core.engine.metadata.annotation.data.properties.FurnaceFuel;
 import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
-import com.temporal.api.core.engine.metadata.executor.AnnotationExecutor;
-import com.temporal.api.core.engine.metadata.strategy.AnnotationStrategy;
+import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
+import com.temporal.api.core.engine.metadata.processor.DataEventAnnotationProcessor;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.util.ReflectionUtils;
 import net.minecraft.core.Holder;
@@ -25,12 +24,12 @@ public class FurnaceFuelStrategy implements FieldAnnotationStrategy<FurnaceFuel>
     }
 
     @Override
-    public Class<? extends FurnaceFuel> getAnnotationClass() {
+    public Class<FurnaceFuel> getAnnotationClass() {
         return FurnaceFuel.class;
     }
 
     @Override
-    public AnnotationExecutor<? extends AnnotationStrategy<Field, ?>> getExecutor() {
-        return MetadataLayer.STATIC_FIELD_EXECUTOR;
+    public ProcessorScope getProcessorScope() {
+        return new ProcessorScope(DataEventAnnotationProcessor.NAME);
     }
 }

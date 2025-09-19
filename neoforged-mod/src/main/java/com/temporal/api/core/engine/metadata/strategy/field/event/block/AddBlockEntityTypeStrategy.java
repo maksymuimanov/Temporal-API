@@ -2,11 +2,10 @@ package com.temporal.api.core.engine.metadata.strategy.field.event.block;
 
 import com.temporal.api.core.engine.event.handler.BlockEntityTypeEventHandler;
 import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
-import com.temporal.api.core.engine.metadata.MetadataLayer;
 import com.temporal.api.core.engine.metadata.annotation.event.block.AddBlockEntityType;
 import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
-import com.temporal.api.core.engine.metadata.executor.AnnotationExecutor;
-import com.temporal.api.core.engine.metadata.strategy.AnnotationStrategy;
+import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
+import com.temporal.api.core.engine.metadata.processor.BlockEntityTypeEventAnnotationProcessor;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.util.MapUtils;
 import com.temporal.api.core.util.RegistryUtils;
@@ -26,12 +25,12 @@ public class AddBlockEntityTypeStrategy implements FieldAnnotationStrategy<AddBl
     }
 
     @Override
-    public Class<? extends AddBlockEntityType> getAnnotationClass() {
+    public Class<AddBlockEntityType> getAnnotationClass() {
         return AddBlockEntityType.class;
     }
 
     @Override
-    public AnnotationExecutor<? extends AnnotationStrategy<Field, ?>> getExecutor() {
-        return MetadataLayer.STATIC_FIELD_EXECUTOR;
+    public ProcessorScope getProcessorScope() {
+        return new ProcessorScope(BlockEntityTypeEventAnnotationProcessor.NAME);
     }
 }

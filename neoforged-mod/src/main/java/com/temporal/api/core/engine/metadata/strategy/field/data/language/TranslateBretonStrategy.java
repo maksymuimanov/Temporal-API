@@ -12,7 +12,7 @@ public class TranslateBretonStrategy extends TranslationStrategy<TranslateBreton
     }
 
     @Override
-    public Class<? extends TranslateBreton> getAnnotationClass() {
+    public Class<TranslateBreton> getAnnotationClass() {
         return TranslateBreton.class;
     }
 }

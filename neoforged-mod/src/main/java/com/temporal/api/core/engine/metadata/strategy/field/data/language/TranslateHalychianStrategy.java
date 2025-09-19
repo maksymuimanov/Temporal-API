@@ -12,7 +12,7 @@ public class TranslateHalychianStrategy extends TranslationStrategy<TranslateHal
     }
 
     @Override
-    public Class<? extends TranslateHalychian> getAnnotationClass() {
+    public Class<TranslateHalychian> getAnnotationClass() {
         return TranslateHalychian.class;
     }
 }

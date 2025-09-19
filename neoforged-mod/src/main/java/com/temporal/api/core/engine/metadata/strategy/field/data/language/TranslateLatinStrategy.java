@@ -12,7 +12,7 @@ public class TranslateLatinStrategy extends TranslationStrategy<TranslateLatin> 
     }
 
     @Override
-    public Class<? extends TranslateLatin> getAnnotationClass() {
+    public Class<TranslateLatin> getAnnotationClass() {
         return TranslateLatin.class;
     }
 }

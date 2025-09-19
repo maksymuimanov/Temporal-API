@@ -6,6 +6,8 @@ import com.temporal.api.core.engine.event.data.advancement.ApiAdvancementProvide
 import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
 import com.temporal.api.core.engine.metadata.annotation.data.RegisterAdvancement;
 import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
+import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
+import com.temporal.api.core.engine.metadata.processor.DataEventAnnotationProcessor;
 import com.temporal.api.core.engine.metadata.strategy.type.ClassAnnotationStrategy;
 
 import java.lang.reflect.Constructor;
@@ -26,7 +28,12 @@ public class RegisterAdvancementStrategy implements ClassAnnotationStrategy<Regi
     }
 
     @Override
-    public Class<? extends RegisterAdvancement> getAnnotationClass() {
+    public Class<RegisterAdvancement> getAnnotationClass() {
         return RegisterAdvancement.class;
+    }
+
+    @Override
+    public ProcessorScope getProcessorScope() {
+        return new ProcessorScope(DataEventAnnotationProcessor.NAME);
     }
 }

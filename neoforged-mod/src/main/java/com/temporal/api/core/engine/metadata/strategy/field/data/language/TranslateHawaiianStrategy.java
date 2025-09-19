@@ -12,7 +12,7 @@ public class TranslateHawaiianStrategy extends TranslationStrategy<TranslateHawa
     }
 
     @Override
-    public Class<? extends TranslateHawaiian> getAnnotationClass() {
+    public Class<TranslateHawaiian> getAnnotationClass() {
         return TranslateHawaiian.class;
     }
 }

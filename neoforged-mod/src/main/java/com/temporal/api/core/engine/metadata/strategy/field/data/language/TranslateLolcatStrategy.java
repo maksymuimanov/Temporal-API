@@ -12,7 +12,7 @@ public class TranslateLolcatStrategy extends TranslationStrategy<TranslateLolcat
     }
 
     @Override
-    public Class<? extends TranslateLolcat> getAnnotationClass() {
+    public Class<TranslateLolcat> getAnnotationClass() {
         return TranslateLolcat.class;
     }
 }

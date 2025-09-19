@@ -12,7 +12,7 @@ public class TranslateLojbanStrategy extends TranslationStrategy<TranslateLojban
     }
 
     @Override
-    public Class<? extends TranslateLojban> getAnnotationClass() {
+    public Class<TranslateLojban> getAnnotationClass() {
         return TranslateLojban.class;
     }
 }

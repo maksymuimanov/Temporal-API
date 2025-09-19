@@ -4,6 +4,8 @@ import com.temporal.api.core.engine.context.InjectionPool;
 import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
 import com.temporal.api.core.engine.metadata.annotation.injection.RegisterConfig;
 import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
+import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
+import com.temporal.api.core.engine.metadata.processor.ConfigAnnotationProcessor;
 import com.temporal.api.core.engine.metadata.strategy.type.ClassAnnotationStrategy;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.neoforge.common.ModConfigSpec;
@@ -32,7 +34,12 @@ public class RegisterConfigStrategy implements ClassAnnotationStrategy<RegisterC
     }
 
     @Override
-    public Class<? extends RegisterConfig> getAnnotationClass() {
+    public Class<RegisterConfig> getAnnotationClass() {
         return RegisterConfig.class;
+    }
+
+    @Override
+    public ProcessorScope getProcessorScope() {
+        return new ProcessorScope(ConfigAnnotationProcessor.NAME);
     }
 }

@@ -57,8 +57,18 @@ public class SimpleStrategyPool implements StrategyPool {
 
     @Override
     @SuppressWarnings("unchecked")
-    public <T, A extends Annotation, S extends AnnotationStrategy<T, A>> List<S> get(Class<? extends A> annotationClass) {
-        return (List<S>) annotationStrategyMap.get(annotationClass);
+    public <T, A extends Annotation> AnnotationStrategy<T, A> get(Class<A> annotationClass, Class<? super T> typeClass) {
+        return this.get(annotationClass)
+                .stream()
+                .filter(strategy -> strategy.getTypeClass().equals(typeClass))
+                .findAny()
+                .map(strategy -> (AnnotationStrategy<T, A>) strategy)
+                .orElseThrow();
+    }
+
+    @Override
+    public List<AnnotationStrategy<?, ?>> get(Class<? extends Annotation> annotationClass) {
+        return annotationStrategyMap.get(annotationClass);
     }
 
     @Override
@@ -112,6 +122,12 @@ public class SimpleStrategyPool implements StrategyPool {
     @Override
     public boolean contains(StrategyScope scope) {
         return this.strategies.containsKey(scope);
+    }
+
+    @Override
+    public <T, A extends Annotation> boolean contains(Class<? extends A> annotationClass, Class<? super T> typeClass) {
+        List<AnnotationStrategy<?, ?>> list = this.annotationStrategyMap.get(annotationClass);
+        return list != null && !list.isEmpty() && list.stream().anyMatch(strategy -> strategy.getTypeClass().equals(typeClass));
     }
 
     @Override

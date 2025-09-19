@@ -12,7 +12,7 @@ public class TranslateSomaliStrategy extends TranslationStrategy<TranslateSomali
     }
 
     @Override
-    public Class<? extends TranslateSomali> getAnnotationClass() {
+    public Class<TranslateSomali> getAnnotationClass() {
         return TranslateSomali.class;
     }
 }

@@ -2,11 +2,10 @@ package com.temporal.api.core.engine.metadata.strategy.field.event.particle;
 
 import com.temporal.api.core.engine.event.handler.RegisterParticleProvidersEventHandler;
 import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
-import com.temporal.api.core.engine.metadata.MetadataLayer;
 import com.temporal.api.core.engine.metadata.annotation.event.particle.RegisterParticleProvider;
 import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
-import com.temporal.api.core.engine.metadata.executor.AnnotationExecutor;
-import com.temporal.api.core.engine.metadata.strategy.AnnotationStrategy;
+import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
+import com.temporal.api.core.engine.metadata.processor.RegisterParticleProvidersEventAnnotationProcessor;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SpriteSet;
@@ -37,12 +36,12 @@ public class RegisterParticleProviderStrategy implements FieldAnnotationStrategy
     }
 
     @Override
-    public Class<? extends RegisterParticleProvider> getAnnotationClass() {
+    public Class<RegisterParticleProvider> getAnnotationClass() {
         return RegisterParticleProvider.class;
     }
 
     @Override
-    public AnnotationExecutor<? extends AnnotationStrategy<Field, ?>> getExecutor() {
-        return MetadataLayer.STATIC_FIELD_EXECUTOR;
+    public ProcessorScope getProcessorScope() {
+        return new ProcessorScope(RegisterParticleProvidersEventAnnotationProcessor.NAME);
     }
 }

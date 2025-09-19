@@ -12,7 +12,7 @@ public class TranslateRipuarianStrategy extends TranslationStrategy<TranslateRip
     }
 
     @Override
-    public Class<? extends TranslateRipuarian> getAnnotationClass() {
+    public Class<TranslateRipuarian> getAnnotationClass() {
         return TranslateRipuarian.class;
     }
 }

@@ -27,8 +27,6 @@ public class InitializationLayer implements EngineLayer {
         Set<Class<?>> classes = mod.getClasses();
         ModContext.NEO_MOD = mod;
         ApiMod.LOGGER.info("NeoMod dependency created: (modId={}, classes={})", modId, classes.size());
-        ModContext.ALL_CLASSES.addAll(classes);
-        ApiMod.LOGGER.info("NeoMod dependency classes have been added to ModContext.ALL_CLASSES: (modId={}, classes={})", modId, classes.size());
         Set<Class<?>> apiClasses = ReflectionUtils.getApiClasses();
         Set<Class<?>> initializationClasses = Stream.of(classes, apiClasses).flatMap(Set::stream).collect(Collectors.toSet());
         ApiMod.LOGGER.debug("Created classes set for initialization phase with dependency and api classes: (modId={}, classes={}, apiClasses={})", modId, classes.size(), apiClasses.size());

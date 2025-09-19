@@ -12,7 +12,7 @@ public class TranslateAustralianEnglishStrategy extends TranslationStrategy<Tran
     }
 
     @Override
-    public Class<? extends TranslateAustralianEnglish> getAnnotationClass() {
+    public Class<TranslateAustralianEnglish> getAnnotationClass() {
         return TranslateAustralianEnglish.class;
     }
 }

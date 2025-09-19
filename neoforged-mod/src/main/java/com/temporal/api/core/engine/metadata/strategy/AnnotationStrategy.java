@@ -1,6 +1,6 @@
 package com.temporal.api.core.engine.metadata.strategy;
 
-import com.temporal.api.core.engine.metadata.executor.AnnotationExecutor;
+import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
 
 import java.lang.annotation.Annotation;
 
@@ -9,7 +9,9 @@ public interface AnnotationStrategy<T, A extends Annotation> {
 
     void execute(T t, Object object, A annotation) throws Exception;
 
-    Class<? extends A> getAnnotationClass();
+    Class<A> getAnnotationClass();
 
-    AnnotationExecutor<? extends AnnotationStrategy<T, ?>> getExecutor();
+    Class<? super T> getTypeClass();
+
+    ProcessorScope getProcessorScope();
 }

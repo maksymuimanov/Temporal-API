@@ -12,7 +12,7 @@ public class TranslateViossaStrategy extends TranslationStrategy<TranslateViossa
     }
 
     @Override
-    public Class<? extends TranslateViossa> getAnnotationClass() {
+    public Class<TranslateViossa> getAnnotationClass() {
         return TranslateViossa.class;
     }
 }

@@ -12,7 +12,7 @@ public class TranslateMacedonianStrategy extends TranslationStrategy<TranslateMa
     }
 
     @Override
-    public Class<? extends TranslateMacedonian> getAnnotationClass() {
+    public Class<TranslateMacedonian> getAnnotationClass() {
         return TranslateMacedonian.class;
     }
 }

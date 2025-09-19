@@ -5,6 +5,8 @@ import com.temporal.api.core.engine.event.data.recipe.description.RecipeDescript
 import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
 import com.temporal.api.core.engine.metadata.annotation.data.RegisterRecipe;
 import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
+import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
+import com.temporal.api.core.engine.metadata.processor.DataEventAnnotationProcessor;
 import com.temporal.api.core.engine.metadata.strategy.type.ClassAnnotationStrategy;
 
 import java.lang.reflect.Constructor;
@@ -19,7 +21,12 @@ public class RegisterRecipeStrategy implements ClassAnnotationStrategy<RegisterR
     }
 
     @Override
-    public Class<? extends RegisterRecipe> getAnnotationClass() {
+    public Class<RegisterRecipe> getAnnotationClass() {
         return RegisterRecipe.class;
+    }
+
+    @Override
+    public ProcessorScope getProcessorScope() {
+        return new ProcessorScope(DataEventAnnotationProcessor.NAME);
     }
 }

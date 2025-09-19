@@ -12,7 +12,7 @@ public class TranslateValencianStrategy extends TranslationStrategy<TranslateVal
     }
 
     @Override
-    public Class<? extends TranslateValencian> getAnnotationClass() {
+    public Class<TranslateValencian> getAnnotationClass() {
         return TranslateValencian.class;
     }
 }

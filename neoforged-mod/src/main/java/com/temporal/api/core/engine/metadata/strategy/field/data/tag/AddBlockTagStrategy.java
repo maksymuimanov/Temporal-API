@@ -2,11 +2,10 @@ package com.temporal.api.core.engine.metadata.strategy.field.data.tag;
 
 import com.temporal.api.core.engine.event.data.tag.BlockTagsProvider;
 import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
-import com.temporal.api.core.engine.metadata.MetadataLayer;
 import com.temporal.api.core.engine.metadata.annotation.data.tag.AddBlockTag;
 import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
-import com.temporal.api.core.engine.metadata.executor.AnnotationExecutor;
-import com.temporal.api.core.engine.metadata.strategy.AnnotationStrategy;
+import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
+import com.temporal.api.core.engine.metadata.processor.DataEventAnnotationProcessor;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.util.MapUtils;
 import net.minecraft.core.Holder;
@@ -25,12 +24,12 @@ public class AddBlockTagStrategy implements FieldAnnotationStrategy<AddBlockTag>
     }
 
     @Override
-    public Class<? extends AddBlockTag> getAnnotationClass() {
+    public Class<AddBlockTag> getAnnotationClass() {
         return AddBlockTag.class;
     }
 
     @Override
-    public AnnotationExecutor<? extends AnnotationStrategy<Field, ?>> getExecutor() {
-        return MetadataLayer.STATIC_FIELD_EXECUTOR;
+    public ProcessorScope getProcessorScope() {
+        return new ProcessorScope(DataEventAnnotationProcessor.NAME);
     }
 }

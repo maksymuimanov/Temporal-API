@@ -12,7 +12,7 @@ public class TranslateNorwegianNynorskStrategy extends TranslationStrategy<Trans
     }
 
     @Override
-    public Class<? extends TranslateNorwegianNynorsk> getAnnotationClass() {
+    public Class<TranslateNorwegianNynorsk> getAnnotationClass() {
         return TranslateNorwegianNynorsk.class;
     }
 }

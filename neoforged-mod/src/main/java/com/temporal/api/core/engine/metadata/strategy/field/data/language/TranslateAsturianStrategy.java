@@ -12,7 +12,7 @@ public class TranslateAsturianStrategy extends TranslationStrategy<TranslateAstu
     }
 
     @Override
-    public Class<? extends TranslateAsturian> getAnnotationClass() {
+    public Class<TranslateAsturian> getAnnotationClass() {
         return TranslateAsturian.class;
     }
 }

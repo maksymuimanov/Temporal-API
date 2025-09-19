@@ -12,7 +12,7 @@ public class TranslateJawiStrategy extends TranslationStrategy<TranslateJawi> {
     }
 
     @Override
-    public Class<? extends TranslateJawi> getAnnotationClass() {
+    public Class<TranslateJawi> getAnnotationClass() {
         return TranslateJawi.class;
     }
 }

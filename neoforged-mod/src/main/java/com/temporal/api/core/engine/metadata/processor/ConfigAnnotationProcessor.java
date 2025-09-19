@@ -1,12 +1,15 @@
 package com.temporal.api.core.engine.metadata.processor;
 
-import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
+import com.temporal.api.core.engine.context.ModContext;
+import com.temporal.api.core.engine.metadata.MetadataLayer;
+import com.temporal.api.core.engine.metadata.annotation.injection.Processor;
 
-import java.util.Set;
-
+@Processor(ConfigAnnotationProcessor.NAME)
 public class ConfigAnnotationProcessor extends AbstractAnnotationProcessor {
+    public static final String NAME = "default_config";
+
     @Override
-    public void process(Set<Class<?>> classes) {
-        this.processAsync(StrategyPoolInitializer.DEFAULT_CLASS_CONFIG, classes);
+    public void process() {
+        this.processAll(MetadataLayer.ASYNC_STRATEGY_CONSUMER, ModContext.NEO_MOD.getClasses());
     }
 }

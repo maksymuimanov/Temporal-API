@@ -12,7 +12,7 @@ public class TranslateVietnameseStrategy extends TranslationStrategy<TranslateVi
     }
 
     @Override
-    public Class<? extends TranslateVietnamese> getAnnotationClass() {
+    public Class<TranslateVietnamese> getAnnotationClass() {
         return TranslateVietnamese.class;
     }
 }

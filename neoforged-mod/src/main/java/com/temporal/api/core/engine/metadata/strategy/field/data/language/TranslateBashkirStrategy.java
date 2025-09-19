@@ -12,7 +12,7 @@ public class TranslateBashkirStrategy extends TranslationStrategy<TranslateBashk
     }
 
     @Override
-    public Class<? extends TranslateBashkir> getAnnotationClass() {
+    public Class<TranslateBashkir> getAnnotationClass() {
         return TranslateBashkir.class;
     }
 }

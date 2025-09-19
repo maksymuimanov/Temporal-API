@@ -1,20 +1,16 @@
 package net.temporal.example.metadata;
 
-import com.temporal.api.core.engine.metadata.annotation.injection.Injected;
+import com.temporal.api.core.engine.context.ModContext;
+import com.temporal.api.core.engine.metadata.MetadataLayer;
+import com.temporal.api.core.engine.metadata.annotation.injection.Processor;
 import com.temporal.api.core.engine.metadata.processor.AbstractAnnotationProcessor;
 
-import java.util.Set;
-
-@Injected
+@Processor(ExampleAnnotationProcessor.NAME)
 public class ExampleAnnotationProcessor extends AbstractAnnotationProcessor {
-    public static final String EXAMPLE_CLASS = "example_class";
-    public static final String EXAMPLE_FIELD = "example_field";
-    public static final String EXAMPLE_METHOD = "example_method";
+    public static final String NAME = "example";
 
     @Override
-    public void process(Set<Class<?>> classes) {
-        this.processAsync(EXAMPLE_CLASS, classes);
-        this.processAsync(EXAMPLE_FIELD, classes);
-        this.processAsync(EXAMPLE_METHOD, classes);
+    public void process() {
+        this.processAll(MetadataLayer.SIMPLE_STRATEGY_CONSUMER, ModContext.NEO_MOD.getClasses());
     }
 }

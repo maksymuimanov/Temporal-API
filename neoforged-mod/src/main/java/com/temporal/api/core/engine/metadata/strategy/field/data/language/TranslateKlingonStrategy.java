@@ -12,7 +12,7 @@ public class TranslateKlingonStrategy extends TranslationStrategy<TranslateKling
     }
 
     @Override
-    public Class<? extends TranslateKlingon> getAnnotationClass() {
+    public Class<TranslateKlingon> getAnnotationClass() {
         return TranslateKlingon.class;
     }
 }

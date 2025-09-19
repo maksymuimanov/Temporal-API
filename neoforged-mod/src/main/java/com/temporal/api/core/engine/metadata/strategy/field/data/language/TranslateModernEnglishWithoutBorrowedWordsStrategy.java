@@ -12,7 +12,7 @@ public class TranslateModernEnglishWithoutBorrowedWordsStrategy extends Translat
     }
 
     @Override
-    public Class<? extends TranslateModernEnglishWithoutBorrowedWords> getAnnotationClass() {
+    public Class<TranslateModernEnglishWithoutBorrowedWords> getAnnotationClass() {
         return TranslateModernEnglishWithoutBorrowedWords.class;
     }
 }

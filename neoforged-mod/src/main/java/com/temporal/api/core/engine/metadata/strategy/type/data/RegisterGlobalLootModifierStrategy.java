@@ -5,6 +5,8 @@ import com.temporal.api.core.engine.event.data.modifier.ChestModifierDescription
 import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
 import com.temporal.api.core.engine.metadata.annotation.data.RegisterGlobalLootModifier;
 import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
+import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
+import com.temporal.api.core.engine.metadata.processor.DataEventAnnotationProcessor;
 import com.temporal.api.core.engine.metadata.strategy.type.ClassAnnotationStrategy;
 
 import java.lang.reflect.Constructor;
@@ -21,7 +23,12 @@ public class RegisterGlobalLootModifierStrategy implements ClassAnnotationStrate
     }
 
     @Override
-    public Class<? extends RegisterGlobalLootModifier> getAnnotationClass() {
+    public Class<RegisterGlobalLootModifier> getAnnotationClass() {
         return RegisterGlobalLootModifier.class;
+    }
+
+    @Override
+    public ProcessorScope getProcessorScope() {
+        return new ProcessorScope(DataEventAnnotationProcessor.NAME);
     }
 }

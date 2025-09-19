@@ -12,7 +12,7 @@ public class TranslateNorwegianBokmalStrategy extends TranslationStrategy<Transl
     }
 
     @Override
-    public Class<? extends TranslateNorwegianBokmal> getAnnotationClass() {
+    public Class<TranslateNorwegianBokmal> getAnnotationClass() {
         return TranslateNorwegianBokmal.class;
     }
 }

@@ -12,4 +12,12 @@ public interface FieldAnnotationStrategy<A extends Annotation> extends Annotatio
         A annotation = field.getDeclaredAnnotation(this.getAnnotationClass());
         this.execute(field, object, annotation);
     }
+
+    @Override
+    void execute(Field field, Object object, A annotation) throws Exception;
+
+    @Override
+    default Class<? super Field> getTypeClass() {
+        return Field.class;
+    }
 }

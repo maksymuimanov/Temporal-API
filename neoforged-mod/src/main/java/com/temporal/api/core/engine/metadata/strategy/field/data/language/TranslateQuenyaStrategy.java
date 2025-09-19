@@ -12,7 +12,7 @@ public class TranslateQuenyaStrategy extends TranslationStrategy<TranslateQuenya
     }
 
     @Override
-    public Class<? extends TranslateQuenya> getAnnotationClass() {
+    public Class<TranslateQuenya> getAnnotationClass() {
         return TranslateQuenya.class;
     }
 }

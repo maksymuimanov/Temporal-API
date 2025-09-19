@@ -12,7 +12,7 @@ public class TranslateCornishStrategy extends TranslationStrategy<TranslateCorni
     }
 
     @Override
-    public Class<? extends TranslateCornish> getAnnotationClass() {
+    public Class<TranslateCornish> getAnnotationClass() {
         return TranslateCornish.class;
     }
 }

@@ -12,7 +12,7 @@ public class TranslateUpperSaxonGermanStrategy extends TranslationStrategy<Trans
     }
 
     @Override
-    public Class<? extends TranslateUpperSaxonGerman> getAnnotationClass() {
+    public Class<TranslateUpperSaxonGerman> getAnnotationClass() {
         return TranslateUpperSaxonGerman.class;
     }
 }

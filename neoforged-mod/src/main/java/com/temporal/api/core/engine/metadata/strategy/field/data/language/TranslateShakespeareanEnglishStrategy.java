@@ -12,7 +12,7 @@ public class TranslateShakespeareanEnglishStrategy extends TranslationStrategy<T
     }
 
     @Override
-    public Class<? extends TranslateShakespeareanEnglish> getAnnotationClass() {
+    public Class<TranslateShakespeareanEnglish> getAnnotationClass() {
         return TranslateShakespeareanEnglish.class;
     }
 }

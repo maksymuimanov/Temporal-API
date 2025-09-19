@@ -3,11 +3,10 @@ package com.temporal.api.core.engine.metadata.strategy.field.data;
 import com.temporal.api.core.engine.event.data.enchantment.ApiEnchantmentProvider;
 import com.temporal.api.core.engine.event.data.enchantment.EnchantmentDescription;
 import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
-import com.temporal.api.core.engine.metadata.MetadataLayer;
 import com.temporal.api.core.engine.metadata.annotation.data.GenerateEnchantment;
 import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
-import com.temporal.api.core.engine.metadata.executor.AnnotationExecutor;
-import com.temporal.api.core.engine.metadata.strategy.AnnotationStrategy;
+import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
+import com.temporal.api.core.engine.metadata.processor.DataEventAnnotationProcessor;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -27,12 +26,12 @@ public class GenerateEnchantmentStrategy implements FieldAnnotationStrategy<Gene
     }
 
     @Override
-    public Class<? extends GenerateEnchantment> getAnnotationClass() {
+    public Class<GenerateEnchantment> getAnnotationClass() {
         return GenerateEnchantment.class;
     }
 
     @Override
-    public AnnotationExecutor<? extends AnnotationStrategy<Field, ?>> getExecutor() {
-        return MetadataLayer.STATIC_FIELD_EXECUTOR;
+    public ProcessorScope getProcessorScope() {
+        return new ProcessorScope(DataEventAnnotationProcessor.NAME);
     }
 }

@@ -12,7 +12,7 @@ public class TranslateUpsideDownBritishEnglishStrategy extends TranslationStrate
     }
 
     @Override
-    public Class<? extends TranslateUpsideDownBritishEnglish> getAnnotationClass() {
+    public Class<TranslateUpsideDownBritishEnglish> getAnnotationClass() {
         return TranslateUpsideDownBritishEnglish.class;
     }
 }

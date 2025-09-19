@@ -3,11 +3,10 @@ package com.temporal.api.core.engine.metadata.strategy.field.data;
 import com.temporal.api.core.engine.event.data.loot.BlockLootTableProvider;
 import com.temporal.api.core.engine.event.data.loot.LootProviderStrategy;
 import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
-import com.temporal.api.core.engine.metadata.MetadataLayer;
 import com.temporal.api.core.engine.metadata.annotation.data.GenerateBlockLootTable;
 import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
-import com.temporal.api.core.engine.metadata.executor.AnnotationExecutor;
-import com.temporal.api.core.engine.metadata.strategy.AnnotationStrategy;
+import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
+import com.temporal.api.core.engine.metadata.processor.DataEventAnnotationProcessor;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import net.minecraft.core.Holder;
 import net.minecraft.util.Tuple;
@@ -48,12 +47,12 @@ public class GenerateBlockLootTableStrategy implements FieldAnnotationStrategy<G
     }
 
     @Override
-    public Class<? extends GenerateBlockLootTable> getAnnotationClass() {
+    public Class<GenerateBlockLootTable> getAnnotationClass() {
         return GenerateBlockLootTable.class;
     }
 
     @Override
-    public AnnotationExecutor<? extends AnnotationStrategy<Field, ?>> getExecutor() {
-        return MetadataLayer.STATIC_FIELD_EXECUTOR;
+    public ProcessorScope getProcessorScope() {
+        return new ProcessorScope(DataEventAnnotationProcessor.NAME);
     }
 }

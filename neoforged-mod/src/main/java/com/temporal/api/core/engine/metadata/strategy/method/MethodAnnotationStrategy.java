@@ -12,4 +12,12 @@ public interface MethodAnnotationStrategy<A extends Annotation> extends Annotati
         A annotation = method.getDeclaredAnnotation(this.getAnnotationClass());
         this.execute(method, object, annotation);
     }
+
+    @Override
+    void execute(Method method, Object object, A annotation) throws Exception;
+
+    @Override
+    default Class<? super Method> getTypeClass() {
+        return Method.class;
+    }
 }

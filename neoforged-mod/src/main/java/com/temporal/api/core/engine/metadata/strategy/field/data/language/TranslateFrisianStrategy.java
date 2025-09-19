@@ -12,7 +12,7 @@ public class TranslateFrisianStrategy extends TranslationStrategy<TranslateFrisi
     }
 
     @Override
-    public Class<? extends TranslateFrisian> getAnnotationClass() {
+    public Class<TranslateFrisian> getAnnotationClass() {
         return TranslateFrisian.class;
     }
 }

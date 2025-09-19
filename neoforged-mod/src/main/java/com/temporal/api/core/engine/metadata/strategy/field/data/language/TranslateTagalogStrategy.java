@@ -12,7 +12,7 @@ public class TranslateTagalogStrategy extends TranslationStrategy<TranslateTagal
     }
 
     @Override
-    public Class<? extends TranslateTagalog> getAnnotationClass() {
+    public Class<TranslateTagalog> getAnnotationClass() {
         return TranslateTagalog.class;
     }
 }

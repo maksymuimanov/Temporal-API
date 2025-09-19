@@ -12,7 +12,7 @@ public class TranslateYiddishStrategy extends TranslationStrategy<TranslateYiddi
     }
 
     @Override
-    public Class<? extends TranslateYiddish> getAnnotationClass() {
+    public Class<TranslateYiddish> getAnnotationClass() {
         return TranslateYiddish.class;
     }
 }
