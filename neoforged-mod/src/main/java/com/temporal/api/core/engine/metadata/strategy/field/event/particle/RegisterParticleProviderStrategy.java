@@ -5,7 +5,7 @@ import com.temporal.api.core.engine.initialization.initializer.StrategyPoolIniti
 import com.temporal.api.core.engine.metadata.annotation.event.particle.RegisterParticleProvider;
 import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
 import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
-import com.temporal.api.core.engine.metadata.processor.RegisterParticleProvidersEventAnnotationProcessor;
+import com.temporal.api.core.engine.metadata.processor.RegisterParticleProvidersEventHandlerAnnotationProcessorAdapter;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SpriteSet;
@@ -42,6 +42,6 @@ public class RegisterParticleProviderStrategy implements FieldAnnotationStrategy
 
     @Override
     public ProcessorScope getProcessorScope() {
-        return new ProcessorScope(RegisterParticleProvidersEventAnnotationProcessor.NAME);
+        return new ProcessorScope(RegisterParticleProvidersEventHandlerAnnotationProcessorAdapter.NAME);
     }
 }

@@ -6,7 +6,7 @@ import com.temporal.api.core.engine.initialization.initializer.StrategyPoolIniti
 import com.temporal.api.core.engine.metadata.annotation.data.model.GenerateBlockModel;
 import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
 import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
-import com.temporal.api.core.engine.metadata.processor.DataEventAnnotationProcessor;
+import com.temporal.api.core.engine.metadata.processor.DataEventHandlerAnnotationProcessorAdapter;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import net.minecraft.core.Holder;
 import net.minecraft.util.Tuple;
@@ -60,6 +60,6 @@ public class GenerateBlockModelStrategy implements FieldAnnotationStrategy<Gener
 
     @Override
     public ProcessorScope getProcessorScope() {
-        return new ProcessorScope(DataEventAnnotationProcessor.NAME);
+        return new ProcessorScope(DataEventHandlerAnnotationProcessorAdapter.NAME);
     }
 }

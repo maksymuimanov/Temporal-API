@@ -8,7 +8,7 @@ import com.temporal.api.core.engine.initialization.initializer.StrategyPoolIniti
 import com.temporal.api.core.engine.metadata.annotation.data.RegisterTagContainer;
 import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
 import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
-import com.temporal.api.core.engine.metadata.processor.DataEventAnnotationProcessor;
+import com.temporal.api.core.engine.metadata.processor.DataEventHandlerAnnotationProcessorAdapter;
 import com.temporal.api.core.engine.metadata.strategy.type.ClassAnnotationStrategy;
 
 @Strategy(StrategyPoolInitializer.DEFAULT_CLASS_DATA)
@@ -30,6 +30,6 @@ public class RegisterTagContainerStrategy implements ClassAnnotationStrategy<Reg
 
     @Override
     public ProcessorScope getProcessorScope() {
-        return new ProcessorScope(DataEventAnnotationProcessor.NAME);
+        return new ProcessorScope(DataEventHandlerAnnotationProcessorAdapter.NAME);
     }
 }

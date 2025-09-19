@@ -7,7 +7,7 @@ import com.temporal.api.core.engine.initialization.initializer.StrategyPoolIniti
 import com.temporal.api.core.engine.metadata.annotation.data.model.GeneratePainting;
 import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
 import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
-import com.temporal.api.core.engine.metadata.processor.DataEventAnnotationProcessor;
+import com.temporal.api.core.engine.metadata.processor.DataEventHandlerAnnotationProcessorAdapter;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.decoration.PaintingVariant;
@@ -31,6 +31,6 @@ public class GeneratePaintingStrategy implements FieldAnnotationStrategy<Generat
 
     @Override
     public ProcessorScope getProcessorScope() {
-        return new ProcessorScope(DataEventAnnotationProcessor.NAME);
+        return new ProcessorScope(DataEventHandlerAnnotationProcessorAdapter.NAME);
     }
 }

@@ -6,7 +6,7 @@ import com.temporal.api.core.engine.initialization.initializer.StrategyPoolIniti
 import com.temporal.api.core.engine.metadata.annotation.data.GenerateEnchantment;
 import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
 import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
-import com.temporal.api.core.engine.metadata.processor.DataEventAnnotationProcessor;
+import com.temporal.api.core.engine.metadata.processor.DataEventHandlerAnnotationProcessorAdapter;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -32,6 +32,6 @@ public class GenerateEnchantmentStrategy implements FieldAnnotationStrategy<Gene
 
     @Override
     public ProcessorScope getProcessorScope() {
-        return new ProcessorScope(DataEventAnnotationProcessor.NAME);
+        return new ProcessorScope(DataEventHandlerAnnotationProcessorAdapter.NAME);
     }
 }

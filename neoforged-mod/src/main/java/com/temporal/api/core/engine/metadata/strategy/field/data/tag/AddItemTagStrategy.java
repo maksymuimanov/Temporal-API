@@ -5,7 +5,7 @@ import com.temporal.api.core.engine.initialization.initializer.StrategyPoolIniti
 import com.temporal.api.core.engine.metadata.annotation.data.tag.AddItemTag;
 import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
 import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
-import com.temporal.api.core.engine.metadata.processor.DataEventAnnotationProcessor;
+import com.temporal.api.core.engine.metadata.processor.DataEventHandlerAnnotationProcessorAdapter;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.util.MapUtils;
 import com.temporal.api.core.util.ReflectionUtils;
@@ -31,6 +31,6 @@ public class AddItemTagStrategy implements FieldAnnotationStrategy<AddItemTag> {
 
     @Override
     public ProcessorScope getProcessorScope() {
-        return new ProcessorScope(DataEventAnnotationProcessor.NAME);
+        return new ProcessorScope(DataEventHandlerAnnotationProcessorAdapter.NAME);
     }
 }

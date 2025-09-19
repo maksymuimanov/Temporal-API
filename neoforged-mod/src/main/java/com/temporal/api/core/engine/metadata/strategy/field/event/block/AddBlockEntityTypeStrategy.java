@@ -5,7 +5,7 @@ import com.temporal.api.core.engine.initialization.initializer.StrategyPoolIniti
 import com.temporal.api.core.engine.metadata.annotation.event.block.AddBlockEntityType;
 import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
 import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
-import com.temporal.api.core.engine.metadata.processor.BlockEntityTypeEventAnnotationProcessor;
+import com.temporal.api.core.engine.metadata.processor.BlockEntityTypeEventHandlerAnnotationProcessorAdapter;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.util.MapUtils;
 import com.temporal.api.core.util.RegistryUtils;
@@ -31,6 +31,6 @@ public class AddBlockEntityTypeStrategy implements FieldAnnotationStrategy<AddBl
 
     @Override
     public ProcessorScope getProcessorScope() {
-        return new ProcessorScope(BlockEntityTypeEventAnnotationProcessor.NAME);
+        return new ProcessorScope(BlockEntityTypeEventHandlerAnnotationProcessorAdapter.NAME);
     }
 }

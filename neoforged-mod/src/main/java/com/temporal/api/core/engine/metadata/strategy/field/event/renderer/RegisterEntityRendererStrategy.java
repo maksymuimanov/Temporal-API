@@ -5,7 +5,7 @@ import com.temporal.api.core.engine.initialization.initializer.StrategyPoolIniti
 import com.temporal.api.core.engine.metadata.annotation.event.renderer.RegisterEntityRenderer;
 import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
 import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
-import com.temporal.api.core.engine.metadata.processor.EntityRendererRegisterRendererEventAnnotationProcessor;
+import com.temporal.api.core.engine.metadata.processor.EntityRendererRegisterRendererEventHandlerAnnotationProcessorAdapter;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -41,6 +41,6 @@ public class RegisterEntityRendererStrategy implements FieldAnnotationStrategy<R
 
     @Override
     public ProcessorScope getProcessorScope() {
-        return new ProcessorScope(EntityRendererRegisterRendererEventAnnotationProcessor.NAME);
+        return new ProcessorScope(EntityRendererRegisterRendererEventHandlerAnnotationProcessorAdapter.NAME);
     }
 }

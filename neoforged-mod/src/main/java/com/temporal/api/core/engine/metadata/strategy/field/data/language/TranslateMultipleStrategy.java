@@ -6,7 +6,7 @@ import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
 import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
 import com.temporal.api.core.engine.metadata.pool.SimpleStrategyPool;
 import com.temporal.api.core.engine.metadata.pool.StrategyPool;
-import com.temporal.api.core.engine.metadata.processor.DataEventAnnotationProcessor;
+import com.temporal.api.core.engine.metadata.processor.DataEventHandlerAnnotationProcessorAdapter;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 
 import java.lang.annotation.Annotation;
@@ -43,6 +43,6 @@ public class TranslateMultipleStrategy implements FieldAnnotationStrategy<Transl
 
     @Override
     public ProcessorScope getProcessorScope() {
-        return new ProcessorScope(DataEventAnnotationProcessor.NAME);
+        return new ProcessorScope(DataEventHandlerAnnotationProcessorAdapter.NAME);
     }
 }

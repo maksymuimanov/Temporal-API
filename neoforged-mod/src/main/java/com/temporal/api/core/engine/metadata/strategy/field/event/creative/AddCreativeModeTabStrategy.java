@@ -6,7 +6,7 @@ import com.temporal.api.core.engine.metadata.annotation.event.creative.AddCreati
 import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
 import com.temporal.api.core.engine.metadata.constant.CreativeModeTabType;
 import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
-import com.temporal.api.core.engine.metadata.processor.CreativeModeTabEventAnnotationProcessor;
+import com.temporal.api.core.engine.metadata.processor.CreativeModeTabEventHandlerAnnotationProcessorAdapter;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.util.MapUtils;
 import com.temporal.api.core.util.ReflectionUtils;
@@ -36,6 +36,6 @@ public class AddCreativeModeTabStrategy implements FieldAnnotationStrategy<AddCr
 
     @Override
     public ProcessorScope getProcessorScope() {
-        return new ProcessorScope(CreativeModeTabEventAnnotationProcessor.NAME);
+        return new ProcessorScope(CreativeModeTabEventHandlerAnnotationProcessorAdapter.NAME);
     }
 }

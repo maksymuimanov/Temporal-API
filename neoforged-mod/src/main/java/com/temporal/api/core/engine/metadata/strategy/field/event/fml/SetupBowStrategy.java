@@ -6,7 +6,7 @@ import com.temporal.api.core.engine.initialization.initializer.StrategyPoolIniti
 import com.temporal.api.core.engine.metadata.annotation.event.fml.SetupBow;
 import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
 import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
-import com.temporal.api.core.engine.metadata.processor.FMLClientSetupEventAnnotationProcessor;
+import com.temporal.api.core.engine.metadata.processor.FMLClientSetupEventHandlerAnnotationProcessorAdapter;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import net.minecraft.core.Holder;
 import net.minecraft.world.item.Item;
@@ -29,6 +29,6 @@ public class SetupBowStrategy implements FieldAnnotationStrategy<SetupBow> {
 
     @Override
     public ProcessorScope getProcessorScope() {
-        return new ProcessorScope(FMLClientSetupEventAnnotationProcessor.NAME);
+        return new ProcessorScope(FMLClientSetupEventHandlerAnnotationProcessorAdapter.NAME);
     }
 }

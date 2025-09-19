@@ -5,7 +5,7 @@ import com.temporal.api.core.engine.initialization.initializer.StrategyPoolIniti
 import com.temporal.api.core.engine.metadata.annotation.event.attributes.CreateEntityAttributes;
 import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
 import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
-import com.temporal.api.core.engine.metadata.processor.EntityAttributeEventAnnotationProcessor;
+import com.temporal.api.core.engine.metadata.processor.EntityAttributeEventHandlerAnnotationProcessorAdapter;
 import com.temporal.api.core.engine.metadata.strategy.method.MethodAnnotationStrategy;
 import com.temporal.api.core.util.RegistryUtils;
 import net.minecraft.core.Holder;
@@ -34,6 +34,6 @@ public class CreateEntityAttributesStrategy implements MethodAnnotationStrategy<
 
     @Override
     public ProcessorScope getProcessorScope() {
-        return new ProcessorScope(EntityAttributeEventAnnotationProcessor.NAME);
+        return new ProcessorScope(EntityAttributeEventHandlerAnnotationProcessorAdapter.NAME);
     }
 }

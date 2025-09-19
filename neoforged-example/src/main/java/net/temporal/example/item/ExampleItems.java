@@ -121,7 +121,7 @@ public final class ExampleItems {
     })
     public static final DeferredItem<?> EXAMPLE_BANNER_ITEM = ITEM_FACTORY.createBannerPattern("example_banner_pattern", ExampleBannerPatternTags.EXAMPLE);
 
-    @AddCreativeModeTab(CreativeModeTabType.INGREDIENTS)
+    @AddCreativeModeTab(CreativeModeTabType.TOOLS_AND_UTILITIES)
     @GenerateItemModel
     @TranslateAmericanEnglish("Example Music Disc")
     public static final DeferredItem<?> EXAMPLE_MUSIC_DISC = ITEM_FACTORY.createMusicDisc("example_music_disc", ExampleJukeboxSongs.EXAMPLE_JUKEBOX_SONG);

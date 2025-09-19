@@ -5,7 +5,7 @@ import com.temporal.api.core.engine.initialization.initializer.StrategyPoolIniti
 import com.temporal.api.core.engine.metadata.annotation.event.layer.RegisterLayerDefinition;
 import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
 import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
-import com.temporal.api.core.engine.metadata.processor.EntityRendererRegisterLayerDefinitionEventAnnotationProcessor;
+import com.temporal.api.core.engine.metadata.processor.EntityRendererRegisterLayerDefinitionEventHandlerAnnotationProcessorAdapter;
 import com.temporal.api.core.engine.metadata.strategy.type.ClassAnnotationStrategy;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
@@ -26,6 +26,6 @@ public class RegisterLayerDefinitionStrategy implements ClassAnnotationStrategy<
 
     @Override
     public ProcessorScope getProcessorScope() {
-        return new ProcessorScope(EntityRendererRegisterLayerDefinitionEventAnnotationProcessor.NAME);
+        return new ProcessorScope(EntityRendererRegisterLayerDefinitionEventHandlerAnnotationProcessorAdapter.NAME);
     }
 }

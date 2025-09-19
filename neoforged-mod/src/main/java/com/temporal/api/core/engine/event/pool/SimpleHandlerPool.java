@@ -67,7 +67,7 @@ public class SimpleHandlerPool implements HandlerPool {
 
     @Override
     public void put(HandlerScope handlerScope, EventHandler eventHandler) {
-        MapUtils.putToSortedListMap(this.eventHandlers, handlerScope, eventHandler, EventHandler::compareTo);
+        MapUtils.putToListMap(this.eventHandlers, handlerScope, eventHandler);
     }
 
     @Override
@@ -98,7 +98,6 @@ public class SimpleHandlerPool implements HandlerPool {
                 .ifPresent(eventHandler -> {
                     eventHandlers.remove(eventHandler);
                     eventHandlers.add(to);
-                    eventHandlers.sort(EventHandler::compareTo);
                 });
     }
 

@@ -3,7 +3,7 @@ package com.temporal.api.core.engine.metadata.strategy.field.data.language;
 import com.temporal.api.core.engine.event.data.language.provider.ApiLanguageProvider;
 import com.temporal.api.core.engine.event.data.language.transformer.KeyTransformer;
 import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
-import com.temporal.api.core.engine.metadata.processor.DataEventAnnotationProcessor;
+import com.temporal.api.core.engine.metadata.processor.DataEventHandlerAnnotationProcessorAdapter;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
@@ -87,6 +87,6 @@ public abstract class TranslationStrategy<A extends Annotation> implements Field
 
     @Override
     public ProcessorScope getProcessorScope() {
-        return new ProcessorScope(DataEventAnnotationProcessor.NAME);
+        return new ProcessorScope(DataEventHandlerAnnotationProcessorAdapter.NAME);
     }
 }
