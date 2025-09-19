@@ -8,6 +8,9 @@ import net.minecraft.world.item.Item;
 import java.util.List;
 
 public class BowClientSetupStrategy implements ClientSetupStrategy<Holder<? extends Item>> {
+    public static final String PULL = "pull";
+    public static final String PULLING = "pulling";
+
     @Override
     public void execute(List<Holder<? extends Item>> source) {
         source.stream()
@@ -20,7 +23,7 @@ public class BowClientSetupStrategy implements ClientSetupStrategy<Holder<? exte
 
     private void registerPull(Item bow) {
         ItemProperties.register(
-                bow, ResourceLocation.withDefaultNamespace("pull"),
+                bow, ResourceLocation.withDefaultNamespace(PULL),
                 (stack, level, entity, seed) ->
                         entity == null ? 0.0F : entity.getUseItem() != stack ? 0.0F : (float) (stack.getUseDuration(entity) - entity.getUseItemRemainingTicks()) / 20.0F
         );
@@ -28,7 +31,7 @@ public class BowClientSetupStrategy implements ClientSetupStrategy<Holder<? exte
 
     private void registerPulling(Item bow) {
         ItemProperties.register(
-                bow, ResourceLocation.withDefaultNamespace("pulling"),
+                bow, ResourceLocation.withDefaultNamespace(PULLING),
                 (item, level, entity, seed) ->
                         entity != null && entity.isUsingItem() && entity.getUseItem() == item ? 1.0F : 0.0F
         );

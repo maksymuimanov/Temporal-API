@@ -8,13 +8,16 @@ import net.minecraft.world.item.Item;
 import java.util.List;
 
 public class ShieldClientSetupStrategy implements ClientSetupStrategy<Holder<? extends Item>> {
+
+    public static final String BLOCKING = "blocking";
+
     @Override
     public void execute(List<Holder<? extends Item>> source) {
         source.stream()
                 .map(Holder::value)
                 .forEach(shield -> {
                     ItemProperties.register(shield,
-                            ResourceLocation.withDefaultNamespace("blocking"),
+                            ResourceLocation.withDefaultNamespace(BLOCKING),
                             (item, level, entity, seed) ->
                                     entity != null && entity.isUsingItem() && entity.getUseItem() == item ? 1.0F : 0.0F);
                 });

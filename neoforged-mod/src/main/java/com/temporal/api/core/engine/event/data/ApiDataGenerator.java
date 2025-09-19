@@ -20,6 +20,7 @@ import com.temporal.api.core.engine.event.data.recipe.ApiRecipeProvider;
 import com.temporal.api.core.engine.event.data.sound.ApiSoundProvider;
 import com.temporal.api.core.engine.event.data.tag.BannerPatternTagsProvider;
 import com.temporal.api.core.engine.event.data.tag.BlockTagsProvider;
+import com.temporal.api.core.engine.event.data.tag.InstrumentTagsProvider;
 import com.temporal.api.core.engine.event.data.tag.ItemTagsProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
@@ -237,6 +238,7 @@ public class ApiDataGenerator implements DataGatherer {
         generator.addProvider(event.includeServer(), new BlockTagsProvider(packOutput));
         generator.addProvider(event.includeServer(), new ItemTagsProvider(packOutput));
         generator.addProvider(event.includeServer(), new BannerPatternTagsProvider(packOutput));
+        generator.addProvider(event.includeServer(), new InstrumentTagsProvider(packOutput));
     }
 
     @Override
