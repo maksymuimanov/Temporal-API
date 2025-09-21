@@ -1,5 +1,6 @@
 {
   "parent": "minecraft:block/cube_column",
+  "render_type": "minecraft:solid",
   "textures": {
     "end": "example:block/example_stripped_log",
     "side": "example:block/example_stripped_log"

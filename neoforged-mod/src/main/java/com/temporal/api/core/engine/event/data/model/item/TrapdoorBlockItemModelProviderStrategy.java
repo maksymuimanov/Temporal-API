@@ -1,6 +1,6 @@
 package com.temporal.api.core.engine.event.data.model.item;
 
-import com.temporal.api.core.engine.event.data.model.block.ApiBlockModelProvider;
+import com.temporal.api.core.engine.event.data.model.block.spec.BlockModelSpec;
 import com.temporal.api.core.util.ResourceUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.world.item.Item;
@@ -9,7 +9,7 @@ public class TrapdoorBlockItemModelProviderStrategy implements ItemModelProvider
     @Override
     public void registerItemModel(Holder<? extends Item> itemRegistry, ApiItemModelProvider provider, String... additionalData) {
         Item item = itemRegistry.value();
-        String blockPath = provider.getItemPath(item, ApiBlockModelProvider.BLOCK_PREFIX);
+        String blockPath = provider.getItemPath(item, BlockModelSpec.BLOCK_PREFIX);
         provider.trapdoorOrientableBottom(provider.getItemPath(item), ResourceUtils.parse(blockPath));
     }
 }

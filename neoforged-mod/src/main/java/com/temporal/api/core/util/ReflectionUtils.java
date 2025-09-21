@@ -10,7 +10,6 @@ import net.neoforged.neoforgespi.language.IModFileInfo;
 import net.neoforged.neoforgespi.language.IModInfo;
 import net.neoforged.neoforgespi.language.ModFileScanData;
 import net.neoforged.neoforgespi.locating.IModFile;
-import org.jetbrains.annotations.NotNull;
 import org.objectweb.asm.Type;
 
 import java.lang.annotation.Annotation;
@@ -70,14 +69,14 @@ public final class ReflectionUtils {
         }
     }
 
-    public static <T> @NotNull Stream<T> getStaticFieldTypeStream(Class<?> container, Predicate<Field> filteringPredicate, Function<Class<?>, T> mapper) {
+    public static <T> Stream<T> getStaticFieldTypeStream(Class<?> container, Predicate<Field> filteringPredicate, Function<Class<?>, T> mapper) {
         return Arrays.stream(container.getDeclaredFields())
                 .filter(filteringPredicate)
                 .map(Field::getType)
                 .map(mapper);
     }
 
-    public static <T> @NotNull Stream<T> getStaticFieldStream(Class<?> container, Predicate<Field> filteringPredicate, Function<Object, T> mapper) {
+    public static <T> Stream<T> getStaticFieldStream(Class<?> container, Predicate<Field> filteringPredicate, Function<Object, T> mapper) {
         return Arrays.stream(container.getDeclaredFields())
                 .filter(filteringPredicate)
                 .map(field -> {

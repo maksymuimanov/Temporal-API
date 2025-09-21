@@ -1,14 +1,14 @@
 package com.temporal.api.core.engine.event.data.model.block;
 
-import net.minecraft.core.Holder;
-import net.minecraft.world.level.block.Block;
+import com.temporal.api.core.engine.event.data.model.block.spec.BlockModelSpec;
+import com.temporal.api.core.engine.event.data.model.block.strategy.BlockModelProviderStrategy;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public interface BlockModelProviderStrategyConsumer {
-    void registerModels(@NotNull ApiBlockModelProvider provider, String... additionalData);
+    void registerModels(@NotNull ApiBlockModelProvider provider);
 
-    BiConsumer<Holder<? extends Block>, String[]> registerBlockModel(@NotNull ApiBlockModelProvider provider, @NotNull Supplier<BlockModelProviderStrategy> blockModelProviderStrategy);
+    <T extends BlockModelSpec> Consumer<T> registerBlockModel(@NotNull ApiBlockModelProvider provider, @NotNull Supplier<BlockModelProviderStrategy<T>> blockModelProviderStrategy);
 }

@@ -20,7 +20,6 @@ import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.common.extensions.IHolderExtension;
 import net.neoforged.neoforge.common.world.BiomeModifier;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Map;
@@ -85,7 +84,7 @@ public final class TagUtils {
     }
 
     @SuppressWarnings("unchecked")
-    public static <T> @NotNull Stream<TagKey<T>> getTagKeyStream(Class<?> tagClassHolder) {
+    public static <T> Stream<TagKey<T>> getTagKeyStream(Class<?> tagClassHolder) {
         return ReflectionUtils.getStaticFieldStream(tagClassHolder,
                 field -> TagKey.class.isAssignableFrom(field.getType()),
                 o -> (TagKey<T>) o);

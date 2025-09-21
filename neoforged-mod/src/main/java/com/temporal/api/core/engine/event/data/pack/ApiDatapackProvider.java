@@ -3,14 +3,10 @@ package com.temporal.api.core.engine.event.data.pack;
 import com.temporal.api.core.engine.context.ModContext;
 import com.temporal.api.core.engine.event.data.banner.ApiBannerPatternProvider;
 import com.temporal.api.core.engine.event.data.biome.CompoundGenerationDefinitionFacade;
-import com.temporal.api.core.engine.event.data.cat.ApiCatVariantProvider;
 import com.temporal.api.core.engine.event.data.damage.ApiDamageTypeProvider;
 import com.temporal.api.core.engine.event.data.enchantment.ApiEnchantmentProvider;
-import com.temporal.api.core.engine.event.data.frog.ApiFrogVariantProvider;
-import com.temporal.api.core.engine.event.data.instrument.ApiInstrumentProvider;
 import com.temporal.api.core.engine.event.data.jukebox.ApiJukeboxSongProvider;
 import com.temporal.api.core.engine.event.data.painting.ApiPaintingVariantProvider;
-import com.temporal.api.core.engine.event.data.pot.ApiDecoratedPotPatternProvider;
 import com.temporal.api.core.engine.event.data.trim.material.ApiTrimMaterialProvider;
 import com.temporal.api.core.engine.event.data.trim.pattern.ApiTrimPatternProvider;
 import com.temporal.api.core.engine.event.data.wolf.ApiWolfVariantProvider;
@@ -31,12 +27,12 @@ public class ApiDatapackProvider extends DatapackBuiltinEntriesProvider {
             .add(Registries.PAINTING_VARIANT, ApiPaintingVariantProvider::bootstrap)
             .add(Registries.DAMAGE_TYPE, ApiDamageTypeProvider::bootstrap)
             .add(Registries.WOLF_VARIANT, ApiWolfVariantProvider::bootstrap)
-            .add(Registries.FROG_VARIANT, ApiFrogVariantProvider::bootstrap)
-            .add(Registries.CAT_VARIANT, ApiCatVariantProvider::bootstrap)
+//            .add(Registries.FROG_VARIANT, ApiFrogVariantProvider::bootstrap) FIXME
+//            .add(Registries.CAT_VARIANT, ApiCatVariantProvider::bootstrap) FIXME
             .add(Registries.BANNER_PATTERN, ApiBannerPatternProvider::bootstrap)
-            .add(Registries.DECORATED_POT_PATTERN, ApiDecoratedPotPatternProvider::bootstrap)
+//            .add(Registries.DECORATED_POT_PATTERN, ApiDecoratedPotPatternProvider::bootstrap) FIXME
             .add(Registries.JUKEBOX_SONG, ApiJukeboxSongProvider::bootstrap)
-            .add(Registries.INSTRUMENT, ApiInstrumentProvider::bootstrap)
+//            .add(Registries.INSTRUMENT, ApiInstrumentProvider::bootstrap) FIXME
             .add(Registries.ENCHANTMENT, ApiEnchantmentProvider::bootstrap)
             .add(Registries.CONFIGURED_FEATURE, CompoundGenerationDefinitionFacade::executeConfiguredFeatures)
             .add(Registries.PLACED_FEATURE, CompoundGenerationDefinitionFacade::executePlacedFeatures)

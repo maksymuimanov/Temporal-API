@@ -1,36 +1,36 @@
 package com.temporal.api.core.engine.event.data.model.block;
 
 import com.temporal.api.core.collection.TemporalMap;
-import net.minecraft.core.Holder;
-import net.minecraft.util.Tuple;
-import net.minecraft.world.level.block.Block;
+import com.temporal.api.core.collection.TemporalQueue;
+import com.temporal.api.core.engine.event.data.model.block.spec.*;
+import com.temporal.api.core.engine.event.data.model.block.strategy.BlockModelProviderStrategy;
 
 import java.util.Map;
+import java.util.Queue;
 
 public final class BlockModelDescriptionContainer {
-    public static final Map<Holder<? extends Block>, String[]> CUBED_BLOCKS = new TemporalMap<>();
-    public static final Map<Holder<? extends Block>, String[]> CUTOUT_CUBED_BLOCKS = new TemporalMap<>();
-    public static final Map<Holder<? extends Block>, String[]> CROSS_BLOCKS = new TemporalMap<>();
-    public static final Map<Holder<? extends Block>, String[]> FLOWER_BLOCKS = new TemporalMap<>();
-    public static final Map<Holder<? extends Block>, String[]> LOGS = new TemporalMap<>();
-    public static final Map<Holder<? extends Block>, String[]> WOODS = new TemporalMap<>();
-    public static final Map<Holder<? extends Block>, String[]> BUTTONS = new TemporalMap<>();
-    public static final Map<Holder<? extends Block>, String[]> DOORS = new TemporalMap<>();
-    public static final Map<Holder<? extends Block>, String[]> FENCES = new TemporalMap<>();
-    public static final Map<Holder<? extends Block>, String[]> FENCE_GATES = new TemporalMap<>();
-    public static final Map<Holder<? extends Block>, String[]> PRESSURE_PLATES = new TemporalMap<>();
-    public static final Map<Holder<? extends Block>, String[]> SLABS = new TemporalMap<>();
-    public static final Map<Holder<? extends Block>, String[]> STAIRS = new TemporalMap<>();
-    public static final Map<Holder<? extends Block>, String[]> TRAPDOORS = new TemporalMap<>();
-    public static final Map<Holder<? extends Block>, String[]> WALLS = new TemporalMap<>();
-    public static final Map<Holder<? extends Block>, String[]> SIGNS = new TemporalMap<>();
-    public static final Map<Holder<? extends Block>, String[]> HANGING_SIGNS = new TemporalMap<>();
-    public static final Map<Holder<? extends Block>, String[]> BARRELS = new TemporalMap<>();
-    public static final Map<Holder<? extends Block>, String[]> VINES = new TemporalMap<>();
-    public static final Map<Holder<? extends Block>, String[]> CARPETS = new TemporalMap<>();
-    public static final Map<Holder<? extends Block>, String[]> PANES = new TemporalMap<>();
-    public static final Map<Holder<? extends Block>, String[]> RAILS = new TemporalMap<>();
-    public static final Map<Tuple<Holder<? extends Block>, String[]>, BlockModelProviderStrategy> CUSTOM_MODELS = new TemporalMap<>();
+    public static final Queue<BlockModelSpec> CUBED_BLOCKS = new TemporalQueue<>();
+    public static final Queue<BlockModelSpec> CROSS_BLOCKS = new TemporalQueue<>();
+    public static final Queue<DependantBlockModelSpec> FLOWER_BLOCKS = new TemporalQueue<>();
+    public static final Queue<BlockModelSpec> LOGS = new TemporalQueue<>();
+    public static final Queue<BlockModelSpec> WOODS = new TemporalQueue<>();
+    public static final Queue<DependantBlockModelSpec> BUTTONS = new TemporalQueue<>();
+    public static final Queue<BlockModelSpec> DOORS = new TemporalQueue<>();
+    public static final Queue<DependantBlockModelSpec> FENCES = new TemporalQueue<>();
+    public static final Queue<DependantBlockModelSpec> FENCE_GATES = new TemporalQueue<>();
+    public static final Queue<DependantBlockModelSpec> PRESSURE_PLATES = new TemporalQueue<>();
+    public static final Queue<DependantBlockModelSpec> SLABS = new TemporalQueue<>();
+    public static final Queue<DependantBlockModelSpec> STAIRS = new TemporalQueue<>();
+    public static final Queue<TrapDoorBlockModelSpec> TRAPDOORS = new TemporalQueue<>();
+    public static final Queue<DependantBlockModelSpec> WALLS = new TemporalQueue<>();
+    public static final Queue<SignBlockModelSpec> SIGNS = new TemporalQueue<>();
+    public static final Queue<SignBlockModelSpec> HANGING_SIGNS = new TemporalQueue<>();
+    public static final Queue<BlockModelSpec> BARRELS = new TemporalQueue<>();
+    public static final Queue<BlockModelSpec> VINES = new TemporalQueue<>();
+    public static final Queue<BlockModelSpec> CARPETS = new TemporalQueue<>();
+    public static final Queue<BlockModelSpec> PANES = new TemporalQueue<>();
+    public static final Queue<BlockModelSpec> RAILS = new TemporalQueue<>();
+    public static final Map<CustomBlockModelSpec, BlockModelProviderStrategy<CustomBlockModelSpec>> CUSTOM_MODELS = new TemporalMap<>();
 
     private BlockModelDescriptionContainer() {
     }

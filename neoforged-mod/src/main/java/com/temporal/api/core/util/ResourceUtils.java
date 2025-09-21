@@ -5,7 +5,6 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Function;
 import java.util.stream.Stream;
@@ -66,7 +65,7 @@ public final class ResourceUtils {
     }
 
     @SuppressWarnings("unchecked")
-    public static <T> @NotNull Stream<ResourceKey<T>> getResourceKeyStream(Class<?> resourceClassHolder) {
+    public static <T> Stream<ResourceKey<T>> getResourceKeyStream(Class<?> resourceClassHolder) {
         return ReflectionUtils.getStaticFieldStream(resourceClassHolder,
                 field -> ResourceKey.class.isAssignableFrom(field.getType()),
                 o -> (ResourceKey<T>) o);
