@@ -1,14 +1,13 @@
 package com.temporal.api.core.engine.event.data.model.item;
 
-import net.minecraft.core.Holder;
-import net.minecraft.world.item.Item;
+import com.temporal.api.core.engine.event.data.model.item.spec.ItemModelSpec;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public interface ItemModelProviderStrategyConsumer {
-    void registerModels(@NotNull ApiItemModelProvider provider, String... additionalData);
+    void registerModels(@NotNull ApiItemModelProvider provider);
 
-    BiConsumer<Holder<? extends Item>, String[]> registerItemModel(@NotNull ApiItemModelProvider provider, @NotNull Supplier<ItemModelProviderStrategy> itemModelProviderStrategy);
+    <T extends ItemModelSpec> Consumer<T> registerItemModel(@NotNull ApiItemModelProvider provider, @NotNull Supplier<ItemModelProviderStrategy<T>> itemModelProviderStrategy);
 }

@@ -26,7 +26,7 @@ public class SmithingTransformRecipeStrategy implements RecipeStrategy<SmithingT
         if (description.getName() != null) {
             path = description.getName();
         } else {
-            path = RegistryUtils.getObjectName(BuiltInRegistries.ITEM, description.getResult().asItem());
+            path = RegistryUtils.getObjectId(BuiltInRegistries.ITEM, description.getResult().asItem());
         }
 
         builder.save(recipeOutput, path);

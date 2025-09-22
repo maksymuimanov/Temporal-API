@@ -1,5 +1,6 @@
 package com.temporal.api.core.engine.event.data.model.block.strategy;
 
+import com.temporal.api.core.engine.event.data.model.ModelConstants;
 import com.temporal.api.core.engine.event.data.model.block.ApiBlockModelProvider;
 import com.temporal.api.core.engine.event.data.model.block.spec.BlockModelSpec;
 import net.minecraft.resources.ResourceLocation;
@@ -11,7 +12,7 @@ public class PaneBlockModelProviderStrategy implements BlockModelProviderStrateg
         Block block = spec.getBlock();
         String blockPath = spec.getPath();
         ResourceLocation paneTexture = spec.getLocation();
-        ResourceLocation edgeTexture = spec.getLocation("_top");
+        ResourceLocation edgeTexture = spec.getLocation(ModelConstants.TOP_SUFFIX);
         provider.simpleBlock(block, provider.models()
                 .paneNoSide(blockPath, paneTexture)
                 .renderType(spec.getRenderType()));

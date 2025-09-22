@@ -46,12 +46,19 @@ public final class RegistryUtils {
                 .filter(condition);
     }
 
-    public static <T> String getObjectName(Registry<T> registry, T value) {
-        return getObjectName(registry, value, "");
+    public static <T> String getObjectId(Registry<T> registry, T value) {
+        return getObjectId(registry, value, "");
     }
 
-    public static <T> String getObjectName(Registry<T> registry, T value, String prefix) {
+    public static <T> String getObjectId(Registry<T> registry, T value, String prefix) {
         ResourceLocation location = Objects.requireNonNull(registry.getKey(value));
-        return location.getNamespace() + ":" + prefix + "/" + location.getPath();
+        String id;
+        if (prefix.isBlank()) {
+            id = location.toString();
+        } else {
+            id = location.getNamespace() + ":" + prefix + "/" + location.getPath();
+        }
+
+        return id;
     }
 }

@@ -50,6 +50,6 @@ public class BlockModelSpec {
     }
 
     public static String getBlockPath(Block block) {
-        return RegistryUtils.getObjectName(BuiltInRegistries.BLOCK, block, BLOCK_PREFIX);
+        return RegistryUtils.getObjectId(BuiltInRegistries.BLOCK, block, BLOCK_PREFIX);
     }
 }

@@ -23,8 +23,8 @@ public class GenerateCustomBlockModelStrategy implements FieldAnnotationStrategy
     public void execute(Field field, Object object, GenerateCustomBlockModel annotation) throws Exception {
         Holder<? extends Block> holder = (Holder<? extends Block>) field.get(object);
         List<String> additionalData = List.of(annotation.additionalData());
-        BlockModelProviderStrategy<CustomBlockModelSpec> providerStrategy = (BlockModelProviderStrategy<CustomBlockModelSpec>) ReflectionUtils.createObject(annotation.strategy());
         CustomBlockModelSpec spec = new CustomBlockModelSpec(holder, annotation.renderType(), additionalData);
+        BlockModelProviderStrategy<CustomBlockModelSpec> providerStrategy = ReflectionUtils.createObject(annotation.strategy());
         BlockModelDescriptionContainer.CUSTOM_MODELS.put(spec, providerStrategy);
     }
 

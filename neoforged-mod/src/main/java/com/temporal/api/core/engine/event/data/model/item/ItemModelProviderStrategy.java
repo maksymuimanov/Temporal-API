@@ -1,8 +1,7 @@
 package com.temporal.api.core.engine.event.data.model.item;
 
-import net.minecraft.core.Holder;
-import net.minecraft.world.item.Item;
+import com.temporal.api.core.engine.event.data.model.item.spec.ItemModelSpec;
 
-public interface ItemModelProviderStrategy {
-    void registerItemModel(Holder<? extends Item> itemRegistry, ApiItemModelProvider provider, String... additionalData);
+public interface ItemModelProviderStrategy<T extends ItemModelSpec> {
+    void registerItemModel(T spec, ApiItemModelProvider provider);
 }

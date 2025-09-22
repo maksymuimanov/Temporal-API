@@ -2,6 +2,7 @@ package com.temporal.api.core.engine.event.data.model.block;
 
 import com.temporal.api.common.block.ApiCropBlock;
 import com.temporal.api.core.engine.context.ModContext;
+import com.temporal.api.core.engine.event.data.model.RenderTypes;
 import com.temporal.api.core.engine.event.data.model.block.spec.BlockModelSpec;
 import com.temporal.api.core.engine.event.data.model.block.spec.DependantBlockModelSpec;
 import com.temporal.api.core.util.ResourceUtils;
@@ -19,8 +20,6 @@ import java.util.function.Function;
 
 public class ApiBlockModelProvider extends BlockStateProvider {
     private static final BlockModelProviderStrategyConsumer CONSUMER = new BlockModelProviderStrategyConsumerImpl();
-    public static final String MINECRAFT_SOLID = "minecraft:solid";
-    public static final String MINECRAFT_CUTOUT = "minecraft:cutout";
 
     public ApiBlockModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
         super(output, ModContext.NEO_MOD.getModId(), existingFileHelper);
@@ -32,7 +31,9 @@ public class ApiBlockModelProvider extends BlockStateProvider {
     }
 
     public <T extends Block> void otherBlockTexture(DependantBlockModelSpec spec, BiConsumer<T, ResourceLocation> blockModelRegistry) {
-        blockModelRegistry.accept(spec.getBlock(), spec.getDependencyLocation());
+        T block = spec.getBlock();
+        ResourceLocation dependencyTexture = spec.getDependencyLocation();
+        blockModelRegistry.accept(block, dependencyTexture);
     }
 
     public void cropBlock(CropBlock block, String modelName, String textureName) {
@@ -44,7 +45,7 @@ public class ApiBlockModelProvider extends BlockStateProvider {
     public <T extends ApiCropBlock> ConfiguredModel[] states(BlockState state, CropBlock block, String modelName, String textureName) {
         ConfiguredModel[] models = new ConfiguredModel[1];
         Integer age = state.getValue(((T) block).getAgeProperty());
-        models[0] = new ConfiguredModel(models().crop(modelName + age, ResourceUtils.parse(BlockModelSpec.BLOCK_PREFIX + "/" + textureName + age)).renderType(MINECRAFT_CUTOUT));
+        models[0] = new ConfiguredModel(models().crop(modelName + age, ResourceUtils.parse(BlockModelSpec.BLOCK_PREFIX + "/" + textureName + age)).renderType(RenderTypes.CUTOUT));
         return models;
     }
 }

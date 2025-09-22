@@ -1,5 +1,6 @@
 package com.temporal.api.core.engine.event.data.model.block.strategy;
 
+import com.temporal.api.core.engine.event.data.model.ModelConstants;
 import com.temporal.api.core.engine.event.data.model.block.ApiBlockModelProvider;
 import com.temporal.api.core.engine.event.data.model.block.spec.BlockModelSpec;
 import net.minecraft.resources.ResourceLocation;
@@ -10,7 +11,7 @@ public class LogBlockModelProviderStrategy implements BlockModelProviderStrategy
     public void registerBlockModel(BlockModelSpec spec, ApiBlockModelProvider provider) {
         RotatedPillarBlock block = spec.getBlock();
         ResourceLocation sideTexture = spec.getLocation();
-        ResourceLocation endTexture = spec.getLocation("_top");
+        ResourceLocation endTexture = spec.getLocation(ModelConstants.TOP_SUFFIX);
         provider.axisBlockWithRenderType(block, sideTexture, endTexture, spec.getRenderType());
     }
 }
