@@ -13,8 +13,6 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface GenerateWorldFeature {
     Class<? extends ConfiguredFeatureDefinition<?, ?>> configuration();
-
     Class<? extends PlacedFeatureDefinition<?>> placement();
-
     Class<? extends BiomeModifierDefinition<?>> biomeModifier();
 }

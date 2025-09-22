@@ -9,12 +9,8 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface GenerateCropBlockLootTable {
     String grown();
-
     String seeds();
-
     int grownAge();
-
     int minAge();
-
     int maxAge();
 }

@@ -18,7 +18,7 @@ public class GeneratePressurePlateBlockModelStrategy implements FieldAnnotationS
     @Override
     public void execute(Field field, Object object, GeneratePressurePlateBlockModel annotation) throws Exception {
         Holder<? extends Block> holder = (Holder<? extends Block>) field.get(object);
-        DependantBlockModelSpec spec = new DependantBlockModelSpec(holder, annotation.parentBlockId());
+        DependantBlockModelSpec spec = new DependantBlockModelSpec(holder, annotation.fullBlock());
         BlockModelContainer.PRESSURE_PLATES.add(spec);
     }
 

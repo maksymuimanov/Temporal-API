@@ -15,15 +15,13 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface GenerateTree {
     Configuration configuration();
-
     Placement placement();
-
     BiomeModifier biomeModifier() default @BiomeModifier;
 
     @interface Configuration {
-        String logBlockId();
-        String leavesBlockId();
-        String rootBlockId() default "minecraft:grass_block";
+        String log();
+        String leaves();
+        String root() default "minecraft:grass_block";
         Trunk trunk();
         Foliage foliage();
         FeatureSize featureSize();
@@ -31,7 +29,7 @@ public @interface GenerateTree {
     }
 
     @interface Placement {
-        String saplingBlockId();
+        String sapling();
         int baseValue();
         int chance();
         int addedAmount();

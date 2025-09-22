@@ -19,7 +19,7 @@ public class GenerateSlabBlockItemModelStrategy implements FieldAnnotationStrate
     @Override
     public void execute(Field field, Object object, GenerateSlabBlockItemModel annotation) throws Exception {
         Holder<? extends Item> holder = ReflectionUtils.getItemHolder(field, object);
-        DependantBlockItemModelSpec spec = new DependantBlockItemModelSpec(holder, annotation.parentBlockId());
+        DependantBlockItemModelSpec spec = new DependantBlockItemModelSpec(holder, annotation.fullBlock());
         ItemModelContainer.SLAB_BLOCK_ITEMS.add(spec);
     }
 

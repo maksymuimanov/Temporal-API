@@ -25,7 +25,7 @@ public class GenerateGrassStrategy implements FieldAnnotationStrategy<GenerateGr
         var annotationPlacement = annotation.placement();
         var annotationBiomeModifier = annotation.biomeModifier();
         TagUtils.putTagContainer(BiomeTagDynamicPreparer.TAG_CONTAINERS, annotationBiomeModifier.biomeTagContainer());
-        var configuration = new Grass.Configuration(annotationConfiguration.blockId(), annotationConfiguration.tries());
+        var configuration = new Grass.Configuration(annotationConfiguration.grass(), annotationConfiguration.tries());
         var placement = new Grass.Placement(annotationPlacement.count());
         var biomeModifier = new Grass.BiomeModifier(annotationBiomeModifier.biomeTag());
         Grass grass = new Grass(ResourceUtils.getResourceId(configuredFeatureKey), configuration, placement, biomeModifier);

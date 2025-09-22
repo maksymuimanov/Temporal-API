@@ -11,6 +11,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface GenerateFlowerBlockModel {
     String renderType() default RenderTypes.CUTOUT;
-
-    String pottedFlowerId();
+    String pottedFlower();
 }

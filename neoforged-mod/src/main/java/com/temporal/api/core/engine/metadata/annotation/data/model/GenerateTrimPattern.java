@@ -8,6 +8,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface GenerateTrimPattern {
-    String itemId();
+    String item();
     boolean decal() default false;
 }

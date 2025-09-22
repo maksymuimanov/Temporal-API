@@ -9,13 +9,11 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface GenerateGrass {
     Configuration configuration();
-
     Placement placement() default @Placement;
-
     BiomeModifier biomeModifier() default @BiomeModifier;
 
     @interface Configuration {
-        String blockId();
+        String grass();
         int tries() default 32;
     }
 

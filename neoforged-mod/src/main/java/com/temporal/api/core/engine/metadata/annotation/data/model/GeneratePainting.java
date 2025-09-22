@@ -9,6 +9,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface GeneratePainting {
     int width() default 1;
-
     int height() default 1;
 }

@@ -19,7 +19,7 @@ public class GeneratePressurePlateBlockItemModelStrategy implements FieldAnnotat
     @Override
     public void execute(Field field, Object object, GeneratePressurePlateBlockItemModel annotation) throws Exception {
         Holder<? extends Item> holder = ReflectionUtils.getItemHolder(field, object);
-        DependantBlockItemModelSpec spec = new DependantBlockItemModelSpec(holder, annotation.parentBlockId());
+        DependantBlockItemModelSpec spec = new DependantBlockItemModelSpec(holder, annotation.fullBlock());
         ItemModelContainer.PRESSURE_PLATE_BLOCK_ITEMS.add(spec);
     }
 

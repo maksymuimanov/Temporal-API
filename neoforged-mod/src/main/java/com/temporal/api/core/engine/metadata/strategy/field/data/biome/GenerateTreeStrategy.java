@@ -26,7 +26,7 @@ public class GenerateTreeStrategy implements FieldAnnotationStrategy<GenerateTre
         var annotationBiomeModifier = annotation.biomeModifier();
         TagUtils.putTagContainer(BiomeTagDynamicPreparer.TAG_CONTAINERS, annotationBiomeModifier.biomeTagContainer());
         var configuration = this.getTreeConfiguration(annotationConfiguration);
-        var placement = new Tree.Placement(annotationPlacement.saplingBlockId(), annotationPlacement.baseValue(), annotationPlacement.chance(), annotationPlacement.addedAmount());
+        var placement = new Tree.Placement(annotationPlacement.sapling(), annotationPlacement.baseValue(), annotationPlacement.chance(), annotationPlacement.addedAmount());
         var biomeModifier = new Tree.BiomeModifier(annotationBiomeModifier.biomeTag());
         Tree tree = new Tree(ResourceUtils.getResourceId(configuredFeatureKey), configuration, placement, biomeModifier);
         GenerationDescriptionContainer.TREES.put(configuredFeatureKey, tree);
@@ -36,7 +36,7 @@ public class GenerateTreeStrategy implements FieldAnnotationStrategy<GenerateTre
         GenerateTree.Trunk trunk = annotationConfiguration.trunk();
         GenerateTree.Foliage foliage = annotationConfiguration.foliage();
         GenerateTree.FeatureSize featureSize = annotationConfiguration.featureSize();
-        var configuration = new Tree.Configuration(annotationConfiguration.logBlockId(), annotationConfiguration.leavesBlockId(), annotationConfiguration.rootBlockId(),
+        var configuration = new Tree.Configuration(annotationConfiguration.log(), annotationConfiguration.leaves(), annotationConfiguration.root(),
                 trunk.trunkPlacerClass(), trunk.baseHeight(), trunk.heightRandA(), trunk.heightRandB(),
                 foliage.foliagePlacerClass(), foliage.radius(), foliage.offset(), foliage.height(),
                 featureSize.type(), featureSize.limit(), featureSize.upperLimit(),

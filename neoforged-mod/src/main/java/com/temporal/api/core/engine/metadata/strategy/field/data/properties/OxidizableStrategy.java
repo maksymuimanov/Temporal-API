@@ -18,7 +18,7 @@ public class OxidizableStrategy implements FieldAnnotationStrategy<Oxidizable> {
     @Override
     public void execute(Field field, Object object, Oxidizable annotation) throws Exception {
         Holder<? extends Block> block = (Holder<? extends Block>) field.get(object);
-        OxidizableDto oxidizableDto = new OxidizableDto(block, annotation.nextBlockStageId(), annotation.replace());
+        OxidizableDto oxidizableDto = new OxidizableDto(block, annotation.nextBlock(), annotation.replace());
         ApiDataMapProvider.OXIDIZABLES.add(oxidizableDto);
     }
 

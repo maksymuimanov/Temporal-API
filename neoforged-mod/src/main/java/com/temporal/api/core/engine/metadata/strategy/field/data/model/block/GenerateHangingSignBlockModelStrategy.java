@@ -18,7 +18,7 @@ public class GenerateHangingSignBlockModelStrategy implements FieldAnnotationStr
     @Override
     public void execute(Field field, Object object, GenerateHangingSignBlockModel annotation) throws Exception {
         Holder<? extends Block> holder = (Holder<? extends Block>) field.get(object);
-        SignBlockModelSpec spec = new SignBlockModelSpec(holder, annotation.wallHangingSignBlockId(), annotation.particleTexturePath());
+        SignBlockModelSpec spec = new SignBlockModelSpec(holder, annotation.wallHangingSign(), annotation.particleTexture());
         BlockModelContainer.HANGING_SIGNS.add(spec);
     }
 

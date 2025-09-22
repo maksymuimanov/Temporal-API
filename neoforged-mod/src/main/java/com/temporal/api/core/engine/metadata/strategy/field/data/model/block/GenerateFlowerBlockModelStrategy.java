@@ -18,7 +18,7 @@ public class GenerateFlowerBlockModelStrategy implements FieldAnnotationStrategy
     @Override
     public void execute(Field field, Object object, GenerateFlowerBlockModel annotation) throws Exception {
         Holder<? extends Block> holder = (Holder<? extends Block>) field.get(object);
-        DependantBlockModelSpec spec = new DependantBlockModelSpec(holder, annotation.renderType(), annotation.pottedFlowerId());
+        DependantBlockModelSpec spec = new DependantBlockModelSpec(holder, annotation.renderType(), annotation.pottedFlower());
         BlockModelContainer.FLOWER_BLOCKS.add(spec);
     }
 

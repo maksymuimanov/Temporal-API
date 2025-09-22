@@ -9,6 +9,6 @@ import net.minecraft.world.item.armortrim.TrimPattern;
 
 public class ExampleTrimPatterns {
     @TranslateAmericanEnglish("Example Trim Pattern")
-    @GenerateTrimPattern(itemId = "example:example_armor_trim_smithing_template")
+    @GenerateTrimPattern(item = "example:example_armor_trim_smithing_template")
     public static final ResourceKey<TrimPattern> EXAMPLE_TRIM_PATTERN = ResourceUtils.createKey(Registries.TRIM_PATTERN, "example");
 }

@@ -12,6 +12,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface GenerateCustomBlockLootTable {
     Class<? extends LootProviderStrategy<CustomBlockLootTableSpec>> strategy();
-
     String[] additionalData() default {};
 }

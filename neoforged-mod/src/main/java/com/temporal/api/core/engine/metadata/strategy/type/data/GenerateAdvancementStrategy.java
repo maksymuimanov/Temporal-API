@@ -4,7 +4,7 @@ import com.temporal.api.core.engine.event.data.advancement.AdvancementDescriptio
 import com.temporal.api.core.engine.event.data.advancement.AdvancementStrategy;
 import com.temporal.api.core.engine.event.data.advancement.ApiAdvancementProvider;
 import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
-import com.temporal.api.core.engine.metadata.annotation.data.RegisterAdvancement;
+import com.temporal.api.core.engine.metadata.annotation.data.GenerateAdvancement;
 import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
 import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
 import com.temporal.api.core.engine.metadata.processor.DataEventHandlerAnnotationProcessorAdapter;
@@ -13,9 +13,9 @@ import com.temporal.api.core.engine.metadata.strategy.type.ClassAnnotationStrate
 import java.lang.reflect.Constructor;
 
 @Strategy(StrategyPoolInitializer.DEFAULT_CLASS_DATA)
-public class RegisterAdvancementStrategy implements ClassAnnotationStrategy<RegisterAdvancement> {
+public class GenerateAdvancementStrategy implements ClassAnnotationStrategy<GenerateAdvancement> {
     @Override
-    public void execute(Class<?> clazz, Object object, RegisterAdvancement annotation) throws Exception {
+    public void execute(Class<?> clazz, Object object, GenerateAdvancement annotation) throws Exception {
         Constructor<?> constructor = clazz.getDeclaredConstructor();
         AdvancementDescription advancementDescription = (AdvancementDescription) constructor.newInstance();
         if (AdvancementStrategy.class.equals(annotation.value())) {
@@ -28,8 +28,8 @@ public class RegisterAdvancementStrategy implements ClassAnnotationStrategy<Regi
     }
 
     @Override
-    public Class<RegisterAdvancement> getAnnotationClass() {
-        return RegisterAdvancement.class;
+    public Class<GenerateAdvancement> getAnnotationClass() {
+        return GenerateAdvancement.class;
     }
 
     @Override

@@ -12,14 +12,12 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface GenerateOre {
     Configuration configuration();
-
     Placement placement();
-
     BiomeModifier biomeModifier() default @BiomeModifier;
 
     @interface Configuration {
-        String blockId();
-        String[] replaceableBlocksIds() default {};
+        String ore();
+        String[] replaceableBlocks() default {};
         String replaceableBlocksTag() default "";
         Class<?> blockTagContainer() default Object.class;
         int size() default 1;

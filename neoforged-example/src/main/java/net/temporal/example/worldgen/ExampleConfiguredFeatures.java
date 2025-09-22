@@ -13,8 +13,8 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 public final class ExampleConfiguredFeatures {
     @GenerateOre(
             configuration = @GenerateOre.Configuration(
-                    blockId = "example:example_ore",
-                    replaceableBlocksIds = "minecraft:sand",
+                    ore = "example:example_ore",
+                    replaceableBlocks = "minecraft:sand",
                     replaceableBlocksTag = "minecraft:stone_ore_replaceables",
                     size = 17
             ),
@@ -29,7 +29,7 @@ public final class ExampleConfiguredFeatures {
 
     @GenerateGrass(
             configuration = @GenerateGrass.Configuration(
-                    blockId = "example:example_grass"
+                    grass = "example:example_grass"
             ),
             biomeModifier = @GenerateGrass.BiomeModifier(
                     biomeTag = "minecraft:is_taiga"
@@ -39,7 +39,7 @@ public final class ExampleConfiguredFeatures {
 
     @GenerateFlower(
             configuration = @GenerateFlower.Configuration(
-                    blockId = "example:example_flower",
+                    flower = "example:example_flower",
                     highStateFlowers = "minecraft:dandelion",
                     lowStateFlowers = "minecraft:dandelion"
             ),
@@ -51,14 +51,14 @@ public final class ExampleConfiguredFeatures {
 
     @GenerateTree(
             configuration = @GenerateTree.Configuration(
-                    logBlockId = "example:example_log",
-                    leavesBlockId = "example:example_leaves",
+                    log = "example:example_log",
+                    leaves = "example:example_leaves",
                     trunk = @GenerateTree.Trunk(baseHeight = 5, heightRandA = 3, heightRandB = 0),
                     foliage = @GenerateTree.Foliage(radius = 3, offset = 1, height = 2),
                     featureSize = @GenerateTree.FeatureSize(limit = 2, lowerSize = 1, upperSize = 2)
             ),
             placement = @GenerateTree.Placement(
-                    saplingBlockId = "example:example_sapling",
+                    sapling = "example:example_sapling",
                     baseValue = 1,
                     chance = 1,
                     addedAmount = 1

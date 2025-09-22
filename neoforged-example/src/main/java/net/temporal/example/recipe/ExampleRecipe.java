@@ -1,7 +1,7 @@
 package net.temporal.example.recipe;
 
 import com.temporal.api.core.engine.event.data.recipe.description.ShapelessRecipeDescription;
-import com.temporal.api.core.engine.metadata.annotation.data.RegisterRecipe;
+import com.temporal.api.core.engine.metadata.annotation.data.GenerateRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
@@ -9,7 +9,7 @@ import net.temporal.example.item.ExampleItems;
 
 import java.util.Map;
 
-@RegisterRecipe
+@GenerateRecipe
 public class ExampleRecipe implements ShapelessRecipeDescription {
     @Override
     public Map<ItemLike, Integer> getItemAndCountMap() {

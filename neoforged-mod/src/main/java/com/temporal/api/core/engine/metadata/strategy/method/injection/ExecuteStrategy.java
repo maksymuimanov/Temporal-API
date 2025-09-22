@@ -14,7 +14,7 @@ import java.lang.reflect.Method;
 public class ExecuteStrategy implements MethodAnnotationStrategy<Execute> {
     @Override
     public void execute(Method method, Object object, Execute annotation) throws Exception {
-        String modCondition = annotation.mandatoryMod();
+        String modCondition = annotation.mod();
         if (modCondition.isBlank() || ModList.get().isLoaded(modCondition)) method.invoke(object);
     }
 

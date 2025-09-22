@@ -18,7 +18,7 @@ public class ParrotImitationStrategy implements FieldAnnotationStrategy<ParrotIm
     @Override
     public void execute(Field field, Object object, ParrotImitation annotation) throws Exception {
         Holder<EntityType<?>> entityType = (Holder<EntityType<?>>) field.get(object);
-        ParrotImitationDto parrotImitationDto = new ParrotImitationDto(entityType, annotation.soundEventId(), annotation.replace());
+        ParrotImitationDto parrotImitationDto = new ParrotImitationDto(entityType, annotation.soundEvent(), annotation.replace());
         ApiDataMapProvider.PARROT_IMITATIONS.add(parrotImitationDto);
     }
 

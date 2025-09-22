@@ -10,7 +10,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface GenerateWallBlockModel {
-    String parentBlockId();
-
     String renderType() default RenderTypes.CUTOUT;
+    String fullBlock();
 }

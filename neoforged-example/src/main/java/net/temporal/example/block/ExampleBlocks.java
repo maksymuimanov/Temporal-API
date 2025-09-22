@@ -45,7 +45,7 @@ public final class ExampleBlocks {
     public static final DeferredBlock<?> EXAMPLE_GRASS = BLOCK_FACTORY.createFlower("example_grass", BlockPropertiesFactory.shortGrass(), MobEffects.DAMAGE_RESISTANCE, 1);
 
     @AddCreativeModeTab(CreativeModeTabType.NATURAL_BLOCKS)
-    @GenerateFlowerBlockModel(pottedFlowerId = "example:potted_example_flower")
+    @GenerateFlowerBlockModel(pottedFlower = "example:potted_example_flower")
     @GenerateFlatBlockItemModel
     @GenerateSelfBlockLootTable
     @TranslateAmericanEnglish("Example Flower")
@@ -105,51 +105,51 @@ public final class ExampleBlocks {
     public static final DeferredBlock<?> EXAMPLE_PLANKS = BLOCK_FACTORY.create("example_planks", BlockPropertiesFactory.planks());
 
     @AddCreativeModeTab(CreativeModeTabType.BUILDING_BLOCKS)
-    @GenerateSlabBlockModel(parentBlockId = "example:example_planks")
-    @GenerateSlabBlockItemModel(parentBlockId = "example:example_planks")
+    @GenerateSlabBlockModel(fullBlock = "example:example_planks")
+    @GenerateSlabBlockItemModel(fullBlock = "example:example_planks")
     @GenerateSelfBlockLootTable
     @TranslateAmericanEnglish("Example Slab")
     public static final DeferredBlock<?> EXAMPLE_SLAB = BLOCK_FACTORY.createSlab("example_planks_slab", BlockPropertiesFactory.planks());
 
     @AddCreativeModeTab(CreativeModeTabType.BUILDING_BLOCKS)
-    @GenerateStairsBlockModel(parentBlockId = "example:example_planks")
-    @GenerateStairsBlockItemModel(parentBlockId = "example:example_planks")
+    @GenerateStairsBlockModel(fullBlock = "example:example_planks")
+    @GenerateStairsBlockItemModel(fullBlock = "example:example_planks")
     @GenerateSelfBlockLootTable
     @TranslateAmericanEnglish("Example Stairs")
     public static final DeferredBlock<?> EXAMPLE_STAIRS = BLOCK_FACTORY.createStair("example_planks_stairs", BlockPropertiesFactory.planks());
 
     @AddCreativeModeTab(CreativeModeTabType.BUILDING_BLOCKS)
-    @GenerateButtonBlockModel(parentBlockId = "example:example_planks")
-    @GenerateButtonBlockItemModel(parentBlockId = "example:example_planks")
+    @GenerateButtonBlockModel(fullBlock = "example:example_planks")
+    @GenerateButtonBlockItemModel(fullBlock = "example:example_planks")
     @GenerateSelfBlockLootTable
     @TranslateAmericanEnglish("Example Button")
     public static final DeferredBlock<?> EXAMPLE_BUTTON = BLOCK_FACTORY.createButton("example_planks_button", ExampleBlockSetTypes.EXAMPLE_BLOCK_SET_TYPE);
 
     @AddCreativeModeTab(CreativeModeTabType.BUILDING_BLOCKS)
-    @GeneratePressurePlateBlockModel(parentBlockId = "example:example_planks")
-    @GeneratePressurePlateBlockItemModel(parentBlockId = "example:example_planks")
+    @GeneratePressurePlateBlockModel(fullBlock = "example:example_planks")
+    @GeneratePressurePlateBlockItemModel(fullBlock = "example:example_planks")
     @GenerateSelfBlockLootTable
     @TranslateAmericanEnglish("Example Pressure Plate")
     public static final DeferredBlock<?> EXAMPLE_PRESSURE_PLATE = BLOCK_FACTORY.createPressurePlate("example_planks_pressure_plate", ExampleBlockSetTypes.EXAMPLE_BLOCK_SET_TYPE);
 
     @AddCreativeModeTab(CreativeModeTabType.BUILDING_BLOCKS)
     @AddBlockTag("minecraft:fences")
-    @GenerateFenceBlockModel(parentBlockId = "example:example_planks")
-    @GenerateFenceBlockItemModel(parentBlockId = "example:example_planks")
+    @GenerateFenceBlockModel(fullBlock = "example:example_planks")
+    @GenerateFenceBlockItemModel(fullBlock = "example:example_planks")
     @GenerateSelfBlockLootTable
     @TranslateAmericanEnglish("Example Fence")
     public static final DeferredBlock<?> EXAMPLE_FENCE = BLOCK_FACTORY.createFence("example_planks_fence");
 
     @AddCreativeModeTab(CreativeModeTabType.BUILDING_BLOCKS)
     @AddBlockTag("minecraft:fence_gates")
-    @GenerateFenceGateBlockModel(parentBlockId = "example:example_planks")
-    @GenerateFenceGateBlockItemModel(parentBlockId = "example:example_planks")
+    @GenerateFenceGateBlockModel(fullBlock = "example:example_planks")
+    @GenerateFenceGateBlockItemModel(fullBlock = "example:example_planks")
     @GenerateSelfBlockLootTable
     @TranslateAmericanEnglish("Example Fence Gate")
     public static final DeferredBlock<?> EXAMPLE_FENCE_GATE = BLOCK_FACTORY.createFenceGate("example_planks_fence_gate", ExampleWoodTypes.EXAMPLE_WOOD_TYPE);
 
     @AddBlockTag("minecraft:signs")
-    @GenerateSignBlockModel(wallSignBlockId = "example:example_wall_sign", particleTexturePath = "example:block/example_stripped_log")
+    @GenerateSignBlockModel(wallSign = "example:example_wall_sign", particleTexture = "example:block/example_stripped_log")
     @GenerateSelfBlockLootTable
     @TranslateAmericanEnglish("Example Sign")
     @AddBlockEntityType("minecraft:sign")
@@ -162,7 +162,7 @@ public final class ExampleBlocks {
     public static final DeferredBlock<WallSignBlock> EXAMPLE_WALL_SIGN = BLOCK_FACTORY.createWallSignWithoutItem("example_wall_sign", 1f, ExampleWoodTypes.EXAMPLE_WOOD_TYPE);
 
     @AddBlockTag("minecraft:ceiling_hanging_signs")
-    @GenerateHangingSignBlockModel(wallHangingSignBlockId = "example:example_wall_hanging_sign", particleTexturePath = "example:block/example_stripped_log")
+    @GenerateHangingSignBlockModel(wallHangingSign = "example:example_wall_hanging_sign", particleTexture = "example:block/example_stripped_log")
     @GenerateSelfBlockLootTable
     @TranslateAmericanEnglish("Example Hanging Sign")
     @AddBlockEntityType("minecraft:hanging_sign")

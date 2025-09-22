@@ -11,6 +11,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface GenerateTrapDoorBlockModel {
     String renderType() default RenderTypes.SOLID;
-
     boolean orientable() default true;
 }

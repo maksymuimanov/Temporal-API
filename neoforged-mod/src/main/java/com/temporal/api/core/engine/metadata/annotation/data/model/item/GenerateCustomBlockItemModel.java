@@ -12,6 +12,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface GenerateCustomBlockItemModel {
     Class<? extends ItemModelProviderStrategy<CustomBlockItemModelSpec>> strategy();
-
     String[] additionalData() default {};
 }

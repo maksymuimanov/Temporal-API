@@ -25,7 +25,7 @@ public class GenerateFlowerStrategy implements FieldAnnotationStrategy<GenerateF
         var annotationPlacement = annotation.placement();
         var annotationBiomeModifier = annotation.biomeModifier();
         TagUtils.putTagContainer(BiomeTagDynamicPreparer.TAG_CONTAINERS, annotationBiomeModifier.biomeTagContainer());
-        var configuration = new Flower.Configuration(annotationConfiguration.blockId(), annotationConfiguration.tries(), annotationConfiguration.xzSpread(), annotationConfiguration.ySpread(), annotationConfiguration.noiseSeed(), annotationConfiguration.noiseScale(), annotationConfiguration.noiseThreshold(), annotationConfiguration.noiseHighChance(), annotationConfiguration.firstOctave(), annotationConfiguration.amplitudes(), annotationConfiguration.lowStateFlowers(), annotationConfiguration.highStateFlowers());
+        var configuration = new Flower.Configuration(annotationConfiguration.flower(), annotationConfiguration.tries(), annotationConfiguration.xzSpread(), annotationConfiguration.ySpread(), annotationConfiguration.noiseSeed(), annotationConfiguration.noiseScale(), annotationConfiguration.noiseThreshold(), annotationConfiguration.noiseHighChance(), annotationConfiguration.firstOctave(), annotationConfiguration.amplitudes(), annotationConfiguration.lowStateFlowers(), annotationConfiguration.highStateFlowers());
         var placement = new Flower.Placement(annotationPlacement.chance(), annotationPlacement.noiseLevel(), annotationPlacement.belowNoise(), annotationPlacement.aboveNoise());
         var biomeModifier = new Flower.BiomeModifier(annotationBiomeModifier.biomeTag());
         Flower flower = new Flower(ResourceUtils.getResourceId(configuredFeatureKey), configuration, placement, biomeModifier);

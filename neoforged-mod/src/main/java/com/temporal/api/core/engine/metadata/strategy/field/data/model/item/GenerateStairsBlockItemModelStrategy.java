@@ -19,7 +19,7 @@ public class GenerateStairsBlockItemModelStrategy implements FieldAnnotationStra
     @Override
     public void execute(Field field, Object object, GenerateStairsBlockItemModel annotation) throws Exception {
         Holder<? extends Item> holder = ReflectionUtils.getItemHolder(field, object);
-        DependantBlockItemModelSpec spec = new DependantBlockItemModelSpec(holder, annotation.parentBlockId());
+        DependantBlockItemModelSpec spec = new DependantBlockItemModelSpec(holder, annotation.fullBlock());
         ItemModelContainer.STAIRS_BLOCK_ITEMS.add(spec);
     }
 

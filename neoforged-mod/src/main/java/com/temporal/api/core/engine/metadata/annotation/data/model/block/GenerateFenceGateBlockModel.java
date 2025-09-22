@@ -11,6 +11,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface GenerateFenceGateBlockModel {
     String renderType() default RenderTypes.CUTOUT;
-
-    String parentBlockId();
+    String fullBlock();
 }

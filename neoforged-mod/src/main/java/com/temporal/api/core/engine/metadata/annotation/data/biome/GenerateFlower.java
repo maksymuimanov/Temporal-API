@@ -13,7 +13,7 @@ public @interface GenerateFlower {
     BiomeModifier biomeModifier() default @BiomeModifier;
 
     @interface Configuration {
-        String blockId();
+        String flower();
         int tries() default 64;
         int xzSpread() default 6;
         int ySpread() default 2;

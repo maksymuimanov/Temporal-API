@@ -18,7 +18,7 @@ public class GenerateTrimPatternStrategy implements FieldAnnotationStrategy<Gene
     @Override
     public void execute(Field field, Object object, GenerateTrimPattern annotation) throws Exception {
         ResourceKey<TrimPattern> trimPattern = (ResourceKey<TrimPattern>) field.get(object);
-        TrimPatternDescription descriptionHolder = new TrimPatternDescription(annotation.itemId(), annotation.decal());
+        TrimPatternDescription descriptionHolder = new TrimPatternDescription(annotation.item(), annotation.decal());
         ApiTrimPatternProvider.TRIM_PATTERNS.put(trimPattern, descriptionHolder);
     }
 

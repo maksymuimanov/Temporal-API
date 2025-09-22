@@ -27,7 +27,7 @@ public class GenerateOreStrategy implements FieldAnnotationStrategy<GenerateOre>
         var annotationBiomeModifier = annotation.biomeModifier();
         TagUtils.putTagContainer(BlockTagDynamicPreparer.TAG_CONTAINERS, annotationConfiguration.blockTagContainer());
         TagUtils.putTagContainer(BiomeTagDynamicPreparer.TAG_CONTAINERS, annotationBiomeModifier.biomeTagContainer());
-        var configuration = new Ore.Configuration(annotationConfiguration.blockId(), annotationConfiguration.replaceableBlocksIds(), annotationConfiguration.replaceableBlocksTag(), annotationConfiguration.size(), annotationConfiguration.discardChanceOnAirExposure());
+        var configuration = new Ore.Configuration(annotationConfiguration.ore(), annotationConfiguration.replaceableBlocks(), annotationConfiguration.replaceableBlocksTag(), annotationConfiguration.size(), annotationConfiguration.discardChanceOnAirExposure());
         var placement = new Ore.Placement(annotationPlacement.rarity(), annotationPlacement.count(), annotationPlacement.shape(), annotationPlacement.from(), annotationPlacement.to());
         var biomeModifier = new Ore.BiomeModifier(annotationBiomeModifier.biomeTag());
         Ore ore = new Ore(ResourceUtils.getResourceId(configuredFeatureKey), configuration, placement, biomeModifier);

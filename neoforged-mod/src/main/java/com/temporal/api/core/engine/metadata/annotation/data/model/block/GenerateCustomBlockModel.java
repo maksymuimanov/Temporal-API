@@ -13,8 +13,6 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface GenerateCustomBlockModel {
     Class<? extends BlockModelProviderStrategy<CustomBlockModelSpec>> strategy();
-
     String renderType() default RenderTypes.SOLID;
-
     String[] additionalData() default {};
 }

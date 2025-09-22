@@ -1,11 +1,11 @@
 package net.temporal.example.recipe;
 
 import com.temporal.api.core.engine.event.data.recipe.description.TemplateSmithingTrimRecipeDescription;
-import com.temporal.api.core.engine.metadata.annotation.data.RegisterRecipe;
+import com.temporal.api.core.engine.metadata.annotation.data.GenerateRecipe;
 import net.minecraft.world.level.ItemLike;
 import net.temporal.example.item.ExampleItems;
 
-@RegisterRecipe
+@GenerateRecipe
 public class ExampleArmorTrimTemplateRecipe implements TemplateSmithingTrimRecipeDescription {
     @Override
     public ItemLike[] getTemplates() {

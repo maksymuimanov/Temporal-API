@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface GenerateTrimMaterial {
-    String itemId();
+    String item();
     String color();
     float itemModelIndex();
 }

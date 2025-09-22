@@ -18,7 +18,7 @@ public class GenerateTrimMaterialStrategy implements FieldAnnotationStrategy<Gen
     @Override
     public void execute(Field field, Object object, GenerateTrimMaterial annotation) throws Exception {
         ResourceKey<TrimMaterial> trimMaterial = (ResourceKey<TrimMaterial>) field.get(object);
-        TrimMaterialDescription descriptionHolder = new TrimMaterialDescription(annotation.itemId(), annotation.color(), annotation.itemModelIndex());
+        TrimMaterialDescription descriptionHolder = new TrimMaterialDescription(annotation.item(), annotation.color(), annotation.itemModelIndex());
         ApiTrimMaterialProvider.TRIM_MATERIALS.put(trimMaterial, descriptionHolder);
     }
 

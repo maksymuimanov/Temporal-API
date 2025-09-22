@@ -19,7 +19,7 @@ public class GenerateFenceGateBlockItemModelStrategy implements FieldAnnotationS
     @Override
     public void execute(Field field, Object object, GenerateFenceGateBlockItemModel annotation) throws Exception {
         Holder<? extends Item> holder = ReflectionUtils.getItemHolder(field, object);
-        DependantBlockItemModelSpec spec = new DependantBlockItemModelSpec(holder, annotation.parentBlockId());
+        DependantBlockItemModelSpec spec = new DependantBlockItemModelSpec(holder, annotation.fullBlock());
         ItemModelContainer.FENCE_GATE_BLOCK_ITEMS.add(spec);
     }
 

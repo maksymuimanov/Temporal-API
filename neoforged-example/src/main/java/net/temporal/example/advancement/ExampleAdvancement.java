@@ -1,7 +1,7 @@
 package net.temporal.example.advancement;
 
 import com.temporal.api.core.engine.event.data.advancement.AdvancementDescription;
-import com.temporal.api.core.engine.metadata.annotation.data.RegisterAdvancement;
+import com.temporal.api.core.engine.metadata.annotation.data.GenerateAdvancement;
 import com.temporal.api.core.engine.metadata.annotation.data.language.TranslateAmericanEnglish;
 import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.AdvancementType;
@@ -13,7 +13,7 @@ import net.temporal.example.item.ExampleItems;
 import java.util.Map;
 import java.util.Set;
 
-@RegisterAdvancement
+@GenerateAdvancement
 public class ExampleAdvancement implements AdvancementDescription {
     @TranslateAmericanEnglish("Example Advancement")
     private static final String TITLE_ID = "advancement.example.example.title";

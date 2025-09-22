@@ -9,6 +9,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface MonsterRoomMob {
     int weight();
-
     boolean replace() default false;
 }

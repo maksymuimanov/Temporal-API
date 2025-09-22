@@ -9,8 +9,6 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface GenerateParticleSpriteSet {
     String id();
-
     int count() default 1;
-
     boolean reverse() default false;
 }

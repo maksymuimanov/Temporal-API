@@ -18,7 +18,7 @@ public class GenerateStairsBlockModelStrategy implements FieldAnnotationStrategy
     @Override
     public void execute(Field field, Object object, GenerateStairsBlockModel annotation) throws Exception {
         Holder<? extends Block> holder = (Holder<? extends Block>) field.get(object);
-        DependantBlockModelSpec spec = new DependantBlockModelSpec(holder, annotation.parentBlockId());
+        DependantBlockModelSpec spec = new DependantBlockModelSpec(holder, annotation.fullBlock());
         BlockModelContainer.STAIRS.add(spec);
     }
 

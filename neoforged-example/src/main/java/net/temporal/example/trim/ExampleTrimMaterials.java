@@ -9,7 +9,7 @@ import net.minecraft.world.item.armortrim.TrimMaterial;
 
 public final class ExampleTrimMaterials {
     @TranslateAmericanEnglish("Example Trim Material")
-    @GenerateTrimMaterial(itemId = "example:example_ingot", color = "#829499", itemModelIndex = 0.2F)
+    @GenerateTrimMaterial(item = "example:example_ingot", color = "#829499", itemModelIndex = 0.2F)
     public static final ResourceKey<TrimMaterial> EXAMPLE_TRIM_MATERIAL = ResourceUtils.createKey(Registries.TRIM_MATERIAL, "example");
 
 }

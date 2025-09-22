@@ -12,8 +12,8 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface GenerateDamageType {
-    DamageScaling damageScaling() default DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER;
+    DamageScaling scaling() default DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER;
     float exhaustion() default 0.1F;
     DamageEffects effects() default DamageEffects.HURT;
-    DeathMessageType messageType() default DeathMessageType.DEFAULT;
+    DeathMessageType message() default DeathMessageType.DEFAULT;
 }
