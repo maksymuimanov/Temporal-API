@@ -1,6 +1,6 @@
 package com.temporal.api.core.engine.metadata.strategy.field.data.model.block;
 
-import com.temporal.api.core.engine.event.data.model.block.BlockModelDescriptionContainer;
+import com.temporal.api.core.engine.event.data.model.block.BlockModelContainer;
 import com.temporal.api.core.engine.event.data.model.block.spec.CustomBlockModelSpec;
 import com.temporal.api.core.engine.event.data.model.block.strategy.BlockModelProviderStrategy;
 import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
@@ -25,7 +25,7 @@ public class GenerateCustomBlockModelStrategy implements FieldAnnotationStrategy
         List<String> additionalData = List.of(annotation.additionalData());
         CustomBlockModelSpec spec = new CustomBlockModelSpec(holder, annotation.renderType(), additionalData);
         BlockModelProviderStrategy<CustomBlockModelSpec> providerStrategy = ReflectionUtils.createObject(annotation.strategy());
-        BlockModelDescriptionContainer.CUSTOM_MODELS.put(spec, providerStrategy);
+        BlockModelContainer.CUSTOM_MODELS.put(spec, providerStrategy);
     }
 
     @Override

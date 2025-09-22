@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-import static com.temporal.api.core.engine.event.data.model.block.BlockModelDescriptionContainer.*;
+import static com.temporal.api.core.engine.event.data.model.block.BlockModelContainer.*;
 
 public class BlockModelProviderStrategyConsumerImpl implements BlockModelProviderStrategyConsumer {
     @Override

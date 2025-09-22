@@ -1,6 +1,6 @@
 package com.temporal.api.core.engine.metadata.strategy.field.data.model.item;
 
-import com.temporal.api.core.engine.event.data.model.item.ItemModelDescriptionContainer;
+import com.temporal.api.core.engine.event.data.model.item.ItemModelContainer;
 import com.temporal.api.core.engine.event.data.model.item.spec.BlockItemModelSpec;
 import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
 import com.temporal.api.core.engine.metadata.annotation.data.model.item.GenerateBarrelBlockItemModel;
@@ -20,7 +20,7 @@ public class GenerateBarrelBlockItemModelStrategy implements FieldAnnotationStra
     public void execute(Field field, Object object, GenerateBarrelBlockItemModel annotation) throws Exception {
         Holder<? extends Item> holder = ReflectionUtils.getItemHolder(field, object);
         BlockItemModelSpec spec = new BlockItemModelSpec(holder);
-        ItemModelDescriptionContainer.BARREL_BLOCK_ITEMS.add(spec);
+        ItemModelContainer.BARREL_BLOCK_ITEMS.add(spec);
     }
 
     @Override

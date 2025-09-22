@@ -1,60 +1,42 @@
 package com.temporal.api.core.engine.event.data.loot;
 
-import com.temporal.api.core.collection.TemporalMap;
-import net.minecraft.core.Holder;
+import com.temporal.api.core.engine.event.data.loot.spec.BlockLootTableSpec;
+import com.temporal.api.core.engine.event.data.loot.strategy.*;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.util.Tuple;
-import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Map;
-import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-public class BlockLootTableProvider extends ApiBlockLootTableProvider {
-    public static final Map<Holder<? extends Block>, String[]> SELF = new TemporalMap<>();
-    public static final Map<Holder<? extends Block>, String[]> SILK_TOUCH = new TemporalMap<>();
-    public static final Map<Holder<? extends Block>, String[]> POTTED_CONTENTS = new TemporalMap<>();
-    public static final Map<Holder<? extends Block>, String[]> ORES = new TemporalMap<>();
-    public static final Map<Holder<? extends Block>, String[]> MULTIPLE_ORES = new TemporalMap<>();
-    public static final Map<Holder<? extends Block>, String[]> GRASSES = new TemporalMap<>();
-    public static final Map<Holder<? extends Block>, String[]> LEAVES = new TemporalMap<>();
-    public static final Map<Holder<? extends Block>, String[]> SHULKER_BOXES = new TemporalMap<>();
-    public static final Map<Holder<? extends Block>, String[]> BANNERS = new TemporalMap<>();
-    public static final Map<Holder<? extends Block>, String[]> MUSHROOM_BLOCKS = new TemporalMap<>();
-    public static final Map<Holder<? extends Block>, String[]> SHEARS_ONLY = new TemporalMap<>();
-    public static final Map<Holder<? extends Block>, String[]> CROPS = new TemporalMap<>();
-    public static final Map<Holder<? extends Block>, String[]> DOORS = new TemporalMap<>();
-    public static final Map<Holder<? extends Block>, String[]> OTHER = new TemporalMap<>();
-    public static final Map<Holder<? extends Block>, String[]> EMPTY = new TemporalMap<>();
-    public static final Map<Tuple<Holder<? extends Block>, String[]>, LootProviderStrategy> CUSTOM_LOOT = new TemporalMap<>();
+import static com.temporal.api.core.engine.event.data.loot.BlockLootTableContainer.*;
 
+public class BlockLootTableProvider extends ApiBlockLootTableProvider {
     protected BlockLootTableProvider(HolderLookup.Provider registries) {
         super(registries);
     }
 
     @Override
     protected void generate() {
-        SELF.forEach(generateLootTable(this, SelfLootProviderStrategy::new));
-        SILK_TOUCH.forEach(generateLootTable(this, SilkTouchLootProviderStrategy::new));
-        POTTED_CONTENTS.forEach(generateLootTable(this, PottedContentLootProviderStrategy::new));
-        ORES.forEach(generateLootTable(this, OreLootProviderStrategy::new));
-        MULTIPLE_ORES.forEach(generateLootTable(this, MultipleOreLootProviderStrategy::new));
-        GRASSES.forEach(generateLootTable(this, GrassLootProviderStrategy::new));
-        LEAVES.forEach(generateLootTable(this, LeavesLootProviderStrategy::new));
-        SHULKER_BOXES.forEach(generateLootTable(this, ShulkerBoxLootProviderStrategy::new));
-        BANNERS.forEach(generateLootTable(this, BannerLootProviderStrategy::new));
-        MUSHROOM_BLOCKS.forEach(generateLootTable(this, MushroomBlockLootProviderStrategy::new));
-        SHEARS_ONLY.forEach(generateLootTable(this, ShearsOnlyLootProviderStrategy::new));
-        CROPS.forEach(generateLootTable(this, CropLootProviderStrategy::new));
-        DOORS.forEach(generateLootTable(this, DoorLootProviderStrategy::new));
-        OTHER.forEach(generateLootTable(this, OtherLootProviderStrategy::new));
-        EMPTY.forEach(generateLootTable(this, EmptyLootProviderStrategy::new));
-        CUSTOM_LOOT.forEach((key, strategy) -> strategy.generateLoot(key.getA(), this, key.getB()));
+        SELF.forEach(this.generateLootTable(this, SelfLootProviderStrategy::new));
+        SILK_TOUCH.forEach(this.generateLootTable(this, SilkTouchLootProviderStrategy::new));
+        POTTED_CONTENTS.forEach(this.generateLootTable(this, PottedContentLootProviderStrategy::new));
+        ORES.forEach(this.generateLootTable(this, OreLootProviderStrategy::new));
+        MULTIPLE_ORES.forEach(this.generateLootTable(this, MultipleOreLootProviderStrategy::new));
+        GRASSES.forEach(this.generateLootTable(this, GrassLootProviderStrategy::new));
+        LEAVES.forEach(this.generateLootTable(this, LeavesLootProviderStrategy::new));
+        SHULKER_BOXES.forEach(this.generateLootTable(this, ShulkerBoxLootProviderStrategy::new));
+        BANNERS.forEach(this.generateLootTable(this, BannerLootProviderStrategy::new));
+        MUSHROOM_BLOCKS.forEach(this.generateLootTable(this, MushroomBlockLootProviderStrategy::new));
+        SHEARS_ONLY.forEach(this.generateLootTable(this, ShearsOnlyLootProviderStrategy::new));
+        CROPS.forEach(this.generateLootTable(this, CropLootProviderStrategy::new));
+        DOORS.forEach(this.generateLootTable(this, DoorLootProviderStrategy::new));
+        OTHER.forEach(this.generateLootTable(this, OtherLootProviderStrategy::new));
+        EMPTY.forEach(this.generateLootTable(this, EmptyLootProviderStrategy::new));
+        CUSTOM_LOOT.forEach((spec, strategy) -> strategy.generateLoot(spec, this));
     }
 
     @Override
-    protected BiConsumer<Holder<? extends Block>, String[]> generateLootTable(@NotNull ApiBlockLootTableProvider provider, @NotNull Supplier<LootProviderStrategy> lootProviderStrategySupplier) {
-        return (blockRegistry, additionalData) -> lootProviderStrategySupplier.get().generateLoot(blockRegistry, provider, additionalData);
+    protected <T extends BlockLootTableSpec> Consumer<T> generateLootTable(@NotNull ApiBlockLootTableProvider provider, @NotNull Supplier<LootProviderStrategy<T>> lootProviderStrategySupplier) {
+        return spec -> lootProviderStrategySupplier.get().generateLoot(spec, provider);
     }
 }

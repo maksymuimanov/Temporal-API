@@ -1,6 +1,6 @@
 package com.temporal.api.core.engine.metadata.strategy.field.data.model.block;
 
-import com.temporal.api.core.engine.event.data.model.block.BlockModelDescriptionContainer;
+import com.temporal.api.core.engine.event.data.model.block.BlockModelContainer;
 import com.temporal.api.core.engine.event.data.model.block.spec.BlockModelSpec;
 import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
 import com.temporal.api.core.engine.metadata.annotation.data.model.block.GenerateCarpetBlockModel;
@@ -19,7 +19,7 @@ public class GenerateCarpetBlockModelStrategy implements FieldAnnotationStrategy
     public void execute(Field field, Object object, GenerateCarpetBlockModel annotation) throws Exception {
         Holder<? extends Block> holder = (Holder<? extends Block>) field.get(object);
         BlockModelSpec spec = new BlockModelSpec(holder, annotation.renderType());
-        BlockModelDescriptionContainer.CARPETS.add(spec);
+        BlockModelContainer.CARPETS.add(spec);
     }
 
     @Override

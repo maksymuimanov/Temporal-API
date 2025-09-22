@@ -1,6 +1,6 @@
 package com.temporal.api.core.engine.metadata.strategy.field.data.model.item;
 
-import com.temporal.api.core.engine.event.data.model.item.ItemModelDescriptionContainer;
+import com.temporal.api.core.engine.event.data.model.item.ItemModelContainer;
 import com.temporal.api.core.engine.event.data.model.item.ItemModelProviderStrategy;
 import com.temporal.api.core.engine.event.data.model.item.spec.CustomItemModelSpec;
 import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
@@ -24,7 +24,7 @@ public class GenerateCustomItemModelStrategy implements FieldAnnotationStrategy<
         List<String> additionalData = List.of(annotation.additionalData());
         CustomItemModelSpec spec = new CustomItemModelSpec(holder, additionalData);
         ItemModelProviderStrategy<CustomItemModelSpec> strategy = ReflectionUtils.createObject(annotation.strategy());
-        ItemModelDescriptionContainer.CUSTOM_MODELS.put(spec, strategy);
+        ItemModelContainer.CUSTOM_MODELS.put(spec, strategy);
     }
 
     @Override

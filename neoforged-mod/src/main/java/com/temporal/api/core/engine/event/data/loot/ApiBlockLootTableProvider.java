@@ -1,9 +1,9 @@
 package com.temporal.api.core.engine.event.data.loot;
 
 import com.temporal.api.core.engine.context.InjectionPool;
+import com.temporal.api.core.engine.event.data.loot.spec.BlockLootTableSpec;
 import com.temporal.api.core.engine.registry.factory.BlockFactory;
 import com.temporal.api.core.util.RegistryUtils;
-import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.loot.BlockLootSubProvider;
@@ -26,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 import java.util.Set;
-import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -35,7 +35,7 @@ public abstract class ApiBlockLootTableProvider extends BlockLootSubProvider {
         super(Set.of(), FeatureFlags.REGISTRY.allFlags(), registries);
     }
 
-    protected abstract BiConsumer<Holder<? extends Block>, String[]> generateLootTable(@NotNull ApiBlockLootTableProvider provider, @NotNull Supplier<LootProviderStrategy> lootProviderStrategySupplier);
+    protected abstract <T extends BlockLootTableSpec> Consumer<T> generateLootTable(@NotNull ApiBlockLootTableProvider provider, @NotNull Supplier<LootProviderStrategy<T>> lootProviderStrategySupplier);
 
     public void dropSharedSelf(DeferredBlock<?> block, Function<String, String> mapper) {
         Block mainBlock = block.value();
@@ -312,7 +312,7 @@ public abstract class ApiBlockLootTableProvider extends BlockLootSubProvider {
 
     @Override
     @NotNull
-    protected Iterable<Block> getKnownBlocks() {
+    public Iterable<Block> getKnownBlocks() {
         return InjectionPool.getFromInstance(BlockFactory.class)
                 .getRegistry()
                 .getEntries()
@@ -321,7 +321,7 @@ public abstract class ApiBlockLootTableProvider extends BlockLootSubProvider {
                 .toList();
     }
 
-    protected HolderLookup.Provider getRegistries() {
+    public HolderLookup.Provider getRegistries() {
         return this.registries;
     }
 }

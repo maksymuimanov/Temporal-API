@@ -37,8 +37,15 @@ public class CustomBlockItemModelSpec extends BlockItemModelSpec {
         this.additionalData = additionalData;
     }
 
+    public int getAdditionalInteger(int index) {
+        return Integer.parseInt(this.getAdditionalString(index));
+    }
 
-    public String getAdditionalDataElement(int index) {
+    public float getAdditionalFloat(int index) {
+        return Float.parseFloat(this.getAdditionalString(index));
+    }
+
+    public String getAdditionalString(int index) {
         return this.getAdditionalData().get(index);
     }
     

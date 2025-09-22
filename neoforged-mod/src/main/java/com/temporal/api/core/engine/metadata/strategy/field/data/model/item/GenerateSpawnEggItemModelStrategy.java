@@ -1,6 +1,6 @@
 package com.temporal.api.core.engine.metadata.strategy.field.data.model.item;
 
-import com.temporal.api.core.engine.event.data.model.item.ItemModelDescriptionContainer;
+import com.temporal.api.core.engine.event.data.model.item.ItemModelContainer;
 import com.temporal.api.core.engine.event.data.model.item.spec.ItemModelSpec;
 import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
 import com.temporal.api.core.engine.metadata.annotation.data.model.item.GenerateSpawnEggItemModel;
@@ -20,7 +20,7 @@ public class GenerateSpawnEggItemModelStrategy implements FieldAnnotationStrateg
     public void execute(Field field, Object object, GenerateSpawnEggItemModel annotation) throws Exception {
         Holder<? extends Item> holder = ReflectionUtils.getItemHolder(field, object);
         ItemModelSpec spec = new ItemModelSpec(holder);
-        ItemModelDescriptionContainer.SPAWN_EGG_ITEMS.add(spec);
+        ItemModelContainer.SPAWN_EGG_ITEMS.add(spec);
     }
 
     @Override

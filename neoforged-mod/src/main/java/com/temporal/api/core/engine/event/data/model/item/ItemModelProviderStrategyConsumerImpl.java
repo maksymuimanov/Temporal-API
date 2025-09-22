@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-import static com.temporal.api.core.engine.event.data.model.item.ItemModelDescriptionContainer.*;
+import static com.temporal.api.core.engine.event.data.model.item.ItemModelContainer.*;
 
 public class ItemModelProviderStrategyConsumerImpl implements ItemModelProviderStrategyConsumer {
     @Override

@@ -1,6 +1,6 @@
 package com.temporal.api.core.engine.metadata.strategy.field.data.model.block;
 
-import com.temporal.api.core.engine.event.data.model.block.BlockModelDescriptionContainer;
+import com.temporal.api.core.engine.event.data.model.block.BlockModelContainer;
 import com.temporal.api.core.engine.event.data.model.block.spec.SignBlockModelSpec;
 import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
 import com.temporal.api.core.engine.metadata.annotation.data.model.block.GenerateHangingSignBlockModel;
@@ -19,7 +19,7 @@ public class GenerateHangingSignBlockModelStrategy implements FieldAnnotationStr
     public void execute(Field field, Object object, GenerateHangingSignBlockModel annotation) throws Exception {
         Holder<? extends Block> holder = (Holder<? extends Block>) field.get(object);
         SignBlockModelSpec spec = new SignBlockModelSpec(holder, annotation.wallHangingSignBlockId(), annotation.particleTexturePath());
-        BlockModelDescriptionContainer.HANGING_SIGNS.add(spec);
+        BlockModelContainer.HANGING_SIGNS.add(spec);
     }
 
     @Override

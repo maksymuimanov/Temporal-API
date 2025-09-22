@@ -1,6 +1,6 @@
 package com.temporal.api.core.engine.metadata.strategy.field.data.model.block;
 
-import com.temporal.api.core.engine.event.data.model.block.BlockModelDescriptionContainer;
+import com.temporal.api.core.engine.event.data.model.block.BlockModelContainer;
 import com.temporal.api.core.engine.event.data.model.block.spec.TrapDoorBlockModelSpec;
 import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
 import com.temporal.api.core.engine.metadata.annotation.data.model.block.GenerateTrapDoorBlockModel;
@@ -19,7 +19,7 @@ public class GenerateTrapDoorBlockModelStrategy implements FieldAnnotationStrate
     public void execute(Field field, Object object, GenerateTrapDoorBlockModel annotation) throws Exception {
         Holder<? extends Block> holder = (Holder<? extends Block>) field.get(object);
         TrapDoorBlockModelSpec spec = new TrapDoorBlockModelSpec(holder, annotation.renderType(), annotation.orientable());
-        BlockModelDescriptionContainer.TRAPDOORS.add(spec);
+        BlockModelContainer.TRAPDOORS.add(spec);
     }
 
     @Override

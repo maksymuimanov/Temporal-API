@@ -18,7 +18,15 @@ public class CustomItemModelSpec extends ItemModelSpec {
         this.additionalData = additionalData;
     }
 
-    public String getAdditionalDataElement(int index) {
+    public int getAdditionalInteger(int index) {
+        return Integer.parseInt(this.getAdditionalString(index));
+    }
+
+    public float getAdditionalFloat(int index) {
+        return Float.parseFloat(this.getAdditionalString(index));
+    }
+
+    public String getAdditionalString(int index) {
         return this.getAdditionalData().get(index);
     }
 

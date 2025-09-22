@@ -1,6 +1,6 @@
 package com.temporal.api.core.engine.metadata.strategy.field.data.model.block;
 
-import com.temporal.api.core.engine.event.data.model.block.BlockModelDescriptionContainer;
+import com.temporal.api.core.engine.event.data.model.block.BlockModelContainer;
 import com.temporal.api.core.engine.event.data.model.block.spec.DependantBlockModelSpec;
 import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
 import com.temporal.api.core.engine.metadata.annotation.data.model.block.GenerateStairsBlockModel;
@@ -19,7 +19,7 @@ public class GenerateStairsBlockModelStrategy implements FieldAnnotationStrategy
     public void execute(Field field, Object object, GenerateStairsBlockModel annotation) throws Exception {
         Holder<? extends Block> holder = (Holder<? extends Block>) field.get(object);
         DependantBlockModelSpec spec = new DependantBlockModelSpec(holder, annotation.parentBlockId());
-        BlockModelDescriptionContainer.STAIRS.add(spec);
+        BlockModelContainer.STAIRS.add(spec);
     }
 
     @Override
