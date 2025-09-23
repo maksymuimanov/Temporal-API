@@ -15,5 +15,6 @@ public final class ExampleItemFactory extends ItemFactory implements SwordSubFac
         SpawnEggSubFactory,
         SmithingTemplateSubFactory,
         BannerPatternSubFactory,
-        MusicDiscSubFactory {
+        MusicDiscSubFactory,
+        InstrumentSubFactory {
 }

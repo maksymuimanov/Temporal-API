@@ -32,7 +32,6 @@ public class ApiDatapackProvider extends DatapackBuiltinEntriesProvider {
             .add(Registries.BANNER_PATTERN, ApiBannerPatternProvider::bootstrap)
 //            .add(Registries.DECORATED_POT_PATTERN, ApiDecoratedPotPatternProvider::bootstrap) FIXME
             .add(Registries.JUKEBOX_SONG, ApiJukeboxSongProvider::bootstrap)
-//            .add(Registries.INSTRUMENT, ApiInstrumentProvider::bootstrap) FIXME
             .add(Registries.ENCHANTMENT, ApiEnchantmentProvider::bootstrap)
             .add(Registries.CONFIGURED_FEATURE, CompoundGenerationDefinitionFacade::executeConfiguredFeatures)
             .add(Registries.PLACED_FEATURE, CompoundGenerationDefinitionFacade::executePlacedFeatures)

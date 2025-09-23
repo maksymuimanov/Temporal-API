@@ -17,6 +17,7 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.temporal.example.armor.ExampleArmorMaterials;
 import net.temporal.example.block.ExampleBlocks;
 import net.temporal.example.entity.ExampleEntityTypes;
+import net.temporal.example.instrument.ExampleInstrumentTags;
 import net.temporal.example.jukebox.ExampleJukeboxSongs;
 import net.temporal.example.tag.ExampleBannerPatternTags;
 
@@ -124,4 +125,9 @@ public final class ExampleItems {
     @GenerateBasicItemModel
     @TranslateAmericanEnglish("Example Music Disc")
     public static final DeferredItem<?> EXAMPLE_MUSIC_DISC = ITEM_FACTORY.createMusicDisc("example_music_disc", ExampleJukeboxSongs.EXAMPLE_JUKEBOX_SONG);
+
+    @AddCreativeModeTab(CreativeModeTabType.TOOLS_AND_UTILITIES)
+    @GenerateBasicItemModel
+    @TranslateAmericanEnglish("Example Instrument")
+    public static final DeferredItem<?> EXAMPLE_INSTRUMENT = ITEM_FACTORY.createInstrument("example_instrument", ExampleInstrumentTags.EXAMPLE);
 }

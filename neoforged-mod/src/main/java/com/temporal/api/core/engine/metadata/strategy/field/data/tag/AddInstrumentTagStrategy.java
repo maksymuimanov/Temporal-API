@@ -8,7 +8,7 @@ import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
 import com.temporal.api.core.engine.metadata.processor.DataEventHandlerAnnotationProcessorAdapter;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.util.MapUtils;
-import net.minecraft.resources.ResourceKey;
+import net.minecraft.core.Holder;
 import net.minecraft.world.item.Instrument;
 
 import java.lang.reflect.Field;
@@ -17,7 +17,7 @@ import java.lang.reflect.Field;
 public class AddInstrumentTagStrategy implements FieldAnnotationStrategy<AddInstrumentTag> {
     @Override
     public void execute(Field field, Object object, AddInstrumentTag annotation) throws Exception {
-        ResourceKey<Instrument> instrument = (ResourceKey<Instrument>) field.get(object);
+        Holder<Instrument> instrument = (Holder<Instrument>) field.get(object);
         for (String tag : annotation.value()) {
             MapUtils.putToListMap(InstrumentTagsProvider.TAG_GENERATION_DESCRIPTIONS, tag, instrument);
         }
