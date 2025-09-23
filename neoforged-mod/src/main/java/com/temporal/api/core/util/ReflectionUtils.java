@@ -3,10 +3,9 @@ package com.temporal.api.core.util;
 import com.temporal.api.ApiMod;
 import com.temporal.api.core.engine.registry.factory.ObjectFactory;
 import net.minecraft.core.Holder;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 import net.neoforged.fml.ModList;
+import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforgespi.language.IModFileInfo;
 import net.neoforged.neoforgespi.language.IModInfo;
 import net.neoforged.neoforgespi.language.ModFileScanData;
@@ -120,20 +119,15 @@ public final class ReflectionUtils {
                 .map(mapper);
     }
 
-
     @SuppressWarnings("unchecked")
     public static Holder<? extends Item> getItemHolder(Field field, Object object) throws Exception {
-        Holder<?> holder = getFieldValue(field, object);
-        Item item = BuiltInRegistries.ITEM.get((ResourceKey<Item>) holder.getKey());
-        if (item == null) throw new RuntimeException("Could not find Item for " + holder);
-        return Holder.direct(item);
-//        if (field.get(object) instanceof DeferredBlock<?> deferredBlock) {
-//            return deferredBlock.asItem()
-//                    .getDefaultInstance()
-//                    .getItemHolder();
-//        } else {
-//            return (Holder<? extends Item>) field.get(object);
-//        }
+        if (field.get(object) instanceof DeferredBlock<?> deferredBlock) {
+            return deferredBlock.asItem()
+                    .getDefaultInstance()
+                    .getItemHolder();
+        } else {
+            return (Holder<? extends Item>) field.get(object);
+        }
     }
 
     public static <T extends Annotation> Comparator<Class<?>> compareByAnnotationOverrideMethodPresence(Class<? extends T> annotation) {

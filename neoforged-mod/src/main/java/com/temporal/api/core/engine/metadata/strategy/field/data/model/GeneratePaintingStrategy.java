@@ -18,7 +18,7 @@ import java.lang.reflect.Field;
 
 @Strategy(StrategyPoolInitializer.DEFAULT_FIELD_DATA)
 public class GeneratePaintingStrategy implements FieldAnnotationStrategy<GeneratePainting> {
-    public static final String MINECRAFT_PLACEABLES_TAG = "minecraft:placeables";
+    public static final String MINECRAFT_PLACEABLES_TAG = "minecraft:placeable";
 
     @Override
     public void execute(Field field, Object object, GeneratePainting annotation) throws Exception {
