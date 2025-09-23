@@ -8,6 +8,7 @@ import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
 import com.temporal.api.core.engine.metadata.processor.BlockEntityTypeEventHandlerAnnotationProcessorAdapter;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.util.MapUtils;
+import com.temporal.api.core.util.ReflectionUtils;
 import com.temporal.api.core.util.RegistryUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.world.level.block.Block;
@@ -19,9 +20,9 @@ import java.lang.reflect.Field;
 public class AddBlockEntityTypeStrategy implements FieldAnnotationStrategy<AddBlockEntityType> {
     @Override
     public void execute(Field field, Object object, AddBlockEntityType annotation) throws Exception {
-        Holder<Block> blockHolder = (Holder<Block>) field.get(object);
+        Holder<Block> block = ReflectionUtils.getFieldValue(field, object);
         BlockEntityType<?> blockEntityType = RegistryUtils.getBlockEntityType(annotation.value());
-        MapUtils.putToListMap(BlockEntityTypeEventHandler.BLOCKS, blockEntityType, blockHolder);
+        MapUtils.putToListMap(BlockEntityTypeEventHandler.BLOCKS, blockEntityType, block);
     }
 
     @Override

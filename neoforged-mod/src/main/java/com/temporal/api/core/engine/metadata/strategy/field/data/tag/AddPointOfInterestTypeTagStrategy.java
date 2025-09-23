@@ -8,6 +8,7 @@ import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
 import com.temporal.api.core.engine.metadata.processor.DataEventHandlerAnnotationProcessorAdapter;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.util.MapUtils;
+import com.temporal.api.core.util.ReflectionUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
 
@@ -17,7 +18,7 @@ import java.lang.reflect.Field;
 public class AddPointOfInterestTypeTagStrategy implements FieldAnnotationStrategy<AddPointOfInterestTypeTag> {
     @Override
     public void execute(Field field, Object object, AddPointOfInterestTypeTag annotation) throws Exception {
-        Holder<? extends PoiType> poiType = (Holder<? extends PoiType>) field.get(object);
+        Holder<? extends PoiType> poiType = ReflectionUtils.getFieldValue(field, object);
         for (String tag : annotation.value()) {
             MapUtils.putToListMap(PointOfInterestTypeTagsProvider.TAG_GENERATION_DESCRIPTIONS, tag, poiType);
         }

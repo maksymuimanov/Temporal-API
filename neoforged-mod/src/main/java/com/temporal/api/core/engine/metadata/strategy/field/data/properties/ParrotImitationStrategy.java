@@ -8,6 +8,7 @@ import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
 import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
 import com.temporal.api.core.engine.metadata.processor.DataEventHandlerAnnotationProcessorAdapter;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
+import com.temporal.api.core.util.ReflectionUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.world.entity.EntityType;
 
@@ -17,7 +18,7 @@ import java.lang.reflect.Field;
 public class ParrotImitationStrategy implements FieldAnnotationStrategy<ParrotImitation> {
     @Override
     public void execute(Field field, Object object, ParrotImitation annotation) throws Exception {
-        Holder<EntityType<?>> entityType = (Holder<EntityType<?>>) field.get(object);
+        Holder<EntityType<?>> entityType = ReflectionUtils.getFieldValue(field, object);
         ParrotImitationDto parrotImitationDto = new ParrotImitationDto(entityType, annotation.soundEvent(), annotation.replace());
         ApiDataMapProvider.PARROT_IMITATIONS.add(parrotImitationDto);
     }

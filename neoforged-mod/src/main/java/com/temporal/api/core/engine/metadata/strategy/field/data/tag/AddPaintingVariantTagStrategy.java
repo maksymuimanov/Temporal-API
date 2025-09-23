@@ -8,6 +8,7 @@ import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
 import com.temporal.api.core.engine.metadata.processor.DataEventHandlerAnnotationProcessorAdapter;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.util.MapUtils;
+import com.temporal.api.core.util.ReflectionUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.decoration.PaintingVariant;
 
@@ -17,7 +18,7 @@ import java.lang.reflect.Field;
 public class AddPaintingVariantTagStrategy implements FieldAnnotationStrategy<AddPaintingVariantTag> {
     @Override
     public void execute(Field field, Object object, AddPaintingVariantTag annotation) throws Exception {
-        ResourceKey<PaintingVariant> paintingVariant = (ResourceKey<PaintingVariant>) field.get(object);
+        ResourceKey<PaintingVariant> paintingVariant = ReflectionUtils.getFieldValue(field, object);
         for (String tag : annotation.value()) {
             MapUtils.putToListMap(PaintingVariantTagsProvider.TAG_GENERATION_DESCRIPTIONS, tag, paintingVariant);
         }

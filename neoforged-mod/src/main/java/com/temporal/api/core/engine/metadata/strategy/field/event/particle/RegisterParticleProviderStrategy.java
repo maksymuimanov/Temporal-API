@@ -7,6 +7,7 @@ import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
 import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
 import com.temporal.api.core.engine.metadata.processor.RegisterParticleProvidersEventHandlerAnnotationProcessorAdapter;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
+import com.temporal.api.core.util.ReflectionUtils;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.core.Holder;
@@ -20,12 +21,13 @@ import java.lang.reflect.InvocationTargetException;
 @Strategy(StrategyPoolInitializer.DEFAULT_FIELD_EVENT_PARTICLE)
 public class RegisterParticleProviderStrategy implements FieldAnnotationStrategy<RegisterParticleProvider> {
     @Override
+    @SuppressWarnings("unchecked")
     public void execute(Field field, Object object, RegisterParticleProvider annotation) throws Exception {
-        Holder<? extends ParticleType<ParticleOptions>> particleTypeHolder = (Holder<ParticleType<ParticleOptions>>) field.get(object);
+        Holder<? extends ParticleType<ParticleOptions>> particleType = ReflectionUtils.getFieldValue(field, object);
         Class<? extends ParticleProvider<?>> providerClass = annotation.value();
         Constructor<? extends ParticleProvider<?>> providerConstructor = providerClass.getDeclaredConstructor(SpriteSet.class);
         RegisterParticleProvidersEventHandler.PROVIDER_REGISTRIES.add(event -> {
-            event.registerSpriteSet(particleTypeHolder.value(), spriteSet -> {
+            event.registerSpriteSet(particleType.value(), spriteSet -> {
                 try {
                     return (ParticleProvider<ParticleOptions>) providerConstructor.newInstance(spriteSet);
                 } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {

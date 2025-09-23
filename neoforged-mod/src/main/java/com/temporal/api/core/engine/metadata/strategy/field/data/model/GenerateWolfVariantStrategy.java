@@ -9,6 +9,7 @@ import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
 import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
 import com.temporal.api.core.engine.metadata.processor.DataEventHandlerAnnotationProcessorAdapter;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
+import com.temporal.api.core.util.ReflectionUtils;
 import com.temporal.api.core.util.TagUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.animal.WolfVariant;
@@ -19,7 +20,7 @@ import java.lang.reflect.Field;
 public class GenerateWolfVariantStrategy implements FieldAnnotationStrategy<GenerateWolfVariant> {
     @Override
     public void execute(Field field, Object object, GenerateWolfVariant annotation) throws Exception {
-        ResourceKey<WolfVariant> variantResourceKey = (ResourceKey<WolfVariant>) field.get(object);
+        ResourceKey<WolfVariant> variantResourceKey = ReflectionUtils.getFieldValue(field, object);
         TagUtils.putTagContainer(BiomeTagDynamicPreparer.TAG_CONTAINERS, annotation.biomeTagContainer());
         ApiWolfVariantProvider.VARIANTS.add(new WolfVariantDescription(variantResourceKey, annotation.biomeTag()));
     }

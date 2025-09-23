@@ -19,9 +19,8 @@ import java.util.List;
 @Strategy(StrategyPoolInitializer.DEFAULT_FIELD_DATA)
 public class GenerateCustomBlockModelStrategy implements FieldAnnotationStrategy<GenerateCustomBlockModel> {
     @Override
-    @SuppressWarnings("unchecked")
     public void execute(Field field, Object object, GenerateCustomBlockModel annotation) throws Exception {
-        Holder<? extends Block> holder = (Holder<? extends Block>) field.get(object);
+        Holder<? extends Block> holder = ReflectionUtils.getFieldValue(field, object);
         List<String> additionalData = List.of(annotation.additionalData());
         CustomBlockModelSpec spec = new CustomBlockModelSpec(holder, annotation.renderType(), additionalData);
         BlockModelProviderStrategy<CustomBlockModelSpec> providerStrategy = ReflectionUtils.createObject(annotation.strategy());

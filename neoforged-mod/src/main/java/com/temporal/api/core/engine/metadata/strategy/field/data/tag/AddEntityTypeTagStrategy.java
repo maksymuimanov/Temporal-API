@@ -8,6 +8,7 @@ import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
 import com.temporal.api.core.engine.metadata.processor.DataEventHandlerAnnotationProcessorAdapter;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.util.MapUtils;
+import com.temporal.api.core.util.ReflectionUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.world.entity.EntityType;
 
@@ -17,7 +18,7 @@ import java.lang.reflect.Field;
 public class AddEntityTypeTagStrategy implements FieldAnnotationStrategy<AddEntityTypeTag> {
     @Override
     public void execute(Field field, Object object, AddEntityTypeTag annotation) throws Exception {
-        Holder<? extends EntityType<?>> entityType = (Holder<? extends EntityType<?>>) field.get(object);
+        Holder<? extends EntityType<?>> entityType = ReflectionUtils.getFieldValue(field, object);
         for (String tag : annotation.value()) {
             MapUtils.putToListMap(EntityTypeTagsProvider.TAG_GENERATION_DESCRIPTIONS, tag, entityType);
         }

@@ -8,6 +8,7 @@ import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
 import com.temporal.api.core.engine.metadata.processor.DataEventHandlerAnnotationProcessorAdapter;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.util.MapUtils;
+import com.temporal.api.core.util.ReflectionUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.world.entity.animal.CatVariant;
 
@@ -17,7 +18,7 @@ import java.lang.reflect.Field;
 public class AddCatVariantTagStrategy implements FieldAnnotationStrategy<AddCatVariantTag> {
     @Override
     public void execute(Field field, Object object, AddCatVariantTag annotation) throws Exception {
-        Holder<? extends CatVariant> catVariant = (Holder<? extends CatVariant>) field.get(object);
+        Holder<? extends CatVariant> catVariant = ReflectionUtils.getFieldValue(field, object);
         for (String tag : annotation.value()) {
             MapUtils.putToListMap(CatVariantTagsProvider.TAG_GENERATION_DESCRIPTIONS, tag, catVariant);
         }

@@ -7,6 +7,7 @@ import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
 import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
 import com.temporal.api.core.engine.metadata.processor.EntityAttributeEventHandlerAnnotationProcessorAdapter;
 import com.temporal.api.core.engine.metadata.strategy.method.MethodAnnotationStrategy;
+import com.temporal.api.core.util.ReflectionUtils;
 import com.temporal.api.core.util.RegistryUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.world.entity.EntityType;
@@ -16,10 +17,10 @@ import java.lang.reflect.Method;
 
 @Strategy(StrategyPoolInitializer.DEFAULT_METHOD_EVENT_ATTRIBUTES)
 public class CreateEntityAttributesStrategy implements MethodAnnotationStrategy<CreateEntityAttributes> {
-    @SuppressWarnings("deprecation")
     @Override
+    @SuppressWarnings("deprecation")
     public void execute(Method method, Object object, CreateEntityAttributes annotation) throws Exception {
-        AttributeSupplier.Builder attributes = (AttributeSupplier.Builder) method.invoke(object);
+        AttributeSupplier.Builder attributes = ReflectionUtils.invokeMethod(method, object);
         String[] entityTypeIds = annotation.value();
         for (String id : entityTypeIds) {
             Holder<? extends EntityType<?>> entityType = RegistryUtils.getEntityType(id).builtInRegistryHolder();

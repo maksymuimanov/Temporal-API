@@ -8,6 +8,7 @@ import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
 import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
 import com.temporal.api.core.engine.metadata.processor.DataEventHandlerAnnotationProcessorAdapter;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
+import com.temporal.api.core.util.ReflectionUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.armortrim.TrimPattern;
 
@@ -17,7 +18,7 @@ import java.lang.reflect.Field;
 public class GenerateTrimPatternStrategy implements FieldAnnotationStrategy<GenerateTrimPattern> {
     @Override
     public void execute(Field field, Object object, GenerateTrimPattern annotation) throws Exception {
-        ResourceKey<TrimPattern> trimPattern = (ResourceKey<TrimPattern>) field.get(object);
+        ResourceKey<TrimPattern> trimPattern = ReflectionUtils.getFieldValue(field, object);
         TrimPatternDescription descriptionHolder = new TrimPatternDescription(annotation.item(), annotation.decal());
         ApiTrimPatternProvider.TRIM_PATTERNS.put(trimPattern, descriptionHolder);
     }

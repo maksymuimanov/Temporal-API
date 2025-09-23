@@ -8,6 +8,7 @@ import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
 import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
 import com.temporal.api.core.engine.metadata.processor.DataEventHandlerAnnotationProcessorAdapter;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
+import com.temporal.api.core.util.ReflectionUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.world.level.block.Block;
 
@@ -17,7 +18,7 @@ import java.lang.reflect.Field;
 public class WaxableStrategy implements FieldAnnotationStrategy<Waxable> {
     @Override
     public void execute(Field field, Object object, Waxable annotation) throws Exception {
-        Holder<? extends Block> block = (Holder<? extends Block>) field.get(object);
+        Holder<? extends Block> block = ReflectionUtils.getFieldValue(field, object);
         WaxableDto waxableDto = new WaxableDto(block, annotation.waxedBlock(), annotation.replace());
         ApiDataMapProvider.WAXABLES.add(waxableDto);
     }

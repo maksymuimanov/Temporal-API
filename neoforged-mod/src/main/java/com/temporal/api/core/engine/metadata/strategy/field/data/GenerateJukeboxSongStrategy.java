@@ -8,6 +8,7 @@ import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
 import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
 import com.temporal.api.core.engine.metadata.processor.DataEventHandlerAnnotationProcessorAdapter;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
+import com.temporal.api.core.util.ReflectionUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.JukeboxSong;
 
@@ -17,7 +18,7 @@ import java.lang.reflect.Field;
 public class GenerateJukeboxSongStrategy implements FieldAnnotationStrategy<GenerateJukeboxSong> {
     @Override
     public void execute(Field field, Object object, GenerateJukeboxSong annotation) throws Exception {
-        ResourceKey<JukeboxSong> jukeboxSong = (ResourceKey<JukeboxSong>) field.get(object);
+        ResourceKey<JukeboxSong> jukeboxSong = ReflectionUtils.getFieldValue(field, object);
         JukeboxSongDescription description = new JukeboxSongDescription(jukeboxSong, annotation.soundEvent(), annotation.lengthInSeconds(), annotation.comparatorOutput());
         ApiJukeboxSongProvider.SONGS.add(description);
     }

@@ -8,6 +8,7 @@ import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
 import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
 import com.temporal.api.core.engine.metadata.processor.DataEventHandlerAnnotationProcessorAdapter;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
+import com.temporal.api.core.util.ReflectionUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.armortrim.TrimMaterial;
 
@@ -17,7 +18,7 @@ import java.lang.reflect.Field;
 public class GenerateTrimMaterialStrategy implements FieldAnnotationStrategy<GenerateTrimMaterial> {
     @Override
     public void execute(Field field, Object object, GenerateTrimMaterial annotation) throws Exception {
-        ResourceKey<TrimMaterial> trimMaterial = (ResourceKey<TrimMaterial>) field.get(object);
+        ResourceKey<TrimMaterial> trimMaterial = ReflectionUtils.getFieldValue(field, object);
         TrimMaterialDescription descriptionHolder = new TrimMaterialDescription(annotation.item(), annotation.color(), annotation.itemModelIndex());
         ApiTrimMaterialProvider.TRIM_MATERIALS.put(trimMaterial, descriptionHolder);
     }

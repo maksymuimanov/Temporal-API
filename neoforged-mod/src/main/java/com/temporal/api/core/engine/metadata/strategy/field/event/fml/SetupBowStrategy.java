@@ -8,6 +8,7 @@ import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
 import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
 import com.temporal.api.core.engine.metadata.processor.FMLClientSetupEventHandlerAnnotationProcessorAdapter;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
+import com.temporal.api.core.util.ReflectionUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.world.item.Item;
 
@@ -17,9 +18,9 @@ import java.lang.reflect.Field;
 public class SetupBowStrategy implements FieldAnnotationStrategy<SetupBow> {
     @Override
     public void execute(Field field, Object object, SetupBow annotation) throws Exception {
-        Holder<? extends Item> bowItem = (Holder<? extends Item>) field.get(object);
-        FovModifierEventHandler.BOWS.add(bowItem);
-        FMLClientSetupEventHandler.BOWS.add(bowItem);
+        Holder<? extends Item> bow = ReflectionUtils.getFieldValue(field, object);
+        FovModifierEventHandler.BOWS.add(bow);
+        FMLClientSetupEventHandler.BOWS.add(bow);
     }
 
     @Override

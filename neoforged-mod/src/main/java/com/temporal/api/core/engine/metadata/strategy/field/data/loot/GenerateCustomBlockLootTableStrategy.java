@@ -20,7 +20,7 @@ import java.util.List;
 public class GenerateCustomBlockLootTableStrategy implements FieldAnnotationStrategy<GenerateCustomBlockLootTable> {
     @Override
     public void execute(Field field, Object object, GenerateCustomBlockLootTable annotation) throws Exception {
-        Holder<? extends Block> holder = (Holder<? extends Block>) field.get(object);
+        Holder<? extends Block> holder = ReflectionUtils.getFieldValue(field, object);
         List<String> additionalData = List.of(annotation.additionalData());
         CustomBlockLootTableSpec spec = new CustomBlockLootTableSpec(holder, additionalData);
         LootProviderStrategy<CustomBlockLootTableSpec> strategy = ReflectionUtils.createObject(annotation.strategy());

@@ -7,6 +7,7 @@ import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
 import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
 import com.temporal.api.core.engine.metadata.processor.FMLClientSetupEventHandlerAnnotationProcessorAdapter;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
+import com.temporal.api.core.util.ReflectionUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.world.item.Item;
 
@@ -16,8 +17,8 @@ import java.lang.reflect.Field;
 public class SetupShieldStrategy implements FieldAnnotationStrategy<SetupShield> {
     @Override
     public void execute(Field field, Object object, SetupShield annotation) throws Exception {
-        Holder<? extends Item> bowItem = (Holder<? extends Item>) field.get(object);
-        FMLClientSetupEventHandler.SHIELDS.add(bowItem);
+        Holder<? extends Item> shield = ReflectionUtils.getFieldValue(field, object);
+        FMLClientSetupEventHandler.SHIELDS.add(shield);
     }
 
     @Override

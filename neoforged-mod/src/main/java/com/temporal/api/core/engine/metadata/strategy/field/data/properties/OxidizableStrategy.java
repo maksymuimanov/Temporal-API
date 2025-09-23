@@ -8,6 +8,7 @@ import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
 import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
 import com.temporal.api.core.engine.metadata.processor.DataEventHandlerAnnotationProcessorAdapter;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
+import com.temporal.api.core.util.ReflectionUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.world.level.block.Block;
 
@@ -17,7 +18,7 @@ import java.lang.reflect.Field;
 public class OxidizableStrategy implements FieldAnnotationStrategy<Oxidizable> {
     @Override
     public void execute(Field field, Object object, Oxidizable annotation) throws Exception {
-        Holder<? extends Block> block = (Holder<? extends Block>) field.get(object);
+        Holder<? extends Block> block = ReflectionUtils.getFieldValue(field, object);
         OxidizableDto oxidizableDto = new OxidizableDto(block, annotation.nextBlock(), annotation.replace());
         ApiDataMapProvider.OXIDIZABLES.add(oxidizableDto);
     }

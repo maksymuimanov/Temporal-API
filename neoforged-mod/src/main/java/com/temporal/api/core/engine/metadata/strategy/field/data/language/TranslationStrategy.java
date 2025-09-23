@@ -5,6 +5,7 @@ import com.temporal.api.core.engine.event.data.language.transformer.KeyTransform
 import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
 import com.temporal.api.core.engine.metadata.processor.DataEventHandlerAnnotationProcessorAdapter;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
+import com.temporal.api.core.util.ReflectionUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
@@ -13,7 +14,6 @@ import net.neoforged.neoforge.common.ModConfigSpec;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.Objects;
 
@@ -31,16 +31,12 @@ public abstract class TranslationStrategy<A extends Annotation> implements Field
 
     @Override
     public void execute(Field field, Object object, A annotation) throws Exception {
-        Object o = field.get(object);
+        Object o = ReflectionUtils.getFieldValue(field, object);
         Class<? extends A> annotationClass = this.getAnnotationClass();
-        Method idMethod = annotationClass.getDeclaredMethod(TRANSLATION_ID_METHOD);
-        String id = (String) idMethod.invoke(annotation);
-        Method valueMethod = annotationClass.getDeclaredMethod(TRANSLATION_VALUE_METHOD);
-        String value = (String) valueMethod.invoke(annotation);
-        Method prefixMethod = annotationClass.getDeclaredMethod(TRANSLATION_PREFIX_METHOD);
-        String prefix = (String) prefixMethod.invoke(annotation);
-        Method suffixMethod = annotationClass.getDeclaredMethod(TRANSLATION_SUFFIX_METHOD);
-        String suffix = (String) suffixMethod.invoke(annotation);
+        String id = ReflectionUtils.invokeMethod(annotationClass, TRANSLATION_ID_METHOD, annotation);
+        String value = ReflectionUtils.invokeMethod(annotationClass, TRANSLATION_VALUE_METHOD, annotation);
+        String prefix = ReflectionUtils.invokeMethod(annotationClass, TRANSLATION_PREFIX_METHOD, annotation);
+        String suffix = ReflectionUtils.invokeMethod(annotationClass, TRANSLATION_SUFFIX_METHOD, annotation);
         this.directTranslation(id, value, prefix, suffix, o);
     }
 
@@ -71,7 +67,8 @@ public abstract class TranslationStrategy<A extends Annotation> implements Field
 
     protected <T> void putTranslation(T key, String value, String prefix, String suffix, KeyTransformer<T> keyTransformer) {
         try {
-            Map<String, String> translationMap = (Map<String, String>) this.translationProvider.getDeclaredField(ApiLanguageProvider.TRANSLATIONS_FIELD_NAME).get(null);
+
+            Map<String, String> translationMap = ReflectionUtils.getFieldValue(this.getTranslationProvider(), ApiLanguageProvider.TRANSLATIONS_FIELD_NAME, null);
             String translationKey = keyTransformer.transform(key);
             if (!prefix.isBlank()) translationKey = prefix + "." + translationKey;
             if (!suffix.isBlank()) translationKey = translationKey + "." + suffix;

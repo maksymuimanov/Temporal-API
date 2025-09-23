@@ -8,6 +8,7 @@ import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
 import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
 import com.temporal.api.core.engine.metadata.processor.DataEventHandlerAnnotationProcessorAdapter;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
+import com.temporal.api.core.util.ReflectionUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.world.level.block.Block;
 
@@ -19,7 +20,7 @@ import java.util.List;
 public class GenerateLeavesBlockLootTableStrategy implements FieldAnnotationStrategy<GenerateLeavesBlockLootTable> {
     @Override
     public void execute(Field field, Object object, GenerateLeavesBlockLootTable annotation) throws Exception {
-        Holder<? extends Block> holder = (Holder<? extends Block>) field.get(object);
+        Holder<? extends Block> holder = ReflectionUtils.getFieldValue(field, object);
         List<Float> chances = new ArrayList<>();
         for (float chance : annotation.chances()) {
             chances.add(chance);

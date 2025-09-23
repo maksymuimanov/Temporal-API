@@ -9,6 +9,7 @@ import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
 import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
 import com.temporal.api.core.engine.metadata.processor.DataEventHandlerAnnotationProcessorAdapter;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
+import com.temporal.api.core.util.ReflectionUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundEvent;
 
@@ -20,7 +21,7 @@ import java.util.List;
 public class GenerateSoundStrategy implements FieldAnnotationStrategy<GenerateSound> {
     @Override
     public void execute(Field field, Object object, GenerateSound annotation) throws Exception {
-        Holder<SoundEvent> soundEvent = (Holder<SoundEvent>) field.get(object);
+        Holder<SoundEvent> soundEvent = ReflectionUtils.getFieldValue(field, object);
         SoundHolder description = new SoundHolder(soundEvent, annotation.replace());
         List<SoundDescription> soundDescriptions = Arrays.stream(annotation.value())
                 .map(sound -> new SoundDescription(sound.fileName(), sound.type(),

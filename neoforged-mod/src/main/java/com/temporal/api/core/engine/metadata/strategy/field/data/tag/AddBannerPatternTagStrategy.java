@@ -8,6 +8,7 @@ import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
 import com.temporal.api.core.engine.metadata.processor.DataEventHandlerAnnotationProcessorAdapter;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.util.MapUtils;
+import com.temporal.api.core.util.ReflectionUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.entity.BannerPattern;
 
@@ -17,7 +18,7 @@ import java.lang.reflect.Field;
 public class AddBannerPatternTagStrategy implements FieldAnnotationStrategy<AddBannerPatternTag> {
     @Override
     public void execute(Field field, Object object, AddBannerPatternTag annotation) throws Exception {
-        ResourceKey<BannerPattern> bannerPattern = (ResourceKey<BannerPattern>) field.get(object);
+        ResourceKey<BannerPattern> bannerPattern = ReflectionUtils.getFieldValue(field, object);
         for (String tag : annotation.value()) {
             MapUtils.putToListMap(BannerPatternTagsProvider.TAG_GENERATION_DESCRIPTIONS, tag, bannerPattern);
         }

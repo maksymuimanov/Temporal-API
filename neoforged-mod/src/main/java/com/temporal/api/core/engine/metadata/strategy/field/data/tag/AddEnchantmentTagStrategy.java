@@ -8,6 +8,7 @@ import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
 import com.temporal.api.core.engine.metadata.processor.DataEventHandlerAnnotationProcessorAdapter;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.util.MapUtils;
+import com.temporal.api.core.util.ReflectionUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.enchantment.Enchantment;
 
@@ -17,7 +18,7 @@ import java.lang.reflect.Field;
 public class AddEnchantmentTagStrategy implements FieldAnnotationStrategy<AddEnchantmentTag> {
     @Override
     public void execute(Field field, Object object, AddEnchantmentTag annotation) throws Exception {
-        ResourceKey<Enchantment> enchantment = (ResourceKey<Enchantment>) field.get(object);
+        ResourceKey<Enchantment> enchantment = ReflectionUtils.getFieldValue(field, object);
         for (String tag : annotation.value()) {
             MapUtils.putToListMap(EnchantmentTagsProvider.TAG_GENERATION_DESCRIPTIONS, tag, enchantment);
         }

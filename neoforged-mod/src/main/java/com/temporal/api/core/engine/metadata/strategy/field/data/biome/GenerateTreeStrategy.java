@@ -9,6 +9,7 @@ import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
 import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
 import com.temporal.api.core.engine.metadata.processor.DataEventHandlerAnnotationProcessorAdapter;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
+import com.temporal.api.core.util.ReflectionUtils;
 import com.temporal.api.core.util.ResourceUtils;
 import com.temporal.api.core.util.TagUtils;
 import net.minecraft.resources.ResourceKey;
@@ -20,7 +21,7 @@ import java.lang.reflect.Field;
 public class GenerateTreeStrategy implements FieldAnnotationStrategy<GenerateTree> {
     @Override
     public void execute(Field field, Object object, GenerateTree annotation) throws Exception {
-        ResourceKey<ConfiguredFeature<?, ?>> configuredFeatureKey = (ResourceKey<ConfiguredFeature<?, ?>>) field.get(object);
+        ResourceKey<ConfiguredFeature<?, ?>> configuredFeatureKey = ReflectionUtils.getFieldValue(field, object);
         var annotationConfiguration = annotation.configuration();
         var annotationPlacement = annotation.placement();
         var annotationBiomeModifier = annotation.biomeModifier();
@@ -36,13 +37,12 @@ public class GenerateTreeStrategy implements FieldAnnotationStrategy<GenerateTre
         GenerateTree.Trunk trunk = annotationConfiguration.trunk();
         GenerateTree.Foliage foliage = annotationConfiguration.foliage();
         GenerateTree.FeatureSize featureSize = annotationConfiguration.featureSize();
-        var configuration = new Tree.Configuration(annotationConfiguration.log(), annotationConfiguration.leaves(), annotationConfiguration.root(),
+        return new Tree.Configuration(annotationConfiguration.log(), annotationConfiguration.leaves(), annotationConfiguration.root(),
                 trunk.trunkPlacerClass(), trunk.baseHeight(), trunk.heightRandA(), trunk.heightRandB(),
                 foliage.foliagePlacerClass(), foliage.radius(), foliage.offset(), foliage.height(),
                 featureSize.type(), featureSize.limit(), featureSize.upperLimit(),
                 featureSize.lowerSize(), featureSize.middleSize(), featureSize.upperSize(), featureSize.minClippedHeight(),
                 annotationConfiguration.ignoreVines());
-        return configuration;
     }
 
     @Override

@@ -21,11 +21,11 @@ import java.lang.reflect.Field;
 public class AddCreativeModeTabStrategy implements FieldAnnotationStrategy<AddCreativeModeTab> {
     @Override
     public void execute(Field field, Object object, AddCreativeModeTab annotation) throws Exception {
-        Holder<? extends Item> registryObject = ReflectionUtils.getItemHolder(field, object);
+        Holder<? extends Item> item = ReflectionUtils.getItemHolder(field, object);
         CreativeModeTabType[] tabTypes = annotation.value();
         for (CreativeModeTabType tabType : tabTypes) {
             ResourceKey<CreativeModeTab> tab = tabType.getCreativeTab();
-            MapUtils.putToListMap(CreativeModeTabEventHandler.CREATIVE_MODE_TABS_CONTENT, tab, registryObject);
+            MapUtils.putToListMap(CreativeModeTabEventHandler.CREATIVE_MODE_TABS_CONTENT, tab, item);
         }
     }
 

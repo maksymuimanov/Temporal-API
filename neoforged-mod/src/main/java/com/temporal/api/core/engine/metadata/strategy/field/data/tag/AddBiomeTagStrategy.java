@@ -8,6 +8,7 @@ import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
 import com.temporal.api.core.engine.metadata.processor.DataEventHandlerAnnotationProcessorAdapter;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.util.MapUtils;
+import com.temporal.api.core.util.ReflectionUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biome;
 
@@ -17,7 +18,7 @@ import java.lang.reflect.Field;
 public class AddBiomeTagStrategy implements FieldAnnotationStrategy<AddBiomeTag> {
     @Override
     public void execute(Field field, Object object, AddBiomeTag annotation) throws Exception {
-        ResourceKey<Biome> biome = (ResourceKey<Biome>) field.get(object);
+        ResourceKey<Biome> biome = ReflectionUtils.getFieldValue(field, object);
         for (String tag : annotation.value()) {
             MapUtils.putToListMap(BiomeTagsProvider.TAG_GENERATION_DESCRIPTIONS, tag, biome);
         }

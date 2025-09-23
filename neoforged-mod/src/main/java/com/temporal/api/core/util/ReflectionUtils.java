@@ -3,9 +3,10 @@ package com.temporal.api.core.util;
 import com.temporal.api.ApiMod;
 import com.temporal.api.core.engine.registry.factory.ObjectFactory;
 import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 import net.neoforged.fml.ModList;
-import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforgespi.language.IModFileInfo;
 import net.neoforged.neoforgespi.language.IModInfo;
 import net.neoforged.neoforgespi.language.ModFileScanData;
@@ -40,11 +41,40 @@ public final class ReflectionUtils {
         }
     }
 
+    public static <T> T getFieldValue(Class<?> clazz, String fieldName, Object object) {
+        try {
+            Field field = clazz.getDeclaredField(fieldName);
+            field.setAccessible(true);
+            return getFieldValue(field, object);
+        } catch (NoSuchFieldException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @SuppressWarnings("unchecked")
-    public static <T> T getFieldObject(Field field, Object object) {
+    public static <T> T getFieldValue(Field field, Object object) {
         try {
             return (T) field.get(object);
         } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static <T> T invokeMethod(Class<?> clazz, String methodName, Object object) {
+        try {
+            Method method = clazz.getDeclaredMethod(methodName);
+            method.setAccessible(true);
+            return invokeMethod(method, object);
+        } catch (NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T> T invokeMethod(Method method, Object object) {
+        try {
+            return (T) method.invoke(object);
+        } catch (IllegalAccessException | InvocationTargetException e) {
             throw new RuntimeException(e);
         }
     }
@@ -93,13 +123,17 @@ public final class ReflectionUtils {
 
     @SuppressWarnings("unchecked")
     public static Holder<? extends Item> getItemHolder(Field field, Object object) throws Exception {
-        if (field.get(object) instanceof DeferredBlock<?> deferredBlock) {
-            return deferredBlock.asItem()
-                    .getDefaultInstance()
-                    .getItemHolder();
-        } else {
-            return (Holder<? extends Item>) field.get(object);
-        }
+        Holder<?> holder = getFieldValue(field, object);
+        Item item = BuiltInRegistries.ITEM.get((ResourceKey<Item>) holder.getKey());
+        if (item == null) throw new RuntimeException("Could not find Item for " + holder);
+        return Holder.direct(item);
+//        if (field.get(object) instanceof DeferredBlock<?> deferredBlock) {
+//            return deferredBlock.asItem()
+//                    .getDefaultInstance()
+//                    .getItemHolder();
+//        } else {
+//            return (Holder<? extends Item>) field.get(object);
+//        }
     }
 
     public static <T extends Annotation> Comparator<Class<?>> compareByAnnotationOverrideMethodPresence(Class<? extends T> annotation) {

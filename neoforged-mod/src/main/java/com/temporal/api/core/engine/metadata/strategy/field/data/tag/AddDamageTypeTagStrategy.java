@@ -8,6 +8,7 @@ import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
 import com.temporal.api.core.engine.metadata.processor.DataEventHandlerAnnotationProcessorAdapter;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.util.MapUtils;
+import com.temporal.api.core.util.ReflectionUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.damagesource.DamageType;
 
@@ -17,7 +18,7 @@ import java.lang.reflect.Field;
 public class AddDamageTypeTagStrategy implements FieldAnnotationStrategy<AddDamageTypeTag> {
     @Override
     public void execute(Field field, Object object, AddDamageTypeTag annotation) throws Exception {
-        ResourceKey<DamageType> damageType = (ResourceKey<DamageType>) field.get(object);
+        ResourceKey<DamageType> damageType = ReflectionUtils.getFieldValue(field, object);
         for (String tag : annotation.value()) {
             MapUtils.putToListMap(DamageTypeTagsProvider.TAG_GENERATION_DESCRIPTIONS, tag, damageType);
         }

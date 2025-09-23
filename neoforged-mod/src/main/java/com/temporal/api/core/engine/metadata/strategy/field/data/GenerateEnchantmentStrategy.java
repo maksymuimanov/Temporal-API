@@ -8,6 +8,7 @@ import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
 import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
 import com.temporal.api.core.engine.metadata.processor.DataEventHandlerAnnotationProcessorAdapter;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
+import com.temporal.api.core.util.ReflectionUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.enchantment.Enchantment;
 
@@ -18,7 +19,7 @@ import java.lang.reflect.Field;
 public class GenerateEnchantmentStrategy implements FieldAnnotationStrategy<GenerateEnchantment> {
     @Override
     public void execute(Field field, Object object, GenerateEnchantment annotation) throws Exception {
-        ResourceKey<Enchantment> enchantment = (ResourceKey<Enchantment>) field.get(object);
+        ResourceKey<Enchantment> enchantment = ReflectionUtils.getFieldValue(field, object);
         Constructor<?> constructor = annotation.value().getDeclaredConstructor();
         constructor.setAccessible(true);
         EnchantmentDescription descriptionHolder = (EnchantmentDescription) constructor.newInstance();

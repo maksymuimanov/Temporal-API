@@ -8,6 +8,7 @@ import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
 import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
 import com.temporal.api.core.engine.metadata.processor.DataEventHandlerAnnotationProcessorAdapter;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
+import com.temporal.api.core.util.ReflectionUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.world.level.block.Block;
 
@@ -17,7 +18,7 @@ import java.lang.reflect.Field;
 public class GenerateFenceGateBlockModelStrategy implements FieldAnnotationStrategy<GenerateFenceGateBlockModel> {
     @Override
     public void execute(Field field, Object object, GenerateFenceGateBlockModel annotation) throws Exception {
-        Holder<? extends Block> holder = (Holder<? extends Block>) field.get(object);
+        Holder<? extends Block> holder = ReflectionUtils.getFieldValue(field, object);
         DependantBlockModelSpec spec = new DependantBlockModelSpec(holder, annotation.renderType(), annotation.fullBlock());
         BlockModelContainer.FENCE_GATES.add(spec);
     }
