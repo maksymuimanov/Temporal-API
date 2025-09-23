@@ -1,4 +1,4 @@
-package com.temporal.api.core.engine.metadata.annotation.data;
+package com.temporal.api.core.engine.metadata.annotation.data.tag;
 
 import com.temporal.api.core.engine.metadata.constant.TagContainerType;
 

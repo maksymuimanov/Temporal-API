@@ -1,6 +1,6 @@
 package net.temporal.example.tag;
 
-import com.temporal.api.core.engine.metadata.annotation.data.AddTagContainer;
+import com.temporal.api.core.engine.metadata.annotation.data.tag.AddTagContainer;
 import com.temporal.api.core.engine.metadata.constant.TagContainerType;
 import com.temporal.api.core.util.TagUtils;
 import net.minecraft.tags.TagKey;

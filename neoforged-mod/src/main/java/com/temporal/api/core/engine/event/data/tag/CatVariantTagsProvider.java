@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class CatVariantTagsProvider extends AbstractTagsProvider<CatVariant> {
     public static final Map<String, List<Holder<? extends CatVariant>>> TAG_GENERATION_DESCRIPTIONS = new HashMap<>();
-    public static final String ROOT_DIRECTORY = "tags/cat_variants/";
+    public static final String ROOT_DIRECTORY = "tags/cat_variant/";
 
     public CatVariantTagsProvider(PackOutput output) {
         super(output, ROOT_DIRECTORY);

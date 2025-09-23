@@ -27,9 +27,7 @@ public class ApiDatapackProvider extends DatapackBuiltinEntriesProvider {
             .add(Registries.PAINTING_VARIANT, ApiPaintingVariantProvider::bootstrap)
             .add(Registries.DAMAGE_TYPE, ApiDamageTypeProvider::bootstrap)
             .add(Registries.WOLF_VARIANT, ApiWolfVariantProvider::bootstrap)
-//            .add(Registries.FROG_VARIANT, ApiFrogVariantProvider::bootstrap) FIXME: archived for future version
             .add(Registries.BANNER_PATTERN, ApiBannerPatternProvider::bootstrap)
-//            .add(Registries.DECORATED_POT_PATTERN, ApiDecoratedPotPatternProvider::bootstrap) FIXME: archived for future version
             .add(Registries.JUKEBOX_SONG, ApiJukeboxSongProvider::bootstrap)
             .add(Registries.ENCHANTMENT, ApiEnchantmentProvider::bootstrap)
             .add(Registries.CONFIGURED_FEATURE, CompoundGenerationDefinitionFacade::executeConfiguredFeatures)

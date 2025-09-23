@@ -93,5 +93,7 @@ public class FactoryPoolInitializer implements ObjectPoolInitializer {
         objectPool.put(new VillagerTypeFactory());
         objectPool.put(new InstrumentFactory());
         objectPool.put(new CatVariantFactory());
+        objectPool.put(new DecoratedPotPatternFactory());
+        objectPool.put(new FrogVariantFactory());
     }
 }

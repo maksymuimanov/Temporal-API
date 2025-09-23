@@ -1,31 +1,31 @@
 package com.temporal.api.core.engine.metadata.strategy.field.data.tag;
 
-import com.temporal.api.core.engine.event.data.tag.BlockTagsProvider;
+import com.temporal.api.core.engine.event.data.tag.BiomeTagsProvider;
 import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
-import com.temporal.api.core.engine.metadata.annotation.data.tag.AddBlockTag;
+import com.temporal.api.core.engine.metadata.annotation.data.tag.AddBiomeTag;
 import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
 import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
 import com.temporal.api.core.engine.metadata.processor.DataEventHandlerAnnotationProcessorAdapter;
 import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
 import com.temporal.api.core.util.MapUtils;
-import net.minecraft.core.Holder;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.biome.Biome;
 
 import java.lang.reflect.Field;
 
 @Strategy(StrategyPoolInitializer.DEFAULT_FIELD_DATA)
-public class AddBlockTagStrategy implements FieldAnnotationStrategy<AddBlockTag> {
+public class AddBiomeTagStrategy implements FieldAnnotationStrategy<AddBiomeTag> {
     @Override
-    public void execute(Field field, Object object, AddBlockTag annotation) throws Exception {
-        Holder<? extends Block> block = (Holder<? extends Block>) field.get(object);
+    public void execute(Field field, Object object, AddBiomeTag annotation) throws Exception {
+        ResourceKey<Biome> biome = (ResourceKey<Biome>) field.get(object);
         for (String tag : annotation.value()) {
-            MapUtils.putToListMap(BlockTagsProvider.TAG_GENERATION_DESCRIPTIONS, tag, block);
+            MapUtils.putToListMap(BiomeTagsProvider.TAG_GENERATION_DESCRIPTIONS, tag, biome);
         }
     }
 
     @Override
-    public Class<AddBlockTag> getAnnotationClass() {
-        return AddBlockTag.class;
+    public Class<AddBiomeTag> getAnnotationClass() {
+        return AddBiomeTag.class;
     }
 
     @Override

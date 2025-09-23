@@ -18,9 +18,9 @@ import java.lang.reflect.Field;
 public class AddItemTagStrategy implements FieldAnnotationStrategy<AddItemTag> {
     @Override
     public void execute(Field field, Object object, AddItemTag annotation) throws Exception {
-        Holder<? extends Item> deferredItem = ReflectionUtils.getItemHolder(field, object);
+        Holder<? extends Item> item = ReflectionUtils.getItemHolder(field, object);
         for (String tag : annotation.value()) {
-            MapUtils.putToListMap(ItemTagsProvider.TAG_GENERATION_DESCRIPTIONS, tag, deferredItem);
+            MapUtils.putToListMap(ItemTagsProvider.TAG_GENERATION_DESCRIPTIONS, tag, item);
         }
     }
 

@@ -1,11 +1,11 @@
-package com.temporal.api.core.engine.metadata.strategy.type.data;
+package com.temporal.api.core.engine.metadata.strategy.type.data.tag;
 
 import com.temporal.api.core.engine.event.data.preparer.tag.BiomeTagDynamicPreparer;
 import com.temporal.api.core.engine.event.data.preparer.tag.BlockTagDynamicPreparer;
 import com.temporal.api.core.engine.event.data.preparer.tag.EnchantmentTagDynamicPreparer;
 import com.temporal.api.core.engine.event.data.preparer.tag.ItemTagDynamicPreparer;
 import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
-import com.temporal.api.core.engine.metadata.annotation.data.AddTagContainer;
+import com.temporal.api.core.engine.metadata.annotation.data.tag.AddTagContainer;
 import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
 import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
 import com.temporal.api.core.engine.metadata.processor.DataEventHandlerAnnotationProcessorAdapter;

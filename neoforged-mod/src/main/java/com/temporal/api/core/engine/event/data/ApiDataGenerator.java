@@ -2,7 +2,6 @@ package com.temporal.api.core.engine.event.data;
 
 import com.temporal.api.core.engine.event.data.advancement.AdvancementProviderFactory;
 import com.temporal.api.core.engine.event.data.file.AtlasArmorTrimProvider;
-import com.temporal.api.core.engine.event.data.file.PlaceablePaintingProvider;
 import com.temporal.api.core.engine.event.data.language.provider.*;
 import com.temporal.api.core.engine.event.data.loot.LootTableProviderFactory;
 import com.temporal.api.core.engine.event.data.map.ApiDataMapProvider;
@@ -32,19 +31,19 @@ import java.util.concurrent.CompletableFuture;
 public class ApiDataGenerator implements DataGatherer {
     @Override
     public void gatherData(GatherDataEvent event) {
-        init();
-        addGlobalLootModifierProvider(event);
-        addLootTableProvider(event);
-        addRecipeProvider(event);
-        addModelProvider(event);
-        addLanguageProvider(event);
-        addTagProvider(event);
-        addDatapackProvider(event);
-        addDataMapProvider(event);
-        addAdvancementProvider(event);
-        addSoundProvider(event);
-        addParticleProvider(event);
-        addFileProvider(event);
+        this.init();
+        this.addGlobalLootModifierProvider(event);
+        this.addLootTableProvider(event);
+        this.addRecipeProvider(event);
+        this.addModelProvider(event);
+        this.addLanguageProvider(event);
+        this.addTagProvider(event);
+        this.addDatapackProvider(event);
+        this.addDataMapProvider(event);
+        this.addAdvancementProvider(event);
+        this.addSoundProvider(event);
+        this.addParticleProvider(event);
+        this.addFileProvider(event);
     }
 
     @Override
@@ -59,33 +58,33 @@ public class ApiDataGenerator implements DataGatherer {
 
     @Override
     public void addGlobalLootModifierProvider(GatherDataEvent event) {
-        final DataGenerator generator = getDataGenerator(event);
-        final PackOutput packOutput = getPackOutput(event);
-        final CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+        final DataGenerator generator = this.getDataGenerator(event);
+        final PackOutput packOutput = this.getPackOutput(event);
+        final CompletableFuture<HolderLookup.Provider> lookupProvider = this.getLookupProvider(event);
         generator.addProvider(event.includeServer(), new ApiGlobalLootModifierProvider(packOutput, lookupProvider));
     }
 
     @Override
     public void addLootTableProvider(GatherDataEvent event) {
-        final DataGenerator generator = getDataGenerator(event);
-        final PackOutput packOutput = getPackOutput(event);
-        final CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+        final DataGenerator generator = this.getDataGenerator(event);
+        final PackOutput packOutput = this.getPackOutput(event);
+        final CompletableFuture<HolderLookup.Provider> lookupProvider = this.getLookupProvider(event);
         generator.addProvider(event.includeServer(), LootTableProviderFactory.createProvider(packOutput, lookupProvider));
     }
 
     @Override
     public void addModelProvider(GatherDataEvent event) {
-        final DataGenerator generator = getDataGenerator(event);
-        final PackOutput packOutput = getPackOutput(event);
-        final ExistingFileHelper existingFileHelper = getExistingFileHelper(event);
+        final DataGenerator generator = this.getDataGenerator(event);
+        final PackOutput packOutput = this.getPackOutput(event);
+        final ExistingFileHelper existingFileHelper = this.getExistingFileHelper(event);
         generator.addProvider(event.includeClient(), new ApiItemModelProvider(packOutput, existingFileHelper));
         generator.addProvider(event.includeClient(), new ApiBlockModelProvider(packOutput, existingFileHelper));
     }
 
     @Override
     public void addLanguageProvider(GatherDataEvent event) {
-        final DataGenerator generator = getDataGenerator(event);
-        final PackOutput packOutput = getPackOutput(event);
+        final DataGenerator generator = this.getDataGenerator(event);
+        final PackOutput packOutput = this.getPackOutput(event);
         generator.addProvider(event.includeClient(), new AfrikaansProvider(packOutput));
         generator.addProvider(event.includeClient(), new AlbanianProvider(packOutput));
         generator.addProvider(event.includeClient(), new AmericanEnglishProvider(packOutput));
@@ -222,83 +221,100 @@ public class ApiDataGenerator implements DataGatherer {
 
     @Override
     public void addRecipeProvider(GatherDataEvent event) {
-        final DataGenerator generator = getDataGenerator(event);
-        final PackOutput packOutput = getPackOutput(event);
+        final DataGenerator generator = this.getDataGenerator(event);
+        final PackOutput packOutput = this.getPackOutput(event);
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
         generator.addProvider(event.includeServer(), new ApiRecipeProvider(packOutput, lookupProvider));
     }
 
     @Override
     public void addTagProvider(GatherDataEvent event) {
-        final DataGenerator generator = getDataGenerator(event);
-        final PackOutput packOutput = getPackOutput(event);
-        generator.addProvider(event.includeServer(), new BlockTagsProvider(packOutput));
-        generator.addProvider(event.includeServer(), new ItemTagsProvider(packOutput));
+        final DataGenerator generator = this.getDataGenerator(event);
+        final PackOutput packOutput = this.getPackOutput(event);
         generator.addProvider(event.includeServer(), new BannerPatternTagsProvider(packOutput));
-        generator.addProvider(event.includeServer(), new InstrumentTagsProvider(packOutput));
+        generator.addProvider(event.includeServer(), new BiomeTagsProvider(packOutput));
+        generator.addProvider(event.includeServer(), new BlockTagsProvider(packOutput));
         generator.addProvider(event.includeServer(), new CatVariantTagsProvider(packOutput));
+        generator.addProvider(event.includeServer(), new DamageTypeTagsProvider(packOutput));
+        generator.addProvider(event.includeServer(), new EnchantmentTagsProvider(packOutput));
+        generator.addProvider(event.includeServer(), new EntityTypeTagsProvider(packOutput));
+        generator.addProvider(event.includeServer(), new FluidTagsProvider(packOutput));
+        generator.addProvider(event.includeServer(), new GameEventTagsProvider(packOutput));
+        generator.addProvider(event.includeServer(), new InstrumentTagsProvider(packOutput));
+        generator.addProvider(event.includeServer(), new ItemTagsProvider(packOutput));
+        generator.addProvider(event.includeServer(), new PaintingVariantTagsProvider(packOutput));
+        generator.addProvider(event.includeServer(), new PointOfInterestTypeTagsProvider(packOutput));
+        generator.addProvider(event.includeServer(), new StructureTagsProvider(packOutput));
     }
 
     @Override
     public void addDatapackProvider(GatherDataEvent event) {
-        final DataGenerator generator = getDataGenerator(event);
-        final PackOutput packOutput = getPackOutput(event);
+        final DataGenerator generator = this.getDataGenerator(event);
+        final PackOutput packOutput = this.getPackOutput(event);
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
         generator.addProvider(event.includeServer(), new ApiDatapackProvider(packOutput, lookupProvider));
     }
 
     @Override
     public void addDataMapProvider(GatherDataEvent event) {
-        final DataGenerator generator = getDataGenerator(event);
-        final PackOutput packOutput = getPackOutput(event);
+        final DataGenerator generator = this.getDataGenerator(event);
+        final PackOutput packOutput = this.getPackOutput(event);
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
         generator.addProvider(event.includeServer(), new ApiDataMapProvider(packOutput, lookupProvider));
     }
 
     @Override
     public void addAdvancementProvider(GatherDataEvent event) {
-        final DataGenerator generator = getDataGenerator(event);
-        final PackOutput packOutput = getPackOutput(event);
+        final DataGenerator generator = this.getDataGenerator(event);
+        final PackOutput packOutput = this.getPackOutput(event);
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
         generator.addProvider(event.includeServer(), AdvancementProviderFactory.createProvider(packOutput, lookupProvider));
     }
 
     @Override
     public void addSoundProvider(GatherDataEvent event) {
-        final DataGenerator generator = getDataGenerator(event);
-        final PackOutput packOutput = getPackOutput(event);
-        final ExistingFileHelper existingFileHelper = getExistingFileHelper(event);
+        final DataGenerator generator = this.getDataGenerator(event);
+        final PackOutput packOutput = this.getPackOutput(event);
+        final ExistingFileHelper existingFileHelper = this.getExistingFileHelper(event);
         generator.addProvider(event.includeClient(), new ApiSoundProvider(packOutput, existingFileHelper));
     }
 
     @Override
     public void addParticleProvider(GatherDataEvent event) {
-        final DataGenerator generator = getDataGenerator(event);
-        final PackOutput packOutput = getPackOutput(event);
-        final ExistingFileHelper existingFileHelper = getExistingFileHelper(event);
+        final DataGenerator generator = this.getDataGenerator(event);
+        final PackOutput packOutput = this.getPackOutput(event);
+        final ExistingFileHelper existingFileHelper = this.getExistingFileHelper(event);
         generator.addProvider(event.includeClient(), new ApiParticleProvider(packOutput, existingFileHelper));
     }
 
     @Override
     public void addFileProvider(GatherDataEvent event) {
-        final DataGenerator generator = getDataGenerator(event);
-        final PackOutput packOutput = getPackOutput(event);
+        final DataGenerator generator = this.getDataGenerator(event);
+        final PackOutput packOutput = this.getPackOutput(event);
         generator.addProvider(event.includeClient(), new AtlasArmorTrimProvider(packOutput));
-        generator.addProvider(event.includeServer(), new PlaceablePaintingProvider(packOutput));
     }
 
     @Override
-    public @NotNull PackOutput getPackOutput(GatherDataEvent event) {
+    @NotNull
+    public PackOutput getPackOutput(GatherDataEvent event) {
         return getDataGenerator(event).getPackOutput();
     }
 
     @Override
+    @NotNull
     public DataGenerator getDataGenerator(GatherDataEvent event) {
         return event.getGenerator();
     }
 
     @Override
+    @NotNull
     public ExistingFileHelper getExistingFileHelper(GatherDataEvent event) {
         return event.getExistingFileHelper();
+    }
+
+    @Override
+    @NotNull
+    public CompletableFuture<HolderLookup.Provider> getLookupProvider(GatherDataEvent event) {
+        return event.getLookupProvider();
     }
 }
