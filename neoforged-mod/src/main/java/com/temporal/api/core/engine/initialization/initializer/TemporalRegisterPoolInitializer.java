@@ -96,6 +96,7 @@ public class TemporalRegisterPoolInitializer implements ObjectPoolInitializer {
         this.putRegister(objectPool, "$VillagerProfessions", Registries.VILLAGER_PROFESSION);
         this.putRegister(objectPool, "$VillagerTypes", Registries.VILLAGER_TYPE);
         this.putRegister(objectPool, "$Instruments", Registries.INSTRUMENT);
+        this.putRegister(objectPool, "$CatVariants", Registries.CAT_VARIANT);
     }
 
     private <T> void putRegister(ObjectPool objectPool, String name, ResourceKey<Registry<T>> registry) {
