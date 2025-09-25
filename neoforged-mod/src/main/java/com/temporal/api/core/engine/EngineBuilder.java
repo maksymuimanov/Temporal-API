@@ -1,52 +1,63 @@
 package com.temporal.api.core.engine;
 
 import com.temporal.api.ApiMod;
-import com.temporal.api.core.engine.io.IOLayer;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.temporal.api.core.engine.TemporalEngine.BANNER;
+import com.temporal.api.core.engine.config.ConfigLayerBuilder;
+import com.temporal.api.core.engine.context.ModContext;
+import com.temporal.api.core.engine.event.EventLayerBuilder;
+import com.temporal.api.core.engine.finalization.FinalizationLayerBuilder;
+import com.temporal.api.core.engine.initialization.InitializationLayerBuilder;
+import com.temporal.api.core.engine.metadata.MetadataLayerBuilder;
+import com.temporal.api.core.engine.registry.RegistryLayerBuilder;
 
 public class EngineBuilder {
-    private static final String LOAD_MESSAGE = "{} has been loaded!";
     private final LayerContainer layerContainer = LayerContainer.getInstance();
-    private final List<EngineTask> tasks = new ArrayList<>(2);
 
     protected EngineBuilder() {
     }
 
     public EngineBuilder addLayer(EngineLayer engineLayer) {
-        tasks.add(() -> layerContainer.add(engineLayer));
+        this.layerContainer.add(engineLayer);
         return this;
     }
 
     public EngineBuilder disableLayer(Class<? extends EngineLayer> engineLayerClass) {
-        tasks.add(() -> layerContainer.delete(engineLayerClass));
+        this.layerContainer.delete(engineLayerClass);
         return this;
     }
     
-    public IOBuilder configureIOLayer() {
-        return new IOBuilder(this);
+    public InitializationLayerBuilder configureInitializationLayer() {
+        return new InitializationLayerBuilder(this);
     }
 
-    public EventBuilder configureEventLayer() {
-        return new EventBuilder(this);
+    public RegistryLayerBuilder configureRegistryLayer() {
+        return new RegistryLayerBuilder(this);
+    }
+
+    public MetadataLayerBuilder configureMetadataLayer() {
+        return new MetadataLayerBuilder(this);
+    }
+
+    public EventLayerBuilder configureEventLayer() {
+        return new EventLayerBuilder(this);
+    }
+
+    public ConfigLayerBuilder configureConfigLayer() {
+        return new ConfigLayerBuilder(this);
+    }
+
+    public FinalizationLayerBuilder configureFinalizationLayer() {
+        return new FinalizationLayerBuilder(this);
     }
 
     public LayerContainer build() {
-        System.out.println(BANNER);
-        tasks.forEach(EngineTask::execute);
-        ApiMod.LOGGER.info("Mod: {} has been registered as a TemporalEngine component!", IOLayer.NEO_MOD);
+        ApiMod.LOGGER.info("Mod: {} has been registered as a TemporalEngine component!", ModContext.NEO_MOD.getModId());
         return this.layerContainer;
     }
-
-    protected void addTask(EngineTask task) {
-        tasks.add(task);
-    }
     
-    protected void processLayer(EngineLayer engineLayer) {
+    public void processLayer(EngineLayer engineLayer) {
+        String layerName = engineLayer.getClass().getName();
+        ApiMod.LOGGER.info("Layer: {} is going to be processed!", layerName);
         engineLayer.processAllTasks();
-        ApiMod.LOGGER.info(LOAD_MESSAGE, engineLayer.getClass().getSimpleName());
+        ApiMod.LOGGER.info("Layer: {} has been processed!", layerName);
     }
 }

@@ -1,0 +1,8 @@
+{
+  "asset_id": "example:example",
+  "decal": false,
+  "description": {
+    "translate": "trim_pattern.example.example"
+  },
+  "template_item": "example:example_armor_trim_smithing_template"
+}

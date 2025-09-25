@@ -1,0 +1,10 @@
+{
+  "comparator_output": 15,
+  "description": {
+    "translate": "jukebox_song.example.example"
+  },
+  "length_in_seconds": 222.0,
+  "sound_event": {
+    "sound_id": "example:example_jukebox_song_sound"
+  }
+}

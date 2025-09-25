@@ -1,0 +1,18 @@
+package com.temporal.api.core.engine.metadata.strategy.field.data.language;
+
+import com.temporal.api.core.engine.event.data.language.provider.KazakhProvider;
+import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
+import com.temporal.api.core.engine.metadata.annotation.data.language.TranslateKazakh;
+import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
+
+@Strategy(StrategyPoolInitializer.DEFAULT_FIELD_DATA)
+public class TranslateKazakhStrategy extends TranslationStrategy<TranslateKazakh> {
+    public TranslateKazakhStrategy() {
+        super(KazakhProvider.class);
+    }
+
+    @Override
+    public Class<TranslateKazakh> getAnnotationClass() {
+        return TranslateKazakh.class;
+    }
+}

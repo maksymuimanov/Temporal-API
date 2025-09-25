@@ -1,28 +1,20 @@
 package com.temporal.api.core.engine.event.handler;
 
 import com.temporal.api.core.collection.TemporalMap;
-import com.temporal.api.core.engine.io.IOLayer;
-import com.temporal.api.core.engine.io.metadata.strategy.type.ClassAnnotationStrategy;
-import com.temporal.api.core.engine.io.metadata.strategy.type.event.render.RegisterLayerDefinitionStrategy;
-import com.temporal.api.core.util.other.IOUtils;
+import com.temporal.api.core.engine.metadata.annotation.injection.Handler;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 
-import java.lang.annotation.Annotation;
-import java.util.List;
 import java.util.Map;
 
+@Handler(EntityRenderersEvent.RegisterLayerDefinitions.class)
 public class EntityRendererRegisterLayerDefinitionEventHandler implements EventHandler {
     public static final Map<ModelLayerLocation, LayerDefinition> LAYERS = new TemporalMap<>();
-    private final Map<Class<? extends Annotation>, ClassAnnotationStrategy> strategies = IOUtils.createAnnotationStrategyMap(List.of(
-            new RegisterLayerDefinitionStrategy()
-    ));
 
     @Override
     public void handle() {
-        subscribeModEvent(EntityRenderersEvent.RegisterLayerDefinitions.class, event -> {
-            IOLayer.SIMPLE_STRATEGY_CONSUMER.execute(IOLayer.CLASS_EXECUTOR, strategies, IOLayer.NEO_MOD.getClasses());
+        this.subscribeModEvent(EntityRenderersEvent.RegisterLayerDefinitions.class, event -> {
             LAYERS.forEach((location, definition) -> event.registerLayerDefinition(location, () -> definition));
         });
     }

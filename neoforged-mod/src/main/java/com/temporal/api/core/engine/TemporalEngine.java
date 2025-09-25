@@ -1,48 +1,50 @@
 package com.temporal.api.core.engine;
 
-import com.temporal.api.core.engine.event.handler.*;
-import com.temporal.api.core.engine.io.context.*;
-import com.temporal.api.core.engine.io.metadata.processor.*;
+import com.temporal.api.ApiMod;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 
-import java.util.Collections;
 import java.util.List;
 
 public class TemporalEngine {
-    public static final List<ObjectPoolInitializer> DEFAULT_SIMPLE_INITIALIZERS = List.of(new DeferredRegisterPoolInitializer(), new FactoryPoolInitializer(), new EventBusPoolInitializer(), new ModContainerPoolInitializer());
-    public static final List<AnnotationProcessor<?>> DEFAULT_SIMPLE_PROCESSORS = List.of(new ClassAnnotationProcessor(), new StaticFieldAnnotationProcessor(), new FieldAnnotationProcessor(), new MethodAnnotationProcessor());
-    public static final List<EventHandler> DEFAULT_HANDLERS = List.of(new FMLClientSetupEventHandler(), new EntityRendererRegisterRendererEventHandler(), new EntityRendererRegisterLayerDefinitionEventHandler(), new DataEventHandler(), new FovModifierEventHandler());
     protected static final String BANNER = """
-                       _________ _________ ___     ___ _________ _________ _________ _________ ____
-                       ---- ---- |   ----| |  \\   / | |  ___  | |  ___  | |  ___  | |  ___  | |  |
-                          | |    |  |      | | \\ /| | |  | |  | |  | |  | |  | |  | |  | |  | |  |
-                          | |    |   --|   | |    | | |  | |  | |  | |  | |  |-|  | |  | |  | |  |
-                          | |    |   --|   | |    | | |  -----| |  | |  | |   ---|  |  |-|  | |  |
-                          | |    |  |      | |    | | | |       |  | |  | |  | |--| |  |-|  | |  |
-                          | |    |  -----| | |    | | | |       |  ---  | |  | |  | |  | |  | |  -----|
-                          |-|    --------| |-|    |-| |-|       --------- |--| |--| |--| |--| --------| v1.9.0
+                       .__________. ._______. .__     __. ._______. ._______. ._______. ._______. .__.
+                       |----  ----| |   ----| |  \\   /  | |  ___  | |  ___  | |  ___  | |  ___  | |  |
+                           |  |     |  |      | | \\ / | | |  | |  | |  | |  | |  | |  | |  | |  | |  |
+                           |  |     |   --|   | |     | | |  | |  | |  | |  | |  |-|  | |  | |  | |  |
+                           |  |     |   --|   | |     | | |  -----| |  | |  | |   .--|  |  |-|  | |  |
+                           |  |     |  |      | |     | | | |       |  | |  | |  | |--| |  |-|  | |  |
+                           |  |     |  -----| | |     | | | |       |  ---  | |  | |  | |  | |  | |  -----|
+                           |--|     |-------| |-|     |-| |-|       |-------| |--| |--| |--| |--| |-------| v1.9.0 by w4t3rcs :D
                     """;
 
     public static LayerContainer run(Class<?> modClass, IEventBus eventBus, ModContainer modContainer) {
         synchronized (TemporalEngine.class) {
-            return builder()
-                    .configureIOLayer()
-                    .modClass(modClass)
-                    .initializers(DEFAULT_SIMPLE_INITIALIZERS)
-                    .externalSource(List.of(eventBus, modContainer))
-                    .simpleProcessors(DEFAULT_SIMPLE_PROCESSORS)
-                    .asyncProcessors(Collections.emptyList())
-                    .cleaners(Collections.emptyList())
-                    .and()
-                    .configureEventLayer()
-                    .handlers(DEFAULT_HANDLERS)
-                    .and()
-                    .build();
+            System.out.println(BANNER);
+            ApiMod.LOGGER.info("Running TemporalEngine for : {}", modClass.getName());
+            return defaultBuilder(modClass, eventBus, modContainer).build();
         }
     }
 
-    public static EngineBuilder builder() {
+    public static EngineBuilder defaultBuilder(Class<?> modClass, IEventBus eventBus, ModContainer modContainer) {
+        return emptyBuilder()
+                .configureInitializationLayer()
+                .modClass(modClass)
+                .externalSource(List.of(eventBus, modContainer))
+                .and()
+                .configureRegistryLayer()
+                .and()
+                .configureMetadataLayer()
+                .and()
+                .configureConfigLayer()
+                .and()
+                .configureEventLayer()
+                .and()
+                .configureFinalizationLayer()
+                .and();
+    }
+
+    public static EngineBuilder emptyBuilder() {
         return new EngineBuilder();
     }
 }
