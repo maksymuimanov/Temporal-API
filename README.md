@@ -14,7 +14,6 @@ Stop hand-writing JSON and plumbing registries. Ship content faster with an anno
 - [Overview](#overview)
 - [Core concepts](#core-concepts)
 - [Structure](#structure)
-- [Annotations (catalog)](#annotations-catalog)
 - [Basic examples](#basic-examples)
   - [A) Bootstrapping TemporalEngine](#a-bootstrapping-temporalengine)
   - [B) Registering an Item](#b-registering-an-item)
@@ -158,28 +157,6 @@ TemporalEngine.emptyBuilder()
 
 7) FinalizationLayer - wrap-up
 - Performs final tasks after metadata/event work; ideal for post-processing or cleanups added by extensions.
-
----
-
-## Annotations (catalog)
-
-| Package                                                           | Names                                                     | Type    | Short description                                                                                                       |
-|-------------------------------------------------------------------|-----------------------------------------------------------|---------|-------------------------------------------------------------------------------------------------------------------------|
-| com.temporal.api.core.engine.metadata.annotation.data.language    | `TranslateAmericanEnglish`; `TranslateMultiple`           | `field` | Add localized strings (item/block names, advancement titles/descriptions, etc.).                                        |
-| com.temporal.api.core.engine.metadata.annotation.data.model.block | `GenerateCubedBlockModel`; `GenerateLogBlockModel`        | `field` | Generate block models (cube-all, cross, flower, log/wood, slab/stairs, fence/gate, sign/hanging sign, wall/vine, etc.). |
-| com.temporal.api.core.engine.metadata.annotation.data.model.item  | `GenerateBasicItemModel`; `GenerateHandheldItemModel`     | `field` | Generate item models (basic/flat/cube, handheld, bow/crossbow, spawn egg, trimmed armor, etc.).                         |
-| com.temporal.api.core.engine.metadata.annotation.data.loot        | `GenerateSelfBlockLootTable`; `GenerateOreBlockLootTable` | `field` | Generate block loot (self-drop, silk touch, ore/raw, leaves with sapling chances, grass, potted, empty).                |
-| com.temporal.api.core.engine.metadata.annotation.data.tag         | `AddBlockTag`; `AddItemTag`                               | `field` | Add registry entries to tags (blocks/items and more families); supports multiple values.                                |
-| com.temporal.api.core.engine.metadata.annotation.data.properties  | `Compostable`; `FurnaceFuel`                              | `field` | Mark items as compostable or usable as furnace fuel with parameters.                                                    |
-| com.temporal.api.core.engine.metadata.annotation.data             | `GenerateRecipe`                                          | `class` | Generate a recipe from a description class (e.g., ShapelessRecipeDescription, ShapedRecipeDescription).                 |
-| com.temporal.api.core.engine.metadata.annotation.data             | `GenerateAdvancement`                                     | `class` | Generate an advancement from an AdvancementDescription implementation.                                                  |
-| com.temporal.api.core.engine.metadata.annotation.data.biome       | `GenerateOre`; `GenerateTree`                             | `field` | Worldgen configured features with inline configuration and placement or biome modifier spec.                            |
-| com.temporal.api.core.engine.metadata.annotation.event.creative   | `AddCreativeModeTab`                                      | `field` | Insert entries into existing creative mode tabs.                                                                        |
-| com.temporal.api.core.engine.metadata.annotation.event.block      | `AddBlockEntityType`                                      | `field` | Attach a vanilla/NeoForge block entity type id to a block registration.                                                 |
-| com.temporal.api.core.engine.metadata.annotation.event.fml        | `SetupBow`; `SetupCrossbow`                               | `field` | Perform standard FML setup for ranged items (bow/crossbow).                                                             |
-| com.temporal.api.core.engine.metadata.annotation.injection        | `Strategy`; `Processor`; `RegisterFactory`                | `class` | Extension points: register strategies/processors or opt-in factory registration.                                        |
-
-Note: Names show 1–2 examples per package; more annotations exist (etc.).
 
 ---
 
