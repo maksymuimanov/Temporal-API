@@ -1,0 +1,15 @@
+package com.temporal.api.core.engine.metadata.annotation.data.language;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.FIELD)
+public @interface TranslateYoruba {
+    String id() default "";
+    String value();
+    String prefix() default "";
+    String suffix() default "";
+}

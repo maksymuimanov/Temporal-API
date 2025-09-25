@@ -1,0 +1,14 @@
+{
+  "example_jukebox_song_sound": {
+    "sounds": [
+      "example:example_jukebox_song_sound"
+    ],
+    "subtitle": "sound.example.example_jukebox_song_sound"
+  },
+  "example_sound": {
+    "sounds": [
+      "example:example_sound"
+    ],
+    "subtitle": "sound.example.example_sound"
+  }
+}

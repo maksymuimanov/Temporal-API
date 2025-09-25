@@ -1,0 +1,18 @@
+package com.temporal.api.core.engine.metadata.strategy.field.data.language;
+
+import com.temporal.api.core.engine.event.data.language.provider.KlingonProvider;
+import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
+import com.temporal.api.core.engine.metadata.annotation.data.language.TranslateKlingon;
+import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
+
+@Strategy(StrategyPoolInitializer.DEFAULT_FIELD_DATA)
+public class TranslateKlingonStrategy extends TranslationStrategy<TranslateKlingon> {
+    public TranslateKlingonStrategy() {
+        super(KlingonProvider.class);
+    }
+
+    @Override
+    public Class<TranslateKlingon> getAnnotationClass() {
+        return TranslateKlingon.class;
+    }
+}

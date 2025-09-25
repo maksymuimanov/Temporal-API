@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "example:block/example_wood_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "example:block/example_wood"
+    },
+    "axis=z": {
+      "model": "example:block/example_wood_horizontal",
+      "x": 90
+    }
+  }
+}

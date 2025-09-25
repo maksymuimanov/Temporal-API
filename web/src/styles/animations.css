@@ -1,0 +1,13 @@
+.transition-all {
+    transition: all .3s ease-in-out;
+}
+
+.up-on-hover:hover {
+    transform: translateY(-10px);
+}
+
+.to-purple-on-hover:hover {
+    color: #dbd5f8;
+    background-color: #4b3897;
+    border-color: #ac9cef;
+}

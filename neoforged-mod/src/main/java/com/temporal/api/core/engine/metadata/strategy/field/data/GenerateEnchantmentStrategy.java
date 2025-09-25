@@ -1,0 +1,38 @@
+package com.temporal.api.core.engine.metadata.strategy.field.data;
+
+import com.temporal.api.core.engine.event.data.enchantment.ApiEnchantmentProvider;
+import com.temporal.api.core.engine.event.data.enchantment.EnchantmentDescription;
+import com.temporal.api.core.engine.initialization.initializer.StrategyPoolInitializer;
+import com.temporal.api.core.engine.metadata.annotation.data.GenerateEnchantment;
+import com.temporal.api.core.engine.metadata.annotation.injection.Strategy;
+import com.temporal.api.core.engine.metadata.pool.ProcessorScope;
+import com.temporal.api.core.engine.metadata.processor.DataEventHandlerAnnotationProcessorAdapter;
+import com.temporal.api.core.engine.metadata.strategy.field.FieldAnnotationStrategy;
+import com.temporal.api.core.util.ReflectionUtils;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.enchantment.Enchantment;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+
+@Strategy(StrategyPoolInitializer.DEFAULT_FIELD_DATA)
+public class GenerateEnchantmentStrategy implements FieldAnnotationStrategy<GenerateEnchantment> {
+    @Override
+    public void execute(Field field, Object object, GenerateEnchantment annotation) throws Exception {
+        ResourceKey<Enchantment> enchantment = ReflectionUtils.getFieldValue(field, object);
+        Constructor<?> constructor = annotation.value().getDeclaredConstructor();
+        constructor.setAccessible(true);
+        EnchantmentDescription descriptionHolder = (EnchantmentDescription) constructor.newInstance();
+        ApiEnchantmentProvider.ENCHANTMENTS.put(enchantment, descriptionHolder);
+    }
+
+    @Override
+    public Class<GenerateEnchantment> getAnnotationClass() {
+        return GenerateEnchantment.class;
+    }
+
+    @Override
+    public ProcessorScope getProcessorScope() {
+        return new ProcessorScope(DataEventHandlerAnnotationProcessorAdapter.NAME);
+    }
+}

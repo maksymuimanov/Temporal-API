@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "example:block/example_planks_slab"
+    },
+    "type=double": {
+      "model": "example:block/example_planks"
+    },
+    "type=top": {
+      "model": "example:block/example_planks_slab_top"
+    }
+  }
+}

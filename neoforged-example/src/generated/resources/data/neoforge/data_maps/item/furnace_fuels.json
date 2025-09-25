@@ -1,0 +1,7 @@
+{
+  "values": {
+    "example:example_fuel": {
+      "burn_time": 1000
+    }
+  }
+}

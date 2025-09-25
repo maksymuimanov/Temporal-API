@@ -1,0 +1,36 @@
+{
+  "parent": "minecraft:story/root",
+  "criteria": {
+    "has_example_bow": {
+      "conditions": {
+        "items": [
+          {
+            "items": "example:example_bow"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.example.example.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "example:example_bow"
+    },
+    "title": {
+      "translate": "advancement.example.example.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_example_bow"
+    ]
+  ],
+  "rewards": {
+    "experience": 10
+  },
+  "sends_telemetry_event": true
+}
