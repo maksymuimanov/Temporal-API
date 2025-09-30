@@ -1,5 +1,7 @@
 # Temporal API - NeoForge Mod Framework (neoforged-mod)
 
+[![Wiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/maksymuimanov/Temporal-API)
+
 Stop hand-writing JSON and plumbing registries. Ship content faster with an annotation-first workflow for NeoForge.
 
 - Module documented here: neoforged-mod
